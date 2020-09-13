@@ -2,6 +2,32 @@ import { StyleSheet } from 'react-native';
 import color from '../../styles/colors';
 
 const styles = StyleSheet.create({
+  container: {},
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: '5%',
+    // paddingLeft: '85%',
+    // paddingRight: '10%',
+    // width: 500,
+    // alignItems: 'stretch',
+    // alignContent: 'flex-end',
+    // // flexDirection: 'row',
+    // // alignSelf: 'flex-end',
+  },
+  backButton: {
+    marginTop: 15,
+    width: '40%',
+    borderRadius: 5,
+    backgroundColor: color.gray,
+  },
+  editButton: {
+    marginTop: 15,
+    width: '40%',
+    borderRadius: 5,
+    backgroundColor: color.blue,
+  },
   screen: {
     // flex: 1,
     padding: 10,
@@ -16,31 +42,6 @@ const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: 'white',
     alignItems: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15, // REVISAR
-    // paddingLeft: '85%',
-    // paddingRight: '10%',
-    // width: 500,
-    // alignItems: 'stretch',
-    // alignContent: 'flex-end',
-    // // flexDirection: 'row',
-    // // alignSelf: 'flex-end',
-  },
-  backButton: {
-    marginTop: 15,
-    width: '30%',
-    borderRadius: 5,
-    backgroundColor: color.gray,
-  },
-  editButton: {
-    marginTop: 15,
-    width: '30%',
-    borderRadius: 5,
-    backgroundColor: color.blue,
   },
   teamTitle: {
     // marginTop: 20,

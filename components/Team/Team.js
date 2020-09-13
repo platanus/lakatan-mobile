@@ -6,7 +6,7 @@ import styles from './styles';
 function Team({ route }) {
   const { name } = route.params;
   return (
-    <View style={styles.cardContainer}>
+    <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <View style={styles.backButton}><Button title="Atrás" color="white" /></View>
         <View style={styles.editButton}><Button title="Editar" color="white" /></View>
