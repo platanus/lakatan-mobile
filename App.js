@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import {
@@ -6,6 +7,8 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Team from './components/Team/Team';
+import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
+
 import color from './styles/colors';
 
 function LandingScreen({ navigation, route }) {
@@ -28,11 +31,12 @@ function LandingScreen({ navigation, route }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-
         <View style={styles.addTeamButton}>
           <Button title="+" color={color.white} onPress={() => navigation.navigate('Nuevo equipo')} />
         </View>
-
+        <View>
+          <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => navigation.navigate('Feedback')} />
+        </View>
         <View style={styles.listOfTeams}>
           {teamList.map((team) => (
             <TouchableOpacity onPress={() => navigation.navigate('Equipo', { name: team.name, description: team.description, members: team.members })}>
@@ -42,7 +46,6 @@ function LandingScreen({ navigation, route }) {
             </TouchableOpacity>
           ))}
         </View>
-
       </View>
     </ScrollView>
   );
@@ -53,7 +56,7 @@ function TeamsFormScreen({ navigation }) {
   const [description, changeDescription] = useState('');
   return (
     // <KeyboardAvoidingView style={styles.form} behavior="padding">
-    <View style={styles.xxxx}>
+    <View style={styles.formContainer}>
       <View style={styles.formCard}>
         <View style={styles.input}>
           <Text style={styles.tag}>Nombre:</Text>
@@ -83,6 +86,7 @@ export default function App() {
         <Stack.Screen name="Equipos" component={LandingScreen} />
         <Stack.Screen name="Nuevo equipo" component={TeamsFormScreen} />
         <Stack.Screen name="Equipo" component={Team} />
+        <Stack.Screen name="Feedback" component={FeedbackScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     color: color.blue,
   },
 
-  xxxx: {
+  formContainer: {
     flex: 1,
   },
 
