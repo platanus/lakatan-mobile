@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Team from './components/Team/Team';
 import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
+import NewTeamScreen from './screens/NewTeamScreen/NewTeamScreen';
 
 import color from './styles/colors';
 
@@ -36,6 +37,7 @@ function LandingScreen({ navigation, route }) {
         </View>
         <View>
           <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => navigation.navigate('Feedback')} />
+          <Button title="TEST NEW TEAM SCREEN" color={color.black} onPress={() => navigation.navigate('Nuevo equipo v2')} />
         </View>
         <View style={styles.listOfTeams}>
           {teamList.map((team) => (
@@ -51,7 +53,7 @@ function LandingScreen({ navigation, route }) {
   );
 }
 
-function TeamsFormScreen({ navigation }) {
+function NewTeamScreenv1({ navigation }) {
   const [name, changeName] = useState('');
   const [description, changeDescription] = useState('');
   return (
@@ -84,9 +86,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Equipos" component={LandingScreen} />
-        <Stack.Screen name="Nuevo equipo" component={TeamsFormScreen} />
+        <Stack.Screen name="Nuevo equipo" component={NewTeamScreenv1} />
         <Stack.Screen name="Equipo" component={Team} />
         <Stack.Screen name="Feedback" component={FeedbackScreen} />
+        <Stack.Screen name="Nuevo equipo v2" component={NewTeamScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
