@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard
+  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 
