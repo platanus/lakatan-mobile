@@ -25,16 +25,13 @@ const LandingScreen = (props) => {
     setTeamList = ((current) => { [...current, algo]; });
   };
   return (
-    <ScrollView>
+    <View style={{ marginBottom: 50 }}>
+      <View style={styles.addTeamButton}>
+        <Button title="+" color={color.white} onPress={() => props.navigation.navigate('Nuevo equipo')} />
+      </View>
+      <ScrollView>
       <View style={styles.container}>
-        <View style={styles.addTeamButton}>
-          <Button title="+" color={color.white} onPress={() => props.navigation.navigate('Nuevo equipo')} />
-        </View>
-        <View>
-          <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => props.navigation.navigate('Feedback')} />
-          <Button title="TEST LOGIN SCREEN" color={color.black} onPress={() => props.navigation.navigate('Iniciar sesión')} />
-          <Button title="TEST AGREGAR USUARIO A TEAM" color={color.black} onPress={() => props.navigation.navigate('Agregar usuarios')} />
-        </View>
+        
         <View style={styles.listOfTeams}>
           {teamList.map((team) => (
             <TouchableOpacity onPress={() => props.navigation.navigate('Equipo', { name: team.name, description: team.description, members: team.members })}>
@@ -44,8 +41,13 @@ const LandingScreen = (props) => {
             </TouchableOpacity>
           ))}
         </View>
+        <View>
+          <Button title="TEST LOGIN SCREEN" color={color.black} onPress={() => props.navigation.navigate('Iniciar sesión')} />
+          <Button title="TEST AGREGAR USUARIO A TEAM" color={color.black} onPress={() => props.navigation.navigate('Agregar usuarios')} />
+        </View>
       </View>
     </ScrollView>
+    </View>
   );
 };
 
