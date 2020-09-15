@@ -1,23 +1,49 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View, Text, Button,
+} from 'react-native';
+import Modal from 'react-native-modal';
+import { bounceInUp, bounceInDown } from 'react-native-animatable';
+import Emoji from 'react-native-emoji';
 import styles from './styles';
+import color from '../../styles/colors';
 
 // function Team({ route }) {
 const Team = (props) => {
   const { name } = props.route.params;
+
+  const users = ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'];
+
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [userSelected, setUserSelected] = useState('');
+  const toggleModalIn = () => {
+    const random = Math.floor(Math.random() * users.length);
+    setUserSelected(users[random]);
+    setModalVisible(!isModalVisible);
+  };
+
+  const toggleModalOff = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const feedbackModal = () => {
+    setModalVisible(!isModalVisible);
+    props.navigation.navigate('Feedback');
+  };
+
   const estoyEnEsteEquipo = true;
   // let editButton = <Text></Text>;
   // let sortButton = <Button title="Unirte a este grupo" color="white" />;
-  let editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
-  let sortButton = <Button title="Sortear" color="white" />;
+  const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
+  const sortButton = <Button title="Sortear" color="white" onPress={toggleModalIn} />;
 
   if (estoyEnEsteEquipo === true) {
-    let editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
-    let sortButton = <Button title="Sortear" color="white" />;
+    const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
+    const sortButton = <Button title="Sortear" color="white" />;
   } else {
-    let editButton = <Text></Text>;
-    let sortButton = <Button title="Unirte a este grupo" color="white" />;
+    const editButton = <Text />;
+    const sortButton = <Button title="Unirte a este grupo" color="white" />;
   }
 
   return (
@@ -44,7 +70,21 @@ const Team = (props) => {
         </View>
       </View>
       <View style={styles.chooseButtonContainer}>
-        {sortButton}
+        <Button title="Sortear" color="white" onPress={toggleModalIn} />
+        <Modal
+          isVisible={isModalVisible}
+          animationIn={bounceInUp}
+          animationOut={bounceInDown}
+          style={styles.modal}
+        >
+          <View style={styles.modalView}>
+            <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
+            <Text style={styles.modalUser}>{userSelected}</Text>
+            <Emoji name=":tada:" style={styles.modalEmoji} />
+            <View style={styles.confirmButton}><Button title="¡Ayudanos con tu feedback!" color={color.white} onPress={feedbackModal} /></View>
+            <View style={styles.cancelButton}><Button title="En otro momento" color={color.gray} onPress={toggleModalOff} /></View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
