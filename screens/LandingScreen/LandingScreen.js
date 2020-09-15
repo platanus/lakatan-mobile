@@ -32,7 +32,8 @@ const LandingScreen = (props) => {
         </View>
         <View>
           <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => props.navigation.navigate('Feedback')} />
-          <Button title="TEST NEW TEAM SCREEN" color={color.black} onPress={() => props.navigation.navigate('Nuevo equipo')} />
+          <Button title="TEST LOGIN SCREEN" color={color.black} onPress={() => props.navigation.navigate('Iniciar sesión')} />
+          <Button title="TEST AGREGAR USUARIO A TEAM" color={color.black} onPress={() => props.navigation.navigate('Agregar usuarios')} />
         </View>
         <View style={styles.listOfTeams}>
           {teamList.map((team) => (

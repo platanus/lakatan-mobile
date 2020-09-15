@@ -6,11 +6,25 @@ import styles from './styles';
 // function Team({ route }) {
 const Team = (props) => {
   const { name } = props.route.params;
+  const estoyEnEsteEquipo = true;
+  // let editButton = <Text></Text>;
+  // let sortButton = <Button title="Unirte a este grupo" color="white" />;
+  let editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
+  let sortButton = <Button title="Sortear" color="white" />;
+
+  if (estoyEnEsteEquipo === true) {
+    let editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
+    let sortButton = <Button title="Sortear" color="white" />;
+  } else {
+    let editButton = <Text></Text>;
+    let sortButton = <Button title="Unirte a este grupo" color="white" />;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <View style={styles.backButton}><Button title="Atrás" color="white" onPress={() => props.navigation.navigate('Equipos')} /></View>
-        <View style={styles.editButton}><Button title="Editar" color="white" /></View>
+        {editButton}
       </View>
       <View style={styles.screen}>
         <View>
@@ -30,10 +44,10 @@ const Team = (props) => {
         </View>
       </View>
       <View style={styles.chooseButtonContainer}>
-        <Button title="Sortear" color="white" />
+        {sortButton}
       </View>
     </View>
   );
-}
+};
 
 export default Team;
