@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     // marginTop: 20,
     // marginBottom: 20,
     marginVertical: 15,
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
     // padding: 10,
   },
@@ -92,12 +92,13 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   description: {
-    fontSize: 18,
+    fontSize: 16,
 
   },
   items: {
     fontSize: 16,
     textAlign: 'center',
+    margin: 0,
     // padding: 10,
     // margin: 10
     // width: '50%',
