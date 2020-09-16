@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, Text, View, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, ScrollView,
+  Text, View, Button, TouchableOpacity, ScrollView,
 } from 'react-native';
 
 import styles from './styles';
 import color from '../../styles/colors';
 
 // function LandingScreen({ navigation, route }) {
-const LandingScreen = (props) => {
+function LandingScreen(props) {
   const [teamList, setTeamList] = useState([{
     id: 1, name: 'Mobile Capstone 1', description: 'Descripción Equipo 1...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
   },
@@ -21,9 +21,23 @@ const LandingScreen = (props) => {
     id: 4, name: 'Mobile Capstone 4', description: 'Descripción Equipo 4...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
   },
   ]);
-  const handlerTeam = (algo) => {
-    setTeamList = ((current) => { [...current, algo]; });
+
+  const [teamId, setTeamId] = useState(5);
+
+  const handlerTeam = (newTeam) => {
+    setTeamList([...teamList, newTeam]);
   };
+
+  useEffect(() => {
+    if (props.route.params?.name) {
+      const { name, description } = props.route.params
+      handlerTeam({
+        id: teamId, name, description: description, members: ['Felipe apablaza'], state: false,
+      });
+      setTeamId(teamId + 1);
+    }
+  }, [props.route.params?.name]);
+
   return (
     <ScrollView>
       <View style={styles.container}>
