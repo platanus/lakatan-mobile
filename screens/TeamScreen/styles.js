@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     // marginTop: 20,
     // marginBottom: 20,
     marginVertical: 15,
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
     // padding: 10,
   },
@@ -92,12 +92,13 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   description: {
-    fontSize: 18,
+    fontSize: 16,
 
   },
   items: {
     fontSize: 16,
     textAlign: 'center',
+    margin: 0,
     // padding: 10,
     // margin: 10
     // width: '50%',
@@ -106,10 +107,40 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 5,
     width: '90%',
-    height: 50,
     backgroundColor: color.blue,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  modal: {
+    backgroundColor: color.white,
+    opacity: 0.9,
+    flex: 0.5,
+    marginTop: '60%',
+    borderRadius: 5,
+  },
+  modalView: {
+    flex: 1,
+    padding: '10%',
+  },
+  modalMessage: {
+    fontSize: 16,
+  },
+  modalUser: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingTop: '10%',
+  },
+  modalEmoji: {
+    fontSize: 40,
+    textAlign: 'center',
+    paddingBottom: '10%',
+  },
+  confirmButton: {
+    backgroundColor: color.blue,
+    borderRadius: 5,
+    marginTop: '5%',
+    marginBottom: '3%',
   },
 });
 
