@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 30,
   },
+  buttonPlus : {
+    opacity:0.1
+  }
+  ,
   listOfTeams: {
     width: '100%',
     flex: 1,

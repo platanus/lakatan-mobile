@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: '10%',
   },
+  addUser: {width: '90%',
+  height: 60,
+  borderRadius: 5,
+  margin: "5%",
+  flexDirection: 'column',
+  justifyContent: 'center',
+  fontSize: 30,},
   cancelButton: {
     backgroundColor: color.gray,
     width: '40%',

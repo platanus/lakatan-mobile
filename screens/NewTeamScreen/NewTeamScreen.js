@@ -7,6 +7,7 @@ import styles from './styles';
 import color from '../../styles/colors';
 
 const NewTeamScreen = (props) => {
+  const name = "equipo 1000";
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -19,9 +20,12 @@ const NewTeamScreen = (props) => {
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" />
           </View>
         </View>
+        <View style={styles.addUser}>
+            <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name})} />
+        </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.navigate('Equipos')}/></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => navigation.navigate('Equipos', { name })} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() => props.navigation.navigate('Equipos')}/></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" onPress={() => props.navigation.navigate('Equipos', { name })} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>
