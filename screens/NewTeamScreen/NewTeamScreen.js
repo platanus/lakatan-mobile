@@ -27,8 +27,8 @@ const NewTeamScreen = (props) => {
             <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name})} />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.navigate('Equipos')}/></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => navigation.navigate('Equipos', { name })} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.goBack()}/></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => props.navigation.navigate('Equipos', { name, description })} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>
