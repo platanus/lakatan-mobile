@@ -36,7 +36,7 @@ const NewUserToTeamScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <View>
+        <View style={{ borderWidth: 0.3, borderRadius: 3 }}>
           <SectionedMultiSelect
             items={users}
             uniqueKey="id"
@@ -55,12 +55,12 @@ const NewUserToTeamScreen = (props) => {
             // itemFontFamily="system font"
             // confirmFontFamily="system font"
             // searchTextFontFamily="system font"
-            button="40"   
+            button="40"
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() => props.navigation.navigate('Equipos')} /></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" onPress={() => props.navigation.navigate('Equipos', { name })} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.navigate('Equipos')} /></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => props.navigation.navigate('Equipos', { name })} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>

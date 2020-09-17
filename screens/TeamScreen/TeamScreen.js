@@ -73,6 +73,7 @@ const Team = (props) => {
         </View>
         <View style={styles.listOfTeam}>
           <FlatList
+            style={styles.cardOfMember}
             data={users}
             renderItem={(member) => <User member={member} />}
             keyExtractor={(member) => member.id.toString()}

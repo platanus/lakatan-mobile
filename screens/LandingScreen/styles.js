@@ -7,11 +7,11 @@ const styles = StyleSheet.create({
     // backgroundColor: color.white,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '90%',
     margin: '5%',
   },
   addTeamButton: {
-    width: '90%',
-    marginHorizontal: '5%',
+    width: '100%',
     height: 50,
     backgroundColor: color.blue,
     borderRadius: 5,
@@ -21,10 +21,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 30,
   },
-  buttonPlus : {
-    opacity:0.1
-  }
-  ,
+  buttonPlus: {
+    opacity: 0.1,
+  },
   listOfTeams: {
     width: '100%',
     flex: 1,
