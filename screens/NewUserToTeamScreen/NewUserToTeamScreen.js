@@ -10,6 +10,8 @@ import color from '../../styles/colors';
 import styles from './styles';
 
 const NewUserToTeamScreen = (props) => {
+  
+
   const users = [{
     id: '1',
     name: 'Felipe Apablaza',
@@ -28,6 +30,7 @@ const NewUserToTeamScreen = (props) => {
 
   const selectedItemsHandler = (items) => {
     setSelectedItems(items);
+    console.log(items)
   };
 
   return (
@@ -39,7 +42,7 @@ const NewUserToTeamScreen = (props) => {
             uniqueKey="id"
             selectText="Elige un usuario a agregar..."
             alwaysShowSelectText={true}
-            onSelectedItemsChange={selectedItemsHandler}
+            onSelectedItemsChange={selectedItemsHandler.bind(selectedItems)}
             selectedItems={selectedItems}
             colors={{ primary: color.blue, success: color.blue, text: color.black }}
             confirmText="Confirmar"
@@ -48,15 +51,16 @@ const NewUserToTeamScreen = (props) => {
             showCancelButton={true}
             showRemoveAll={false}
             modalWithTouchable={true}
-            itemFontFamily="system font"
-            confirmFontFamily="system font"
-            searchTextFontFamily="system font"
+            // Estos items generan error, revisar
+            // itemFontFamily="system font"
+            // confirmFontFamily="system font"
+            // searchTextFontFamily="system font"
             button="40"   
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.navigate('Equipos')} /></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => navigation.navigate('Equipos', { name })} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() => props.navigation.navigate('Equipos')} /></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" onPress={() => props.navigation.navigate('Equipos', { name })} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>
