@@ -11,6 +11,7 @@ const NewTeamScreen = (props) => {
   const [description, setDescription] = React.useState('');
 
 
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
