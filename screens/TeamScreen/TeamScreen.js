@@ -11,7 +11,7 @@ import color from '../../styles/colors';
 
 const User = (props) => {
   return (
-    <View style={styles.cardOfMember}>
+    <View style={styles.cardOfMemberView}>
       <Text style={styles.items}>{props.member.item.name}</Text>
     </View>   
   )
@@ -73,6 +73,7 @@ const Team = (props) => {
         </View>
         <View style={styles.listOfTeam}>
           <FlatList
+            style={styles.cardOfMember}
             data={users}
             renderItem={(member) => <User member={member} />}
             keyExtractor={(member) => member.id.toString()}
