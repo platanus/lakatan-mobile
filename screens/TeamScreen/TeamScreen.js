@@ -11,7 +11,7 @@ import color from '../../styles/colors';
 
 const User = (props) => {
   return (
-    <View style={styles.cardOfMemberView}>
+    <View style={styles.cardOfMember}>
       <Text style={styles.items}>{props.member.item.name}</Text>
     </View>   
   )
