@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Button,
+  View, Text, Button, FlatList, 
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { bounceInUp, bounceInDown } from 'react-native-animatable';
@@ -9,17 +9,29 @@ import Emoji from 'react-native-emoji';
 import styles from './styles';
 import color from '../../styles/colors';
 
+const User = (props) => {
+  return (
+    <View style={styles.cardOfMember}>
+      <Text style={styles.items}>{props.member.item.name}</Text>
+    </View>   
+  )
+}
+
+
 // function Team({ route }) {
 const Team = (props) => {
   const { name } = props.route.params;
 
-  const users = ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'];
+  const [users, usersHandler] = useState([{id: 1, name: 'Felipe Apablaza'},
+    {id: 2, name: 'Felipe Beltrán'},
+    {id: 3, name: 'Cristobal Ilabaca'},
+    {id: 4, name: 'Javier Tramon'}]);
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [userSelected, setUserSelected] = useState('');
   const toggleModalIn = () => {
     const random = Math.floor(Math.random() * users.length);
-    setUserSelected(users[random]);
+    setUserSelected(users[random].name);
     setModalVisible(!isModalVisible);
   };
 
@@ -60,13 +72,11 @@ const Team = (props) => {
           <Text style={styles.description}>{props.route.params.description}</Text>
         </View>
         <View style={styles.listOfTeam}>
-          {props.route.params.members.map((member) => (
-            <View style={styles.cardOfMember}>
-              <Text style={styles.items}>
-                {member}
-              </Text>
-            </View>
-          ))}
+          <FlatList
+            data={users}
+            renderItem={(member) => <User member={member} />}
+            keyExtractor={(member) => member.id.toString()}
+          />
         </View>
       </View>
       <View style={styles.chooseButtonContainer}>

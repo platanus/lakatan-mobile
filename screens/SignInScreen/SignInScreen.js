@@ -18,9 +18,9 @@ const SignInScreen = props => {
     }
 
     const signInButtonHandler = () => {
-      if (password.length >5 && mail.includes('@')) {
+      // if (password.length >5 && mail.includes('@')) {
         props.navigation.navigate('Equipos')
-      } 
+      // } 
     }
 
     return (

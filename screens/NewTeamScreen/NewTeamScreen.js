@@ -11,6 +11,7 @@ const NewTeamScreen = (props) => {
   const [description, setDescription] = React.useState('');
 
 
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -22,6 +23,9 @@ const NewTeamScreen = (props) => {
             <Text style={styles.tag}>Descripción:</Text>
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
+        </View>
+        <View style={styles.addUser}>
+            <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name})} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.goBack()}/></View>
