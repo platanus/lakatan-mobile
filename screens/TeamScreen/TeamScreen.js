@@ -3,19 +3,13 @@ import React, { useState } from 'react';
 import {
   View, Text, Button, FlatList, 
 } from 'react-native';
-import Modal from 'react-native-modal';
-import { bounceInUp, bounceInDown } from 'react-native-animatable';
-import Emoji from 'react-native-emoji';
-import styles from './styles';
-import color from '../../styles/colors';
 
-const User = (props) => {
-  return (
-    <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{props.member.item.name}</Text>
-    </View>   
-  )
-}
+import styles from '../../styles/TeamScreen/TeamScreen';
+
+import Sorteo from '../../components/TeamScreen/Sorteo'
+import TeamList from '../../components/TeamScreen/TeamList'
+
+
 
 
 // function Team({ route }) {
@@ -29,26 +23,12 @@ const Team = (props) => {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [userSelected, setUserSelected] = useState('');
-  const toggleModalIn = () => {
-    const random = Math.floor(Math.random() * users.length);
-    setUserSelected(users[random].name);
-    setModalVisible(!isModalVisible);
-  };
-
-  const toggleModalOff = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const feedbackModal = () => {
-    setModalVisible(!isModalVisible);
-    props.navigation.navigate('Feedback');
-  };
 
   const estoyEnEsteEquipo = true;
   // let editButton = <Text></Text>;
   // let sortButton = <Button title="Unirte a este grupo" color="white" />;
   const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
-  const sortButton = <Button title="Sortear" color="white" onPress={toggleModalIn} />;
+  const sortButton = <Button title="Sortear" color="white" onPress={()=> setModalVisible(!isModalVisible)} />;
 
   if (estoyEnEsteEquipo === true) {
     const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
@@ -71,30 +51,14 @@ const Team = (props) => {
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>{props.route.params.description}</Text>
         </View>
-        <View style={styles.listOfTeam}>
-          <FlatList
-            data={users}
-            renderItem={(member) => <User member={member} />}
-            keyExtractor={(member) => member.id.toString()}
-          />
-        </View>
+        <TeamList users={users}/>
       </View>
       <View style={styles.chooseButtonContainer}>
-        <Button title="Sortear" color="white" onPress={toggleModalIn} />
-        <Modal
-          isVisible={isModalVisible}
-          animationIn={bounceInUp}
-          animationOut={bounceInDown}
-          style={styles.modal}
-        >
-          <View style={styles.modalView}>
-            <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
-            <Text style={styles.modalUser}>{userSelected}</Text>
-            <Emoji name=":tada:" style={styles.modalEmoji} />
-            <View style={styles.confirmButton}><Button title="¡Ayudanos con tu feedback!" color={color.white} onPress={feedbackModal} /></View>
-            <View style={styles.cancelButton}><Button title="En otro momento" color={color.gray} onPress={toggleModalOff} /></View>
-          </View>
-        </Modal>
+        <Button title="Sortear" color="white" onPress={()=>setModalVisible(true)} />
+        {isModalVisible ?  (
+        <Sorteo visible={isModalVisible} setVisible={setModalVisible} users={users} navigation={props.navigation}/>
+        ) : <></> }
+  
       </View>
     </View>
   );
