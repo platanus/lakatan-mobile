@@ -55,7 +55,7 @@ const Team = (props) => {
       <View style={styles.chooseButtonContainer}>
         <Button title="Sortear" color="white" onPress={()=>setModalVisible(true)} />
         {isModalVisible ?  (
-        <Sorteo visible={isModalVisible} setVisible={setModalVisible} users={users} navigation={props.navigation}/>
+        <Sorteo visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>
         ) : <></> }
   
       </View>
