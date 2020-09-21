@@ -40,9 +40,9 @@ function LandingScreen(props) {
 
   useEffect(() => {
     if (props.route.params?.name) {
-      const { name, description } = props.route.params
+      const { name, description, members} = props.route.params
       handlerTeam({
-        id: teamId, name, description, members: ['Felipe apablaza'], state: false,
+        id: teamId, name, description, members: members, state: false,
       });
       setTeamId(teamId + 1);
     }
@@ -51,7 +51,7 @@ function LandingScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.addTeamButton}>
-        <Button title="+" color={color.white} onPress={() => props.navigation.navigate('Nuevo equipo')} />
+        <Button title="+" color={color.white} onPress={() => props.navigation.navigate('Nuevo equipo',{members: []})} />
       </View>
       <View>
         {/* <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => props.navigation.navigate('Feedback')} />

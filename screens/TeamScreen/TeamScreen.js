@@ -11,10 +11,9 @@ import TeamList from '../../components/TeamScreen/TeamList'
 
 
 
-
 // function Team({ route }) {
 const Team = (props) => {
-  const { name } = props.route.params;
+  const { name ,description, members} = props.route.params;
 
   const [users, usersHandler] = useState([{id: 1, name: 'Felipe Apablaza'},
     {id: 2, name: 'Felipe Beltrán'},
@@ -51,7 +50,7 @@ const Team = (props) => {
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>{props.route.params.description}</Text>
         </View>
-        <TeamList users={users}/>
+        <TeamList users={members}/>
       </View>
       <View style={styles.chooseButtonContainer}>
         <Button title="Sortear" color="white" onPress={()=>setModalVisible(true)} />

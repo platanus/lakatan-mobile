@@ -11,18 +11,21 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderRadius: 5,
     backgroundColor: color.white,
-    paddingTop: '25%',
+    paddingTop: '10%',
   },
-  formCard: {},
+  formCard: {
+
+  },
   input: {
     width: '90%',
     marginHorizontal: '10%',
+    margin: "1%"
   },
   title: {
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: '10%',
+    paddingBottom: '5%',
   },
   tag: {
     marginTop: '10%',
@@ -40,13 +43,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: '10%',
   },
-  addUser: {width: '90%',
-  height: 60,
-  borderRadius: 5,
-  margin: "5%",
-  flexDirection: 'column',
-  justifyContent: 'center',
-  fontSize: 30,},
+  addUser: {
+    width: '90%',
+    height: 60,
+    borderRadius: 5,
+    margin: "5%",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    fontSize: 30,
+  },
   cancelButton: {
     backgroundColor: color.gray,
     width: '40%',
