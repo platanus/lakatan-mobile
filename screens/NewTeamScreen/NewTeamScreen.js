@@ -16,8 +16,9 @@ const NewTeamScreen = (props) => {
   const SendUsers = () =>{
     var membersList = [];
     members.forEach((user) => {
+      if (user){
         membersList.push(user.id.toString())
-    });
+    }});
     props.navigation.navigate('Agregar usuarios', {name: name, members: members,memberslist: membersList})
   }
 
