@@ -14,7 +14,7 @@ import TeamList from '../../components/TeamScreen/TeamList'
 // function Team({ route }) {
 const Team = (props) => {
   const { name ,description, members} = props.route.params;
-
+  console.log("miembros en pantalla principal team\n", members)
   const [users, usersHandler] = useState([{id: 1, name: 'Felipe Apablaza'},
     {id: 2, name: 'Felipe Beltrán'},
     {id: 3, name: 'Cristobal Ilabaca'},

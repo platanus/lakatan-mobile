@@ -8,18 +8,34 @@ import color from '../../styles/colors';
 import TeamList from '../../components/TeamScreen/TeamList'
 
 const NewTeamScreen = (props) => {
-  const {members} = props.route.params;
-  console.log("miembros en pantalla principal\n", members)
+  const users = [{
+    id: '1',
+    name: 'Felipe Apablaza',
+  }, {
+    id: '2',
+    name: 'Felipe Beltrán',
+  }, {
+    id: '3',
+    name: 'Cristobal Ilabaca',
+  }, {
+    id: '4',
+    name: 'Javier Tramon',
+  }];
+  const {members} = props.route.params; 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
 
+  const membersObjects = [];
+
+  if (members){
+    members.forEach(element => {
+      membersObjects.push(users.find(x => x.id === element));
+      
+    });
+  }
+
   const SendUsers = () =>{
-    var membersList = [];
-    members.forEach((user) => {
-      if (user){
-        membersList.push(user.id.toString())
-    }});
-    props.navigation.navigate('Agregar usuarios', {name: name, members: members,memberslist: membersList})
+    props.navigation.navigate('Agregar usuarios', {name: name, members: members})
   }
 
   return (
@@ -34,13 +50,13 @@ const NewTeamScreen = (props) => {
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
         </View>
-        <TeamList users={members}/>
+        <TeamList users={membersObjects}/>
         <View style={styles.addUser}>
             <Button title="Agregar Usuario"  onPress={() => SendUsers()} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.goBack()}/></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => props.navigation.navigate('Equipos', { name, description, members})} /></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => props.navigation.navigate('Equipos', { name, description, members: membersObjects})} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>

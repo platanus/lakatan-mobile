@@ -27,27 +27,13 @@ const NewUserToTeamScreen = (props) => {
     id: '4',
     name: 'Javier Tramon',
   }];
-
-  console.log("users\n",users)
-  const {members, memberslist} = props.route.params;
-  const [selectedItems, setSelectedItems] = useState(memberslist);
-
-  console.log("selected Items\n",selectedItems)
+  
+  const {members} = props.route.params;
+  const [selectedItems, setSelectedItems] = useState(members)
 
   const send = () =>{
-    var list = [];
-    selectedItems.forEach((item) => {
-      console.log(item)
-      users.forEach((user) => {
-        if (item.toString() == user.id){
-          list.push(user)
-        }
-      });
-    });
-    console.log(list)
-    props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: list})
+    props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: selectedItems})
   };
-  console.log("selecionados",selectedItems)
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
