@@ -39,8 +39,8 @@ const Sorteo = ({users, setVisible, visible, navigation}) => {
                 <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
                 <Text style={styles.modalUser}>{userSelected}</Text>
                 <Emoji name=":tada:" style={styles.modalEmoji} />
-                <View style={styles.confirmButton}><Button title="¡Ayudanos con tu feedback!" color={color.white} onPress={feedbackModal} /></View>
-                <View style={styles.cancelButton}><Button title="En otro momento" color={color.gray} onPress={toggleModalOff} /></View>
+                {/* <View style={styles.confirmButton}><Button title="¡Ayudanos con tu feedback!"  onPress={feedbackModal} /></View> */}
+                <View style={styles.cancelButton}><Button title="Salir" color={color.gray} onPress={toggleModalOff} /></View>
             </View>
             </Modal>
         </View>

@@ -5,7 +5,7 @@ import {
 
 import styles from './styles';
 import color from '../../styles/colors';
-import TeamList from '../../components/TeamScreen/TeamList'
+import UsersList from '../../components/TeamScreen/UsersList'
 
 const NewTeamScreen = (props) => {
   const users = [{
@@ -34,10 +34,6 @@ const NewTeamScreen = (props) => {
     });
   }
 
-  const SendUsers = () =>{
-    props.navigation.navigate('Agregar usuarios', {name: name, members: members})
-  }
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -50,13 +46,13 @@ const NewTeamScreen = (props) => {
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
         </View>
-        <TeamList users={membersObjects}/>
+        <UsersList users={membersObjects}/>
         <View style={styles.addUser}>
-            <Button title="Agregar Usuario"  onPress={() => SendUsers()} />
+            <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name, members})} />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() => props.navigation.goBack()}/></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => props.navigation.navigate('Equipos', { name, description, members: membersObjects})} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() => props.navigation.goBack()}/></View>
+          <View style={styles.confirmButton}><Button title="Confirmar"  onPress={() => props.navigation.navigate('Equipos', { name, description, members: membersObjects})} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>

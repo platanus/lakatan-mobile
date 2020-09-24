@@ -31,9 +31,6 @@ const NewUserToTeamScreen = (props) => {
   const {members} = props.route.params;
   const [selectedItems, setSelectedItems] = useState(members)
 
-  const send = () =>{
-    props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: selectedItems})
-  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -72,13 +69,10 @@ const NewUserToTeamScreen = (props) => {
             button="40"
             // ref = {component => {this.multiselect = component}}
           />
-        <View>
-          {/* {this.multiselect? this.multiSelect.getSelectedItemsExt(selecteData):null} */}
-        </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar" color={color.white} onPress={() =>  props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: members})} /></View>
-          <View style={styles.confirmButton}><Button title="Confirmar" color={color.white} onPress={() => send()} /></View>
+          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() =>  props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: members})} /></View>
+          <View style={styles.confirmButton}><Button title="Confirmar" onPress={() => props.navigation.navigate('Nuevo equipo', { name: props.route.params.name ,members: selectedItems})} /></View>
         </View>
       </View>
     </TouchableWithoutFeedback>

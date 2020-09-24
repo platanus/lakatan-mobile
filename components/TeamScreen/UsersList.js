@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, FlatList, Text ,TouchableWithoutFeedback} from 'react-native'
-import styles from '../../styles/TeamScreen/TeamScreen'
+import { View, FlatList, Text ,TouchableWithoutFeedback, Dimensions} from 'react-native'
+import styles from '../../styles/UsersList/UsersList'
 
 const User = (props) => {
   return (
@@ -12,7 +12,8 @@ const User = (props) => {
   )
 }
 
-const TeamList = ({users}) => {
+const UsersList = ({users}) => {
+
     return ( 
         <View style={styles.listOfTeam}>
           <FlatList
@@ -28,4 +29,4 @@ const TeamList = ({users}) => {
 
 
 
-export default TeamList
+export default UsersList

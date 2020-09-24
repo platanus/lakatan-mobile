@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: '5%',
+    paddingBottom: '3%',
   },
   tag: {
     marginTop: '10%',
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderBottomWidth: 0.5,
     fontSize: 15,
+    marginBottom: "2%"
   },
   buttonContainer: {
     flexDirection: 'row',

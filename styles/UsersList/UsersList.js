@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet , Dimensions} from 'react-native';
 import color from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   listOfTeam: {
     // flexDirection: 'row',
     width: '100%',
-    height: 200,
+    height: "15%",
     // flexDirection: 'column',
     // flexWrap: 'wrap',
     alignItems: 'center',

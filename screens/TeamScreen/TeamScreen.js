@@ -14,7 +14,6 @@ import TeamList from '../../components/TeamScreen/TeamList'
 // function Team({ route }) {
 const Team = (props) => {
   const { name ,description, members} = props.route.params;
-  console.log("miembros en pantalla principal team\n", members)
   const [users, usersHandler] = useState([{id: 1, name: 'Felipe Apablaza'},
     {id: 2, name: 'Felipe Beltrán'},
     {id: 3, name: 'Cristobal Ilabaca'},
@@ -26,21 +25,21 @@ const Team = (props) => {
   const estoyEnEsteEquipo = true;
   // let editButton = <Text></Text>;
   // let sortButton = <Button title="Unirte a este grupo" color="white" />;
-  const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
+  const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
   const sortButton = <Button title="Sortear" color="white" onPress={()=> setModalVisible(!isModalVisible)} />;
 
   if (estoyEnEsteEquipo === true) {
-    const editButton = <View style={styles.editButton}><Button title="Editar" color="white" /></View>;
-    const sortButton = <Button title="Sortear" color="white" />;
+    const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
+    const sortButton = <Button title="Sortear"  />;
   } else {
     const editButton = <Text />;
-    const sortButton = <Button title="Unirte a este grupo" color="white" />;
+    const sortButton = <Button title="Unirte a este grupo"  />;
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <View style={styles.backButton}><Button title="Atrás" color="white" onPress={() => props.navigation.navigate('Equipos')} /></View>
+        <View style={styles.backButton}><Button title="Atrás"  onPress={() => props.navigation.navigate('Equipos')} /></View>
         {editButton}
       </View>
       <View style={styles.screen}>
@@ -53,7 +52,7 @@ const Team = (props) => {
         <TeamList users={members}/>
       </View>
       <View style={styles.chooseButtonContainer}>
-        <Button title="Sortear" color="white" onPress={()=>setModalVisible(true)} />
+        <Button title="Sortear" onPress={()=>setModalVisible(true)} />
         {isModalVisible ?  (
         <Sorteo visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>
         ) : <></> }
