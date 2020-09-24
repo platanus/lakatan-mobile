@@ -9,7 +9,7 @@ const sagaMiddleware = createSagaMiddleware(); // crear el middleware de saga pa
 const persistConfig = {         // envuelve el AsyncStorage (memoria local) en el persistor
     key: 'root',
     storage: AsyncStorage,
-    whitelist: ['authentication'] // persistirán solo el estado del reducir auth...
+    blacklist: ['authentication'] // persistirán solo el estado del reducer auth...
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) // envuelve el reducer en el persistor
