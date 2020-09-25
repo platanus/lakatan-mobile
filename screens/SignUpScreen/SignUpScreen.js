@@ -21,7 +21,7 @@ const SignUpScreen = props => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.confirmButton}><Button title="Registrar" color={color.white} /></View>
+          <View style={styles.confirmButton}><Button title="Registrar"  /></View>
         </View>
       </View>
       </TouchableWithoutFeedback>

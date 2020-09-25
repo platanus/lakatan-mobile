@@ -19,16 +19,16 @@ const TeamView = (props) => {
 // function LandingScreen({ navigation, route }) {
 function LandingScreen(props) {
   const [teamList, setTeamList] = useState([{
-    id: 1, name: 'Mobile Capstone 1', description: 'Descripción Equipo 1...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
+    id: 1, name: 'Mobile Capstone 1', description: 'Descripción Equipo 1...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 2, name: 'Mobile Capstone 2', description: 'Descripción Equipo 2...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
+    id: 2, name: 'Mobile Capstone 2', description: 'Descripción Equipo 2...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 3, name: 'Mobile Capstone 3', description: 'Descripción Equipo 3...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
+    id: 3, name: 'Mobile Capstone 3', description: 'Descripción Equipo 3...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 4, name: 'Mobile Capstone 4', description: 'Descripción Equipo 4...', members: ['Felipe Apablaza', 'Felipe Beltrán', 'Cristobal Ilabaca', 'Javier Tramon'], state: false,
+    id: 4, name: 'Mobile Capstone 4', description: 'Descripción Equipo 4...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   ]);
 
@@ -40,9 +40,9 @@ function LandingScreen(props) {
 
   useEffect(() => {
     if (props.route.params?.name) {
-      const { name, description } = props.route.params
+      const { name, description, members} = props.route.params
       handlerTeam({
-        id: teamId, name, description, members: ['Felipe apablaza'], state: false,
+        id: teamId, name, description, members: members, state: false,
       });
       setTeamId(teamId + 1);
     }
@@ -51,12 +51,7 @@ function LandingScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.addTeamButton}>
-        <Button title="+" color={color.white} onPress={() => props.navigation.navigate('Nuevo equipo')} />
-      </View>
-      <View>
-        {/* <Button title="TEST FEEDBACK SCREEN" color={color.black} onPress={() => props.navigation.navigate('Feedback')} />
-        <Button title="TEST LOGIN SCREEN" color={color.black} onPress={() => props.navigation.navigate('Iniciar sesión')} />
-        <Button title="TEST AGREGAR USUARIO A TEAM" color={color.black} onPress={() => props.navigation.navigate('Agregar usuarios')} /> */}
+        <Button title="+" onPress={() => props.navigation.navigate('Nuevo equipo',{members: []})} />
       </View>
       <View style={styles.listOfTeams}>
         <FlatList

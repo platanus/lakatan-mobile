@@ -36,8 +36,8 @@ const SignInScreen = props => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Registrar" color={color.white} onPress={() => props.navigation.navigate('SignUp')}/></View>
-          <View style={styles.confirmButton}><Button title="Ingresar" color={color.white} onPress={signInButtonHandler} /></View>
+          <View style={styles.cancelButton}><Button title="Registrar"  onPress={() => props.navigation.navigate('SignUp')}/></View>
+          <View style={styles.confirmButton}><Button title="Ingresar"  onPress={signInButtonHandler} /></View>
         </View>
       </View>
       </TouchableWithoutFeedback>
