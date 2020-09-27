@@ -17,8 +17,7 @@ const SignInScreen = props => {
     const signInButtonHandler = () => {
       console.log(email, password)
       dispatch({ 
-        type: SING_IN_REQUEST,
-        payload: { email }
+        type: SING_IN_REQUEST
       })
       //props.navigation.navigate('Equipos') // más adelante esto n iría aquí
     }

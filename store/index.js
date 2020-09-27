@@ -3,13 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import { configureStore } from "@reduxjs/toolkit" 
 import { persistStore, persistReducer } from 'redux-persist'
 import rootReducer from './reducers'
+import rootSagas from './sagas'
 
 const sagaMiddleware = createSagaMiddleware(); // crear el middleware de saga para eventos asíncronos
 
 const persistConfig = {         // envuelve el AsyncStorage (memoria local) en el persistor
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['authentication'] // persistirán solo el estado del reducer auth...
+    whitelist: ['authentication'] // persistirán solo el estado del reducer auth...
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer) // envuelve el reducer en el persistor
@@ -19,7 +20,11 @@ const store = configureStore({     // se crea la store y se le entrega el reduce
     middleware: [sagaMiddleware]
 })
 
+function runSagas() {
+    sagaMiddleware.run(rootSagas)
+}
+
 const persistor = persistStore(store)  // permite generar un delay hasta que los datos son obtenidos de la store
                                         // sirve para implementar la splash screen
 
-export {store, persistor}
+export {store, persistor, runSagas} 

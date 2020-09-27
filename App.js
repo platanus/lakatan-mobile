@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, {useState} from 'react';
 import { Provider } from 'react-redux'
-import { store, persistor } from './store';
+import { store, persistor, runSagas } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,6 +17,7 @@ import SplashScreen from './screens/SplashScreen/SplashScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 
+runSagas()
 
 const TeamStack = createStackNavigator();
 
