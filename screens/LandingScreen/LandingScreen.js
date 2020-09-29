@@ -3,7 +3,7 @@ import {
   Text, View, Button, TouchableOpacity, ScrollView, FlatList,
 } from 'react-native';
 
-import styles from './styles';
+import styles from '../../styles/LandingScreen/LandingScreen';
 import color from '../../styles/colors';
 
 const TeamView = (props) => {

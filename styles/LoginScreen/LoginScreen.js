@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import color from '../../styles/colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,11 +9,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 0.26,
     elevation: 8,
-    borderRadius: 15,
+    borderRadius: 5,
     backgroundColor: color.white,
     paddingTop: '25%',
-    
-    
   },
   formCard: {},
   input: {

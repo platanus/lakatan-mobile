@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import color from '../../styles/colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
     margin: '5%',
     flex: 1,
     paddingTop: '25%',
+    paddingHorizontal: '10%',
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 3,
     shadowOpacity: 0.26,
@@ -13,26 +14,19 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     borderRadius: 5,
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingBottom: '10%',
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingTop: '10%',
   },
-  startsContainer: {
-    paddingHorizontal: '10%',
-  },
-  inputContainer: {
-    paddingVertical: '10%',
-  },
-  commentInput: {
-    height: 200,
-    borderWidth: 0.5,
-    borderRadius: 3,
-    padding: '5%',
-    fontSize: 16,
+  cancelButton: {
+    backgroundColor: color.gray,
+    width: '40%',
+    borderRadius: 5,
   },
   confirmButton: {
+    width: '40%',
     backgroundColor: color.blue,
     borderRadius: 5,
   },

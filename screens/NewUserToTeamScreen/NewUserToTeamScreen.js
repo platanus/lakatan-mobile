@@ -9,7 +9,7 @@ import MultiSelect from 'react-native-multiple-select';
 
 
 import color from '../../styles/colors';
-import styles from './styles';
+import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 
 const NewUserToTeamScreen = (props) => {
   

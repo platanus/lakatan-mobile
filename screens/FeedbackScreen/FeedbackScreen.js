@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 
-import styles from './styles';
+import styles from '../../styles/FeedbackScreen/FeedbackScreen';
 import color from '../../styles/colors';
 
 const FeedbackScreen = (props) => {

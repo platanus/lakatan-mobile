@@ -11,7 +11,7 @@ import {
 } from 'react-native-material-textfield';
 
 import color from '../../styles/colors';
-import styles from './styles';
+import styles from '../../styles/LoginScreen/LoginScreen';
 
 const LoginScreen = (props) => {
   const [userPassword, setUserPassword] = useState('');

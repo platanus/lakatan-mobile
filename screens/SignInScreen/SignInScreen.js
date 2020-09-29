@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 import color from '../../styles/colors';
-import styles from './styles';
+import styles from '../../styles/SignInScreen/SignInScreen';
 
 const SignInScreen = props => {
 

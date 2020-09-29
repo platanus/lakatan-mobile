@@ -3,7 +3,7 @@ import { View, Text, Keyboard, TouchableWithoutFeedback, Button, TextInput } fro
 
 
 import color from '../../styles/colors';
-import styles from './styles';
+import styles from '../../styles/SignUpScreen/SignUpScreen';
 
 const SignUpScreen = props => {
     return ( 

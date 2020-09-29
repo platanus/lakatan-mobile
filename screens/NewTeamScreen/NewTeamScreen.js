@@ -3,7 +3,7 @@ import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 
-import styles from './styles';
+import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import color from '../../styles/colors';
 import UsersList from '../../components/TeamScreen/UsersList'
 
