@@ -55,7 +55,6 @@ const NewUserToTeamScreen = (props) => {
             // searchTextFontFamily="system font"
             selectText="Elige usuarios"
             searchInputPlaceholderText="Elige un usuario a agregar..."
-            onChangeInput={ (text)=> console.log(text)}
             tagRemoveIconColor="#CCC"
             tagBorderColor="#CCC"
             tagTextColor={color.black}

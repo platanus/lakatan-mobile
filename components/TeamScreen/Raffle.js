@@ -11,7 +11,6 @@ import styles from '../../styles/TeamScreen/TeamScreen'
 
 const Raffle = ({users, setVisible, visible, navigation}) => {
     const [userSelected, setUserSelected] = useState('');
-    console.log(userSelected)
     useEffect ( () => { 
         const random = Math.floor(Math.random() * users.length);
         setUserSelected(users[random].name);
