@@ -9,7 +9,7 @@ import styles from '../../styles/TeamScreen/TeamScreen'
 
 
 
-const Sorteo = ({users, setVisible, visible, navigation}) => {
+const Raffle = ({users, setVisible, visible, navigation}) => {
     const [userSelected, setUserSelected] = useState('');
     console.log(userSelected)
     useEffect ( () => { 
@@ -51,4 +51,4 @@ const Sorteo = ({users, setVisible, visible, navigation}) => {
 
 
 
-export default Sorteo
+export default Raffle

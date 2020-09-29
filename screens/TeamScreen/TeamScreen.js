@@ -6,7 +6,7 @@ import {
 
 import styles from '../../styles/TeamScreen/TeamScreen';
 
-import Sorteo from '../../components/TeamScreen/Sorteo'
+import Raffle from '../../components/TeamScreen/Raffle'
 import TeamList from '../../components/TeamScreen/TeamList'
 
 
@@ -22,13 +22,13 @@ const Team = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [userSelected, setUserSelected] = useState('');
 
-  const estoyEnEsteEquipo = true;
+  const AmIInThisTeam = true;
   // let editButton = <Text></Text>;
   // let sortButton = <Button title="Unirte a este grupo" color="white" />;
   const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
   const sortButton = <Button title="Sortear" color="white" onPress={()=> setModalVisible(!isModalVisible)} />;
 
-  if (estoyEnEsteEquipo === true) {
+  if (AmIInThisTeam === true) {
     const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
     const sortButton = <Button title="Sortear"  />;
   } else {
@@ -54,7 +54,7 @@ const Team = (props) => {
       <View style={styles.chooseButtonContainer}>
         <Button title="Sortear" onPress={()=>setModalVisible(true)} />
         {isModalVisible ?  (
-        <Sorteo visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>
+        <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>
         ) : <></> }
   
       </View>
