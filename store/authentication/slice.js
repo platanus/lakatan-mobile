@@ -2,10 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     token: undefined,
-    userName: undefined,
-    userEmail: undefined,
+    email: undefined,
     loading: false,
-    error: undefined
 }
 
 const slice = createSlice({
@@ -14,11 +12,13 @@ const slice = createSlice({
     reducers: {
         start (state) {   
             state.loading = true
-           // console.log("start")
+        },
+        signInSuccess (state, action) {
+            state.email = action.payload.email
+            state.token = action.payload.authentication_token
         },
         finish (state) {
             state.loading = false
-            // console.log("finish")
         },
         reset () {
             return initialState
