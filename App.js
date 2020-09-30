@@ -8,7 +8,6 @@ import TeamScreen from './screens/TeamScreen/TeamScreen';
 import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
 import NewTeamScreen from './screens/NewTeamScreen/NewTeamScreen';
 import LandingScreen from './screens/LandingScreen/LandingScreen';
-import LoginScreen from './screens/LoginScreen/LoginScreen';
 import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScreen';
 import SplashScreen from './screens/SplashScreen/SplashScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
