@@ -11,23 +11,22 @@ import MultiSelect from 'react-native-multiple-select';
 import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 
-const NewUserToTeamScreen = (props) => {
-  
+const users = [{
+  id: '1',
+  name: 'Felipe Apablaza',
+}, {
+  id: '2',
+  name: 'Felipe Beltrán',
+}, {
+  id: '3',
+  name: 'Cristobal Ilabaca',
+}, {
+  id: '4',
+  name: 'Javier Tramon',
+}];
 
-  const users = [{
-    id: '1',
-    name: 'Felipe Apablaza',
-  }, {
-    id: '2',
-    name: 'Felipe Beltrán',
-  }, {
-    id: '3',
-    name: 'Cristobal Ilabaca',
-  }, {
-    id: '4',
-    name: 'Javier Tramon',
-  }];
-  
+const NewUserToTeamScreen = (props) => {
+    
   const {members} = props.route.params;
   const [selectedItems, setSelectedItems] = useState(members)
 
@@ -38,21 +37,11 @@ const NewUserToTeamScreen = (props) => {
           <MultiSelect
             items={users}
             uniqueKey="id"
-            selectText="Elige un usuario a agregar..."
             alwaysShowSelectText={true}
             onSelectedItemsChange={setSelectedItems}
             selectedItems={selectedItems}
             colors={{ primary: color.blue, success: color.blue, text: color.black }}
             confirmText="Confirmar"
-            // searchPlaceholderText="Elige un usuario a agregar..."
-            // removeAllText="Remove all"
-            // showCancelButton={true}
-            // showRemoveAll={false}
-            // modalWithTouchable={true}
-            // Estos items generan error, revisar
-            // itemFontFamily="system font"
-            // confirmFontFamily="system font"
-            // searchTextFontFamily="system font"
             selectText="Elige usuarios"
             searchInputPlaceholderText="Elige un usuario a agregar..."
             tagRemoveIconColor="#CCC"
@@ -66,7 +55,6 @@ const NewUserToTeamScreen = (props) => {
             submitButtonColor={color.blue}
             submitButtonText="Submit"
             button="40"
-            // ref = {component => {this.multiselect = component}}
           />
         </View>
         <View style={styles.buttonContainer}>

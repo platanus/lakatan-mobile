@@ -1,29 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import color from '../../styles/colors';
-import UsersList from '../../components/TeamScreen/UsersList'
+import TeamList from '../../components/TeamScreen/TeamList'
+
+const users = [{
+  id: '1',
+  name: 'Felipe Apablaza',
+}, {
+  id: '2',
+  name: 'Felipe Beltrán',
+}, {
+  id: '3',
+  name: 'Cristobal Ilabaca',
+}, {
+  id: '4',
+  name: 'Javier Tramon',
+}];
 
 const NewTeamScreen = (props) => {
-  const users = [{
-    id: '1',
-    name: 'Felipe Apablaza',
-  }, {
-    id: '2',
-    name: 'Felipe Beltrán',
-  }, {
-    id: '3',
-    name: 'Cristobal Ilabaca',
-  }, {
-    id: '4',
-    name: 'Javier Tramon',
-  }];
   const {members} = props.route.params; 
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   const membersObjects = [];
 
@@ -46,7 +47,7 @@ const NewTeamScreen = (props) => {
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
         </View>
-        <UsersList users={membersObjects}/>
+        <TeamList users={membersObjects} inUserList={true}/>
         <View style={styles.addUser}>
             <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name, members})} />
         </View>

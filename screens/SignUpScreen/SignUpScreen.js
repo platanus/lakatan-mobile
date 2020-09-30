@@ -6,6 +6,11 @@ import color from '../../styles/colors';
 import styles from '../../styles/SignUpScreen/SignUpScreen';
 
 const SignUpScreen = props => {
+  const signUpButtonHandler = () => {
+    // if (password.length >5 && mail.includes('@')) {
+      props.navigation.navigate('Equipos')
+    // } 
+  }
     return ( 
         <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
         <View style={styles.container}>
@@ -21,7 +26,7 @@ const SignUpScreen = props => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.confirmButton}><Button title="Registrar"  /></View>
+          <View style={styles.confirmButton}><Button title="Registrar"   onPress={signUpButtonHandler}/></View>
         </View>
       </View>
       </TouchableWithoutFeedback>

@@ -23,39 +23,36 @@ const Team = (props) => {
   const [userSelected, setUserSelected] = useState('');
 
   const AmIInThisTeam = true;
-  // let editButton = <Text></Text>;
-  // let sortButton = <Button title="Unirte a este grupo" color="white" />;
   const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
   const sortButton = <Button title="Sortear" color="white" onPress={()=> setModalVisible(!isModalVisible)} />;
 
-  if (AmIInThisTeam === true) {
+  /* if (AmIInThisTeam === true) {
     const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
     const sortButton = <Button title="Sortear"  />;
   } else {
     const editButton = <Text />;
     const sortButton = <Button title="Unirte a este grupo"  />;
   }
-
+ */
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <View style={styles.backButton}><Button title="Atrás"  onPress={() => props.navigation.navigate('Equipos')} /></View>
         {editButton}
-      </View>
+      </View> */}
       <View style={styles.screen}>
         <View>
           <Text style={styles.teamTitle}>{name}</Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>{props.route.params.description}</Text>
+          <Text style={styles.description}>{description}</Text>
         </View>
-        <TeamList users={members}/>
+        <TeamList users={members} inUserList={false}/>
       </View>
       <View style={styles.chooseButtonContainer}>
         <Button title="Sortear" onPress={()=>setModalVisible(true)} />
-        {isModalVisible ?  (
-        <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>
-        ) : <></> }
+        {isModalVisible &&
+        <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation}/>}
   
       </View>
     </View>

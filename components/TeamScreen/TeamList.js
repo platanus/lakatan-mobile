@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, FlatList, Text ,TouchableWithoutFeedback} from 'react-native'
-import styles from '../../styles/TeamScreen/TeamScreen'
+import stylesTeam from '../../styles/TeamScreen/TeamScreen'
+import stylesUsers from '../../styles/UsersList/UsersList'
 
 const User = (props) => {
+  const {styles} = props;
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>
@@ -12,13 +14,19 @@ const User = (props) => {
   )
 }
 
-const TeamList = ({users}) => {
+const TeamList = ({users, inUserList}) => {
+    let styling;
+    if (inUserList){
+      styling = stylesUsers
+    } else {
+      styling = stylesTeam
+    }
     return ( 
-        <View style={styles.listOfTeam}>
+        <View style={styling.listOfTeam}>
           <FlatList
-            style={styles.cardOfMemberView}
+            style={styling.cardOfMemberView}
             data={users}
-            renderItem={(member) => <User member={member} />}
+            renderItem={(member) => <User member={member} styles={styling} />}
             keyExtractor={(member) => member.id.toString()}
           />
         </View>

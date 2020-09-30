@@ -19,12 +19,7 @@ const Raffle = ({users, setVisible, visible, navigation}) => {
     const toggleModalOff = () => {
         setVisible(!visible);
     };
-
-    const feedbackModal = () => {
-        setVisible(!visible);
-        navigation.navigate('Feedback');
-    };
-   
+  
 
     return (
         <View>
@@ -38,7 +33,6 @@ const Raffle = ({users, setVisible, visible, navigation}) => {
                 <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
                 <Text style={styles.modalUser}>{userSelected}</Text>
                 <Emoji name=":tada:" style={styles.modalEmoji} />
-                {/* <View style={styles.confirmButton}><Button title="¡Ayudanos con tu feedback!"  onPress={feedbackModal} /></View> */}
                 <View style={styles.cancelButton}><Button title="Salir" color={color.gray} onPress={toggleModalOff} /></View>
             </View>
             </Modal>

@@ -7,8 +7,11 @@ import styles from '../../styles/LandingScreen/LandingScreen';
 import color from '../../styles/colors';
 
 const TeamView = (props) => {
+  const {name, description, members} = props.team.item;
+
+ 
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate('Equipo', { name: props.team.item.name, description: props.team.item.description, members: props.team.item.members })}>
+    <TouchableOpacity onPress={() => props.navigation.navigate('Equipo', { name: name, description: description, members: members })}>
       <View style={styles.teamCard}>
         <Text style={styles.teamName}>{props.team.item.name}</Text>
       </View>
@@ -16,7 +19,6 @@ const TeamView = (props) => {
   )
 }
 
-// function LandingScreen({ navigation, route }) {
 function LandingScreen(props) {
   const [teamList, setTeamList] = useState([{
     id: 1, name: 'Mobile Capstone 1', description: 'Descripción Equipo 1...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
