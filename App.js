@@ -28,7 +28,6 @@ export default function App() {
         <TeamStack.Screen name="Equipo" component={TeamScreen} />
         <TeamStack.Screen name="Feedback" component={FeedbackScreen} />
         <TeamStack.Screen name="Nuevo equipo" component={NewTeamScreen} />
-        <TeamStack.Screen name="Iniciar sesión" component={LoginScreen} />
         <TeamStack.Screen name="Agregar usuarios" component={NewUserToTeamScreen} />
       </TeamStack.Navigator>
     </NavigationContainer>
