@@ -1,30 +1,29 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-community/async-storage';
 import createSagaMiddleware from 'redux-saga';
-import { configureStore } from "@reduxjs/toolkit" 
-import { persistStore, persistReducer } from 'redux-persist'
-import rootReducer from './reducers'
-import rootSagas from './sagas'
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import rootReducer from './reducers';
+import rootSagas from './sagas';
 
-const sagaMiddleware = createSagaMiddleware(); // crear el middleware de saga para eventos asíncronos
+const sagaMiddleware = createSagaMiddleware();
 
-const persistConfig = {         // envuelve el AsyncStorage (memoria local) en el persistor
-    key: 'root',
-    storage: AsyncStorage,
-    whitelist: ['authentication'] // persistirán solo el estado del reducer auth...
-}
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['authentication'],
+};
 
-const persistedReducer = persistReducer(persistConfig, rootReducer) // envuelve el reducer en el persistor
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({     // se crea la store y se le entrega el reducer
-    reducer: persistedReducer,
-    middleware: [sagaMiddleware]
-})
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [sagaMiddleware],
+});
 
 function runSagas() {
-    sagaMiddleware.run(rootSagas)
+  sagaMiddleware.run(rootSagas);
 }
 
-const persistor = persistStore(store)  // permite generar un delay hasta que los datos son obtenidos de la store
-                                        // sirve para implementar la splash screen
+const persistor = persistStore(store);
 
-export {store, persistor, runSagas} 
+export { store, persistor, runSagas };

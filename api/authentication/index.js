@@ -1,24 +1,24 @@
-import axios from 'axios'
+import axios from 'axios';
+import url from '../../env';
 
- 
 function signInApi({ email, password }) {
-    return axios({
-        method: "post",
-        url: "localhost:3000/api/v1/sessions",
-        data: {
-            "user": {
-                "email": email,
-                "password": password
-            }
-        },
-        headers: {
-            "Content-type": "application/json"
-        }
-    })
+  return axios({
+    method: 'post',
+    url: `${url}/api/v1/sessions`,
+    data: {
+      user: {
+        email,
+        password,
+      },
+    },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
 }
 
 const authenticactionApi = {
-    signInApi
-}
+  signInApi,
+};
 
-export default authenticactionApi
+export default authenticactionApi;
