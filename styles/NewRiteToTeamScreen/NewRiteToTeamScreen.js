@@ -3,48 +3,63 @@ import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
+    width: '90%',
+    height: '90%',
     margin: '5%',
-    flex: 1,
+    borderRadius: 5,
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 3,
     shadowOpacity: 0.26,
     elevation: 8,
-    borderRadius: 15,
-    backgroundColor: color.white,
-    paddingTop: '25%',
+    backgroundColor: 'white',
+    padding: '5%',
   },
-  formCard: {},
-  input: {
-    width: '90%',
-    marginHorizontal: '10%',
+
+  infoContainer: {
+    padding: '5%',
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
+
+  teamTitle: {
+    fontSize: 24,
     fontWeight: 'bold',
-    paddingBottom: '10%',
+    textAlign: 'center',
+    marginBottom: '5%',
   },
-  tag: {
+
+  textHeader: {
+    fontWeight: 'bold',
+    fontSize: 16,
     marginTop: '10%',
-    fontSize: 13,
   },
+
   areaInput: {
-    width: '90%',
+    width: '100%',
     height: 40,
     borderBottomWidth: 0.5,
-    fontSize: 15,
+    fontSize: 14,
   },
+
   buttonContainer: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'center',
-    padding: '10%',
+    justifyContent: 'space-between',
+    marginTop: '100%', // TO DO: separar las view infoContainer y buttonContainer 80-20
   },
-  // cancelButton: {
-  //   backgroundColor: color.gray,
-  //   width: '40%',
-  //   borderRadius: 5,
-  // },
+
+  cancelButton: {
+    backgroundColor: color.gray,
+    width: '40%',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+
+  textCancelButton: {
+    color: color.white,
+    fontSize: 18,
+  },
+
   confirmButton: {
     width: '40%',
     backgroundColor: color.blue,
@@ -53,10 +68,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
   },
+
   textConfirmButton: {
     color: color.white,
     fontSize: 18,
   },
+
 });
 
 export default { ...styles };

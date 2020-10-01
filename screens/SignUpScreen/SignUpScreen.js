@@ -1,19 +1,18 @@
-import React from 'react'
-import { View, Text, Keyboard, TouchableWithoutFeedback, Button, TextInput } from 'react-native'
-
+import React from 'react';
+import {
+  View, Text, Keyboard, TouchableWithoutFeedback, Button, TextInput, TouchableOpacity,
+} from 'react-native';
 
 import color from '../../styles/colors';
 import styles from '../../styles/SignUpScreen/SignUpScreen';
 
-const SignUpScreen = props => {
+const SignUpScreen = (props) => {
   const signUpButtonHandler = () => {
-    // if (password.length >5 && mail.includes('@')) {
-      props.navigation.navigate('Equipos')
-    // } 
-  }
-    return ( 
-        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
-        <View style={styles.container}>
+    props.navigation.navigate('Equipos');
+  };
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
         <View style={styles.formCard}>
           <Text style={styles.title}>¡Crea una cuenta!</Text>
           <View style={styles.input}>
@@ -26,13 +25,13 @@ const SignUpScreen = props => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.confirmButton}><Button title="Registrar"   onPress={signUpButtonHandler}/></View>
+          <TouchableOpacity style={styles.confirmButton} onPress={signUpButtonHandler}>
+            <Text style={styles.textConfirmButton}>Registrar</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      </TouchableWithoutFeedback>
-    )
-}
+    </TouchableWithoutFeedback>
+  );
+};
 
-
-
-export default SignUpScreen
+export default SignUpScreen;

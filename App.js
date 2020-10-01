@@ -12,23 +12,25 @@ import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScre
 import SplashScreen from './screens/SplashScreen/SplashScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
-
+import RiteScreen from './screens/RiteScreen/RiteScreen';
+import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
 const TeamStack = createStackNavigator();
-
 
 export default function App() {
   return (
     <NavigationContainer>
       <TeamStack.Navigator>
-        <TeamStack.Screen name ="Splash" component={SplashScreen} options={{ headerShown: false }}/>
-        <TeamStack.Screen name ="SignIn" component={SignInScreen} options={{ headerShown: false }} />
-        <TeamStack.Screen name ="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
-        <TeamStack.Screen name="Equipos" component={LandingScreen} options={{ gestureEnabled: false ,headerLeft: null }} />
+        <TeamStack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+        <TeamStack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
+        <TeamStack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+        <TeamStack.Screen name="Equipos" component={LandingScreen} options={{ gestureEnabled: false, headerLeft: null }} />
         <TeamStack.Screen name="Equipo" component={TeamScreen} />
         <TeamStack.Screen name="Feedback" component={FeedbackScreen} />
         <TeamStack.Screen name="Nuevo equipo" component={NewTeamScreen} />
         <TeamStack.Screen name="Agregar usuarios" component={NewUserToTeamScreen} />
+        <TeamStack.Screen name="Rito" component={RiteScreen} />
+        <TeamStack.Screen name="Nuevo rito" component={NewRiteToTeamScreen} />
       </TeamStack.Navigator>
     </NavigationContainer>
   );

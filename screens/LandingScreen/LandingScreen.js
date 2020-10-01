@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Text, View, Button, TouchableOpacity, ScrollView, FlatList,
-} from 'react-native';
+  Text, View, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 import color from '../../styles/colors';
@@ -21,16 +20,16 @@ const TeamView = (props) => {
 
 function LandingScreen(props) {
   const [teamList, setTeamList] = useState([{
-    id: 1, name: 'Mobile Capstone 1', description: 'Descripción Equipo 1...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
+    id: 1, name: 'Mobile Capstone 1', description: 'Propósito Equipo 1...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 2, name: 'Mobile Capstone 2', description: 'Descripción Equipo 2...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
+    id: 2, name: 'Mobile Capstone 2', description: 'Propósito Equipo 2...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 3, name: 'Mobile Capstone 3', description: 'Descripción Equipo 3...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
+    id: 3, name: 'Mobile Capstone 3', description: 'Propósito Equipo 3...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   {
-    id: 4, name: 'Mobile Capstone 4', description: 'Descripción Equipo 4...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
+    id: 4, name: 'Mobile Capstone 4', description: 'Propósito Equipo 4...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
   },
   ]);
 
@@ -53,7 +52,11 @@ function LandingScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.addTeamButton}>
-        <Button title="+" onPress={() => props.navigation.navigate('Nuevo equipo',{members: []})} />
+        <TouchableOpacity onPress={() => props.navigation.navigate('Nuevo equipo', { members: [] })}>
+          <View style={styles.viewAddTeamButton}>
+            <Text style={styles.textAddTeamButton}>+</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.listOfTeams}>
         <FlatList

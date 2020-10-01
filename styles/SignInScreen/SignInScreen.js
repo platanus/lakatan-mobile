@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: color.white,
     paddingTop: '25%',
-    
-    
   },
   formCard: {},
   input: {
@@ -46,11 +44,25 @@ const styles = StyleSheet.create({
     backgroundColor: color.gray,
     width: '40%',
     borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
   },
   confirmButton: {
     width: '40%',
     backgroundColor: color.blue,
     borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+  textCancelButton: {
+    color: color.white,
+    fontSize: 18,
+  },
+  textConfirmButton: {
+    color: color.white,
+    fontSize: 18,
   },
 });
 

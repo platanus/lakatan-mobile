@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 
 import color from '../../styles/colors';
 import styles from '../../styles/SignInScreen/SignInScreen';
@@ -36,8 +36,16 @@ const SignInScreen = props => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Registrar"  onPress={() => props.navigation.navigate('SignUp')}/></View>
-          <View style={styles.confirmButton}><Button title="Ingresar"  onPress={signInButtonHandler} /></View>
+          <View style={styles.cancelButton}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
+              <Text style={styles.textCancelButton}>Registrar</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.confirmButton}>
+            <TouchableOpacity onPress={signInButtonHandler}>
+              <Text style={styles.textConfirmButton}>Ingresar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       </TouchableWithoutFeedback>
