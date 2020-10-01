@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import color from '../../styles/colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {},
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
   cardOfMember: {
     // flex: 1,
     // fontSize: 56,
-    paddingTop: "1%",
-    
+    paddingTop: '1%',
+
     marginHorizontal: '3%',
     // height: '55%',
-    marginVertical: "2%",
+    marginVertical: '2%',
     // justifyContent: 'center',
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   cardOfMemberView: {
-    width: "100%",
+    width: '100%',
     overflow: 'hidden',
     // flexDirection: 'column',
     // flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    padding: "3%",
-    margin: "2%"
+    padding: '3%',
+    margin: '2%',
   },
   descriptionContainer: {
     width: '90%',
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'white',
     // padding: 10,
     // borderRadius: 5,
-    marginBottom: "2%",
+    marginBottom: '2%',
   },
   description: {
     fontSize: 16,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: "1%",
+    padding: '1%',
     // margin: 0,
     // padding: 10,
     // margin: 10
@@ -127,6 +127,16 @@ const styles = StyleSheet.create({
     backgroundColor: color.blue,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  chooseButton: {
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+  textChooseButton: {
+    color: color.white,
+    fontSize: 18,
   },
   modal: {
     backgroundColor: color.white,
@@ -151,7 +161,25 @@ const styles = StyleSheet.create({
   modalEmoji: {
     fontSize: 40,
     textAlign: 'center',
-    paddingBottom: "4%",
+    paddingBottom: '4%',
+  },
+  exitButtonContainer: {
+    marginTop: '10%',
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+  },
+  exitButton: {
+    backgroundColor: color.gray,
+    width: '40%',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+  textExitButton: {
+    color: color.white,
+    fontSize: 18,
   },
   confirmButton: {
     backgroundColor: color.blue,
@@ -161,7 +189,7 @@ const styles = StyleSheet.create({
   },
   teamCard: {
     width: '100%',
-    height: "60%",
+    height: '60%',
     // marginHorizontal: 20,
     // marginVertical: 10,
     justifyContent: 'center',
