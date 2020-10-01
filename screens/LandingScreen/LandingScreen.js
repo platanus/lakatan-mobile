@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Text, View, Button, TouchableOpacity, ScrollView, FlatList,
-} from 'react-native';
+  Text, View, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 import color from '../../styles/colors';
@@ -53,7 +52,11 @@ function LandingScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.addTeamButton}>
-        <Button title="+" onPress={() => props.navigation.navigate('Nuevo equipo',{members: []})} />
+        <TouchableOpacity onPress={() => props.navigation.navigate('Nuevo equipo', { members: [] })}>
+          <View style={styles.viewAddTeamButton}>
+            <Text style={styles.textAddTeamButton}>+</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.listOfTeams}>
         <FlatList
