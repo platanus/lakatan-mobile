@@ -49,6 +49,10 @@ const Team = (props) => {
         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation} />}
 
       </View>
+      <View>
+        <Button title="test Rite View" onPress={() => props.navigation.navigate('Rito') } />
+        <Button title="test New Rite View" onPress={() => props.navigation.navigate('Nuevo rito') } />
+      </View>
     </View>
   );
 };
