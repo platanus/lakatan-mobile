@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-boolean-value */
 import React, {useState} from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard,
+  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import color from '../../styles/colors';
-import TeamList from '../../components/TeamScreen/TeamList'
+import TeamList from '../../components/TeamScreen/TeamList';
 
 const users = [{
   id: '1',
@@ -52,8 +53,12 @@ const NewTeamScreen = (props) => {
             <Button title="Agregar Usuario"  onPress={() => props.navigation.navigate('Agregar usuarios', {name, members})} />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}><Button title="Cancelar"  onPress={() => props.navigation.goBack()}/></View>
-          <View style={styles.confirmButton}><Button title="Confirmar"  onPress={() => props.navigation.navigate('Equipos', { name, description, members: membersObjects})} /></View>
+          <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>
+            <Text style={styles.textCancelButton}>Cancelar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Equipos', { name, description, members: membersObjects})}>
+            <Text style={styles.textConfirmButton}>Confirmar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
