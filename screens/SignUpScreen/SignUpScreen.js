@@ -8,9 +8,7 @@ import styles from '../../styles/SignUpScreen/SignUpScreen';
 
 const SignUpScreen = (props) => {
   const signUpButtonHandler = () => {
-    // if (password.length >5 && mail.includes('@')) {
     props.navigation.navigate('Equipos');
-    // }
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

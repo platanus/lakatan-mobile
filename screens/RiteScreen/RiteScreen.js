@@ -20,7 +20,6 @@ const users = [{
 }];
 
 const RiteScreen = (props) => {
-  // const { members } = props.route.params;
   const [selectedItems, setSelectedItems] = useState(users);
 
   return (
