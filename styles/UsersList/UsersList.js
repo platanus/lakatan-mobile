@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   listOfTeam: {
     // flexDirection: 'row',
     width: '100%',
-    height: "15%",
+    height: '35%',
     // flexDirection: 'column',
     // flexWrap: 'wrap',
     alignItems: 'center',

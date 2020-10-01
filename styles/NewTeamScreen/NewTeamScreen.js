@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   addUser: {
     width: '90%',
-    height: 60,
+    height: 40,
     borderRadius: 5,
     margin: "5%",
     flexDirection: 'column',

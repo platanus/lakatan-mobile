@@ -50,8 +50,8 @@ const Team = (props) => {
 
       </View>
       <View>
-        <Button title="test Rite View" onPress={() => props.navigation.navigate('Rito') } />
-        <Button title="test New Rite View" onPress={() => props.navigation.navigate('Nuevo rito') } />
+        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rito') } />
+        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('Nuevo rito') } />
       </View>
     </View>
   );
