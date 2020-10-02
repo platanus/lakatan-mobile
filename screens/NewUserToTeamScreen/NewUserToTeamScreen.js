@@ -78,12 +78,12 @@ const NewUserToTeamScreen = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Nuevo equipo', { name: props.route.params.name, members })}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { name: props.route.params.name, members })}>
               <Text style={styles.textCancelButton}>Cancelar</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Nuevo equipo', { name: props.route.params.name, members: selectedItems })}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { name: props.route.params.name, members: selectedItems })}>
               <Text style={styles.textConfirmButton}>Confirmar</Text>
             </TouchableOpacity>
           </View>

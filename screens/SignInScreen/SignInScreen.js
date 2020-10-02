@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback, TouchableOpacity,
+  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity,
 } from 'react-native';
 import { SING_IN_REQUEST } from '../../store/types';
 
-import color from '../../styles/colors';
 import styles from '../../styles/SignInScreen/SignInScreen';
 
 const SignInScreen = (props) => {
@@ -19,7 +18,7 @@ const SignInScreen = (props) => {
   const signInButtonHandler = () => {
     // aquí falta el control de email y contraseña
     // dispatch({ type: SING_IN_REQUEST, payload: { email, password }})
-    props.navigation.navigate('Equipos'); // más adelante esto no iría aquí
+    props.navigation.navigate('Teams'); // más adelante esto no iría aquí
   };
 
   return (

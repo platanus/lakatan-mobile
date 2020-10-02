@@ -26,7 +26,7 @@ const FeedbackScreen = (props) => {
           </View>
           <View>
             <View style={styles.confirmButton}><Button title="Enviar" color={color.white} /></View>
-            <View style={styles.cancelButton}><Button title="En otro momento" color={color.gray} onPress={() => props.navigation.navigate('Equipos')} /></View>
+            <View style={styles.cancelButton}><Button title="En otro momento" color={color.gray} onPress={() => props.navigation.navigate('Teams')} /></View>
           </View>
         </View>
       </View>

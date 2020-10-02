@@ -28,7 +28,7 @@ const Team = (props) => {
     <View style={styles.container}>
       {/* <View style={styles.buttonContainer}>
         <View style={styles.backButton}>
-          <Button title="Atrás"  onPress={() => props.navigation.navigate('Equipos')} />
+          <Button title="Atrás"  onPress={() => props.navigation.navigate('Teams')} />
         </View>
         {editButton}
       </View> */}
@@ -50,8 +50,8 @@ const Team = (props) => {
 
       </View>
       <View>
-        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rito') } />
-        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('Nuevo rito') } />
+        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rite') } />
+        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('New Rite') } />
       </View>
     </View>
   );

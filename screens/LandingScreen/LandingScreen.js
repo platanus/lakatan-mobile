@@ -10,7 +10,7 @@ const TeamView = (props) => {
 
  
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate('Equipo', { name: name, description: description, members: members })}>
+    <TouchableOpacity onPress={() => props.navigation.navigate('Team', { name: name, description: description, members: members })}>
       <View style={styles.teamCard}>
         <Text style={styles.teamName}>{props.team.item.name}</Text>
       </View>
@@ -52,7 +52,7 @@ function LandingScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.addTeamButton}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Nuevo equipo', { members: [] })}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { members: [] })}>
           <View style={styles.viewAddTeamButton}>
             <Text style={styles.textAddTeamButton}>+</Text>
           </View>
