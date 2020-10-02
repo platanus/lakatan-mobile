@@ -34,6 +34,15 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
+
+  passwordInput: {
+    flexDirection: 'row',
+    width: '90%',
+    height: 40,
+    borderBottomWidth: 0.5,
+    fontSize: 15,
+  },
+
   buttonContainer: {
     flexDirection: 'row',
     width: '100%',

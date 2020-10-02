@@ -1,38 +1,55 @@
-import React, {useState} from 'react'
-import { View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  View, Text, TextInput, Button, Keyboard, TouchableWithoutFeedback, TouchableOpacity,
+} from 'react-native';
+import { SING_IN_REQUEST } from '../../store/types';
 
 import color from '../../styles/colors';
 import styles from '../../styles/SignInScreen/SignInScreen';
 
-const SignInScreen = props => {
+const SignInScreen = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [hiddenPassword, setHiddenPassword] = useState(true);
 
-    const [mail, setMail] = useState('')
-    const [password,setPassword] = useState('')
+  const dispatch = useDispatch();
 
-    const mailHandler = text => {
-      setMail(text)
-    }
+  const signInButtonHandler = () => {
+    // aquí falta el control de email y contraseña
+    // dispatch({ type: SING_IN_REQUEST, payload: { email, password }})
+    props.navigation.navigate('Equipos'); // más adelante esto no iría aquí
+  };
 
-    const passwordHandler = text => {
-      setPassword(text)
-    }
-
-    const signInButtonHandler = () => {
-      // if (password.length >5 && mail.includes('@')) {
-        props.navigation.navigate('Equipos')
-      // } 
-    }
-
-    return (
-        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
-        <View style={styles.container}>
+  return (
+  // eslint-disable-next-line react/jsx-filename-extension
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
         <View style={styles.formCard}>
-          <Text style={styles.title}>¡Bienvenido a Lakatan!</Text>
+          <Text style={styles.title}>¡Bienvenido a Lakatan! </Text>
           <View style={styles.input}>
             <Text style={styles.tag}>Correo electrónico:</Text>
-            <TextInput style={styles.areaInput} placeholder="Ej: 'baldana@uc.cl'" onChangeText={ text => mailHandler(text)} />
+            <TextInput
+              style={styles.areaInput}
+              placeholder="Ej: 'baldana@uc.cl'"
+              onChangeText={(text) => setEmail(text)}
+              autoCapitalize="none"
+              value={email}
+            />
             <Text style={styles.tag}>Contraseña:</Text>
-            <TextInput style={styles.areaInput} onChangeText={ text => passwordHandler(text)} secureTextEntry={true} />
+            <View style={styles.passwordInput}>
+              <TextInput
+                style={styles.areaInput}
+                onChangeText={(text) => setPassword(text)}
+                secureTextEntry={hiddenPassword}
+                autoCapitalize="none"
+                value={password}
+              />
+              <TouchableWithoutFeedback onPress={() => setHiddenPassword(!hiddenPassword)}>
+                <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={{ marginTop: 7 }} />
+              </TouchableWithoutFeedback>
+            </View>
           </View>
         </View>
         <View style={styles.buttonContainer}>
@@ -48,10 +65,9 @@ const SignInScreen = props => {
           </View>
         </View>
       </View>
-      </TouchableWithoutFeedback>
-    )
-}
+    </TouchableWithoutFeedback>
 
+  );
+};
 
-
-export default SignInScreen
+export default SignInScreen;
