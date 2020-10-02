@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity,
 } from 'react-native';
-import { SING_IN_REQUEST } from '../../store/types';
+import { SIGN_IN_REQUEST } from '../../store/types';
 
 import styles from '../../styles/SignInScreen/SignInScreen';
 
@@ -17,8 +17,8 @@ const SignInScreen = (props) => {
 
   const signInButtonHandler = () => {
     // aquí falta el control de email y contraseña
-    // dispatch({ type: SING_IN_REQUEST, payload: { email, password }})
-    props.navigation.navigate('Teams'); // más adelante esto no iría aquí
+    dispatch({ type: SIGN_IN_REQUEST, payload: { email, password } });
+    // props.navigation.navigate('Teams'); // más adelante esto no iría aquí
   };
 
   return (
@@ -52,14 +52,14 @@ const SignInScreen = (props) => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
-              <Text style={styles.textCancelButton}>Registrar</Text>
-            </TouchableOpacity>
-          </View>
           <View style={styles.confirmButton}>
             <TouchableOpacity onPress={signInButtonHandler}>
               <Text style={styles.textConfirmButton}>Ingresar</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.cancelButton}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
+              <Text style={styles.textCancelButton}>Registrar</Text>
             </TouchableOpacity>
           </View>
         </View>

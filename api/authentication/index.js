@@ -17,8 +17,26 @@ function signInApi({ email, password }) {
   });
 }
 
+function signUpApi({ email, password, confirmPassword }) {
+  return axios({
+    method: 'post',
+    url: `${url}/api/v1/registrations`,
+    data: {
+      user: {
+        email,
+        password,
+        password_confirmation: confirmPassword,
+      },
+    },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 const authenticactionApi = {
   signInApi,
+  signUpApi,
 };
 
 export default authenticactionApi;

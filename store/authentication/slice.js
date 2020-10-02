@@ -17,6 +17,10 @@ const slice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.authentication_token;
     },
+    signUpSuccess(state, action) {
+      state.email = action.payload.email;
+      state.token = action.payload.authentication_token;
+    },
     finish(state) {
       state.loading = false;
     },
