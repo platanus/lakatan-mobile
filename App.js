@@ -1,42 +1,42 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, {useState} from 'react';
-import { Provider } from 'react-redux'
-import { store, persistor, runSagas } from './store';
-import { PersistGate } from 'redux-persist/integration/react'
+import React, { useState } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { store, persistor, runSagas } from './store';
 import TeamScreen from './screens/TeamScreen/TeamScreen';
 import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
 import NewTeamScreen from './screens/NewTeamScreen/NewTeamScreen';
 import LandingScreen from './screens/LandingScreen/LandingScreen';
-import LoginScreen from './screens/LoginScreen/LoginScreen';
 import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScreen';
 import SplashScreen from './screens/SplashScreen/SplashScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
+import RiteScreen from './screens/RiteScreen/RiteScreen';
+import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
-runSagas()
-
+runSagas();
 const TeamStack = createStackNavigator();
-
 
 export default function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}> 
+      <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <TeamStack.Navigator>
-            <TeamStack.Screen name ="Splash" component={SplashScreen} options={{ headerShown: false }}/>
-            <TeamStack.Screen name ="SignIn" component={SignInScreen} options={{ headerShown: false }} />
-            <TeamStack.Screen name ="SignUp" component={SignUpScreen} options={{ headerShown: false }}/>
-            <TeamStack.Screen name="Equipos" component={LandingScreen} options={{ gestureEnabled: false ,headerLeft: null }} />
+            <TeamStack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+            <TeamStack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
+            <TeamStack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+            <TeamStack.Screen name="Equipos" component={LandingScreen} options={{ gestureEnabled: false, headerLeft: null }} />
             <TeamStack.Screen name="Equipo" component={TeamScreen} />
             <TeamStack.Screen name="Feedback" component={FeedbackScreen} />
             <TeamStack.Screen name="Nuevo equipo" component={NewTeamScreen} />
-            <TeamStack.Screen name="Iniciar sesión" component={LoginScreen} />
             <TeamStack.Screen name="Agregar usuarios" component={NewUserToTeamScreen} />
+            <TeamStack.Screen name="Rito" component={RiteScreen} />
+            <TeamStack.Screen name="Nuevo rito" component={NewRiteToTeamScreen} />
           </TeamStack.Navigator>
         </NavigationContainer>
       </PersistGate>

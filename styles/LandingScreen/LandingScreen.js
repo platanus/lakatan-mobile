@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import color from '../../styles/colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,9 +17,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 15,
     // marginBottom: 10,
-    flexDirection: 'column',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 30,
+  },
+  textAddTeamButton: {
+    color: color.white,
+    fontSize: 18,
+  },
+  viewAddTeamButton: {
+    width: '100%',
   },
   buttonPlus: {
     opacity: 0.1,

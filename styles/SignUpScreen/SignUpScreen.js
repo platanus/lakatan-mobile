@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import color from '../../styles/colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: color.white,
     paddingTop: '25%',
-    
-    
   },
   formCard: {},
   input: {
@@ -36,30 +34,28 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
-
-  passwordInput: {
-    flexDirection: 'row',
-    width: '90%',
-    height: 40,
-    borderBottomWidth: 0.5,
-    fontSize: 15,
-  },
-
   buttonContainer: {
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     padding: '10%',
   },
-  cancelButton: {
-    backgroundColor: color.gray,
-    width: '40%',
-    borderRadius: 5,
-  },
+  // cancelButton: {
+  //   backgroundColor: color.gray,
+  //   width: '40%',
+  //   borderRadius: 5,
+  // },
   confirmButton: {
     width: '40%',
     backgroundColor: color.blue,
     borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+  textConfirmButton: {
+    color: color.white,
+    fontSize: 18,
   },
 });
 

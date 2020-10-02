@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 
-import styles from './styles';
+import styles from '../../styles/FeedbackScreen/FeedbackScreen';
 import color from '../../styles/colors';
 
 const FeedbackScreen = (props) => {
@@ -20,7 +20,7 @@ const FeedbackScreen = (props) => {
         
         <View style={styles.startsContainer}>
           <Text style={styles.title}>¡Ayúdanos a mejorar!</Text>
-          <StarRating disabled={false} maxStars={5} rating={stars} selectedStar={starsHanlder} fullStarColor={color.yellow}/>
+          <StarRating maxStars={5} rating={stars} selectedStar={starsHanlder} fullStarColor={color.yellow}/>
           <View style={styles.inputContainer}>
             <TextInput style={styles.commentInput} placeholder="Escribe tu comentario aquí..." multiline={true} />
           </View>
