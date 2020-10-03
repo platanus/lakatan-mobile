@@ -29,7 +29,7 @@ const NewTeamScreen = (props) => {
           <View style={styles.input}>
             <Text style={styles.tag}>Nombre:</Text>
             <TextInput style={styles.areaInput} placeholder="Ej: 'Mobile Capstone'" value={name} onChangeText={setName} />
-            <Text style={styles.tag}>Descripción:</Text>
+            <Text style={styles.tag}>Propósito:</Text>
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
         </View>
