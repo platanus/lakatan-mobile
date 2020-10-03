@@ -57,7 +57,7 @@ const Team = (props) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: 'first', title: 'Ritos' },
-    { key: 'second', title: 'Miembros' },
+    { key: 'second', title: 'Usuarios' },
   ]);
   const renderScene = SceneMap({
     first: ritesRoute,
