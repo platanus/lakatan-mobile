@@ -34,7 +34,7 @@ const NewRiteToTeamScreen = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
               <Text style={styles.textCancelButton}>Cancelar</Text>
             </TouchableOpacity>
           </View>
