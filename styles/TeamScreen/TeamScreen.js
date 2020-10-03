@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   listOfTeam: {
-    height: '85%',
+    height: '100%',
     alignItems: 'center',
   },
   cardOfMember: {

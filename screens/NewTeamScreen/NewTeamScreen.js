@@ -70,7 +70,9 @@ const NewTeamScreen = (props) => {
         </View>
         <TeamList users={membersObjects} inUserList={true} />
         <View style={styles.addUser}>
-          <Button title="Agregar Usuario" onPress={() => props.navigation.navigate('Add Users', { name, members })} />
+          <TouchableOpacity style={styles.addUserButton} onPress={() => props.navigation.navigate('Add Users', { name, members })}>
+            <Text style={styles.addUserText}>Agregar usuarios</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>

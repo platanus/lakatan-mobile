@@ -51,13 +51,11 @@ function LandingScreen(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.addTeamButton}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { members: [] })}>
-          <View style={styles.viewAddTeamButton}>
-            <Text style={styles.textAddTeamButton}>+</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.addTeamButton} onPress={() => props.navigation.navigate('New Team', { members: [] })}>
+        <View style={styles.viewAddTeamButton}>
+          <Text style={styles.textAddTeamButton}>+</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.listOfTeams}>
         <FlatList
           data={teamList}
