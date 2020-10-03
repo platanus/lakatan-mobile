@@ -9,31 +9,12 @@ import styles from '../../styles/RiteScreen/RiteScreen';
 
 import color from '../../styles/colors';
 
-const users = [{
-  id: '1',
-  name: 'Felipe Apablaza',
-}, {
-  id: '2',
-  name: 'Felipe Beltrán',
-}, {
-  id: '3',
-  name: 'Cristobal Ilabaca',
-}, {
-  id: '4',
-  name: 'Javier Tramon',
-}];
-
 const RiteScreen = (props) => {
-  const { name, people, objective } = props.route.params;
+  const { name, people, objective, members } = props.route.params;
 
-  const [selectedItems, setSelectedItems] = useState(users);
+  const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [teamList, setTeamList] = useState([
-    {
-      id: 1, name: 'Mobile Capstone 1', description: 'Propósito Equipo 1...', members: [{ id: 1, name: 'Felipe Apablaza' }, { id: 2, name: 'Felipe Beltrán' }, { id: 3, name: 'Cristobal Ilabaca' }, { id: 4, name: 'Javier Tramon' }], state: false,
-    },
-  ]);
-  // const sortButton = <Button title="Sortear" color="white" onPress={() => setModalVisible(!isModalVisible)} />;
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -48,7 +29,7 @@ const RiteScreen = (props) => {
           <View style={styles.raffleContainer}>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
-              items={users}
+              items={members}
               uniqueKey="id"
               alwaysShowSelectText
               onSelectedItemsChange={setSelectedItems}
@@ -77,7 +58,7 @@ const RiteScreen = (props) => {
             <Text style={styles.textRaffleButton}>Sortear</Text>
           </TouchableOpacity>
           {isModalVisible
-         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={teamList} navigation={props.navigation} />}
+         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter(member => selectedItems.includes(member.id))} navigation={props.navigation} />}
         </View>
       </View>
     </TouchableWithoutFeedback>

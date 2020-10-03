@@ -14,8 +14,9 @@ import color from '../../styles/colors';
 
 const RiteView = (props) => {
   const { name, people, objective } = props.rite.item;
+  const { members } = props;
   return (
-    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, people, objective })}>
+    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, people, objective, members })}>
       <Text style={styles.riteText}>{name}</Text>
     </TouchableOpacity>
   );
@@ -32,10 +33,12 @@ const Team = (props) => {
         <View>
           <FlatList
             data={rites}
-            renderItem={(rite) => <RiteView navigation={props.navigation} rite={rite} />}
+            renderItem={
+              (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} />
+            }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
+          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, description, members,  })}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
         </View>
