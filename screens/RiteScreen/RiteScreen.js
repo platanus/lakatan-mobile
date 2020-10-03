@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import {
   Text, View, Button, TouchableOpacity, ScrollView, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+
+import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
+
 import color from '../../styles/colors';
 
 const users = [{
@@ -21,7 +24,21 @@ const users = [{
 
 const RiteScreen = (props) => {
   const [selectedItems, setSelectedItems] = useState(users);
-
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [teamList, setTeamList] = useState([{
+    id: 1, name: 'Mobile Capstone 1', description: 'Propósito Equipo 1...', members: [{ id: 1, name: 'Felipe Apablaza' }, { id: 2, name: 'Felipe Beltrán' }, { id: 3, name: 'Cristobal Ilabaca' }, { id: 4, name: 'Javier Tramon' }], state: false,
+  },
+  {
+    id: 2, name: 'Mobile Capstone 2', description: 'Propósito Equipo 2...', members: [{ id: 1, name: 'Felipe Apablaza' }, { id: 2, name: 'Felipe Beltrán' }, { id: 3, name: 'Cristobal Ilabaca' }, { id: 4, name: 'Javier Tramon' }], state: false,
+  },
+  {
+    id: 3, name: 'Mobile Capstone 3', description: 'Propósito Equipo 3...', members: [{ id: 1, name: 'Felipe Apablaza' }, { id: 2, name: 'Felipe Beltrán' }, { id: 3, name: 'Cristobal Ilabaca' }, { id: 4, name: 'Javier Tramon' }], state: false,
+  },
+  {
+    id: 4, name: 'Mobile Capstone 4', description: 'Propósito Equipo 4...', members: [{ id: 1, name: 'Felipe Apablaza' }, { id: 2, name: 'Felipe Beltrán' }, { id: 3, name: 'Cristobal Ilabaca' }, { id: 4, name: 'Javier Tramon' }], state: false,
+  },
+  ]);
+  // const sortButton = <Button title="Sortear" color="white" onPress={() => setModalVisible(!isModalVisible)} />;
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -59,10 +76,13 @@ const RiteScreen = (props) => {
             />
           </View>
         </View>
+        {/* TO DO: usuarios de Raffle están malos */}
         <View style={styles.raffleButtonContainer}>
-          <TouchableOpacity style={styles.raffleButton}>
+          <TouchableOpacity style={styles.raffleButton} onPress={() => setModalVisible(true)}>
             <Text style={styles.textRaffleButton}>Sortear</Text>
           </TouchableOpacity>
+          {isModalVisible
+         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={teamList} navigation={props.navigation} />}
         </View>
       </View>
     </TouchableWithoutFeedback>
