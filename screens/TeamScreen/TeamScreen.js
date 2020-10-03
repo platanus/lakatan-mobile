@@ -11,23 +11,30 @@ import TeamList from '../../components/TeamScreen/TeamList';
 
 import color from '../../styles/colors';
 // function Team({ route }) {
+
+const RiteView = (props) => {
+  const { name, people, objective } = props.rite.item;
+  return (
+    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, people, objective })}>
+      <Text style={styles.riteText}>{name}</Text>
+    </TouchableOpacity>
+  );
+};
+
 const Team = (props) => {
-  const { name, description, members } = props.route.params;
+  const {
+    name, description, members, rites,
+  } = props.route.params;
 
   const ritesRoute = () => (
     <View style={styles.riteContainer}>
       <View style={styles.riteScreen}>
         <View>
-          {/* TO DO: Flat list con TouchableOpacity */}
-          <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite')}>
-            <Text style={styles.riteText}>Rito uno</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite')}>
-            <Text style={styles.riteText}>Rito dos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite')}>
-            <Text style={styles.riteText}>Rito tres</Text>
-          </TouchableOpacity>
+          <FlatList
+            data={rites}
+            renderItem={(rite) => <RiteView navigation={props.navigation} rite={rite} />}
+            keyExtractor={(rite) => rite.id.toString()}
+          />
           <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
@@ -54,7 +61,6 @@ const Team = (props) => {
     second: membersRoute,
   });
 
-  
   const [userSelected, setUserSelected] = useState('');
 
   const AmIInThisTeam = true;
@@ -86,7 +92,6 @@ const Team = (props) => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={initialLayout}
-      // style={{ position: 'static', top: 0 }}
     />
   );
 };
