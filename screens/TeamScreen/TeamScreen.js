@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Button, FlatList, TouchableOpacity,
+  View, Text, Button, TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { CURRENT_TEAM_REQUEST } from '../../store/types';
 
 import styles from '../../styles/TeamScreen/TeamScreen';
 
@@ -11,18 +13,17 @@ import TeamList from '../../components/TeamScreen/TeamList';
 
 // function Team({ route }) {
 const Team = (props) => {
-  const { name, description, members } = props.route.params;
-  const [users, usersHandler] = useState([{ id: 1, name: 'Felipe Apablaza' },
-    { id: 2, name: 'Felipe Beltrán' },
-    { id: 3, name: 'Cristobal Ilabaca' },
-    { id: 4, name: 'Javier Tramon' }]);
+  const { id } = props.route.params;
+  const { name, description, members } = useSelector((state) => state.teams.currentTeam);
+  const { token, email } = useSelector((state) => state.authentication);
+
+  const dispatch = useDispatch();
+  dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [userSelected, setUserSelected] = useState('');
 
   const AmIInThisTeam = true;
   const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
-  const sortButton = <Button title="Sortear" color="white" onPress={() => setModalVisible(!isModalVisible)} />;
 
   return (
     <View style={styles.container}>

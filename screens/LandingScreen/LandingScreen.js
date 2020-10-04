@@ -8,12 +8,12 @@ import { ALL_TEAMS_REQUEST } from '../../store/types';
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
-  const { name, description, members } = props.team.item;
+  const { id, data: { name } } = props.team.item;
 
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate('Team', { name, description, members })}>
+    <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
       <View style={styles.teamCard}>
-        <Text style={styles.teamName}>{props.team.item.name}</Text>
+        <Text style={styles.teamName}>{name}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -41,7 +41,7 @@ function LandingScreen(props) {
   }
 
   useEffect(() => {
-    if (props.route.params?.name) {
+    if (props.route.params?.id) {
       const { name, description, members } = props.route.params;
       handlerTeam({
         id: teamId, name, description, members, state: false,
