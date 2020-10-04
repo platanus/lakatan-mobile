@@ -21,7 +21,7 @@ function* signInRequest({ payload }) {
     } = yield call(api.signInApi, payload);
     if (is_success) {
       yield put(authenticationActions.signInSuccess({
-        [email]: payload,
+        email: payload.email,
         authentication_token,
       }));
     }
