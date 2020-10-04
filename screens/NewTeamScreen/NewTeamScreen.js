@@ -44,17 +44,18 @@ const users = [{
 }];
 
 const NewTeamScreen = (props) => {
-  const { members } = props.route.params;
+  // const { members } = props.route.params;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const membersObjects = [];
 
-  if (members) {
-    members.forEach((element) => {
-      membersObjects.push(users.find((x) => x.id === element));
-    });
-  }
+  // if (members) {
+  //   members.forEach((element) => {
+  //     membersObjects.push(users.find((x) => x.id === element));
+  //   });
+  // }
+  const members = [2, 3];
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -76,7 +77,7 @@ const NewTeamScreen = (props) => {
           <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>
             <Text style={styles.textCancelButton}>Cancelar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Teams', { name, description, members: membersObjects })}>
+          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Teams', { name, description, members })}>
             <Text style={styles.textConfirmButton}>Confirmar</Text>
           </TouchableOpacity>
         </View>

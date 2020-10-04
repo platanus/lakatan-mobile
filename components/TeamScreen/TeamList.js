@@ -8,7 +8,7 @@ const User = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{props.member.item.name}</Text>
+      <Text style={styles.items}>{props.member.item.email}</Text>
     </View>
     </TouchableWithoutFeedback>   
   )

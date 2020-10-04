@@ -3,12 +3,12 @@ import {
   Text, View, TouchableOpacity, FlatList, RefreshControl,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { ALL_TEAMS_REQUEST } from '../../store/types';
+import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST } from '../../store/types';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
-  const { id, data: { name } } = props.team.item;
+  const { id, attributes: { name } } = props.team.item;
 
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
@@ -21,13 +21,17 @@ const TeamView = (props) => {
 
 function LandingScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
-  const { teamsList } = useSelector((state) => state.teams);
+  const { teamsList, id, name } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
-  const handlerTeam = (newTeam) => {
-    // setTeamList([...teamList, newTeam]);
-    // dispatch algo
+  const handlerTeam = ({ name, purpose, members }) => {
+    dispatch({
+      type: NEW_TEAM_REQUEST,
+      payload: {
+        token, email, name, purpose, members,
+      },
+    });
   };
 
   const onRefresh = useCallback(() => {
@@ -41,12 +45,11 @@ function LandingScreen(props) {
   }
 
   useEffect(() => {
-    if (props.route.params?.id) {
+    if (props.route.params?.name) {
       const { name, description, members } = props.route.params;
       handlerTeam({
-        id: teamId, name, description, members, state: false,
+        name, purpose: description, members,
       });
-      setTeamId(teamId + 1);
     }
   }, [props.route.params?.name]);
 

@@ -25,9 +25,29 @@ function team({ email, token, id }) {
   });
 }
 
+function newTeam({
+  name, purpose, members, token, email,
+}) {
+  return axios({
+    method: 'post',
+    url: `${url}/api/v1/teams`,
+    data: {
+      name,
+      purpose,
+      users: members,
+    },
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 const apiTeams = {
   allTeams,
   team,
+  newTeam,
 };
 
 export default apiTeams;

@@ -14,7 +14,7 @@ import TeamList from '../../components/TeamScreen/TeamList';
 // function Team({ route }) {
 const Team = (props) => {
   const { id } = props.route.params;
-  const { name, description, members } = useSelector((state) => state.teams.currentTeam);
+  const { name, purpose, members } = useSelector((state) => state.teams.currentTeam);
   const { token, email } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Team = (props) => {
           <Text style={styles.teamTitle}>{name}</Text>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.description}>{purpose}</Text>
         </View>
         <TeamList users={members} inUserList={false} />
       </View>
