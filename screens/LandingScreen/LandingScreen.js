@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Text, View, TouchableOpacity, FlatList,
+  Text, View, TouchableOpacity, FlatList, RefreshControl,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ALL_TEAMS_REQUEST } from '../../store/types';
@@ -20,29 +20,21 @@ const TeamView = (props) => {
 };
 
 function LandingScreen(props) {
-  // const [teamList, setTeamList] = useState([{
-  //   id: 1, name: 'Mobile Capstone 1', description: 'Propósito Equipo 1...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
-  // },
-  // {
-  //   id: 2, name: 'Mobile Capstone 2', description: 'Propósito Equipo 2...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
-  // },
-  // {
-  //   id: 3, name: 'Mobile Capstone 3', description: 'Propósito Equipo 3...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
-  // },
-  // {
-  //   id: 4, name: 'Mobile Capstone 4', description: 'Propósito Equipo 4...', members: [{id: 1, name: 'Felipe Apablaza'},{id: 2, name: 'Felipe Beltrán'},{id: 3, name: 'Cristobal Ilabaca'},{id: 4, name: 'Javier Tramon'}], state: false,
-  // },
-  // ]);
+  const [refreshing, setRefreshing] = useState(false);
   const { teamsList } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
-
-  // const [teamId, setTeamId] = useState(5);
 
   const handlerTeam = (newTeam) => {
     // setTeamList([...teamList, newTeam]);
     // dispatch algo
   };
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+    setRefreshing(false);
+  });
 
   if (teamsList.length === 0) {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
@@ -72,6 +64,9 @@ function LandingScreen(props) {
           data={teamsList}
           renderItem={(team) => <TeamView navigation={props.navigation} team={team} />}
           keyExtractor={(team) => team.id.toString()}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       </View>
     </View>
