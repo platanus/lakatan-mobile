@@ -4,11 +4,12 @@ import stylesTeam from '../../styles/TeamScreen/TeamScreen'
 import stylesUsers from '../../styles/UsersList/UsersList'
 
 const User = (props) => {
-  const {styles} = props;
+  const {styles, member} = props;
+  console.log(member)
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{props.member.item.name}</Text>
+      <Text style={styles.items}>{member.item.attributes.email}</Text>
     </View>
     </TouchableWithoutFeedback>   
   )

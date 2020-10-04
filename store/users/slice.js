@@ -13,7 +13,7 @@ const slice = createSlice({
       state.loading = true;
     },
     get(state, action) {
-      state.users = action.payload.userList;
+      state.users = action.payload.data.data;
     },
     finish(state) {
       state.loading = false;

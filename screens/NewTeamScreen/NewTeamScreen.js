@@ -3,51 +3,29 @@ import React, { useState } from 'react';
 import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { USERS_REQUEST } from '../../store/types';
 
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import color from '../../styles/colors';
 import TeamList from '../../components/TeamScreen/TeamList';
-
-const users = [{
-  id: '1',
-  name: 'Felipe Apablaza',
-}, {
-  id: '2',
-  name: 'Felipe Beltrán',
-}, {
-  id: '3',
-  name: 'Cristobal Ilabaca',
-}, {
-  id: '4',
-  name: 'Javier Tramon',
-}, {
-  id: '5',
-  name: 'Alfonso Aguirrebeña',
-}, {
-  id: '6',
-  name: 'Benjamin Aldana',
-}, {
-  id: '7',
-  name: 'Cindy Tarud',
-}, {
-  id: '8',
-  name: 'Claudio Prieto',
-}, {
-  id: '9',
-  name: 'Fran Holhlberg',
-}, {
-  id: '10',
-  name: 'Ignacio Madariaga',
-}, {
-  id: '11',
-  name: 'Javier Paravich',
-}];
 
 const NewTeamScreen = (props) => {
   const { members } = props.route.params;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
+  const dispatch = useDispatch();
+  const { token, email } = useSelector((state) => state.authentication);
+  dispatch({ type: USERS_REQUEST, payload: { token, email } });
+  const { users } = useSelector((state) => state.users);
+  const dataHandler = (data) => {
+    const aux = [];
+    data.forEach((element) => {
+      aux.push({ id: element.id, email: element.attributes.email });
+    });
+    return aux;
+  };
   const membersObjects = [];
 
   if (members) {

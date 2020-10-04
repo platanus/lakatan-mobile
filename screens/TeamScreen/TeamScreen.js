@@ -12,11 +12,6 @@ import TeamList from '../../components/TeamScreen/TeamList';
 // function Team({ route }) {
 const Team = (props) => {
   const { name, description, members } = props.route.params;
-  const [users, usersHandler] = useState([{ id: 1, name: 'Felipe Apablaza' },
-    { id: 2, name: 'Felipe Beltrán' },
-    { id: 3, name: 'Cristobal Ilabaca' },
-    { id: 4, name: 'Javier Tramon' }]);
-
   const [isModalVisible, setModalVisible] = useState(false);
   const [userSelected, setUserSelected] = useState('');
 
@@ -50,8 +45,8 @@ const Team = (props) => {
 
       </View>
       <View>
-        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rite') } />
-        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('New Rite') } />
+        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rite')} />
+        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('New Rite')} />
       </View>
     </View>
   );

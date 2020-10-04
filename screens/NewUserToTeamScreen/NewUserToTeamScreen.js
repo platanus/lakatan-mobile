@@ -12,40 +12,6 @@ import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 
 import { USERS_REQUEST } from '../../store/types';
-// const users = [{
-//   id: '1',
-//   name: 'Felipe Apablaza',
-// }, {
-//   id: '2',
-//   name: 'Felipe Beltrán',
-// }, {
-//   id: '3',
-//   name: 'Cristobal Ilabaca',
-// }, {
-//   id: '4',
-//   name: 'Javier Tramon',
-// }, {
-//   id: '5',
-//   name: 'Alfonso Aguirrebeña',
-// }, {
-//   id: '6',
-//   name: 'Benjamin Aldana',
-// }, {
-//   id: '7',
-//   name: 'Cindy Tarud',
-// }, {
-//   id: '8',
-//   name: 'Claudio Prieto',
-// }, {
-//   id: '9',
-//   name: 'Fran Holhlberg',
-// }, {
-//   id: '10',
-//   name: 'Ignacio Madariaga',
-// }, {
-//   id: '11',
-//   name: 'Javier Paravich',
-// }];
 
 
 
@@ -56,13 +22,20 @@ const NewUserToTeamScreen = (props) => {
   const { token , email} = useSelector((state) => state.authentication);
   dispatch({type: USERS_REQUEST, payload: {token, email}});
   const {users} = useSelector((state) => state.users);
-
+  const dataHandler = (data) => {
+    const aux = [];
+    data.forEach((element) => {
+      aux.push({ id: element.id, email: element.attributes.email });
+    });
+    return aux;
+  };
+  const usuarios = dataHandler(users);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View>
           <MultiSelect
-            items={users}
+            items={usuarios}
             uniqueKey="id"
             alwaysShowSelectText
             onSelectedItemsChange={setSelectedItems}
@@ -77,7 +50,7 @@ const NewUserToTeamScreen = (props) => {
             selectedItemTextColor={color.blue}
             selectedItemIconColor={color.softGray}
             itemTextColor={color.black}
-            displayKey="name"
+            displayKey="email"
             searchInputStyle={{ color: color.softGray }}
             submitButtonColor={color.blue}
             submitButtonText="Submit"
