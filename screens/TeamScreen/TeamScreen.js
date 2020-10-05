@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Button, FlatList, TouchableOpacity,
+  View, Text, Button, TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { CURRENT_TEAM_REQUEST } from '../../store/types';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from '../../components/TeamScreen/TeamList';
-
-import color from '../../styles/colors';
 
 const RiteView = (props) => {
   const { name, numberOfPeople, objective } = props.rite.item;
@@ -21,11 +21,16 @@ const RiteView = (props) => {
   );
 };
 
-
 const Team = (props) => {
   const {
     name, description, members, rites,
   } = props.route.params;
+  const { id } = props.route.params;
+  const { name, purpose, members } = useSelector((state) => state.teams.currentTeam);
+  const { token, email } = useSelector((state) => state.authentication);
+ 
+  const dispatch = useDispatch();
+  dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
 
   const ritesRoute = () => (
     <View style={styles.riteContainer}>
@@ -74,7 +79,7 @@ const Team = (props) => {
       <View style={styles.teamScreen}>
         <Text style={styles.teamTitle}>{name}</Text>
         <Text style={styles.textHeader}>Propósito</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.description}>{purpose}</Text>
       </View>
       <View>
         <TabBar

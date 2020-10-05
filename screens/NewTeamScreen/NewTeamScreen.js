@@ -47,7 +47,7 @@ const NewTeamScreen = (props) => {
           <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>
             <Text style={styles.textCancelButton}>Cancelar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Teams', { name, description, members: membersObjects })}>
+          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Teams', { name, description, members })}>
             <Text style={styles.textConfirmButton}>Confirmar</Text>
           </TouchableOpacity>
         </View>
