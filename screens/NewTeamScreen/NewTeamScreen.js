@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { USERS_REQUEST } from '../../store/types';
 
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import color from '../../styles/colors';
@@ -12,6 +14,8 @@ const NewTeamScreen = (props) => {
   const { members } = props.route.params;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
+  const { users } = useSelector((state) => state.users);
 
   const membersObjects = [];
 

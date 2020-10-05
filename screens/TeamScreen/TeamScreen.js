@@ -21,6 +21,7 @@ const RiteView = (props) => {
   );
 };
 
+
 const Team = (props) => {
   const {
     name, description, members, rites,
