@@ -25,7 +25,7 @@ const slice = createSlice({
       state.currentTeam = action.payload.team;
     },
     addNewTeam(state, action) {
-      state.teamsList = [...state.teamsList, action.newTeam];
+      state.teamsList = [...state.teamsList, action.payload.newTeam];
     },
     finish(state) {
       state.loading = false;

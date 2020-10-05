@@ -41,7 +41,7 @@ function* newTeamRequest({ payload }) {
   yield put(teamsActions.start());
   try {
     const { data: { data: { attributes: { name }, id } } } = yield call(apiTeams.newTeam, payload);
-    // yield put(teamsActions.addNewTeam({ newTeam: { name, id } }));
+    yield put(teamsActions.addNewTeam({ newTeam: { attributes: { name }, id } }));
   } catch (error) {
     console.log(error);
   }
