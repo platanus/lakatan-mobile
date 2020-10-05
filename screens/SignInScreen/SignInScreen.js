@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity,
+  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert,
 } from 'react-native';
-import { SING_IN_REQUEST } from '../../store/types';
+import { color } from 'react-native-reanimated';
+import colors from '../../styles/colors';
+import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR } from '../../store/types';
 
 import styles from '../../styles/SignInScreen/SignInScreen';
 
@@ -13,13 +15,46 @@ const SignInScreen = (props) => {
   const [password, setPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
 
+  const { authentication: { error } } = useSelector((store) => store);
   const dispatch = useDispatch();
 
-  const signInButtonHandler = () => {
-    // aquí falta el control de email y contraseña
-    // dispatch({ type: SING_IN_REQUEST, payload: { email, password }})
-    props.navigation.navigate('Teams'); // más adelante esto no iría aquí
+  const emailHandler = (text) => {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(text)) {
+      return (true);
+    }
+    Alert.alert(
+      'Has ingresado un correo inválido!',
+      'Intenta de nuevo',
+      [
+        { text: 'OK' },
+      ],
+      { cancelable: false },
+    );
+    return (false);
   };
+
+  const signInButtonHandler = () => {
+    if (emailHandler(email)) {
+      dispatch({ type: SIGN_IN_REQUEST, payload: { email, password } });
+    }
+  };
+
+  const signInButtonDisable = () => (
+    { ...styles.confirmButton, backgroundColor: email && password ? colors.blue : colors.gray });
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert(
+        error,
+        '',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+      dispatch({ type: CLEAR_AUTH_ERROR });
+    }
+  }, [error]);
 
   return (
   // eslint-disable-next-line react/jsx-filename-extension
@@ -35,6 +70,8 @@ const SignInScreen = (props) => {
               onChangeText={(text) => setEmail(text)}
               autoCapitalize="none"
               value={email}
+              keyboardType="email-address"
+              autoCompleteType="off"
             />
             <Text style={styles.tag}>Contraseña:</Text>
             <View style={styles.passwordInput}>
@@ -52,14 +89,14 @@ const SignInScreen = (props) => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
+          <View style={signInButtonDisable()}>
+            <TouchableOpacity disabled={!(email && password)} onPress={signInButtonHandler}>
+              <Text style={styles.textConfirmButton}>Ingresar</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.cancelButton}>
             <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
               <Text style={styles.textCancelButton}>Registrar</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={signInButtonHandler}>
-              <Text style={styles.textConfirmButton}>Ingresar</Text>
             </TouchableOpacity>
           </View>
         </View>

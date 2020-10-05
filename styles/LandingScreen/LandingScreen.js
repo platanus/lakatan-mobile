@@ -55,6 +55,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: color.blue,
   },
+
+  signOutButton: {
+    width: '40%',
+    height: 30,
+   
+    borderRadius: 5,
+    marginTop: 12,
+    // marginBottom: 10,
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textSignOutButton: {
+    color: color.red,
+    fontSize: 15,
+  },
+  viewSignOutButton: {
+    width: '100%',
+  },
 });
 
 export default { ...styles };

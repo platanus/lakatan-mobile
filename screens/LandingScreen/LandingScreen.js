@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
   Text, View, Button, TouchableOpacity, ScrollView, FlatList,
 } from 'react-native';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_OUT_REQUEST } from '../../store/types';
 import styles from '../../styles/LandingScreen/LandingScreen';
 import color from '../../styles/colors';
 
 const TeamView = (props) => {
+
   const { name, description, members, rites } = props.team.item;
 
   return (
@@ -110,6 +112,7 @@ function LandingScreen(props) {
       },
     ],
     state: false,
+
   },
   ]);
 
@@ -129,6 +132,9 @@ function LandingScreen(props) {
     }
   }, [props.route.params?.name]);
 
+  const { authentication: { token, email } } = useSelector((store) => store);
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.addTeamButton} onPress={() => props.navigation.navigate('New Team', { members: [] })}>
@@ -142,6 +148,13 @@ function LandingScreen(props) {
           renderItem={(team) => <TeamView navigation={props.navigation} team={team} />}
           keyExtractor={(team) => team.id.toString()}
         />
+      </View>
+      <View style={styles.signOutButton}>
+        <TouchableOpacity onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}>
+          <View style={styles.viewSignOutButton}>
+            <Text style={styles.textSignOutButton}>Cerrar Sesión</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
