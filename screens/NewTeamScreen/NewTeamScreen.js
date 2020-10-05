@@ -11,7 +11,7 @@ import color from '../../styles/colors';
 import TeamList from '../../components/TeamScreen/TeamList';
 
 const NewTeamScreen = (props) => {
-  // const { members } = props.route.params;
+  const { members } = props.route.params;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -19,12 +19,11 @@ const NewTeamScreen = (props) => {
 
   const membersObjects = [];
 
-  // if (members) {
-  //   members.forEach((element) => {
-  //     membersObjects.push(users.find((x) => x.id === element));
-  //   });
-  // }
-  const members = [2, 3];
+  if (members) {
+    members.forEach((element) => {
+      membersObjects.push(users.find((x) => x.id === element));
+    });
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
