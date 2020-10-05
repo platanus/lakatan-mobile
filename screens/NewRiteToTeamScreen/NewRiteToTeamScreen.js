@@ -6,7 +6,7 @@ import color from '../../styles/colors';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
 const NewRiteToTeamScreen = (props) => {
-  const { name, description } = props.route.params;
+  const { name, purpose } = props.route.params;
   const [numberOfPeople, setNumberOfPeople] = useState(0);
   const [riteName, setRiteName] = useState('');
   const [objective, setObjective] = useState('');
@@ -24,7 +24,7 @@ const NewRiteToTeamScreen = (props) => {
       <View style={styles.container}>
         <View style={styles.infoContainer}>
           <Text style={styles.teamTitle}>{name}</Text>
-          <Text>{description}</Text>
+          <Text>{purpose}</Text>
           <Text style={styles.textHeader}>Nombre del rito</Text>
           <TextInput style={styles.areaInput} value={riteName} onChangeText={setRiteName} placeholder="Ingresar nombre" />
           <Text style={styles.textHeader}>Objetivo del rito</Text>

@@ -7,11 +7,18 @@ import stylesUsers from '../../styles/UsersList/UsersList';
 
 const User = (props) => {
 
-  const {styles, member} = props;
+  const {styles, member, inUserList} = props;
+  let email;
+  if (inUserList){
+    email =member.item.attributes.email;
+  } else{
+    email = member.item.email
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{member.item.email}</Text>
+      <Text style={styles.items}>{email}</Text>
     </View>
     </TouchableWithoutFeedback>   
   )
@@ -29,7 +36,7 @@ const TeamList = ({ users, inUserList }) => {
       <FlatList
         style={styling.cardOfMemberView}
         data={users}
-        renderItem={(member) => <User member={member} styles={styling} />}
+        renderItem={(member) => <User member={member} styles={styling} inUserList={inUserList}/>}
         keyExtractor={(member) => member.id.toString()}
       />
     </View>

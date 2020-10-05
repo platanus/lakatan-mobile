@@ -1,16 +1,26 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TouchableOpacity,
+  View, Text, Button, TouchableOpacity, FlatList
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { CURRENT_TEAM_REQUEST } from '../../store/types';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-
+import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from '../../components/TeamScreen/TeamList';
-
+const rites= [
+  {
+    id: 1, name: "Rito 1 equipo MC 1", people: 1, objective: "Objetivo Rito 1 MC 1",
+  },
+  {
+    id: 2, name: "Rito 2 equipo MC 1", people: 2, objective: "Objetivo Rito 2 MC 1",
+  },
+  {
+    id: 3, name: "Rito 3 equipo MC 1", people: 3, objective: "Objetivo Rito 3 MC 1",
+  },
+];
 const RiteView = (props) => {
   const { name, numberOfPeople, objective } = props.rite.item;
   const { members } = props;
@@ -22,9 +32,6 @@ const RiteView = (props) => {
 };
 
 const Team = (props) => {
-  const {
-    name, description, members, rites,
-  } = props.route.params;
   const { id } = props.route.params;
   const { name, purpose, members } = useSelector((state) => state.teams.currentTeam);
   const { token, email } = useSelector((state) => state.authentication);
@@ -43,7 +50,7 @@ const Team = (props) => {
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, description, members,  })}>
+          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, purpose, members,  })}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
         </View>

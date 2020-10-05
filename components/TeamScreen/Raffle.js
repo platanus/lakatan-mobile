@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import {
+  View, Text, Button, TouchableOpacity,
+} from 'react-native';
 import Modal from 'react-native-modal';
 import Emoji from 'react-native-emoji';
 import { bounceInUp, bounceInDown } from 'react-native-animatable';
@@ -12,7 +14,7 @@ const Raffle = ({
   const [userSelected, setUserSelected] = useState('');
   useEffect(() => {
     const random = Math.floor(Math.random() * users.length);
-    setUserSelected(users[random].name);
+    setUserSelected(users[random].email);
   }, []);
 
   const toggleModalOff = () => {

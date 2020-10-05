@@ -44,7 +44,7 @@ const RiteScreen = (props) => {
               selectedItemTextColor={color.blue}
               selectedItemIconColor={color.softGray}
               itemTextColor={color.black}
-              displayKey="name"
+              displayKey="email"
               searchInputStyle={{ color: color.softGray }}
               submitButtonColor={color.blue}
               submitButtonText="Submit"

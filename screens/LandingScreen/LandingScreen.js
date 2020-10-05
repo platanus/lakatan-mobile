@@ -21,7 +21,7 @@ const TeamView = (props) => {
 
 function LandingScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
-  const { teamsList, id, name } = useSelector((state) => state.teams);
+  const { teamsList} = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
@@ -52,9 +52,6 @@ function LandingScreen(props) {
       });
     }
   }, [props.route.params?.name]);
-
-  const { authentication: { token, email } } = useSelector((store) => store);
-  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
