@@ -1,9 +1,12 @@
-import React from 'react'
-import { View, FlatList, Text ,TouchableWithoutFeedback} from 'react-native'
-import stylesTeam from '../../styles/TeamScreen/TeamScreen'
-import stylesUsers from '../../styles/UsersList/UsersList'
+import React from 'react';
+import {
+  View, FlatList, Text, TouchableWithoutFeedback,
+} from 'react-native';
+import stylesTeam from '../../styles/TeamScreen/TeamScreen';
+import stylesUsers from '../../styles/UsersList/UsersList';
 
 const User = (props) => {
+
   const {styles, member} = props;
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
@@ -14,26 +17,23 @@ const User = (props) => {
   )
 }
 
-const TeamList = ({users, inUserList}) => {
-    let styling;
-    if (inUserList){
-      styling = stylesUsers
-    } else {
-      styling = stylesTeam
-    }
-    return ( 
-        <View style={styling.listOfTeam}>
-          <FlatList
-            style={styling.cardOfMemberView}
-            data={users}
-            renderItem={(member) => <User member={member} styles={styling} />}
-            keyExtractor={(member) => member.id.toString()}
-          />
-        </View>
-    )
-}
+const TeamList = ({ users, inUserList }) => {
+  let styling;
+  if (inUserList) {
+    styling = stylesUsers;
+  } else {
+    styling = stylesTeam;
+  }
+  return (
+    <View style={styling.listOfTeam}>
+      <FlatList
+        style={styling.cardOfMemberView}
+        data={users}
+        renderItem={(member) => <User member={member} styles={styling} />}
+        keyExtractor={(member) => member.id.toString()}
+      />
+    </View>
+  );
+};
 
-
-
-
-export default TeamList
+export default TeamList;

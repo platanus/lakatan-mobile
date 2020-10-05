@@ -33,13 +33,15 @@ const NewTeamScreen = (props) => {
           <View style={styles.input}>
             <Text style={styles.tag}>Nombre:</Text>
             <TextInput style={styles.areaInput} placeholder="Ej: 'Mobile Capstone'" value={name} onChangeText={setName} />
-            <Text style={styles.tag}>Descripción:</Text>
+            <Text style={styles.tag}>Propósito:</Text>
             <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
           </View>
         </View>
         <TeamList users={membersObjects} inUserList={true} />
         <View style={styles.addUser}>
-          <Button title="Agregar Usuario" onPress={() => props.navigation.navigate('Add Users', { name, members })} />
+          <TouchableOpacity style={styles.addUserButton} onPress={() => props.navigation.navigate('Add Users', { name, members })}>
+            <Text style={styles.addUserText}>Agregar usuarios</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>

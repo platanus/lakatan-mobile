@@ -1,42 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Text, View, Button, TouchableOpacity, ScrollView, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
+  Text, View, Button, TouchableOpacity, ScrollView, FlatList, TouchableWithoutFeedback, Keyboard,
+} from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+
+import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
+
 import color from '../../styles/colors';
 
-const users = [{
-  id: '1',
-  name: 'Felipe Apablaza',
-}, {
-  id: '2',
-  name: 'Felipe Beltrán',
-}, {
-  id: '3',
-  name: 'Cristobal Ilabaca',
-}, {
-  id: '4',
-  name: 'Javier Tramon',
-}];
-
 const RiteScreen = (props) => {
-  const [selectedItems, setSelectedItems] = useState(users);
+  const { name, numberOfPeople, objective, members } = props.route.params;
+
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.screen}>
-          <Text style={styles.riteTitle}>Rito 1</Text>
+          <Text style={styles.riteTitle}>{name}</Text>
           <View style={styles.infoRite}>
             <Text style={styles.textHeader}>Objetivo</Text>
-            <Text style={styles.textInfo}>Este es el objetivo de este rito</Text>
-            <Text style={styles.textHeader}>Personas</Text>
-            <Text style={styles.textInfo}>Este objetivo necesita 2 personas</Text>
+            <Text style={styles.textInfo}>{objective}</Text>
+            <Text style={styles.textHeader}>Cantidad de personas</Text>
+            <Text style={styles.textInfo}>{numberOfPeople}</Text>
           </View>
           <View style={styles.raffleContainer}>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
-              items={users}
+              items={members}
               uniqueKey="id"
               alwaysShowSelectText
               onSelectedItemsChange={setSelectedItems}
@@ -59,10 +52,13 @@ const RiteScreen = (props) => {
             />
           </View>
         </View>
+        {/* TO DO: usuarios de Raffle están malos */}
         <View style={styles.raffleButtonContainer}>
-          <TouchableOpacity style={styles.raffleButton}>
+          <TouchableOpacity style={styles.raffleButton} onPress={() => setModalVisible(true)}>
             <Text style={styles.textRaffleButton}>Sortear</Text>
           </TouchableOpacity>
+          {isModalVisible
+         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter(member => selectedItems.includes(member.id))} navigation={props.navigation} />}
         </View>
       </View>
     </TouchableWithoutFeedback>
