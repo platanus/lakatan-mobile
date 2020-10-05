@@ -29,13 +29,13 @@ const NewUserToTeamScreen = (props) => {
     });
     return aux;
   };
-  const usuarios = dataHandler(users);
+  const availableUsers = dataHandler(users);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View>
           <MultiSelect
-            items={usuarios}
+            items={availableUsers}
             uniqueKey="id"
             alwaysShowSelectText
             onSelectedItemsChange={setSelectedItems}

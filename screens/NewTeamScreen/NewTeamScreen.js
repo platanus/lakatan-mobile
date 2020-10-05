@@ -15,17 +15,8 @@ const NewTeamScreen = (props) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const dispatch = useDispatch();
-  const { token, email } = useSelector((state) => state.authentication);
-  dispatch({ type: USERS_REQUEST, payload: { token, email } });
   const { users } = useSelector((state) => state.users);
-  const dataHandler = (data) => {
-    const aux = [];
-    data.forEach((element) => {
-      aux.push({ id: element.id, email: element.attributes.email });
-    });
-    return aux;
-  };
+
   const membersObjects = [];
 
   if (members) {

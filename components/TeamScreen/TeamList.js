@@ -5,7 +5,6 @@ import stylesUsers from '../../styles/UsersList/UsersList'
 
 const User = (props) => {
   const {styles, member} = props;
-  console.log(member)
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>

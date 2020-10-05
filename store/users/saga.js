@@ -10,7 +10,6 @@ function* getUsersRequest({ payload }) {
       data,
 
     } = yield call(api.users, payload);
-    // const userList = dataHandler(data.data)
     yield put(usersActions.get({
       data,
     }));
