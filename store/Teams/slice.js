@@ -4,7 +4,7 @@ const initialState = {
   teamsList: [],
   loading: false,
   currentTeam: {
-    name: '', purpose: '', members: [], rite: [],
+    name: '', purpose: '', members: [], rites: [],
   },
   newTeam: {
     id: undefined,

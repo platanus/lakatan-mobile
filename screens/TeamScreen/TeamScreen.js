@@ -11,25 +11,15 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from '../../components/TeamScreen/TeamList';
 
-// const rites = [
-//   {
-//     id: 1, name: 'Rito 1 equipo MC 1', people: 1, objective: 'Objetivo Rito 1 MC 1',
-//   },
-//   {
-//     id: 2, name: 'Rito 2 equipo MC 1', people: 2, objective: 'Objetivo Rito 2 MC 1',
-//   },
-//   {
-//     id: 3, name: 'Rito 3 equipo MC 1', people: 3, objective: 'Objetivo Rito 3 MC 1',
-//   },
-// ];
 const RiteView = (props) => {
-  const { name, user_minimum, goal } = props.rite.item;
+  const { name, goal } = props.rite.item;
+  const userMinimum = props.rite.item.user_minimum;
   const { members } = props;
   return (
     <TouchableOpacity
       style={styles.riteButton}
       onPress={() => props.navigation.navigate('Rite', {
-        name, user_minimum, goal, members,
+        name, userMinimum, goal, members,
       })}
     >
       <Text style={styles.riteText}>{name}</Text>
