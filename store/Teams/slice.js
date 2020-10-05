@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   teamsList: [],
   loading: false,
-  currentTeam: { name: '', purpose: '', members: [] },
+  currentTeam: {
+    name: '', purpose: '', members: [], rite: [],
+  },
   newTeam: {
     id: undefined,
     name: undefined,

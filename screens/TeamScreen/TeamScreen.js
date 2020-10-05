@@ -1,31 +1,37 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TouchableOpacity, FlatList
+  View, Text, Button, TouchableOpacity, FlatList,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { CURRENT_TEAM_REQUEST } from '../../store/types';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { CURRENT_TEAM_REQUEST } from '../../store/types';
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from '../../components/TeamScreen/TeamList';
-const rites= [
-  {
-    id: 1, name: "Rito 1 equipo MC 1", people: 1, objective: "Objetivo Rito 1 MC 1",
-  },
-  {
-    id: 2, name: "Rito 2 equipo MC 1", people: 2, objective: "Objetivo Rito 2 MC 1",
-  },
-  {
-    id: 3, name: "Rito 3 equipo MC 1", people: 3, objective: "Objetivo Rito 3 MC 1",
-  },
-];
+
+// const rites = [
+//   {
+//     id: 1, name: 'Rito 1 equipo MC 1', people: 1, objective: 'Objetivo Rito 1 MC 1',
+//   },
+//   {
+//     id: 2, name: 'Rito 2 equipo MC 1', people: 2, objective: 'Objetivo Rito 2 MC 1',
+//   },
+//   {
+//     id: 3, name: 'Rito 3 equipo MC 1', people: 3, objective: 'Objetivo Rito 3 MC 1',
+//   },
+// ];
 const RiteView = (props) => {
-  const { name, numberOfPeople, objective } = props.rite.item;
+  const { name, user_minimum, goal } = props.rite.item;
   const { members } = props;
   return (
-    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, numberOfPeople, objective, members })}>
+    <TouchableOpacity
+      style={styles.riteButton}
+      onPress={() => props.navigation.navigate('Rite', {
+        name, user_minimum, goal, members,
+      })}
+    >
       <Text style={styles.riteText}>{name}</Text>
     </TouchableOpacity>
   );
@@ -33,9 +39,11 @@ const RiteView = (props) => {
 
 const Team = (props) => {
   const { id } = props.route.params;
-  const { name, purpose, members } = useSelector((state) => state.teams.currentTeam);
+  const {
+    name, purpose, members, rites,
+  } = useSelector((state) => state.teams.currentTeam);
   const { token, email } = useSelector((state) => state.authentication);
- 
+
   const dispatch = useDispatch();
   dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
 
@@ -50,7 +58,7 @@ const Team = (props) => {
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, purpose, members,  })}>
+          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, purpose, members })}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
         </View>
