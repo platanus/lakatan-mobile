@@ -3,57 +3,98 @@ import React, { useState } from 'react';
 import {
   View, Text, Button, FlatList, TouchableOpacity,
 } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import styles from '../../styles/TeamScreen/TeamScreen';
 
-import Raffle from '../../components/TeamScreen/Raffle';
 import TeamList from '../../components/TeamScreen/TeamList';
 
-// function Team({ route }) {
-const Team = (props) => {
-  const { name, description, members } = props.route.params;
-  const [users, usersHandler] = useState([{ id: 1, name: 'Felipe Apablaza' },
-    { id: 2, name: 'Felipe Beltrán' },
-    { id: 3, name: 'Cristobal Ilabaca' },
-    { id: 4, name: 'Javier Tramon' }]);
+import color from '../../styles/colors';
 
-  const [isModalVisible, setModalVisible] = useState(false);
+const RiteView = (props) => {
+  const { name, numberOfPeople, objective } = props.rite.item;
+  const { members } = props;
+  return (
+    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, numberOfPeople, objective, members })}>
+      <Text style={styles.riteText}>{name}</Text>
+    </TouchableOpacity>
+  );
+};
+
+const Team = (props) => {
+  const {
+    name, description, members, rites,
+  } = props.route.params;
+
+  const ritesRoute = () => (
+    <View style={styles.riteContainer}>
+      <View style={styles.riteScreen}>
+        <View>
+          <FlatList
+            data={rites}
+            renderItem={
+              (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} />
+            }
+            keyExtractor={(rite) => rite.id.toString()}
+          />
+          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, description, members,  })}>
+            <Text style={styles.newRiteText}>+</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+  const membersRoute = () => (
+    <View style={styles.riteContainer}>
+      <View style={styles.riteScreen}>
+        <TeamList users={members} inUserList={false} />
+      </View>
+    </View>
+  );
+  const initialLayout = {};
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'first', title: 'Ritos' },
+    { key: 'second', title: 'Usuarios' },
+  ]);
+  const renderScene = SceneMap({
+    first: ritesRoute,
+    second: membersRoute,
+  });
+
   const [userSelected, setUserSelected] = useState('');
 
   const AmIInThisTeam = true;
   const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
-  const sortButton = <Button title="Sortear" color="white" onPress={() => setModalVisible(!isModalVisible)} />;
 
-  return (
-    <View style={styles.container}>
-      {/* <View style={styles.buttonContainer}>
-        <View style={styles.backButton}>
-          <Button title="Atrás"  onPress={() => props.navigation.navigate('Teams')} />
-        </View>
-        {editButton}
-      </View> */}
-      <View style={styles.screen}>
-        <View>
-          <Text style={styles.teamTitle}>{name}</Text>
-        </View>
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>{description}</Text>
-        </View>
-        <TeamList users={members} inUserList={false} />
-      </View>
-      <View style={styles.chooseButtonContainer}>
-        <TouchableOpacity style={styles.chooseButton} onPress={() => setModalVisible(true)}>
-          <Text style={styles.textChooseButton}>Sortear</Text>
-        </TouchableOpacity>
-        {isModalVisible
-        && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members} navigation={props.navigation} />}
-
+  const renderTabBar = (props) => (
+    <View style={styles.teamContainer}>
+      <View style={styles.teamScreen}>
+        <Text style={styles.teamTitle}>{name}</Text>
+        <Text style={styles.textHeader}>Propósito</Text>
+        <Text style={styles.description}>{description}</Text>
       </View>
       <View>
-        <Button title="test Rite View" color="white" onPress={() => props.navigation.navigate('Rite') } />
-        <Button title="test New Rite View" color="white" onPress={() => props.navigation.navigate('New Rite') } />
+        <TabBar
+          {...props}
+          indicatorStyle={{ backgroundColor: color.yellow }}
+          style={{ backgroundColor: color.blue }}
+          getLabelText={({ route }) => route.title}
+          labelStyle={{ fontSize: 16 }}
+        />
       </View>
     </View>
+  );
+
+  return (
+    <TabView
+      renderTabBar={renderTabBar}
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+    />
   );
 };
 

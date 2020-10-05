@@ -11,11 +11,10 @@ const styles = StyleSheet.create({
     margin: '5%',
   },
   addTeamButton: {
-    width: '100%',
+    width: '98%',
     height: 50,
     backgroundColor: color.blue,
     borderRadius: 5,
-    marginTop: 15,
     // marginBottom: 10,
     // flexDirection: 'column',
     // justifyContent: 'center',
@@ -25,9 +24,6 @@ const styles = StyleSheet.create({
   textAddTeamButton: {
     color: color.white,
     fontSize: 18,
-  },
-  viewAddTeamButton: {
-    width: '100%',
   },
   buttonPlus: {
     opacity: 0.1,
@@ -39,7 +35,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   teamCard: {
-    width: '100%',
+    width: '98%',
+    marginHorizontal: '1%',
     height: 170,
     // marginHorizontal: 20,
     marginVertical: 10,
