@@ -23,13 +23,15 @@ function* currentTeamRequest({ payload }) {
       data: {
         data: {
           attributes: {
-            name, purpose, users,
+            name, purpose, users, tasks,
           },
         },
       },
     } = yield call(apiTeams.team, payload);
     yield put(teamsActions.loadCurrentTeamSuccess({
-      team: { name, purpose, members: users },
+      team: {
+        name, purpose, members: users, rites: tasks,
+      },
     }));
   } catch (error) {
     console.log(error);
