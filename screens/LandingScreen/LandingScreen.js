@@ -47,10 +47,10 @@ function LandingScreen(props) {
     name: 'Mobile Capstone 2',
     description: 'Propósito Equipo 2...',
     members: [
-      { id: 1, name: 'Felipe Apablaza MC2' },
-      { id: 2, name: 'Felipe Beltrán MC2' },
-      { id: 3, name: 'Cristobal Ilabaca MC2' },
-      { id: 4, name: 'Javier Tramon MC2' },
+      { id: 5, name: 'Felipe Apablaza MC2' },
+      { id: 6, name: 'Felipe Beltrán MC2' },
+      { id: 7, name: 'Cristobal Ilabaca MC2' },
+      { id: 8, name: 'Javier Tramon MC2' },
     ],
     rites: [
       {
@@ -70,10 +70,10 @@ function LandingScreen(props) {
     name: 'Mobile Capstone 3',
     description: 'Propósito Equipo 3...',
     members: [
-      { id: 1, name: 'Felipe Apablaza MC3' },
-      { id: 2, name: 'Felipe Beltrán MC3' },
-      { id: 3, name: 'Cristobal Ilabaca MC3' },
-      { id: 4, name: 'Javier Tramon MC3' },
+      { id: 9, name: 'Felipe Apablaza MC3' },
+      { id: 10, name: 'Felipe Beltrán MC3' },
+      { id: 11, name: 'Cristobal Ilabaca MC3' },
+      { id: 12, name: 'Javier Tramon MC3' },
     ],
     rites: [
       {
@@ -93,10 +93,10 @@ function LandingScreen(props) {
     name: 'Mobile Capstone 4',
     description: 'Propósito Equipo 4...',
     members: [
-      { id: 1, name: 'Felipe Apablaza MC4' },
-      { id: 2, name: 'Felipe Beltrán MC4' },
-      { id: 3, name: 'Cristobal Ilabaca MC4' },
-      { id: 4, name: 'Javier Tramon MC4' },
+      { id: 13, name: 'Felipe Apablaza MC4' },
+      { id: 14, name: 'Felipe Beltrán MC4' },
+      { id: 15, name: 'Cristobal Ilabaca MC4' },
+      { id: 16, name: 'Javier Tramon MC4' },
     ],
     rites: [
       {
