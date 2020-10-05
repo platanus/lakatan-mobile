@@ -6,7 +6,10 @@ import color from '../../styles/colors';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
 const NewRiteToTeamScreen = (props) => {
-  const [numberOfPeople, setNumberOfPeople] = useState('');
+  const { name, description } = props.route.params;
+  const [numberOfPeople, setNumberOfPeople] = useState(0);
+  const [riteName, setRiteName] = useState('');
+  const [objective, setObjective] = useState('');
 
   const numberOfPeopleHandler = (currentNumber) => {
     if (currentNumber <= 99) {
@@ -18,28 +21,29 @@ const NewRiteToTeamScreen = (props) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>  
+      <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.teamTitle}>Equipo 1</Text>
-          <Text>Este es el propósito del equipo 1</Text>
+          <Text style={styles.teamTitle}>{name}</Text>
+          <Text>{description}</Text>
+          <Text style={styles.textHeader}>Nombre del rito</Text>
+          <TextInput style={styles.areaInput} value={riteName} onChangeText={setRiteName} placeholder="Ingresar nombre" />
           <Text style={styles.textHeader}>Objetivo del rito</Text>
-          <TextInput style={styles.areaInput} placeholder="Ingresar objetivo"/>
+          <TextInput style={styles.areaInput} value={objective} onChangeText={setObjective} placeholder="Ingresar objetivo" />
           <Text style={styles.textHeader}>Personas requeridas</Text>
-          <TextInput style={styles.areaInput} value={numberOfPeople} onChangeText={numberOfPeopleHandler} placeholder="Ingresar cantidad de personas" keyboardType={Platform.OS === 'android' ? "numeric" : "number-pad"}/>
+          <TextInput style={styles.areaInput} value={numberOfPeople} onChangeText={numberOfPeopleHandler} placeholder="Ingresar cantidad de personas" keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
               <Text style={styles.textCancelButton}>Cancelar</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.confirmButton}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => props.navigation.navigate('Team', { name, riteName, objective, numberOfPeople })} >
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>
         </View>
-        
       </View>
     </TouchableWithoutFeedback>
   );

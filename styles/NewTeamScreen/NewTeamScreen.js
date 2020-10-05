@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   input: {
     width: '90%',
     marginHorizontal: '10%',
-    margin: "1%"
+    margin: '1%',
   },
   title: {
     textAlign: 'center',
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderBottomWidth: 0.5,
     fontSize: 15,
-    marginBottom: "2%"
+    marginBottom: '2%',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -45,13 +45,21 @@ const styles = StyleSheet.create({
     padding: '10%',
   },
   addUser: {
-    width: '90%',
-    height: 40,
-    borderRadius: 5,
-    margin: "5%",
-    flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 30,
+  },
+  addUserButton: {
+    backgroundColor: color.yellow,
+    width: '80%',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    marginTop: '15%', // TO DO: ordenar botones
+  },
+  addUserText: {
+    color: color.white,
+    fontSize: 18,
   },
   cancelButton: {
     backgroundColor: color.gray,

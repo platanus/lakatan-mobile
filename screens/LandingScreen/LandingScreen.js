@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Text, View, TouchableOpacity, FlatList, RefreshControl,
+  Text, View, TouchableOpacity, FlatList, RefreshControl, Button,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST } from '../../store/types';
+import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST, SIGN_OUT_REQUEST } from '../../store/types';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 
@@ -53,15 +53,16 @@ function LandingScreen(props) {
     }
   }, [props.route.params?.name]);
 
+  const { authentication: { token, email } } = useSelector((store) => store);
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
-      <View style={styles.addTeamButton}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { members: [] })}>
-          <View style={styles.viewAddTeamButton}>
-            <Text style={styles.textAddTeamButton}>+</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.addTeamButton} onPress={() => props.navigation.navigate('New Team', { members: [] })}>
+        <View style={styles.viewAddTeamButton}>
+          <Text style={styles.textAddTeamButton}>+</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.listOfTeams}>
         <FlatList
           data={teamsList}
@@ -71,6 +72,13 @@ function LandingScreen(props) {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         />
+      </View>
+      <View style={styles.signOutButton}>
+        <TouchableOpacity onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}>
+          <View style={styles.viewSignOutButton}>
+            <Text style={styles.textSignOutButton}>Cerrar Sesión</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

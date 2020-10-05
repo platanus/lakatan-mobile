@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     margin: '5%',
     flex: 1,
     shadowOffset: { width: 0, height: 1 },
+
     shadowRadius: 3,
     shadowOpacity: 0.26,
     elevation: 8,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     padding: '10%',
   },
   cancelButton: {
-    backgroundColor: color.gray,
+    backgroundColor: color.yellow,
     width: '40%',
     borderRadius: 5,
     alignItems: 'center',

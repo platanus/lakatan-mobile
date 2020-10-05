@@ -1,5 +1,6 @@
 import ListItem from 'antd-mobile/lib/list/ListItem';
 /* eslint-disable react/jsx-filename-extension */
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
@@ -10,51 +11,31 @@ import MultiSelect from 'react-native-multiple-select';
 import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 
-const users = [{
-  id: '1',
-  name: 'Felipe Apablaza',
-}, {
-  id: '2',
-  name: 'Felipe Beltrán',
-}, {
-  id: '3',
-  name: 'Cristobal Ilabaca',
-}, {
-  id: '4',
-  name: 'Javier Tramon',
-}, {
-  id: '5',
-  name: 'Alfonso Aguirrebeña',
-}, {
-  id: '6',
-  name: 'Benjamin Aldana',
-}, {
-  id: '7',
-  name: 'Cindy Tarud',
-}, {
-  id: '8',
-  name: 'Claudio Prieto',
-}, {
-  id: '9',
-  name: 'Fran Holhlberg',
-}, {
-  id: '10',
-  name: 'Ignacio Madariaga',
-}, {
-  id: '11',
-  name: 'Javier Paravich',
-}];
+import { USERS_REQUEST } from '../../store/types';
+
+
 
 const NewUserToTeamScreen = (props) => {
   const { members } = props.route.params;
   const [selectedItems, setSelectedItems] = useState(members);
-
+  const dispatch = useDispatch();
+  const { token , email} = useSelector((state) => state.authentication);
+  dispatch({type: USERS_REQUEST, payload: {token, email}});
+  const {users} = useSelector((state) => state.users);
+  const dataHandler = (data) => {
+    const aux = [];
+    data.forEach((element) => {
+      aux.push({ id: element.id, email: element.attributes.email });
+    });
+    return aux;
+  };
+  const availableUsers = dataHandler(users);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View>
           <MultiSelect
-            items={users}
+            items={availableUsers}
             uniqueKey="id"
             alwaysShowSelectText
             onSelectedItemsChange={setSelectedItems}
@@ -69,7 +50,7 @@ const NewUserToTeamScreen = (props) => {
             selectedItemTextColor={color.blue}
             selectedItemIconColor={color.softGray}
             itemTextColor={color.black}
-            displayKey="name"
+            displayKey="email"
             searchInputStyle={{ color: color.softGray }}
             submitButtonColor={color.blue}
             submitButtonText="Submit"

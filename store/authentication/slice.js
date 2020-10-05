@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   token: undefined,
   email: undefined,
+  name: undefined,
   loading: false,
+  error: undefined,
 };
 
 const slice = createSlice({
@@ -17,9 +19,20 @@ const slice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.authentication_token;
     },
+    signInError(state, action) {
+      state.error = action.payload;
+    },
     signUpSuccess(state, action) {
       state.email = action.payload.email;
       state.token = action.payload.authentication_token;
+      state.name = action.payload.name;
+    },
+    signOutSuccess(state) {
+      state.token = undefined;
+      state.email = undefined;
+    },
+    clearError(state) {
+      state.error = undefined;
     },
     finish(state) {
       state.loading = false;
