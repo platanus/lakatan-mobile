@@ -45,13 +45,8 @@ const styles = StyleSheet.create({
     padding: '10%',
   },
   addUser: {
-    // width: '90%',
-    // height: 40,
-    // borderRadius: 5,
-    // margin: '5%',
     alignItems: 'center',
     justifyContent: 'center',
-    // fontSize: 30,
   },
   addUserButton: {
     backgroundColor: color.yellow,

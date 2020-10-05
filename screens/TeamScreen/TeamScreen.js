@@ -10,13 +10,12 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
 
 import color from '../../styles/colors';
-// function Team({ route }) {
 
 const RiteView = (props) => {
-  const { name, people, objective } = props.rite.item;
+  const { name, numberOfPeople, objective } = props.rite.item;
   const { members } = props;
   return (
-    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, people, objective, members })}>
+    <TouchableOpacity style={styles.riteButton} onPress={() => props.navigation.navigate('Rite', { name, numberOfPeople, objective, members })}>
       <Text style={styles.riteText}>{name}</Text>
     </TouchableOpacity>
   );
