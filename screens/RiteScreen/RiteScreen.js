@@ -9,22 +9,14 @@ import styles from '../../styles/RiteScreen/RiteScreen';
 
 import color from '../../styles/colors';
 
-const RiteScreen = (props) => {
-  const {
-    name, userMinimum, goal, members,
-  } = props.route.params;
-
+const RiteScreen = ({ navigation, route: { params: { name, userMinimum, goal, members } } }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
 
   const selectedHandler = (selected) => {
     setSelectedItems(selected);
-    if (userMinimum <= selected.length) {
-      setRaffleButton(true);
-    } else {
-      setRaffleButton(false);
-    }
+    setRaffleButton(userMinimum <= selected.length);
   };
 
   return (
@@ -64,20 +56,20 @@ const RiteScreen = (props) => {
             />
           </View>
         </View>
-        {!raffleButton
+        {raffleButton
           ? (
-            <View style={styles.raffleButtonContainer}>
-              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-                <Text style={styles.textRaffleButton}>Sortear</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
             <View style={styles.raffleButtonContainer}>
               <TouchableOpacity style={styles.raffleButton} onPress={() => setModalVisible(true)}>
                 <Text style={styles.textRaffleButton}>Sortear</Text>
               </TouchableOpacity>
               {isModalVisible
-            && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter((member) => selectedItems.includes(member.id))} navigation={props.navigation} />}
+            && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter((member) => selectedItems.includes(member.id))} navigation={navigation} />}
+            </View>
+          ) : (
+            <View style={styles.raffleButtonContainer}>
+              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
+              </TouchableOpacity>
             </View>
           )}
       </View>

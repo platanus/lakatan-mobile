@@ -10,7 +10,7 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from '../../components/TeamScreen/TeamList';
 
-const selectedUsersId = [5, 6, 8]; // TO DO: estos son los seleccionados que llegan de backend
+const selectedUsersId = [5, 6, 8];
 
 let fewUsers = false;
 
@@ -20,7 +20,6 @@ const Raffle = ({
   const [userSelected, setUserSelected] = useState([]);
   useEffect(() => {
     const random = Math.floor(Math.random() * users.length);
-    // setUserSelected(users[random].email);
     setUserSelected(users.filter((user) => selectedUsersId.includes(user.id)));
     if (selectedUsersId.length > 1) {
       fewUsers = true;
@@ -45,7 +44,6 @@ const Raffle = ({
           ) : (
             <Text style={styles.modalMessage}>Los usuarios seleccionados son:</Text>
           )}
-          {/* <Text style={styles.modalUser}>{userSelected}</Text> */}
           <View style={styles.teamListContainer}>
             <TeamList users={userSelected} inUserList={false} />
           </View>
