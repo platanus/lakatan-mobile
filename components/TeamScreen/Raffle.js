@@ -8,7 +8,7 @@ import { bounceInUp, bounceInDown } from 'react-native-animatable';
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 
-import TeamList from '../../components/TeamScreen/TeamList';
+import TeamList from './TeamList';
 
 const selectedUsersId = [5, 6, 8];
 
@@ -17,15 +17,10 @@ let fewUsers = false;
 const Raffle = ({
   users, setVisible, visible, navigation,
 }) => {
-  const [userSelected, setUserSelected] = useState([]);
-  useEffect(() => {
-    const random = Math.floor(Math.random() * users.length);
-    setUserSelected(users.filter((user) => selectedUsersId.includes(user.id)));
-    if (selectedUsersId.length > 1) {
-      fewUsers = true;
-    }
-  }, []);
-
+  const userSelected = users.filter((user) => selectedUsersId.includes(user.id));
+  if (selectedUsersId.length > 1) {
+    fewUsers = true;
+  }
   const toggleModalOff = () => {
     setVisible(!visible);
   };
