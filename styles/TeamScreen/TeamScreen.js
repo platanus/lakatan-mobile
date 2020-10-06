@@ -103,11 +103,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  teamListContainer: {
+    height: '60%',
+  },
   modal: {
     backgroundColor: color.white,
     opacity: 0.9,
-    flex: 0.5,
-    marginTop: '60%',
+    flex: 0.6,
+    marginTop: '50%',
     borderRadius: 5,
   },
   modalView: {
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
   },
   modalMessage: {
     fontSize: 16,
+    marginBottom: '5%',
   },
   modalUser: {
     textAlign: 'center',
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
     paddingBottom: '4%',
   },
   exitButtonContainer: {
-    marginTop: '10%',
+    marginTop: '1%',
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
