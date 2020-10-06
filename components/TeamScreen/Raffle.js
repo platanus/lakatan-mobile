@@ -25,12 +25,6 @@ const Raffle = ({
     if (selectedUsersId.length > 1) {
       fewUsers = true;
     }
-    console.log("HOLA");
-    console.log(users);
-    console.log(selectedUsersId);
-    console.log("--");
-    console.log(users.filter((user) => selectedUsersId.includes(user.id)));
-    console.log("CHAO");
   }, []);
 
   const toggleModalOff = () => {
