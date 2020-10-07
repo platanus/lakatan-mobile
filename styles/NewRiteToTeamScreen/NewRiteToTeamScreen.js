@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: '70%', // TO DO: separar las view infoContainer y buttonContainer 80-20
+    marginTop: '40%', // TO DO: separar las view infoContainer y buttonContainer 80-20
   },
 
   cancelButton: {

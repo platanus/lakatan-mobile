@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import {
   View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import color from '../../styles/colors';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
+import { CREATE_RITE_REQUEST } from '../../store/types';
 
 const NewRiteToTeamScreen = (props) => {
-  const { name, purpose } = props.route.params;
-  const [numberOfPeople, setNumberOfPeople] = useState(0);
+  const { name, purpose } = useSelector((state)=>state.teams.currentTeam)
+  const [numberOfPeople, setNumberOfPeople] = useState('');
   const [riteName, setRiteName] = useState('');
   const [objective, setObjective] = useState('');
+  const { token , email} = useSelector((state) => state.authentication);
+  const {id} = useSelector((state) => state.teams.currentTeam);
+  const dispatch = useDispatch();
 
   const numberOfPeopleHandler = (currentNumber) => {
     if (currentNumber <= 99) {
@@ -17,6 +22,22 @@ const NewRiteToTeamScreen = (props) => {
     } else {
       setNumberOfPeople(currentNumber.slice(0, 2));
     }
+  };
+  
+  const createHandler = () => {
+    dispatch({
+      type: CREATE_RITE_REQUEST,
+      payload:
+    {
+      name: riteName,
+      goal: objective,
+      team_id: id,
+      user_minimum: numberOfPeople,
+      token,
+      email
+    },
+    });
+    props.navigation.navigate('Team');
   };
 
   return (
@@ -30,7 +51,7 @@ const NewRiteToTeamScreen = (props) => {
           <Text style={styles.textHeader}>Objetivo del rito</Text>
           <TextInput style={styles.areaInput} value={objective} onChangeText={setObjective} placeholder="Ingresar objetivo" />
           <Text style={styles.textHeader}>Personas requeridas</Text>
-          <TextInput style={styles.areaInput} value={numberOfPeople} onChangeText={numberOfPeopleHandler} placeholder="Ingresar cantidad de personas" keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'} />
+          <TextInput style={styles.areaInput} value={numberOfPeople.toString()} onChangeText={numberOfPeopleHandler} placeholder="Ingresar cantidad de personas" keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}>
@@ -39,7 +60,7 @@ const NewRiteToTeamScreen = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Team', { name, riteName, objective, numberOfPeople })} >
+            <TouchableOpacity onPress={createHandler}>
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>

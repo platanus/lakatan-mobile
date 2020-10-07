@@ -48,7 +48,7 @@ const Team = (props) => {
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite', { name, purpose, members })}>
+          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
         </View>
