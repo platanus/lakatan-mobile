@@ -22,6 +22,7 @@ function* currentTeamRequest({ payload }) {
     const {
       data: {
         data: {
+          id,
           attributes: {
             name, purpose, users, tasks,
           },
@@ -30,7 +31,7 @@ function* currentTeamRequest({ payload }) {
     } = yield call(apiTeams.team, payload);
     yield put(teamsActions.loadCurrentTeamSuccess({
       team: {
-        name, purpose, members: users, rites: tasks,
+        id, name, purpose, members: users, rites: tasks,
       },
     }));
   } catch (error) {
