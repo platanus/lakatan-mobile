@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   teamsList: [],
   loading: false,
-  currentTeam: { name: '', purpose: '', members: [] },
+  currentTeam: {
+    name: '', purpose: '', members: [], rites: [],
+  },
   newTeam: {
     id: undefined,
     name: undefined,
@@ -25,7 +27,7 @@ const slice = createSlice({
       state.currentTeam = action.payload.team;
     },
     addNewTeam(state, action) {
-      state.teamsList = [...state.teamsList, action.newTeam];
+      state.teamsList = [...state.teamsList, action.payload.newTeam];
     },
     finish(state) {
       state.loading = false;

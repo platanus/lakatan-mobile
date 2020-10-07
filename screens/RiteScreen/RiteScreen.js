@@ -9,11 +9,15 @@ import styles from '../../styles/RiteScreen/RiteScreen';
 
 import color from '../../styles/colors';
 
-const RiteScreen = (props) => {
-  const { name, numberOfPeople, objective, members } = props.route.params;
-
+const RiteScreen = ({ navigation, route: { params: { name, userMinimum, goal, members } } }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [raffleButton, setRaffleButton] = useState(false);
+
+  const selectedHandler = (selected) => {
+    setSelectedItems(selected);
+    setRaffleButton(userMinimum <= selected.length);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -22,9 +26,9 @@ const RiteScreen = (props) => {
           <Text style={styles.riteTitle}>{name}</Text>
           <View style={styles.infoRite}>
             <Text style={styles.textHeader}>Objetivo</Text>
-            <Text style={styles.textInfo}>{objective}</Text>
+            <Text style={styles.textInfo}>{goal}</Text>
             <Text style={styles.textHeader}>Cantidad de personas</Text>
-            <Text style={styles.textInfo}>{numberOfPeople}</Text>
+            <Text style={styles.textInfo}>{userMinimum}</Text>
           </View>
           <View style={styles.raffleContainer}>
             <Text style={styles.textHeader}>Sortear</Text>
@@ -32,7 +36,7 @@ const RiteScreen = (props) => {
               items={members}
               uniqueKey="id"
               alwaysShowSelectText
-              onSelectedItemsChange={setSelectedItems}
+              onSelectedItemsChange={selectedHandler}
               selectedItems={selectedItems}
               colors={{ primary: color.blue, success: color.blue, text: color.black }}
               confirmText="Confirmar"
@@ -52,14 +56,22 @@ const RiteScreen = (props) => {
             />
           </View>
         </View>
-        {/* TO DO: usuarios de Raffle están malos */}
-        <View style={styles.raffleButtonContainer}>
-          <TouchableOpacity style={styles.raffleButton} onPress={() => setModalVisible(true)}>
-            <Text style={styles.textRaffleButton}>Sortear</Text>
-          </TouchableOpacity>
-          {isModalVisible
-         && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter(member => selectedItems.includes(member.id))} navigation={props.navigation} />}
-        </View>
+        {raffleButton
+          ? (
+            <View style={styles.raffleButtonContainer}>
+              <TouchableOpacity style={styles.raffleButton} onPress={() => setModalVisible(true)}>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
+              </TouchableOpacity>
+              {isModalVisible
+            && <Raffle visible={isModalVisible} setVisible={setModalVisible} users={members.filter((member) => selectedItems.includes(member.id))} navigation={navigation} />}
+            </View>
+          ) : (
+            <View style={styles.raffleButtonContainer}>
+              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
+              </TouchableOpacity>
+            </View>
+          )}
       </View>
     </TouchableWithoutFeedback>
   );

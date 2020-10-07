@@ -49,6 +49,16 @@ const styles = StyleSheet.create({
     height: 40,
   },
 
+  disabledRaffleButton: {
+    backgroundColor: color.blue,
+    width: '100%',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    opacity: 0.3,
+  },
+
   textRaffleButton: {
     color: color.white,
     fontSize: 18,
