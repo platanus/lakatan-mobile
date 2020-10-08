@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View, Text, Button, TouchableOpacity, FlatList,
 } from 'react-native';
@@ -12,14 +12,15 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
 
 const RiteView = (props) => {
-  const { name, goal } = props.rite.item;
+  const { name, goal, id } = props.rite.item;
   const userMinimum = props.rite.item.user_minimum;
   const { members } = props;
+  const task_id = id;
   return (
     <TouchableOpacity
       style={styles.riteButton}
       onPress={() => props.navigation.navigate('Rite', {
-        name, userMinimum, goal, members,
+        name, userMinimum, goal, members, task_id,
       })}
     >
       <Text style={styles.riteText}>{name}</Text>
@@ -35,7 +36,14 @@ const Team = (props) => {
   const { token, email } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
-  dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
+
+
+  useEffect(() => {
+    const refresh = props.navigation.addListener('focus', () => {
+      dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } }); 
+    });
+    return refresh;
+  }, [props.navigation]);
 
   const ritesRoute = () => (
     <View style={styles.riteContainer}>

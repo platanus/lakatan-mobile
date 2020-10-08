@@ -8,17 +8,17 @@ import stylesUsers from '../../styles/UsersList/UsersList';
 const User = (props) => {
 
   const {styles, member, inUserList} = props;
-  let email;
+  let name;
   if (inUserList){
-    email =member.item.attributes.email;
+    name =member.item.attributes.name;
   } else{
-    email = member.item.email
+    name = member.item.name
   }
 
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
     <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{email}</Text>
+      <Text style={styles.items}>{name}</Text>
     </View>
     </TouchableWithoutFeedback>   
   )

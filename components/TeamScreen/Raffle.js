@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   View, Text, Button, TouchableOpacity,
 } from 'react-native';
@@ -10,15 +12,15 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from './TeamList';
 
-const selectedUsersId = [5, 6, 8];
+
 
 let fewUsers = false;
 
-const Raffle = ({
-  users, setVisible, visible, navigation,
-}) => {
-  const userSelected = users.filter((user) => selectedUsersId.includes(user.id));
-  if (selectedUsersId.length > 1) {
+const Raffle = ({ users, setVisible, visible, navigation }) => {
+
+  const { rites: { chosenOnes }} = useSelector(store => store)
+  const userSelected = users.filter((user) => chosenOnes.includes(user.id));
+  if (userSelected.length > 1) {
     fewUsers = true;
   }
   const toggleModalOff = () => {

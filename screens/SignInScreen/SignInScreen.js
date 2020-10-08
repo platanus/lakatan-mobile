@@ -23,7 +23,7 @@ const SignInScreen = (props) => {
       return (true);
     }
     Alert.alert(
-      'Has ingresado un correo inválido!',
+      'Haz ingresado un correo inválido!',
       'Intenta de nuevo',
       [
         { text: 'OK' },
@@ -95,7 +95,11 @@ const SignInScreen = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('SignUp')}>
+            <TouchableOpacity onPress={() => (
+              setEmail(''),
+              setPassword(''),
+              props.navigation.navigate('SignUp'))}
+            >
               <Text style={styles.textCancelButton}>Registrar</Text>
             </TouchableOpacity>
           </View>

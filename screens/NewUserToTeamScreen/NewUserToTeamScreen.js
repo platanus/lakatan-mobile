@@ -25,7 +25,7 @@ const NewUserToTeamScreen = (props) => {
   const dataHandler = (data) => {
     const aux = [];
     data.forEach((element) => {
-      aux.push({ id: element.id, email: element.attributes.email });
+      aux.push({ id: element.id, name: element.attributes.name });
     });
     return aux;
   };
@@ -50,7 +50,7 @@ const NewUserToTeamScreen = (props) => {
             selectedItemTextColor={color.blue}
             selectedItemIconColor={color.softGray}
             itemTextColor={color.black}
-            displayKey="email"
+            displayKey="name"
             searchInputStyle={{ color: color.softGray }}
             submitButtonColor={color.blue}
             submitButtonText="Submit"

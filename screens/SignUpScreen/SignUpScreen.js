@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   View, Text, Keyboard, TouchableWithoutFeedback, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView,
   Platform,
@@ -18,6 +18,7 @@ const SignUpScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
 
+  const { authentication: { token } } = useSelector((store) => store);
   const dispatch = useDispatch();
 
   const signUpButtonDisable = () => (
@@ -38,9 +39,9 @@ const SignUpScreen = () => {
         ],
         { cancelable: false },
       );
-    } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+    } else if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
       Alert.alert(
-        'Has ingresado un correo inválido!',
+        'Haz ingresado un correo inválido!',
         'Intenta de nuevo',
         [
           { text: 'OK' },
@@ -56,6 +57,19 @@ const SignUpScreen = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      Alert.alert(
+        'Te has registrado correctamente!',
+        '',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+    }
+  }, [token]);
 
   return (
 

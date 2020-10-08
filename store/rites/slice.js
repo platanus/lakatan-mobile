@@ -11,6 +11,7 @@ const initialState = {
     team_id: undefined,
     user_minimum: undefined,
   },
+  chosenOnes: [],
 };
 
 const slice = createSlice({
@@ -22,6 +23,9 @@ const slice = createSlice({
     },
     addNewRite(state, action) {
       state.teams.currentTeam.rites = [...state.teams.currentTeam.rites, action.newRite];
+    },
+    setChosenOnes(state, action) {
+      state.chosenOnes = action.payload;
     },
     finish(state) {
       state.loading = false;
