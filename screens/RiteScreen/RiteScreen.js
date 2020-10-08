@@ -30,7 +30,6 @@ const RiteScreen = ({
   members.forEach((member) => strMembers.push({ id: member.id.toString(), name: member.name }));
 
   const raffleHandler = () => {
-    console.log("aqui")
     dispatch({
       type: MAKE_RAFFLE_REQUEST,
       payload: {

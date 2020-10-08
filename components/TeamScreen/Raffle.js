@@ -17,9 +17,9 @@ import TeamList from './TeamList';
 let fewUsers = false;
 
 const Raffle = ({ users, setVisible, visible, navigation }) => {
-
   const { rites: { chosenOnes }} = useSelector(store => store)
-  const userSelected = users.filter((user) => chosenOnes.includes(user.id));
+  const { members } = useSelector(store => store.teams.currentTeam);
+  const userSelected = members.filter((user) => chosenOnes.includes(user.id));
   if (userSelected.length > 1) {
     fewUsers = true;
   }
