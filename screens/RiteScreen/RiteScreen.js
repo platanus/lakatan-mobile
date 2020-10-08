@@ -26,6 +26,8 @@ const RiteScreen = ({
 
   const { authentication: { email, token } } = useSelector((store) => store);
   const dispatch = useDispatch();
+  const strMembers = [];
+  members.forEach((member) => strMembers.push({ id: member.id.toString(), name: member.name }));
 
   const raffleHandler = () => {
     console.log("aqui")
@@ -57,7 +59,7 @@ const RiteScreen = ({
           <View style={styles.raffleContainer}>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
-              items={members}
+              items={strMembers}
               uniqueKey="id"
               alwaysShowSelectText
               onSelectedItemsChange={selectedHandler}
