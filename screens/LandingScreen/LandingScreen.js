@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Text, View, TouchableOpacity, FlatList, RefreshControl, Button,
+  Text, View, TouchableOpacity, FlatList, RefreshControl, Alert,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST, SIGN_OUT_REQUEST } from '../../store/types';
@@ -21,7 +21,7 @@ const TeamView = (props) => {
 
 function LandingScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
-  const { teamsList} = useSelector((state) => state.teams);
+  const { teamsList } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
@@ -52,6 +52,19 @@ function LandingScreen(props) {
       });
     }
   }, [props.route.params?.name]);
+
+  useEffect(() => {
+    if (!token) {
+      Alert.alert(
+        'Has cerrado tu sesión',
+        ':)',
+        [
+          { text: 'OK' },
+        ],
+        { cancelable: false },
+      );
+    }
+  }, [token]);
 
   return (
     <View style={styles.container}>

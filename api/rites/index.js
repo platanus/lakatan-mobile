@@ -22,6 +22,7 @@ function createRite({
   });
 }
 
+
 const ritesApi = {
   createRite,
 };

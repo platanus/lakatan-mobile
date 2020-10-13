@@ -13,6 +13,8 @@ function* createRiteRequest({ payload }) {
   yield put(ritesActions.finish());
 }
 
+
+
 export default function* ritesSaga() {
   yield takeLatest(CREATE_RITE_REQUEST, createRiteRequest);
 }

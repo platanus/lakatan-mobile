@@ -18,6 +18,8 @@ import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
+import Splash from './screens/SplashScreen/SplashScreen';
+
 runSagas();
 const TeamStack = createStackNavigator();
 
@@ -30,7 +32,6 @@ const Navigation = () => {
         {!token
           ? (
             <>
-              <TeamStack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
               <TeamStack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
               <TeamStack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
             </>
@@ -41,7 +42,7 @@ const Navigation = () => {
               <TeamStack.Screen name="Team" component={TeamScreen} options={{ title: 'Equipo' }} />
               <TeamStack.Screen name="Feedback" component={FeedbackScreen} />
               <TeamStack.Screen name="New Team" component={NewTeamScreen} options={{ title: 'Nuevo Equipo' }} />
-              <TeamStack.Screen name="Add Users" component={NewUserToTeamScreen} options={{ title: 'Agregar Uusuarios' }} />
+              <TeamStack.Screen name="Add Users" component={NewUserToTeamScreen} options={{ title: 'Agregar Usuarios' }} />
               <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
               <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
             </>
@@ -54,7 +55,7 @@ const Navigation = () => {
 export default function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Splash />} persistor={persistor} onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}>
         <Navigation />
       </PersistGate>
     </Provider>

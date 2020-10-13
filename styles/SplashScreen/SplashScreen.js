@@ -34,13 +34,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
     width: '40%',
-    backgroundColor: color.yellow,
+    backgroundColor: '#3170F5',
     borderRadius: 5,
   },
   textButton: {
-    color: color.white,
-    fontSize: 18,
+    color: color.yellow,
+    fontSize: 25,
     fontStyle: 'italic',
+    fontWeight: '900',
   },
 });
 

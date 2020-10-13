@@ -31,8 +31,8 @@ const NewRiteToTeamScreen = (props) => {
     {
       name: riteName,
       goal: objective,
-      team_id: id,
-      user_minimum: numberOfPeople,
+      team_id: parseInt(id, 10),
+      user_minimum: parseInt(numberOfPeople, 10),
       token,
       email
     },

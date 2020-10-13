@@ -3,7 +3,7 @@ import authenticactionSaga from './authentication/saga';
 import teamsSaga from './Teams/saga';
 import usersSaga from './users/saga';
 import ritesSaga from './rites/saga';
-import ritesApi from '../api/rites';
+import rafflesSaga from './raffles/saga';
 
 export default function* rootSagas() {
   yield all([
@@ -11,5 +11,6 @@ export default function* rootSagas() {
     teamsSaga(),
     usersSaga(),
     ritesSaga(),
+    rafflesSaga(),
   ]);
 }
