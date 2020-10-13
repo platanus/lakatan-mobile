@@ -56,7 +56,7 @@ function LandingScreen(props) {
   useEffect(() => {
     if (!token) {
       Alert.alert(
-        'Haz cerrado tu sesión',
+        'Has cerrado tu sesión',
         ':)',
         [
           { text: 'OK' },

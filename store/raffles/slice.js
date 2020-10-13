@@ -1,27 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ritesList: [],
-  loading: false,
-  currentRite: undefined,
-  newRite: {
-    id: undefined,
-    name: undefined,
-    goal: undefined,
-    team_id: undefined,
-    user_minimum: undefined,
-  },
+  chosenOnes: [],
+  loading: undefined,
 };
 
 const slice = createSlice({
-  name: 'rites',
+  name: 'raffles',
   initialState,
   reducers: {
     start(state) {
       state.loading = true;
     },
-    addNewRite(state, action) {
-      state.teams.currentTeam.rites = [...state.teams.currentTeam.rites, action.newRite];
+    setChosenOnes(state, action) {
+      state.chosenOnes = action.payload;
     },
     finish(state) {
       state.loading = false;

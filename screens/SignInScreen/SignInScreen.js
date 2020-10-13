@@ -15,7 +15,7 @@ const SignInScreen = (props) => {
   const [password, setPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
 
-  const { authentication: { error } } = useSelector((store) => store);
+  const error = useSelector((store) => store.authentication.error);
   const dispatch = useDispatch();
 
   const emailHandler = (text) => {
@@ -23,7 +23,7 @@ const SignInScreen = (props) => {
       return (true);
     }
     Alert.alert(
-      'Haz ingresado un correo inválido!',
+      'Has ingresado un correo inválido!',
       'Intenta de nuevo',
       [
         { text: 'OK' },
@@ -41,6 +41,12 @@ const SignInScreen = (props) => {
 
   const signInButtonDisable = () => (
     { ...styles.confirmButton, backgroundColor: email && password ? colors.blue : colors.gray });
+
+  const signUpButtonHandler = () => {
+    setEmail('');
+    setPassword('');
+    props.navigation.navigate('SignUp');
+  };
 
   useEffect(() => {
     if (error) {
@@ -95,11 +101,7 @@ const SignInScreen = (props) => {
             </TouchableOpacity>
           </View>
           <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => (
-              setEmail(''),
-              setPassword(''),
-              props.navigation.navigate('SignUp'))}
-            >
+            <TouchableOpacity onPress={signUpButtonHandler}>
               <Text style={styles.textCancelButton}>Registrar</Text>
             </TouchableOpacity>
           </View>

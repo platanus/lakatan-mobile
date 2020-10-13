@@ -18,7 +18,7 @@ const SignUpScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
 
-  const { authentication: { token } } = useSelector((store) => store);
+  const token = useSelector((store) => store.authentication.token);
   const dispatch = useDispatch();
 
   const signUpButtonDisable = () => (
@@ -41,7 +41,7 @@ const SignUpScreen = () => {
       );
     } else if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
       Alert.alert(
-        'Haz ingresado un correo inválido!',
+        'Has ingresado un correo inválido!',
         'Intenta de nuevo',
         [
           { text: 'OK' },

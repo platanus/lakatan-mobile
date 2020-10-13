@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import {
-  View, Text, Button, TouchableOpacity,
+  View, Text, TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import Emoji from 'react-native-emoji';
 import { bounceInUp, bounceInDown } from 'react-native-animatable';
-import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 
 import TeamList from './TeamList';
 
-
-
 let fewUsers = false;
 
-const Raffle = ({ users, setVisible, visible, navigation }) => {
-  const { rites: { chosenOnes }} = useSelector(store => store)
-  const { members } = useSelector(store => store.teams.currentTeam);
-  const userSelected = members.filter((user) => chosenOnes.includes(user.id));
-  if (userSelected.length > 1) {
+const Raffle = ({
+  users, setVisible, visible, navigation,
+}) => {
+  const chosenOnes = useSelector((store) => store.raffles.chosenOnes);
+  const members = useSelector((store) => store.teams.currentTeam.members);
+  const usersSelected = members.filter((user) => chosenOnes.includes(user.id));
+  if (usersSelected.length > 1) {
     fewUsers = true;
   }
   const toggleModalOff = () => {
@@ -42,7 +41,7 @@ const Raffle = ({ users, setVisible, visible, navigation }) => {
             <Text style={styles.modalMessage}>Los usuarios seleccionados son:</Text>
           )}
           <View style={styles.teamListContainer}>
-            <TeamList users={userSelected} inUserList={false} />
+            <TeamList users={usersSelected} inUserList={false} />
           </View>
           <Emoji name=":tada:" style={styles.modalEmoji} />
           <View style={styles.exitButtonContainer}>

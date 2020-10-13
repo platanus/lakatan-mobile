@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  Text, View, Button, TouchableOpacity, ScrollView, FlatList, TouchableWithoutFeedback, Keyboard,
+  Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
-import { MAKE_RAFFLE_REQUEST } from '../../store/types';
+import { CREATE_RAFFLE_REQUEST } from '../../store/types';
 
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
 import color from '../../styles/colors';
-import { set } from 'react-native-reanimated';
 
 const RiteScreen = ({
   navigation, route: {
@@ -24,14 +23,16 @@ const RiteScreen = ({
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
 
-  const { authentication: { email, token } } = useSelector((store) => store);
+  const email = useSelector((store) => store.authentication.email);
+  const token = useSelector((store) => store.authentication.token);
+
   const dispatch = useDispatch();
-  const strMembers = [];
-  members.forEach((member) => strMembers.push({ id: member.id.toString(), name: member.name }));
+  const availableMembers = [];
+  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name }));
 
   const raffleHandler = () => {
     dispatch({
-      type: MAKE_RAFFLE_REQUEST,
+      type: CREATE_RAFFLE_REQUEST,
       payload: {
         selectedItems, task_id, email, token,
       },
@@ -58,7 +59,7 @@ const RiteScreen = ({
           <View style={styles.raffleContainer}>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
-              items={strMembers}
+              items={availableMembers}
               uniqueKey="id"
               alwaysShowSelectText
               onSelectedItemsChange={selectedHandler}
