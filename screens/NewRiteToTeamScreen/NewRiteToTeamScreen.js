@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import color from '../../styles/colors';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import { CREATE_RITE_REQUEST } from '../../store/types';
 

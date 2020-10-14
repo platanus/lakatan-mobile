@@ -82,11 +82,6 @@ const Team = (props) => {
     second: membersRoute,
   });
 
-  const [userSelected, setUserSelected] = useState('');
-
-  const AmIInThisTeam = true;
-  const editButton = <View style={styles.editButton}><Button title="Editar" /></View>;
-
   const renderTabBar = (props) => (
     <View style={styles.teamContainer}>
       <View style={styles.teamScreen}>

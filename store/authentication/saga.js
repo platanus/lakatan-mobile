@@ -8,7 +8,6 @@ function* signInRequest({ payload }) {
   try {
     const {
       data: {
-        messages,
         is_success,
         data: {
           user:
@@ -38,7 +37,6 @@ function* signUpRequest({ payload }) {
   try {
     const {
       data: {
-        messages,
         is_success,
         data: {
           user:
@@ -68,7 +66,6 @@ function* signOutRequest({ payload }) {
   try {
     const {
       data: {
-        messages,
         is_success,
       },
     } = yield call(api.signOutApi, payload);

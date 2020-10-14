@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert,
 } from 'react-native';
-import { color } from 'react-native-reanimated';
 import colors from '../../styles/colors';
 import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR } from '../../store/types';
 

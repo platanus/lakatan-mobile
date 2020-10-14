@@ -1,18 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
 import { store, persistor, runSagas } from './store';
 import TeamScreen from './screens/TeamScreen/TeamScreen';
 import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
 import NewTeamScreen from './screens/NewTeamScreen/NewTeamScreen';
 import LandingScreen from './screens/LandingScreen/LandingScreen';
 import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScreen';
-import SplashScreen from './screens/SplashScreen/SplashScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';

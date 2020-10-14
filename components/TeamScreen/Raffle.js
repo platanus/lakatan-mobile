@@ -14,7 +14,7 @@ import TeamList from './TeamList';
 let fewUsers = false;
 
 const Raffle = ({
-  users, setVisible, visible, navigation,
+  setVisible, visible,
 }) => {
   const chosenOnes = useSelector((store) => store.raffles.chosenOnes);
   const members = useSelector((store) => store.teams.currentTeam.members);

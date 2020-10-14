@@ -1,9 +1,8 @@
-import ListItem from 'antd-mobile/lib/list/ListItem';
 /* eslint-disable react/jsx-filename-extension */
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 
 import MultiSelect from 'react-native-multiple-select';

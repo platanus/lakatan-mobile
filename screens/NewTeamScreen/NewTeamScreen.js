@@ -1,13 +1,11 @@
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { USERS_REQUEST } from '../../store/types';
+import { useSelector } from 'react-redux';
 
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
-import color from '../../styles/colors';
 import TeamList from '../../components/TeamScreen/TeamList';
 
 const NewTeamScreen = (props) => {
