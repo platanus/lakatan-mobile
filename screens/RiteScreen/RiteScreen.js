@@ -49,13 +49,13 @@ const RiteScreen = ({
       <View style={styles.container}>
         <View style={styles.screen}>
           <Text style={styles.riteTitle}>{name}</Text>
-          <View style={styles.infoRite}>
+          <View>
             <Text style={styles.textHeader}>Objetivo</Text>
-            <Text style={styles.textInfo}>{goal}</Text>
+            <Text>{goal}</Text>
             <Text style={styles.textHeader}>Cantidad de personas</Text>
             <Text style={styles.textInfo}>{userMinimum}</Text>
           </View>
-          <View style={styles.raffleContainer}>
+          <View>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
               items={availableMembers}
@@ -82,7 +82,7 @@ const RiteScreen = ({
           </View>
         </View>
         {raffleButton ? (
-          <View style={styles.raffleButtonContainer}>
+          <View>
             <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
               <Text style={styles.textRaffleButton}>Sortear</Text>
             </TouchableOpacity>

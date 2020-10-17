@@ -69,7 +69,7 @@ const SignUpScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         >
-          <View style={styles.formCard}>
+          <View>
             <Text style={styles.title}>¡Crea una cuenta!</Text>
             <View style={styles.input}>
               <Text style={styles.tag}>Nombre:</Text>
