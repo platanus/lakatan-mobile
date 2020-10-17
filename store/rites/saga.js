@@ -3,7 +3,7 @@ import { actions as ritesActions } from './slice';
 import { CREATE_RITE_REQUEST } from '../types';
 import ritesApi from '../../api/rites';
 
-function* createRiteRequest({ payload }) {
+function *createRiteRequest({ payload }) {
   yield put(ritesActions.start());
   try {
     yield call(ritesApi.createRite, payload);
@@ -13,8 +13,6 @@ function* createRiteRequest({ payload }) {
   yield put(ritesActions.finish());
 }
 
-
-
-export default function* ritesSaga() {
+export default function *ritesSaga() {
   yield takeLatest(CREATE_RITE_REQUEST, createRiteRequest);
 }

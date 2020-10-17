@@ -1,18 +1,19 @@
 import axios from 'axios';
 import url from '../../env';
 
-
 function createRaffle({
-  selectedItems, task_id, email, token,
+  selectedItems, taskId, email, token,
 }) {
   const selectedItemsInt = [];
   selectedItems.forEach((item) => selectedItemsInt.push(parseInt(item, 10)));
+
   return axios({
     method: 'post',
     url: `${url}/api/v1/raffle`,
     data: {
+      // eslint-disable-next-line camelcase
       users_list: selectedItemsInt,
-      id: task_id,
+      id: taskId,
     },
     headers: {
       'X-User-Email': email,

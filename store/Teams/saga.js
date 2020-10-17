@@ -3,7 +3,7 @@ import { actions as teamsActions } from './slice';
 import { ALL_TEAMS_REQUEST, CURRENT_TEAM_REQUEST, NEW_TEAM_REQUEST } from '../types';
 import apiTeams from '../../api/Teams';
 
-function* allTeamsRequest({ payload }) {
+function *allTeamsRequest({ payload }) {
   yield put(teamsActions.start());
   try {
     const { data } = yield call(apiTeams.allTeams, payload);
@@ -16,7 +16,7 @@ function* allTeamsRequest({ payload }) {
   yield put(teamsActions.finish());
 }
 
-function* currentTeamRequest({ payload }) {
+function *currentTeamRequest({ payload }) {
   yield put(teamsActions.start());
   try {
     const {
@@ -40,7 +40,7 @@ function* currentTeamRequest({ payload }) {
   yield put(teamsActions.finish());
 }
 
-function* newTeamRequest({ payload }) {
+function *newTeamRequest({ payload }) {
   yield put(teamsActions.start());
   try {
     const { data: { data: { attributes: { name }, id } } } = yield call(apiTeams.newTeam, payload);
@@ -51,7 +51,7 @@ function* newTeamRequest({ payload }) {
   yield put(teamsActions.finish());
 }
 
-export default function* teamsSaga() {
+export default function *teamsSaga() {
   yield takeLatest(ALL_TEAMS_REQUEST, allTeamsRequest);
   yield takeLatest(CURRENT_TEAM_REQUEST, currentTeamRequest);
   yield takeLatest(NEW_TEAM_REQUEST, newTeamRequest);

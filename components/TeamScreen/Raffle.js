@@ -35,10 +35,10 @@ const Raffle = ({
         style={styles.modal}
       >
         <View style={styles.modalView}>
-          {!fewUsers ? (
-            <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
-          ) : (
+          {fewUsers ? (
             <Text style={styles.modalMessage}>Los usuarios seleccionados son:</Text>
+          ) : (
+            <Text style={styles.modalMessage}>El usuario seleccionado es:</Text>
           )}
           <View style={styles.teamListContainer}>
             <TeamList users={usersSelected} inUserList={false} />

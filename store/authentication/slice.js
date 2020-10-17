@@ -17,14 +17,14 @@ const slice = createSlice({
     },
     signInSuccess(state, action) {
       state.email = action.payload.email;
-      state.token = action.payload.authentication_token;
+      state.token = action.payload.authenticationToken;
     },
     signInError(state, action) {
       state.error = action.payload;
     },
     signUpSuccess(state, action) {
       state.email = action.payload.email;
-      state.token = action.payload.authentication_token;
+      state.token = action.payload.authenticationToken;
       state.name = action.payload.name;
     },
     signOutSuccess(state) {

@@ -3,13 +3,10 @@ import { actions as rafflesActions } from './slice';
 import { CREATE_RAFFLE_REQUEST } from '../types';
 import api from '../../api/raffles';
 
-function* createRaffleRequest({ payload }) {
+function *createRaffleRequest({ payload }) {
   yield put(rafflesActions.start());
   try {
     const data = yield call(api.createRaffle, payload);
-    if (data.data) {
-      console.log('respond', data.data);
-    }
     yield put(rafflesActions.setChosenOnes(data.data));
   } catch (error) {
     yield put(rafflesActions.setChosenOnes([]));
@@ -18,6 +15,6 @@ function* createRaffleRequest({ payload }) {
   yield put(rafflesActions.finish());
 }
 
-export default function* rafflesSaga() {
+export default function *rafflesSaga() {
   yield takeLatest(CREATE_RAFFLE_REQUEST, createRaffleRequest);
 }

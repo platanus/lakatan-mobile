@@ -28,6 +28,7 @@ function signUpApi({
         name,
         email,
         password,
+        // eslint-disable-next-line camelcase
         password_confirmation: confirmPassword,
       },
     },

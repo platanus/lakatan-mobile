@@ -2,7 +2,7 @@ import axios from 'axios';
 import url from '../../env';
 
 function createRite({
-  name, goal, team_id, user_minimum, token, email,
+  name, goal, teamId, userMinimum, token, email,
 }) {
   return axios({
     method: 'post',
@@ -10,8 +10,10 @@ function createRite({
     data: {
       name,
       goal,
-      team_id,
-      user_minimum,
+      // eslint-disable-next-line camelcase
+      team_id: teamId,
+      // eslint-disable-next-line camelcase
+      user_minimum: userMinimum,
 
     },
     headers: {
@@ -21,7 +23,6 @@ function createRite({
     },
   });
 }
-
 
 const ritesApi = {
   createRite,

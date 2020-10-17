@@ -7,7 +7,7 @@
       "ecmaVersion": 2018,
       "sourceType": "module"
     },
-    "plugins": ["import"],
+    "plugins": ["import", "react", "jest"],
     "settings": {
       "import/resolver": {
         "node": {
@@ -16,7 +16,8 @@
       }
     },
     "extends": [
-      "plugin:vue/strongly-recommended"
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
     ],
     "rules": {
       "accessor-pairs": 0,
@@ -220,7 +221,7 @@
       "consistent-this": [2, "self"],
       "eol-last": 2,
       "func-names": 0,
-      "func-style": [2, "declaration"],
+      "func-style": [2, "declaration", { "allowArrowFunctions": true }],
       "id-blacklist": 0,
       "id-length": 0,
       "id-match": 0,
@@ -336,9 +337,6 @@
         "args": "after-used"
       }],
       "no-use-before-define": 2,
-      "vue/max-len": ["error", {
-        "code": 120,
-        "ignoreHTMLAttributeValues": true
-    }]
+      "react/prop-types": 0
     }
   }

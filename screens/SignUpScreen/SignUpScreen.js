@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable max-statements */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,6 +10,7 @@ import colors from '../../styles/colors';
 import { SIGN_UP_REQUEST } from '../../store/types';
 
 import styles from '../../styles/SignUpScreen/SignUpScreen';
+import emailHandler from '../../components/SignIn/EmailHandler';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
@@ -25,8 +26,7 @@ const SignUpScreen = () => {
     {
       ...styles.confirmButton,
       backgroundColor:
-      email && password && confirmPassword && name
-        ? colors.blue : colors.gray,
+      email && password && confirmPassword && name ? colors.blue : colors.gray,
     });
 
   const signUpButtonHandler = () => {
@@ -39,16 +39,7 @@ const SignUpScreen = () => {
         ],
         { cancelable: false },
       );
-    } else if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-      Alert.alert(
-        'Has ingresado un correo inválido!',
-        'Intenta de nuevo',
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-    } else {
+    } else if (emailHandler(email)) {
       dispatch({
         type: SIGN_UP_REQUEST,
         payload: {
@@ -76,8 +67,7 @@ const SignUpScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <KeyboardAvoidingView
-          behavior={Platform.OS == 'ios' ? 'position' : 'height'}
-
+          behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         >
           <View style={styles.formCard}>
             <Text style={styles.title}>¡Crea una cuenta!</Text>

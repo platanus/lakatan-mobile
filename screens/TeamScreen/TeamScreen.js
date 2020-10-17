@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable max-statements */
 import React, { useEffect, useState } from 'react';
 import {
-  View, Text, Button, TouchableOpacity, FlatList,
+  View, Text, TouchableOpacity, FlatList,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
@@ -15,12 +15,13 @@ const RiteView = (props) => {
   const { name, goal, id } = props.rite.item;
   const userMinimum = props.rite.item.user_minimum;
   const { members } = props;
-  const task_id = id;
+  const taskId = id;
+
   return (
     <TouchableOpacity
       style={styles.riteButton}
       onPress={() => props.navigation.navigate('Rite', {
-        name, userMinimum, goal, members, task_id,
+        name, userMinimum, goal, members, taskId,
       })}
     >
       <Text style={styles.riteText}>{name}</Text>
@@ -37,11 +38,11 @@ const Team = (props) => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const refresh = props.navigation.addListener('focus', () => {
-      dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } }); 
+      dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
     });
+
     return refresh;
   }, [props.navigation]);
 
@@ -82,7 +83,7 @@ const Team = (props) => {
     second: membersRoute,
   });
 
-  const renderTabBar = (props) => (
+  const renderTabBar = (tabProps) => (
     <View style={styles.teamContainer}>
       <View style={styles.teamScreen}>
         <Text style={styles.teamTitle}>{name}</Text>
@@ -91,7 +92,7 @@ const Team = (props) => {
       </View>
       <View>
         <TabBar
-          {...props}
+          {...tabProps}
           indicatorStyle={{ backgroundColor: color.yellow }}
           style={{ backgroundColor: color.blue }}
           getLabelText={({ route }) => route.title}

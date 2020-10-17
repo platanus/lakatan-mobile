@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
@@ -30,14 +29,26 @@ const NewTeamScreen = (props) => {
           <Text style={styles.title}>Crear un nuevo equipo</Text>
           <View style={styles.input}>
             <Text style={styles.tag}>Nombre:</Text>
-            <TextInput style={styles.areaInput} placeholder="Ej: 'Mobile Capstone'" value={name} onChangeText={setName} />
+            <TextInput
+              style={styles.areaInput}
+              placeholder="Ej: 'Mobile Capstone'"
+              value={name} onChangeText={setName}
+            />
             <Text style={styles.tag}>Propósito:</Text>
-            <TextInput style={styles.areaInput} placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'" value={description} onChangeText={setDescription} />
+            <TextInput
+              style={styles.areaInput}
+              placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'"
+              value={description}
+              onChangeText={setDescription}
+            />
           </View>
         </View>
         <TeamList users={membersObjects} inUserList={true} />
         <View style={styles.addUser}>
-          <TouchableOpacity style={styles.addUserButton} onPress={() => props.navigation.navigate('Add Users', { name, members })}>
+          <TouchableOpacity
+            style={styles.addUserButton}
+            onPress={() => props.navigation.navigate('Add Users', { name, members })}
+          >
             <Text style={styles.addUserText}>Agregar usuarios</Text>
           </TouchableOpacity>
         </View>
@@ -45,7 +56,10 @@ const NewTeamScreen = (props) => {
           <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>
             <Text style={styles.textCancelButton}>Cancelar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.confirmButton} onPress={() => props.navigation.navigate('Teams', { name, description, members })}>
+          <TouchableOpacity
+            style={styles.confirmButton}
+            onPress={() => props.navigation.navigate('Teams', { name, description, members })}
+          >
             <Text style={styles.textConfirmButton}>Confirmar</Text>
           </TouchableOpacity>
         </View>

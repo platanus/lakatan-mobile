@@ -8,6 +8,7 @@ import colors from '../../styles/colors';
 import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR } from '../../store/types';
 
 import styles from '../../styles/SignInScreen/SignInScreen';
+import emailHandler from '../../components/SignIn/EmailHandler';
 
 const SignInScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -16,21 +17,6 @@ const SignInScreen = (props) => {
 
   const error = useSelector((store) => store.authentication.error);
   const dispatch = useDispatch();
-
-  const emailHandler = (text) => {
-    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(text)) {
-      return (true);
-    }
-    Alert.alert(
-      'Has ingresado un correo inválido!',
-      'Intenta de nuevo',
-      [
-        { text: 'OK' },
-      ],
-      { cancelable: false },
-    );
-    return (false);
-  };
 
   const signInButtonHandler = () => {
     if (emailHandler(email)) {
@@ -62,7 +48,6 @@ const SignInScreen = (props) => {
   }, [error]);
 
   return (
-  // eslint-disable-next-line react/jsx-filename-extension
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.formCard}>
