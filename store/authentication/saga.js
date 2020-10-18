@@ -75,14 +75,11 @@ function *signInRequest({ payload }) {
 function *signOutRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
-    const response = yield call(api.signOutApi, payload);
-    const camelResponse = camelizeKeys(response);
-    const { isSuccess } = camelResponse.data;
-    if (isSuccess) {
-      yield put(authenticationActions.signOutSuccess());
-    }
+    yield call(api.signOutApi, payload);
+    yield put(authenticationActions.signOutSuccess('¡Has cerrado tu sesión!'));
   } catch (error) {
-    console.log('error sign out');
+    yield put(authenticationActions.authError('¡Oops, hubo un error!'));
+    yield put(authenticationActions.reset());
   }
   yield put(authenticationActions.finish());
 }

@@ -23,9 +23,11 @@ const slice = createSlice({
     signUpSuccess(state, action) {
       state.success = action.payload;
     },
-    signOutSuccess(state) {
+    signOutSuccess(state, action) {
+      state.success = action.payload;
       state.token = undefined;
       state.email = undefined;
+      state.name = undefined;
     },
     clearSuccess(state) {
       state.success = undefined;
@@ -43,8 +45,6 @@ const slice = createSlice({
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;
-      state.loading = false;
-      state.error = undefined;
     },
   },
 });

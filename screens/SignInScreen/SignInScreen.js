@@ -5,7 +5,7 @@ import {
   View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert,
 } from 'react-native';
 import colors from '../../styles/colors';
-import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR } from '../../store/types';
+import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
 
 import styles from '../../styles/SignInScreen/SignInScreen';
 import emailHandler from '../../components/Authentication/EmailHandler';
@@ -18,6 +18,8 @@ const SignInScreen = (props) => {
   const [formError, setFormError] = useState(undefined);
 
   const apiError = useSelector((store) => store.authentication.error);
+  const apiSuccess = useSelector((store) => store.authentication.success);
+
   const dispatch = useDispatch();
 
   const signInButtonDisable = () => (
@@ -37,11 +39,12 @@ const SignInScreen = (props) => {
 
   const clearAlertMessage = () => {
     if (!!apiError) dispatch({ type: CLEAR_AUTH_ERROR });
+    if (!!apiSuccess) dispatch({ type: CLEAR_AUTH_SUCCESS });
     if (!!formError) setFormError(undefined);
   };
 
-  if (apiError || formError) {
-    const message = apiError || formError;
+  if (apiError || formError || apiSuccess) {
+    const message = apiError || formError || apiSuccess;
     Alert.alert(
       message, '', [{ text: 'OK', onPress: clearAlertMessage }],
       { cancelable: false },

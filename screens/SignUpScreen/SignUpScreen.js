@@ -30,7 +30,7 @@ const SignUpScreen = () => {
   const [formError, setFormError] = useState(undefined);
 
   const apiError = useSelector((store) => store.authentication.error);
-  const successMessage = useSelector((store) => store.authentication.success);
+  const apiSuccess = useSelector((store) => store.authentication.success);
   const dispatch = useDispatch();
 
   const signUpButtonDisable = () => (
@@ -57,11 +57,11 @@ const SignUpScreen = () => {
   const clearAlertMessage = () => {
     if (!!formError) setFormError(undefined);
     if (!!apiError) dispatch({ type: CLEAR_AUTH_ERROR });
-    if (!!successMessage) dispatch({ type: CLEAR_AUTH_SUCCESS });
+    if (!!apiSuccess) dispatch({ type: CLEAR_AUTH_SUCCESS });
   };
 
-  if (formError || apiError || successMessage) {
-    const message = formError || apiError || successMessage;
+  if (formError || apiError || apiSuccess) {
+    const message = formError || apiError || apiSuccess;
     Alert.alert(
       message, '', [{ text: 'OK', onPress: clearAlertMessage }],
       { cancelable: false },
