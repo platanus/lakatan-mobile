@@ -21,7 +21,7 @@ import emailHandler from '../../components/Authentication/EmailHandler';
 
 const passwordMinimumLength = 6;
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,7 +47,7 @@ const SignUpScreen = () => {
       return setFormError('¡Tu contraseña debe tener un mínimo de 6 caracteres!');
     }
 
-    return dispatch({ type: SIGN_UP_REQUEST,
+    dispatch({ type: SIGN_UP_REQUEST,
       payload: {
         name, email, password, confirmPassword,
       },
@@ -57,10 +57,13 @@ const SignUpScreen = () => {
   const clearAlertMessage = () => {
     if (!!formError) setFormError(undefined);
     if (!!apiError) dispatch({ type: CLEAR_AUTH_ERROR });
-    if (!!apiSuccess) dispatch({ type: CLEAR_AUTH_SUCCESS });
+    if (!!apiSuccess) {
+      dispatch({ type: CLEAR_AUTH_SUCCESS });
+      navigation.goBack();
+    }
   };
 
-  if (formError || apiError || apiSuccess) {
+  if ((formError || apiError || apiSuccess) && navigation.isFocused()) {
     const message = formError || apiError || apiSuccess;
     Alert.alert(
       message, '', [{ text: 'OK', onPress: clearAlertMessage }],
@@ -85,6 +88,7 @@ const SignUpScreen = () => {
                 autoCapitalize="words"
                 onChangeText={(text) => setName(text)}
                 autoCompleteType="off"
+                value={name}
               />
               <Text style={styles.tag}>Correo electrónico:</Text>
               <TextInput
@@ -94,6 +98,7 @@ const SignUpScreen = () => {
                 onChangeText={(text) => setEmail(text)}
                 keyboardType="email-address"
                 autoCompleteType="off"
+                value={email}
               />
               <Text style={styles.tag}>Contraseña:</Text>
               <View style={styles.passwordInput}>
@@ -102,6 +107,7 @@ const SignUpScreen = () => {
                   autoCapitalize="none"
                   secureTextEntry={hiddenPassword}
                   onChangeText={(text) => setPassword(text)}
+                  value={password}
                 />
                 <TouchableWithoutFeedback onPress={() => setHiddenPassword(!hiddenPassword)}>
                   <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={{ marginTop: 7 }} />
@@ -113,6 +119,7 @@ const SignUpScreen = () => {
                 autoCapitalize="none"
                 secureTextEntry={hiddenPassword}
                 onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
               />
             </View>
           </View>

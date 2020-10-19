@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   cancelButton: {
-    backgroundColor: color.gray,
+    backgroundColor: color.red,
     width: '40%',
     borderRadius: 5,
     alignItems: 'center',

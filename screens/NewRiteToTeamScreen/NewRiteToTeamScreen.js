@@ -4,8 +4,10 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
+import colors from '../../styles/colors';
 import { CREATE_RITE_REQUEST } from '../../store/types';
 
+// eslint-disable-next-line max-statements
 const NewRiteToTeamScreen = (props) => {
   const { name, purpose } = useSelector((state) => state.teams.currentTeam);
   const [numberOfPeople, setNumberOfPeople] = useState('');
@@ -14,6 +16,9 @@ const NewRiteToTeamScreen = (props) => {
   const { token, email } = useSelector((state) => state.authentication);
   const { id } = useSelector((state) => state.teams.currentTeam);
   const dispatch = useDispatch();
+
+  const createRiteButtonDisable = () => (
+    { ...styles.confirmButton, backgroundColor: name && purpose && numberOfPeople ? colors.blue : colors.gray });
 
   const numberOfPeopleHandler = (currentNumber) => {
     const maxPeople = 99;
@@ -75,8 +80,8 @@ const NewRiteToTeamScreen = (props) => {
               <Text style={styles.textCancelButton}>Cancelar</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={createHandler}>
+          <View style={createRiteButtonDisable()}>
+            <TouchableOpacity onPress={createHandler} disabled={!(name && purpose && numberOfPeople)}>
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>

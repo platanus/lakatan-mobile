@@ -3,7 +3,7 @@ import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-
+import colors from '../../styles/colors'
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
 
@@ -15,6 +15,9 @@ const NewTeamScreen = (props) => {
   const { users } = useSelector((state) => state.users);
 
   const membersObjects = [];
+
+  const confirmButtonDisable = () => (
+    { ...styles.confirmButton, backgroundColor: name && description ? colors.blue : colors.gray });
 
   if (members) {
     members.forEach((element) => {
@@ -57,7 +60,8 @@ const NewTeamScreen = (props) => {
             <Text style={styles.textCancelButton}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.confirmButton}
+            disabled={!name || !description}
+            style={confirmButtonDisable()}
             onPress={() => props.navigation.navigate('Teams', { name, description, members })}
           >
             <Text style={styles.textConfirmButton}>Confirmar</Text>

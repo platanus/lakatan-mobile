@@ -11,7 +11,7 @@ import styles from '../../styles/SignInScreen/SignInScreen';
 import emailHandler from '../../components/Authentication/EmailHandler';
 
 // eslint-disable-next-line max-statements
-const SignInScreen = (props) => {
+const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -34,7 +34,7 @@ const SignInScreen = (props) => {
   const signUpButtonHandler = () => {
     setEmail('');
     setPassword('');
-    props.navigation.navigate('SignUp');
+    navigation.navigate('SignUp');
   };
 
   const clearAlertMessage = () => {
@@ -43,7 +43,7 @@ const SignInScreen = (props) => {
     if (!!formError) setFormError(undefined);
   };
 
-  if (apiError || formError || apiSuccess) {
+  if ((apiError || formError || apiSuccess) && navigation.isFocused()) {
     const message = apiError || formError || apiSuccess;
     Alert.alert(
       message, '', [{ text: 'OK', onPress: clearAlertMessage }],
