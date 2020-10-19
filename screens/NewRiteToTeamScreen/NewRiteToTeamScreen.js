@@ -17,7 +17,6 @@ const NewRiteToTeamScreen = (props) => {
 
   const numberOfPeopleHandler = (currentNumber) => {
     const maxPeople = 99;
-    // Cantidad maxima para que no se introduzcan numeros de 3 digitos
     if (currentNumber <= maxPeople) {
       setNumberOfPeople(currentNumber);
     } else {

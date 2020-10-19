@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
 function createRaffle({
@@ -6,15 +7,12 @@ function createRaffle({
 }) {
   const selectedItemsInt = [];
   selectedItems.forEach((item) => selectedItemsInt.push(parseInt(item, 10)));
+  const data = decamelizeKeys({ usersList: selectedItemsInt, id: taskId });
 
   return axios({
     method: 'post',
     url: `${url}/api/v1/raffle`,
-    data: {
-      // eslint-disable-next-line camelcase
-      users_list: selectedItemsInt,
-      id: taskId,
-    },
+    data,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
