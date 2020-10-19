@@ -1,4 +1,4 @@
-import { StyleSheet , Dimensions} from 'react-native';
+import { StyleSheet } from 'react-native';
 import color from '../../styles/colors';
 
 const styles = StyleSheet.create({
@@ -8,13 +8,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: '5%',
-    // paddingLeft: '85%',
-    // paddingRight: '10%',
-    // width: 500,
-    // alignItems: 'stretch',
-    // alignContent: 'flex-end',
-    // // flexDirection: 'row',
-    // // alignSelf: 'flex-end',
   },
   backButton: {
     marginTop: 15,
@@ -29,7 +22,6 @@ const styles = StyleSheet.create({
     backgroundColor: color.blue,
   },
   screen: {
-    // flex: 1,
     padding: 10,
     margin: 20,
     borderRadius: 5,
@@ -44,33 +36,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   teamTitle: {
-    // marginTop: 20,
-    // marginBottom: 20,
     marginVertical: '6%',
     fontSize: 24,
     fontWeight: 'bold',
-    // padding: 10,
   },
   listOfTeam: {
-    // flexDirection: 'row',
     width: '100%',
     height: '35%',
-    // flexDirection: 'column',
-    // flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingTop: 10,
     borderRadius: 5,
   },
   cardOfMember: {
-    // flex: 1,
-    // fontSize: 56,
-    paddingTop: "1%",
-    
+    paddingTop: '1%',
     marginHorizontal: '3%',
-    // height: '55%',
-    marginVertical: "2%",
-    // justifyContent: 'center',
+    marginVertical: '2%',
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 3,
@@ -78,47 +58,29 @@ const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: 'white',
     borderRadius: 2,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
   },
   cardOfMemberView: {
-    width: "100%",
+    width: '100%',
     overflow: 'hidden',
-    // flexDirection: 'column',
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    padding: "3%",
-    margin: "2%"
+    padding: '3%',
+    margin: '2%',
   },
   descriptionContainer: {
     width: '90%',
-    // shadowColor: 'black',
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.26,
-    // elevation: 8,
-    // backgroundColor: 'white',
-    // padding: 10,
-    // borderRadius: 5,
-    marginBottom: "2%",
+    marginBottom: '2%',
   },
   description: {
     fontSize: 16,
 
   },
   items: {
-    // flex: 1,
     width: '100%',
     fontSize: 16,
     textAlign: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: "1%",
-    // margin: 0,
-    // padding: 10,
-    // margin: 10
+    padding: '1%',
   },
   chooseButtonContainer: {
     marginHorizontal: 20,
@@ -151,7 +113,7 @@ const styles = StyleSheet.create({
   modalEmoji: {
     fontSize: 40,
     textAlign: 'center',
-    paddingBottom: "4%",
+    paddingBottom: '4%',
   },
   confirmButton: {
     backgroundColor: color.blue,
@@ -161,9 +123,7 @@ const styles = StyleSheet.create({
   },
   teamCard: {
     width: '100%',
-    height: "60%",
-    // marginHorizontal: 20,
-    // marginVertical: 10,
+    height: '60%',
     justifyContent: 'center',
     shadowColor: color.black,
     shadowOffset: { width: 0, height: 1 },

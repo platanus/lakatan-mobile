@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     paddingTop: '25%',
   },
-  formCard: {},
   input: {
     width: '90%',
     marginHorizontal: '10%',
@@ -47,11 +46,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: '10%',
   },
-  // cancelButton: {
-  //   backgroundColor: color.gray,
-  //   width: '40%',
-  //   borderRadius: 5,
-  // },
   confirmButton: {
     width: '40%',
     backgroundColor: color.blue,

@@ -5,7 +5,7 @@ import usersSaga from './users/saga';
 import ritesSaga from './rites/saga';
 import rafflesSaga from './raffles/saga';
 
-export default function* rootSagas() {
+export default function *rootSagas() {
   yield all([
     authenticactionSaga(),
     teamsSaga(),

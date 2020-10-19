@@ -26,19 +26,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  infoRite: {},
-
   textHeader: {
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: '10%',
   },
-
-  textInfo: {},
-
-  raffleContainer: {},
-
-  raffleButtonContainer: {},
 
   raffleButton: {
     backgroundColor: color.blue,

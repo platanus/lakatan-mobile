@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, Image, Button, TouchableOpacity,
+  View, Text, Image, TouchableOpacity,
 } from 'react-native';
 
 import styles from '../../styles/SplashScreen/SplashScreen';

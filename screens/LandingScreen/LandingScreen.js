@@ -25,15 +25,6 @@ function LandingScreen(props) {
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
-  const handlerTeam = ({ name, purpose, members }) => {
-    dispatch({
-      type: NEW_TEAM_REQUEST,
-      payload: {
-        token, email, name, purpose, members,
-      },
-    });
-  };
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
@@ -47,8 +38,11 @@ function LandingScreen(props) {
   useEffect(() => {
     if (props.route.params?.name) {
       const { name, description, members } = props.route.params;
-      handlerTeam({
-        name, purpose: description, members,
+      dispatch({
+        type: NEW_TEAM_REQUEST,
+        payload: {
+          token, email, name, purpose: description, members,
+        },
       });
     }
   }, [props.route.params?.name]);
@@ -68,7 +62,10 @@ function LandingScreen(props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.addTeamButton} onPress={() => props.navigation.navigate('New Team', { members: [] })}>
+      <TouchableOpacity
+        style={styles.addTeamButton}
+        onPress={() => props.navigation.navigate('New Team', { members: [] })}
+      >
         <View style={styles.viewAddTeamButton}>
           <Text style={styles.textAddTeamButton}>+</Text>
         </View>

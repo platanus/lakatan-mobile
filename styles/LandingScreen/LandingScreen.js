@@ -4,7 +4,6 @@ import color from '../colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: color.white,
     alignItems: 'center',
     justifyContent: 'center',
     width: '90%',
@@ -15,9 +14,6 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: color.blue,
     borderRadius: 5,
-    // marginBottom: 10,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -38,7 +34,6 @@ const styles = StyleSheet.create({
     width: '98%',
     marginHorizontal: '1%',
     height: 170,
-    // marginHorizontal: 20,
     marginVertical: 10,
     justifyContent: 'center',
     shadowColor: color.black,
@@ -59,12 +54,8 @@ const styles = StyleSheet.create({
   signOutButton: {
     width: '40%',
     height: 30,
-   
     borderRadius: 5,
     marginTop: 12,
-    // marginBottom: 10,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },

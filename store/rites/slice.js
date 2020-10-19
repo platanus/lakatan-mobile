@@ -8,8 +8,8 @@ const initialState = {
     id: undefined,
     name: undefined,
     goal: undefined,
-    team_id: undefined,
-    user_minimum: undefined,
+    teamId: undefined,
+    userMinimum: undefined,
   },
 };
 
@@ -27,6 +27,7 @@ const slice = createSlice({
       state.loading = false;
     },
     reset() {
+      // eslint-disable-next-line no-undef
       state = initialState;
     },
   },

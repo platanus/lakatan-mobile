@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-
   },
   items: {
     width: '100%',

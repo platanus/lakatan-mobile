@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
 function signInApi({ email, password }) {
@@ -20,16 +21,13 @@ function signInApi({ email, password }) {
 function signUpApi({
   name, email, password, confirmPassword,
 }) {
+  const user = decamelizeKeys({ name, email, password, passwordConfirmation: confirmPassword });
+
   return axios({
     method: 'post',
     url: `${url}/api/v1/registrations`,
     data: {
-      user: {
-        name,
-        email,
-        password,
-        password_confirmation: confirmPassword,
-      },
+      user,
     },
     headers: {
       'Content-type': 'application/json',

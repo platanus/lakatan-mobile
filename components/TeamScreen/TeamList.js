@@ -6,23 +6,22 @@ import stylesTeam from '../../styles/TeamScreen/TeamScreen';
 import stylesUsers from '../../styles/UsersList/UsersList';
 
 const User = (props) => {
-
-  const {styles, member, inUserList} = props;
+  const { styles, member, inUserList } = props;
   let name;
-  if (inUserList){
-    name =member.item.attributes.name;
-  } else{
-    name = member.item.name
+  if (inUserList) {
+    name = member.item.attributes.name;
+  } else {
+    name = member.item.name;
   }
 
   return (
     <TouchableWithoutFeedback onPress={() => {}}>
-    <View style={styles.cardOfMember}>
-      <Text style={styles.items}>{name}</Text>
-    </View>
-    </TouchableWithoutFeedback>   
-  )
-}
+      <View style={styles.cardOfMember}>
+        <Text style={styles.items}>{name}</Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 const TeamList = ({ users, inUserList }) => {
   let styling;
@@ -31,6 +30,7 @@ const TeamList = ({ users, inUserList }) => {
   } else {
     styling = stylesTeam;
   }
+
   return (
     <View style={styling.listOfTeam}>
       <FlatList

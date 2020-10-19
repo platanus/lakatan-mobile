@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
 import {
-  View, Text, Button, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import color from '../../styles/colors';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import { CREATE_RITE_REQUEST } from '../../store/types';
 
 const NewRiteToTeamScreen = (props) => {
-  const { name, purpose } = useSelector((state)=>state.teams.currentTeam)
+  const { name, purpose } = useSelector((state) => state.teams.currentTeam);
   const [numberOfPeople, setNumberOfPeople] = useState('');
   const [riteName, setRiteName] = useState('');
   const [objective, setObjective] = useState('');
-  const { token , email} = useSelector((state) => state.authentication);
-  const {id} = useSelector((state) => state.teams.currentTeam);
+  const { token, email } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.teams.currentTeam);
   const dispatch = useDispatch();
 
   const numberOfPeopleHandler = (currentNumber) => {
-    if (currentNumber <= 99) {
+    const maxPeople = 99;
+    if (currentNumber <= maxPeople) {
       setNumberOfPeople(currentNumber);
     } else {
+      // eslint-disable-next-line no-magic-numbers
       setNumberOfPeople(currentNumber.slice(0, 2));
     }
   };
-  
+
   const createHandler = () => {
     dispatch({
       type: CREATE_RITE_REQUEST,
@@ -31,10 +32,10 @@ const NewRiteToTeamScreen = (props) => {
     {
       name: riteName,
       goal: objective,
-      team_id: parseInt(id, 10),
-      user_minimum: parseInt(numberOfPeople, 10),
+      teamId: parseInt(id, 10),
+      userMinimum: parseInt(numberOfPeople, 10),
       token,
-      email
+      email,
     },
     });
     props.navigation.navigate('Team');
@@ -47,11 +48,25 @@ const NewRiteToTeamScreen = (props) => {
           <Text style={styles.teamTitle}>{name}</Text>
           <Text>{purpose}</Text>
           <Text style={styles.textHeader}>Nombre del rito</Text>
-          <TextInput style={styles.areaInput} value={riteName} onChangeText={setRiteName} placeholder="Ingresar nombre" />
+          <TextInput
+            style={styles.areaInput}
+            value={riteName} onChangeText={setRiteName}
+            placeholder="Ingresar nombre"
+          />
           <Text style={styles.textHeader}>Objetivo del rito</Text>
-          <TextInput style={styles.areaInput} value={objective} onChangeText={setObjective} placeholder="Ingresar objetivo" />
+          <TextInput
+            style={styles.areaInput}
+            value={objective} onChangeText={setObjective}
+            placeholder="Ingresar objetivo"
+          />
           <Text style={styles.textHeader}>Personas requeridas</Text>
-          <TextInput style={styles.areaInput} value={numberOfPeople.toString()} onChangeText={numberOfPeopleHandler} placeholder="Ingresar cantidad de personas" keyboardType={Platform.OS === 'android' ? 'numeric' : 'number-pad'} />
+          <TextInput
+            style={styles.areaInput}
+            value={numberOfPeople.toString()}
+            onChangeText={numberOfPeopleHandler}
+            placeholder="Ingresar cantidad de personas"
+            keyboardType={'number-pad'}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.cancelButton}>
