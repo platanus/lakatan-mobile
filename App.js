@@ -19,7 +19,7 @@ import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
-
+import SyncScreen from './screens/SyncScreen/SyncScreen';
 runSagas();
 const TeamStack = createStackNavigator();
 
@@ -56,7 +56,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<Splash />} persistor={persistor} onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}>
-        <Navigation />
+        <SyncScreen />
       </PersistGate>
     </Provider>
   );
