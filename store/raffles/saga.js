@@ -1,5 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as rafflesActions } from './slice';
+import { actions as teamsActions } from '../Teams/slice';
+import { actions as authActions } from '../authentication/slice';
 import { CREATE_RAFFLE_REQUEST } from '../types';
 import api from '../../api/raffles';
 
@@ -9,8 +11,12 @@ function *createRaffleRequest({ payload }) {
     const data = yield call(api.createRaffle, payload);
     yield put(rafflesActions.setChosenOnes(data.data));
   } catch (error) {
-    yield put(rafflesActions.setChosenOnes([]));
-    console.log('error', error);
+    if (error.response.status.toString() === '401') {
+      yield put(authActions.authError('¡Oops, hubo un error!'));
+      yield put(rafflesActions.reset());
+      yield put(teamsActions.reset());
+      yield put(authActions.reset());
+    } else console.log(error);
   }
   yield put(rafflesActions.finish());
 }

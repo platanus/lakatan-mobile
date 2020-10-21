@@ -1,25 +1,36 @@
 /* eslint-disable max-statements */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  View, Text, Keyboard, TouchableWithoutFeedback, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView,
+  View,
+  Text,
+  Keyboard,
+  TouchableWithoutFeedback,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
-import { SIGN_UP_REQUEST } from '../../store/types';
+import { SIGN_UP_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
 
 import styles from '../../styles/SignUpScreen/SignUpScreen';
-import emailHandler from '../../components/SignIn/EmailHandler';
+import emailHandler from '../../components/Authentication/EmailHandler';
 
-const SignUpScreen = () => {
+const passwordMinimumLength = 6;
+
+const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
+  const [formError, setFormError] = useState(undefined);
 
-  const token = useSelector((store) => store.authentication.token);
+  const apiError = useSelector((store) => store.authentication.error);
+  const apiSuccess = useSelector((store) => store.authentication.success);
   const dispatch = useDispatch();
 
   const signUpButtonDisable = () => (
@@ -30,37 +41,35 @@ const SignUpScreen = () => {
     });
 
   const signUpButtonHandler = () => {
-    if (!(password === confirmPassword)) {
-      Alert.alert(
-        '¡Las contraseñas no coinciden!',
-        'Asegúrate de que sean iguales',
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-    } else if (emailHandler(email)) {
-      dispatch({
-        type: SIGN_UP_REQUEST,
-        payload: {
-          name, email, password, confirmPassword,
-        },
-      });
+    if (!emailHandler(email)) return setFormError('¡Has ingresado un email inválido!');
+    if ((password !== confirmPassword)) return setFormError('¡Las contraseñas no coinciden!');
+    if (password.length < passwordMinimumLength) {
+      return setFormError('¡Tu contraseña debe tener un mínimo de 6 caracteres!');
+    }
+
+    dispatch({ type: SIGN_UP_REQUEST,
+      payload: {
+        name, email, password, confirmPassword,
+      },
+    });
+  };
+
+  const clearAlertMessage = () => {
+    if (!!formError) setFormError(undefined);
+    if (!!apiError) dispatch({ type: CLEAR_AUTH_ERROR });
+    if (!!apiSuccess) {
+      dispatch({ type: CLEAR_AUTH_SUCCESS });
+      navigation.goBack();
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      Alert.alert(
-        'Te has registrado correctamente!',
-        '',
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-    }
-  }, [token]);
+  if ((formError || apiError || apiSuccess) && navigation.isFocused()) {
+    const message = formError || apiError || apiSuccess;
+    Alert.alert(
+      message, '', [{ text: 'OK', onPress: clearAlertMessage }],
+      { cancelable: false },
+    );
+  }
 
   return (
 
@@ -79,6 +88,7 @@ const SignUpScreen = () => {
                 autoCapitalize="words"
                 onChangeText={(text) => setName(text)}
                 autoCompleteType="off"
+                value={name}
               />
               <Text style={styles.tag}>Correo electrónico:</Text>
               <TextInput
@@ -88,6 +98,7 @@ const SignUpScreen = () => {
                 onChangeText={(text) => setEmail(text)}
                 keyboardType="email-address"
                 autoCompleteType="off"
+                value={email}
               />
               <Text style={styles.tag}>Contraseña:</Text>
               <View style={styles.passwordInput}>
@@ -96,6 +107,7 @@ const SignUpScreen = () => {
                   autoCapitalize="none"
                   secureTextEntry={hiddenPassword}
                   onChangeText={(text) => setPassword(text)}
+                  value={password}
                 />
                 <TouchableWithoutFeedback onPress={() => setHiddenPassword(!hiddenPassword)}>
                   <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={{ marginTop: 7 }} />
@@ -107,6 +119,7 @@ const SignUpScreen = () => {
                 autoCapitalize="none"
                 secureTextEntry={hiddenPassword}
                 onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
               />
             </View>
           </View>
