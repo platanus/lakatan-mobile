@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST, SIGN_OUT_REQUEST } from '../../store/types';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
+import SlackAuth from '../../components/Slack/slack_auth'
 
 const TeamView = (props) => {
   const { id, attributes: { name } } = props.team.item;
@@ -79,6 +80,9 @@ function LandingScreen(props) {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         />
+      </View>
+      <View>
+        <SlackAuth/>
       </View>
       <View style={styles.signOutButton}>
         <TouchableOpacity onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}>
