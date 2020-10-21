@@ -32,6 +32,9 @@ const slice = createSlice({
     finish(state) {
       state.loading = false;
     },
+    reset(state) {
+      state = initialState;
+    },
   },
 });
 

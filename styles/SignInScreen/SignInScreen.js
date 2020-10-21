@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: '10%',
   },
   cancelButton: {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+    margin: 20,
   },
   confirmButton: {
     width: '40%',
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+    margin: 20,
   },
   textCancelButton: {
     color: color.white,

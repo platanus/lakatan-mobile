@@ -6,6 +6,7 @@ const initialState = {
   name: undefined,
   loading: false,
   error: undefined,
+  success: undefined,
 };
 
 const slice = createSlice({
@@ -19,17 +20,20 @@ const slice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
     },
-    signInError(state, action) {
-      state.error = action.payload;
-    },
     signUpSuccess(state, action) {
-      state.email = action.payload.email;
-      state.token = action.payload.authenticationToken;
-      state.name = action.payload.name;
+      state.success = action.payload;
     },
-    signOutSuccess(state) {
+    signOutSuccess(state, action) {
+      state.success = action.payload;
       state.token = undefined;
       state.email = undefined;
+      state.name = undefined;
+    },
+    clearSuccess(state) {
+      state.success = undefined;
+    },
+    authError(state, action) {
+      state.error = action.payload;
     },
     clearError(state) {
       state.error = undefined;
@@ -37,8 +41,10 @@ const slice = createSlice({
     finish(state) {
       state.loading = false;
     },
-    reset() {
-      return initialState;
+    reset(state) {
+      state.token = undefined;
+      state.email = undefined;
+      state.name = undefined;
     },
   },
 });

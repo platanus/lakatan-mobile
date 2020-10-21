@@ -1,7 +1,20 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as teamsActions } from './slice';
+import { actions as authActions } from '../authentication/slice';
 import { ALL_TEAMS_REQUEST, CURRENT_TEAM_REQUEST, NEW_TEAM_REQUEST } from '../types';
 import apiTeams from '../../api/Teams';
+
+function *requestsErrorHandler(error) {
+  switch (error) {
+  case '401':
+    yield put(authActions.authError('¡Oops, hubo un error!'));
+    yield put(teamsActions.reset());
+    yield put(authActions.reset());
+    break;
+  default:
+    console.log(error);
+  }
+}
 
 function *allTeamsRequest({ payload }) {
   yield put(teamsActions.start());
@@ -11,7 +24,7 @@ function *allTeamsRequest({ payload }) {
       teams: data.data,
     }));
   } catch (error) {
-    console.log(error);
+    yield requestsErrorHandler(error.response.status.toString());
   }
   yield put(teamsActions.finish());
 }
@@ -35,7 +48,7 @@ function *currentTeamRequest({ payload }) {
       },
     }));
   } catch (error) {
-    console.log(error);
+    yield requestsErrorHandler(error.response.status.toString());
   }
   yield put(teamsActions.finish());
 }
@@ -46,7 +59,7 @@ function *newTeamRequest({ payload }) {
     const { data: { data: { attributes: { name }, id } } } = yield call(apiTeams.newTeam, payload);
     yield put(teamsActions.addNewTeam({ newTeam: { attributes: { name }, id } }));
   } catch (error) {
-    console.log(error);
+    yield requestsErrorHandler(error.response.status.toString());
   }
   yield put(teamsActions.finish());
 }
