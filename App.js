@@ -20,6 +20,7 @@ import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScre
 
 import Splash from './screens/SplashScreen/SplashScreen';
 import SyncScreen from './screens/SyncScreen/SyncScreen';
+
 runSagas();
 const TeamStack = createStackNavigator();
 
@@ -56,7 +57,11 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<Splash />} persistor={persistor} onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}>
-        <SyncScreen />
+        <NavigationContainer>
+          <TeamStack.Navigator>
+            <TeamStack.Screen name="Sync" component={SyncScreen} options={{ title: 'Slack' }} />
+          </TeamStack.Navigator>
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );

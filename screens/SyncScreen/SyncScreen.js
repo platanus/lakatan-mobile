@@ -1,11 +1,23 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View, Text, Image, TouchableOpacity,
+} from 'react-native';
 import ItemList from '../../components/SyncScreen/ItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import { syncData1 } from './SyncData';
 
-const SyncScreen = () => {
+const SyncScreen = ({ navigation }) => {
+  navigation.setOptions({
+    headerTitle: (
+      <View>
+        <Image
+          style={{ width: 40, height: 40 }}
+          source={require('../../assets/integrations/slackLogo.png')}
+        />
+        <Text style={{ color: 'black' }}>Slack</Text>
+      </View>),
+  });
   const [data, setData] = useState(syncData1);
   const [count, setCount] = useState(syncData1.length);
 

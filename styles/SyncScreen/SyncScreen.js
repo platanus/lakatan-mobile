@@ -4,10 +4,11 @@ import colors from '../colors';
 const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
-    paddingTop: '3%',
+    paddingTop: '1%',
     paddingBottom: '1%',
     paddingHorizontal: '5%',
     flexDirection: 'column',
+    alignItems: 'center',
   },
 
   description: {
@@ -40,12 +41,13 @@ const styles = StyleSheet.create({
   },
 
   itemsListContainer: {
+    width: '100%',
     flex: 1,
     marginTop: 7,
   },
 
   reloadButton: {
-    width: '100%',
+    width: '20%',
     paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
