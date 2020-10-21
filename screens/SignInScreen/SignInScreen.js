@@ -1,51 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert,
 } from 'react-native';
 import colors from '../../styles/colors';
-import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR } from '../../store/types';
+import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
 
 import styles from '../../styles/SignInScreen/SignInScreen';
-import emailHandler from '../../components/SignIn/EmailHandler';
+import emailHandler from '../../components/Authentication/EmailHandler';
 
-const SignInScreen = (props) => {
+// eslint-disable-next-line max-statements
+const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
+  const [formError, setFormError] = useState(undefined);
 
-  const error = useSelector((store) => store.authentication.error);
+  const apiError = useSelector((store) => store.authentication.error);
+  const apiSuccess = useSelector((store) => store.authentication.success);
+
   const dispatch = useDispatch();
-
-  const signInButtonHandler = () => {
-    if (emailHandler(email)) {
-      dispatch({ type: SIGN_IN_REQUEST, payload: { email, password } });
-    }
-  };
 
   const signInButtonDisable = () => (
     { ...styles.confirmButton, backgroundColor: email && password ? colors.blue : colors.gray });
 
+  const signInButtonHandler = () => {
+    if (emailHandler(email)) {
+      dispatch({ type: SIGN_IN_REQUEST, payload: { email, password } });
+    } else setFormError('¡Has ingresado un email inválido!');
+  };
+
   const signUpButtonHandler = () => {
     setEmail('');
     setPassword('');
-    props.navigation.navigate('SignUp');
+    navigation.navigate('SignUp');
   };
 
-  useEffect(() => {
-    if (error) {
-      Alert.alert(
-        error,
-        '',
-        [
-          { text: 'OK' },
-        ],
-        { cancelable: false },
-      );
-      dispatch({ type: CLEAR_AUTH_ERROR });
-    }
-  }, [error]);
+  const clearAlertMessage = () => {
+    if (!!apiError) dispatch({ type: CLEAR_AUTH_ERROR });
+    if (!!apiSuccess) dispatch({ type: CLEAR_AUTH_SUCCESS });
+    if (!!formError) setFormError(undefined);
+  };
+
+  if ((apiError || formError || apiSuccess) && navigation.isFocused()) {
+    const message = apiError || formError || apiSuccess;
+    Alert.alert(
+      message, '', [{ text: 'OK', onPress: clearAlertMessage }],
+      { cancelable: false },
+    );
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

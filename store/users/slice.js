@@ -18,8 +18,8 @@ const slice = createSlice({
     finish(state) {
       state.loading = false;
     },
-    reset() {
-      return initialState;
+    reset(state) {
+      state = initialState;
     },
   },
 });

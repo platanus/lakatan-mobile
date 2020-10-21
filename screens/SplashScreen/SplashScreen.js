@@ -10,7 +10,7 @@ const SplashScreen = (props) => (
     <Image style={styles.logo} source={require('../../assets/platanus/logoPlatanus.png')} />
     <Text style={styles.platanusTitle}>Platanus</Text>
     <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.signInButton} onPress={() => props.navigation.navigate('SignIn')}>
+      <TouchableOpacity style={styles.signInButton}>
         <Text style={styles.textButton}>Lakatan</Text>
       </TouchableOpacity>
     </View>

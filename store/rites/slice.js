@@ -26,8 +26,7 @@ const slice = createSlice({
     finish(state) {
       state.loading = false;
     },
-    reset() {
-      // eslint-disable-next-line no-undef
+    reset(state) {
       state = initialState;
     },
   },
