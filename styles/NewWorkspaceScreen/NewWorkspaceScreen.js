@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   buttonContainer: {
-    marginTop: '140%',
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -44,6 +43,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: color.white,
     paddingLeft: '33%',
+  },
+  bottomContent: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 40,
   },
 });
 

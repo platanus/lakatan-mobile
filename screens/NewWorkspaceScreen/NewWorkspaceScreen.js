@@ -21,12 +21,14 @@ const NewWorkspaceScreen = () => {
           style={styles.textInput}
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>
+      <View style={styles.bottomContent}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.textButton}>
             Listo
-          </Text>
-        </TouchableOpacity>
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
