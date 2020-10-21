@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useLayoutEffect } from 'react';
 import {
   Text, View, TouchableOpacity, FlatList, RefreshControl, Alert,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ALL_TEAMS_REQUEST, NEW_TEAM_REQUEST, SIGN_OUT_REQUEST } from '../../store/types';
+import MenuButton from '../../components/LandingScreen/MenuButton';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 import SlackAuth from '../../components/Slack/slack_auth'
@@ -60,6 +61,14 @@ function LandingScreen(props) {
       );
     }
   }, [token]);
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerLeft: () => (
+        <MenuButton navigation={props.navigation}/>
+      ),
+    });
+  }, [props.navigation]);
 
   return (
     <View style={styles.container}>

@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
   viewSignOutButton: {
     width: '100%',
   },
+  menuButton: {
+    width: '170%',
+    paddingLeft: '70%',
+    flexDirection: 'column',
+  },
 });
 
 export default { ...styles };
