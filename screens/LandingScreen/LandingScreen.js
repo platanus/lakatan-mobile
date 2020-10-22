@@ -73,6 +73,9 @@ function LandingScreen(props) {
           }
         />
       </View>
+      <TouchableOpacity onPress={() => props.navigation.navigate('Integrations')}>
+        <Text>Integrations</Text>
+      </TouchableOpacity>
       <View style={styles.signOutButton}>
         <TouchableOpacity onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}>
           <View style={styles.viewSignOutButton}>
