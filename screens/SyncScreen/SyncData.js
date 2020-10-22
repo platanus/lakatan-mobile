@@ -1,7 +1,7 @@
 const syncData1 = [
   { selected: true, title: 'Nuevo usuario', description: 'Diego Andai', key: '1' },
   { selected: true, title: 'Nuevo usuario', description: 'Andrés Matte', key: '2' },
-  { selected: true, title: 'Usuario eliminado', description: 'Lionel Messi', key: '3' },
+  { selected: true, title: 'Usuario eliminado', description: 'Luis Fros', key: '3' },
   { selected: true, title: 'Nuevo equipo', description: 'Platanus', key: '4' },
   { selected: true, title: 'Equipo eliminado', description: 'Mobile', key: '5' },
 ];

@@ -1,15 +1,36 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
-  View, Text, TouchableOpacity,
+  View, Text, TouchableOpacity, Image,
 } from 'react-native';
 import ItemList from '../../components/SyncScreen/ItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
+import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import { syncData1, syncData2 } from './SyncData';
 
-const StepOneScreen = ({ navigation }) => {
+const StepOneScreen = ({ navigation, route }) => {
   const [data, setData] = useState(syncData1);
   const [count, setCount] = useState(syncData1.length);
+
+  const { name } = route.params;
+  const img = {
+    'Slack': require('../../assets/Slack/logoSlack.png'),
+    'Google': require('../../assets/Google/google_logo_2.png'),
+    'Notion': require('../../assets/Notion/logoNotion.png'),
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (
+        <View style={stylesHeader.header}>
+          <Image style={stylesHeader.logo} source={img[name]} />
+          <Text style={stylesHeader.title}>{name}</Text>
+        </View>
+      ),
+      headerBackTitle: 'Back',
+    });
+  }, [navigation]);
 
   const itemOnPressHandler = (key) => {
     setData((prevData) => {
@@ -52,7 +73,7 @@ const StepOneScreen = ({ navigation }) => {
         return item;
       }
     });
-    navigation.navigate('StepTwo', { syncData2: newSyncData2 });
+    navigation.navigate('StepTwo', { syncData2: newSyncData2, name });
   };
 
   return (

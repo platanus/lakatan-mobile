@@ -1,7 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as syncActions } from './slice';
-import { CREATE_WORKSPACE_REQUEST, WORKSPACE_CHANGES_REQUEST, END_SYNC_REQUEST } from '../types';
+import { CREATE_WORKSPACE_REQUEST, WORKSPACE_CHANGES_REQUEST, END_SYNC_REQUEST, SET_WORKSPACE } from '../types';
 import api from '../../api/sync';
+
+function *setWorkspace({ payload }) {
+  yield put(syncActions.setWorkspace({ payload }));
+}
 
 function *createWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
@@ -53,4 +57,5 @@ export default function *syncSaga() {
   yield takeLatest(CREATE_WORKSPACE_REQUEST, createWorkspaceRequest);
   yield takeLatest(WORKSPACE_CHANGES_REQUEST, workspaceChangesRequest);
   yield takeLatest(END_SYNC_REQUEST, endSyncRequest);
+  yield takeLatest(SET_WORKSPACE, setWorkspace);
 }

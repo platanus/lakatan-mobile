@@ -4,6 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 import NewWorksapceButton from '../../components/IntegrationScreen/NewWorkspaceButton';
 import colors from '../../styles/colors';
+import { useSelector } from 'react-redux';
 
 const IntegrationScreen = (props) => {
   const { name } = props.route.params;
@@ -12,7 +13,7 @@ const IntegrationScreen = (props) => {
     'Google': require('../../assets/Google/google_logo_2.png'),
     'Notion': require('../../assets/Notion/logoNotion.png'),
   };
-  const [workspace, setWorkspace] = useState('');
+  const { workspace } = useSelector((state) => state.sync);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -25,7 +26,7 @@ const IntegrationScreen = (props) => {
       ),
       // eslint-disable-next-line react/display-name
       headerRight: () => (
-        <NewWorksapceButton navigation={props.navigation}/>
+        <NewWorksapceButton navigation={props.navigation} name={name}/>
       ),
       headerBackTitle: 'Back',
     });
@@ -48,6 +49,7 @@ const IntegrationScreen = (props) => {
         <TouchableOpacity
           style={{ ...styles.button, backgroundColor: workspace ? colors.darkBlue : colors.gray }}
           disabled={workspace === ''}
+          onPress={() => props.navigation.navigate('Sync step 1', { name })}
         >
           <Text style={styles.textButton}>
           Sincronizar
