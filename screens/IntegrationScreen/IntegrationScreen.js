@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from 'react';
-import { View, Text, Image } from 'react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 import NewWorksapceButton from '../../components/IntegrationScreen/NewWorkspaceButton';
+import colors from '../../styles/colors';
 
 const IntegrationScreen = (props) => {
   const { name } = props.route.params;
@@ -11,6 +12,7 @@ const IntegrationScreen = (props) => {
     'Google': require('../../assets/Google/google_logo_2.png'),
     'Notion': require('../../assets/Notion/logoNotion.png'),
   };
+  const [workspace, setWorkspace] = useState('');
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -29,9 +31,29 @@ const IntegrationScreen = (props) => {
     });
   }, [props.navigation]);
 
+  let workspaceMessaje = '';
+  if (workspace) {
+    workspaceMessaje = 'Configurado con workspace ';
+  } else {
+    workspaceMessaje = 'No hay Workspace configurado';
+  }
+
   return (
     <View>
-      <Text>Integration</Text>
+      <View style={styles.description}>
+        <Text style={styles.textDescription}>{workspaceMessaje}</Text>
+        <Text style={styles.textWorkspace}>{workspace}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={{ ...styles.button, backgroundColor: workspace ? colors.darkBlue : colors.gray }}
+          disabled={workspace === ''}
+        >
+          <Text style={styles.textButton}>
+          Sincronizar
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
