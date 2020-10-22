@@ -43,19 +43,23 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     padding: '10%',
+    position: 'absolute',
+    bottom: '0%',
   },
   addUser: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: '100%',
+    paddingHorizontal: '10%',
+    position: 'absolute',
+    bottom: '15%',
   },
   addUserButton: {
     backgroundColor: color.yellow,
-    width: '80%',
+    width: '100%',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
-    marginTop: '15%', // TO DO: ordenar botones
+    // todo
   },
   addUserText: {
     color: color.white,

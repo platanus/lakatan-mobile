@@ -83,13 +83,17 @@ const SignInScreen = ({navigation}) => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={signInButtonDisable()}>
-            <TouchableOpacity disabled={!(email && password)} onPress={signInButtonHandler}>
+          <View style={styles.confirmButtonContainer}>
+            <TouchableOpacity
+              style={signInButtonDisable()}
+              disabled={!(email && password)} onPress={signInButtonHandler}>
               <Text style={styles.textConfirmButton}>Ingresar</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={signUpButtonHandler}>
+          <View style={styles.cancelButtonContainer}>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={signUpButtonHandler}>
               <Text style={styles.textCancelButton}>Registrar</Text>
             </TouchableOpacity>
           </View>

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: '10%',
   },
   confirmButton: {
-    width: '40%',
+    width: '100%',
     backgroundColor: color.blue,
     borderRadius: 5,
     alignItems: 'center',

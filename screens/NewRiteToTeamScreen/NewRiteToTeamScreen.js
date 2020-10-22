@@ -74,13 +74,17 @@ const NewRiteToTeamScreen = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          <View style={styles.cancelButtonContainer}>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => props.navigation.goBack()}>
               <Text style={styles.textCancelButton}>Cancelar</Text>
             </TouchableOpacity>
           </View>
-          <View style={createRiteButtonDisable()}>
-            <TouchableOpacity onPress={createHandler} disabled={!(name && purpose && numberOfPeople)}>
+          <View style={styles.confirmButtonContainer}>
+            <TouchableOpacity
+              style={createRiteButtonDisable()}
+              onPress={createHandler} disabled={!(name && purpose && numberOfPeople)}>
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>

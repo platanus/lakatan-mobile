@@ -125,14 +125,13 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
         <View style={styles.buttonContainer}>
-          <View style={signUpButtonDisable()}>
-            <TouchableOpacity
-              disabled={!(email && password && confirmPassword && name)}
-              onPress={signUpButtonHandler}
-            >
-              <Text style={styles.textConfirmButton}>Registrar</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={signUpButtonDisable()}
+            disabled={!(email && password && confirmPassword && name)}
+            onPress={signUpButtonHandler}
+          >
+            <Text style={styles.textConfirmButton}>Registrar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>

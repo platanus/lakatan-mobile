@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: '5%',
   },
+  riteList: {
+    height: '85%',
+  },
   riteButton: {
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 1 },
@@ -68,6 +71,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+    position: 'absolute',
+    bottom: '0%',
+    marginLeft: '5%',
+    marginBottom: '5%',
   },
   newRiteText: {
     color: color.white,

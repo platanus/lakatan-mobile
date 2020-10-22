@@ -51,16 +51,20 @@ const Team = (props) => {
       <View style={styles.riteScreen}>
         <View>
           <FlatList
+            style={styles.riteList}
             data={rites}
             renderItem={
               (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} />
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
+          
+        </View>
+        <TouchableOpacity
+            style={styles.newRiteButton}
+            onPress={() => props.navigation.navigate('New Rite')}>
             <Text style={styles.newRiteText}>+</Text>
           </TouchableOpacity>
-        </View>
       </View>
     </View>
   );

@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
   container: {
     margin: '5%',
     flex: 1,
-    paddingTop: '25%',
-    paddingHorizontal: '10%',
+    paddingTop: '10%',
+    paddingHorizontal: '5%',
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 3,
     shadowOpacity: 0.26,
@@ -14,27 +14,38 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     borderRadius: 5,
   },
+  selectContainer: {
+    height: '80%',
+  },
   buttonContainer: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    paddingTop: '10%',
+    position: 'absolute',
+    bottom: '5%',
+    marginLeft: '6%',
   },
   cancelButton: {
     backgroundColor: color.gray,
-    width: '40%',
+    width: '100%',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
   },
   confirmButton: {
-    width: '40%',
+    width: '100%',
     backgroundColor: color.blue,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
+  },
+  confirmButtonContainer: {
+    width: '40%',
+  },
+  cancelButtonContainer: {
+    width: '40%',
   },
   textCancelButton: {
     color: color.white,

@@ -43,12 +43,22 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: '40%', // TO DO: separar las view infoContainer y buttonContainer 80-20
+    position: 'absolute',
+    bottom: '5%',
+    left: '5%'
+    // marginLeft: '20%',
   },
-
+  cancelButtonContainer: {
+    width: '50%',
+    paddingHorizontal: '5%',
+  },
+  confirmButtonContainer: {
+    width: '50%',
+    paddingHorizontal: '5%',
+  },
   cancelButton: {
     backgroundColor: color.red,
-    width: '40%',
+    width: '100%',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -61,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   confirmButton: {
-    width: '40%',
+    width: '100%',
     backgroundColor: color.blue,
     borderRadius: 5,
     alignItems: 'center',
