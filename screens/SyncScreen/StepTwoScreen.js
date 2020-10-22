@@ -1,25 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import {
-  View, Text, Image, TouchableOpacity,
+  View, Text, TouchableOpacity,
 } from 'react-native';
 import ItemList from '../../components/SyncScreen/ItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
-import { syncData1 } from './SyncData';
 
-const SyncScreen = ({ navigation }) => {
-  navigation.setOptions({
-    headerTitle: (
-      <View>
-        <Image
-          style={{ width: 40, height: 40 }}
-          source={require('../../assets/integrations/slackLogo.png')}
-        />
-        <Text style={{ color: 'black' }}>Slack</Text>
-      </View>),
-  });
-  const [data, setData] = useState(syncData1);
-  const [count, setCount] = useState(syncData1.length);
+const StepTwoScreen = ({ route, navigation }) => {
+  const { syncData2 } = route.params;
+  const [data, setData] = useState(syncData2);
+  const [count, setCount] = useState(syncData2.length);
 
   const itemOnPressHandler = (key) => {
     setData((prevData) => {
@@ -42,6 +32,11 @@ const SyncScreen = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
 
+      <View style={styles.step}>
+        <Text style={styles.textStep}>
+          Paso 2 de 2
+        </Text>
+      </View>
       <View style={styles.description}>
         <Text style={styles.textDescription}>
           Configurado con workspace
@@ -73,4 +68,4 @@ const SyncScreen = ({ navigation }) => {
   );
 };
 
-export default SyncScreen;
+export default StepTwoScreen;

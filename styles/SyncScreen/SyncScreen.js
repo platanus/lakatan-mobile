@@ -10,6 +10,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  step: {
+    backgroundColor: colors.yellow,
+    borderRadius: 50,
+    width: 110,
+    alignItems: 'center',
+  },
+
+  textStep: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
 
   description: {
     flexDirection: 'row',
@@ -17,10 +29,10 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   textDescription: {
-    fontSize: 10,
+    fontSize: 12,
   },
   textWorkspace: {
-    fontSize: 10,
+    fontSize: 12,
     marginHorizontal: 3,
     color: colors.blue,
   },
