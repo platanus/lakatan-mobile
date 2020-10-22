@@ -1,13 +1,24 @@
 import { StyleSheet } from 'react-native';
-import colors from '../colors';
+import color from '../colors';
 
 const styles = StyleSheet.create({
-applyButton: {
-    width: '100%',
-    backgroundColor: colors.blue,
-    borderRadius: 45,
-    alignItems: 'center',
+  button: {
+    backgroundColor: color.blue,
+    borderRadius: 5,
+    height: 40,
+    width: 130,
     justifyContent: 'center',
-    paddingVertical: 10,
-    height: 55,
+    alignItems: 'center',
+  },
+  textButton: {
+    fontSize: 18,
+    color: color.white,
+
+  },
+  bottomContent: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 40,
   }});
+
+  export default { ...styles };

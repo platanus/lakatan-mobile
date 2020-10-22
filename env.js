@@ -3,4 +3,4 @@ const clientID = `1414886919431.1429629233266`;
 
 export default stagingUrl;
 export {clientID};
-// this env file is not setted yet.
+    // this env file is not setted yet.
