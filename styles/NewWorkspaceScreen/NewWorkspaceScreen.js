@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderRadius: 15,
     backgroundColor: color.white,
-    paddingTop: '15%',
+    
   },
   tag: {
     fontSize: 13,
@@ -37,18 +37,42 @@ const styles = StyleSheet.create({
     height: 40,
     width: '40%',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
   },
   textButton: {
     fontSize: 18,
     color: color.white,
-    paddingLeft: '33%',
+
   },
   bottomContent: {
     flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 40,
   },
+  slackContent: {
+    alignItems: 'center'
+    },
+  stepContent: {
+    margin: 20,
+    flexDirection: "row",
+
+  },
+  TitleContent: {
+    marginTop: 20,
+    alignItems: "center",
+  },
+  Title :{
+    fontSize: 16,
+    fontWeight: '400'
+  },
+  subTitle :{
+    fontSize: 14,
+    fontWeight: '600',
+    marginRight: 10,
+  },
+  row : {
+    marginRight: 40
+  }
 });
 
 export default styles;
