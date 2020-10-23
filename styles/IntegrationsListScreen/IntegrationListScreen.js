@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   image: {
-    height: 30,
+    height: 31,
     width: 30,
   },
   buttonContainer: {
