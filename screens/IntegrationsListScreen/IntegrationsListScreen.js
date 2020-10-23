@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from 'react';
-import { View, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import MenuButton from '../../components/LandingScreen/MenuButton';
+import styles from '../../styles/IntegrationsListScreen/IntegrationListScreen';
 
 const IntegrationList = (props) => {
   useLayoutEffect(() => {
@@ -13,10 +14,25 @@ const IntegrationList = (props) => {
   }, [props.navigation]);
 
   return (
-    <View>
-      <Button title='Slack' onPress={() => props.navigation.navigate('Integration', { name: 'Slack' })} />
-      <Button title='Google' onPress={() => props.navigation.navigate('Integration', { name: 'Google' })} />
-      <Button title='Notion' onPress={() => props.navigation.navigate('Integration', { name: 'Notion' })} />
+    <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Integration', { name: 'Slack' })}>
+        <Image source={require('../../assets/Slack/logoSlack.png')} style={styles.image} />
+        <Text style={styles.buttonText}>
+          Slack
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Integration', { name: 'Google' })}>
+        <Image source={require('../../assets/Google/google_logo_2.png')} style={styles.image}/>
+        <Text style={styles.buttonText}>
+          Google
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Integration', { name: 'Notion' })}>
+        <Image source={require('../../assets/Notion/logoNotion.png')} style={styles.image}/>
+        <Text style={styles.buttonText}>
+          Notion
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

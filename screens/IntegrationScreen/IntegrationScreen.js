@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
@@ -13,7 +13,7 @@ const IntegrationScreen = (props) => {
     'Google': require('../../assets/Google/google_logo_2.png'),
     'Notion': require('../../assets/Notion/logoNotion.png'),
   };
-  const { workspace } = useSelector((state) => state.sync);
+  let { workspace } = useSelector((state) => state.sync);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -33,10 +33,11 @@ const IntegrationScreen = (props) => {
   }, [props.navigation]);
 
   let workspaceMessaje = '';
-  if (workspace) {
+  if (workspace && name === 'Slack') {
     workspaceMessaje = 'Configurado con workspace ';
   } else {
     workspaceMessaje = 'No hay Workspace configurado';
+    workspace = '';
   }
 
   return (
@@ -47,8 +48,8 @@ const IntegrationScreen = (props) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={{ ...styles.button, backgroundColor: workspace ? colors.darkBlue : colors.gray }}
-          disabled={workspace === ''}
+          style={{ ...styles.button, backgroundColor: workspace && name==='Slack' ? colors.darkBlue : colors.gray }}
+          disabled={name != 'Slack'}
           onPress={() => props.navigation.navigate('Sync step 1', { name })}
         >
           <Text style={styles.textButton}>
