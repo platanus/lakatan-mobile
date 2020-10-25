@@ -19,8 +19,8 @@ import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
-import StepOneScreen from './screens/SyncScreen/StepOneScreen';
-import StepTwoScreen from './screens/SyncScreen/StepTwoScreen';
+import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
+import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
 
 runSagas();
 const TeamStack = createStackNavigator();
@@ -60,8 +60,8 @@ export default function App() {
       <PersistGate loading={<Splash />} persistor={persistor} onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}>
         <NavigationContainer>
           <TeamStack.Navigator>
-            <TeamStack.Screen name="StepOne" component={StepOneScreen} options={{ title: 'Paso 1' }} />
-            <TeamStack.Screen name="StepTwo" component={StepTwoScreen} options={{ title: 'Paso 2' }} />
+            <TeamStack.Screen name="Step One Sync" component={StepOneSyncScreen} options={{ title: 'Paso 1' }} />
+            <TeamStack.Screen name="Step Two Sync" component={StepTwoSyncScreen} options={{ title: 'Paso 2' }} />
           </TeamStack.Navigator>
         </NavigationContainer>
       </PersistGate>

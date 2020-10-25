@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import colors from '../colors';
 
-const ItemStyles = StyleSheet.create({
-  newItemContainer: {
+const itemStyles = StyleSheet.create({
+  addItemContainer: {
     backgroundColor: colors.lightBlue,
     borderRadius: 50,
     paddingHorizontal: 25,
@@ -13,16 +13,16 @@ const ItemStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  newTextItemTitle: {
+  addActionTypeText: {
     fontSize: 12,
     color: colors.blue,
   },
-  newTextItemDescription: {
+  addActionNameText: {
     fontSize: 14,
     color: colors.darkBlue,
   },
 
-  eliminatedItemContainer: {
+  deleteItemContainer: {
     backgroundColor: colors.lightRed,
     borderRadius: 50,
     paddingHorizontal: 25,
@@ -33,16 +33,16 @@ const ItemStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  eliminatedTextItemTitle: {
+  deleteActionTypeText: {
     fontSize: 12,
     color: colors.red,
   },
-  eliminatedTextItemDescription: {
+  deleteActionNameText: {
     fontSize: 14,
     color: colors.darkRed,
   },
 
-  notSelectedItemContainer: {
+  unselectedItemContainer: {
     backgroundColor: colors.lightGray,
     borderRadius: 50,
     paddingHorizontal: 25,
@@ -53,20 +53,20 @@ const ItemStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  notSelectedTextItemTitle: {
+  unselectedActionTypeText: {
     fontSize: 12,
     color: colors.gray,
   },
-  notSelectedTextItemDescription: {
+  unselectedActionNameText: {
     fontSize: 14,
     color: colors.gray,
   },
 
-  textsContainer: {
+  actionTextContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: 35,
   },
 });
 
-export default { ...ItemStyles };
+export default { ...itemStyles };

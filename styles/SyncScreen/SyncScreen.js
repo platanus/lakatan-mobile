@@ -9,35 +9,36 @@ const styles = StyleSheet.create({
     paddingHorizontal: '5%',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: colors.white,
   },
-  step: {
+
+  stepView: {
     backgroundColor: colors.yellow,
     borderRadius: 50,
     width: 110,
     alignItems: 'center',
   },
-
-  textStep: {
+  stepText: {
     color: colors.white,
     fontWeight: 'bold',
     fontSize: 15,
   },
 
-  description: {
+  descriptionView: {
     flexDirection: 'row',
     width: '100%',
     marginVertical: 5,
   },
-  textDescription: {
+  descriptionText: {
     fontSize: 12,
   },
-  textWorkspace: {
+  workspaceText: {
     fontSize: 12,
     marginHorizontal: 3,
     color: colors.blue,
   },
 
-  applyButton: {
+  applyTouchable: {
     width: '100%',
     backgroundColor: colors.darkBlue,
     borderRadius: 50,
@@ -46,26 +47,25 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     height: 55,
   },
-  textApplyButton: {
+  applyText: {
     color: colors.white,
     fontSize: 18,
     fontWeight: '500',
   },
 
-  itemsListContainer: {
-    width: '100%',
+  syncItemListContainer: {
     flex: 1,
+    width: '100%',
     marginTop: 7,
   },
 
-  reloadButton: {
+  reloadTouchable: {
     width: '20%',
     paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  textReloadButton: {
+  reloadText: {
     color: colors.darkBlue,
   },
 });
