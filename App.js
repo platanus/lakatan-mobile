@@ -13,8 +13,6 @@ import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
-import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
-import TokenIntegrationScreen from './screens/TokenIntegrationScreen/TokenIntegrationScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
 
@@ -44,11 +42,6 @@ const Navigation = () => {
             />
             <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
             <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
-            <TeamStack.Screen name="Integrations" component={IntegrationScreen} options={{ title: 'Integraciones' }} />
-            <TeamStack.Screen
-              name="TokenIntegrations"
-              component={TokenIntegrationScreen}
-              options={{ title: 'Token para Integracion' }} />
           </>
         ) :
           (
