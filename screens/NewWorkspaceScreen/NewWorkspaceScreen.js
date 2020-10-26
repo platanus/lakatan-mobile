@@ -22,7 +22,7 @@ const NewWorkspaceScreen = (props) => {
           Paso 1 
         </Text>
         <Text style={styles.row}>
-          presiona el siguente botón para autorizar nuestra app a acceder al workspace
+          Presiona el siguente botón para autorizar nuestra app a acceder al workspace
         </Text>
       </View>
       <View style={styles.slackContent}>
@@ -33,7 +33,7 @@ const NewWorkspaceScreen = (props) => {
           Paso 2 
         </Text>
         <Text style={styles.row}>
-        Copia el código mostrado al final de la autorización e ingrésalo en el siguiente form
+        Copia el código mostrado al final de la autorización e ingrésalo en el siguiente campo.
         </Text>
       </View>
       <View style={styles.input}>
@@ -51,7 +51,7 @@ const NewWorkspaceScreen = (props) => {
           Paso 3 
         </Text>
         <Text style={styles.row}> 
-        presiona listo
+        Presiona listo.
         </Text>
       </View>
       <View style={styles.bottomContent}>
