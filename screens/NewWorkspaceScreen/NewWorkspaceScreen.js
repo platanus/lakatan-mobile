@@ -6,7 +6,7 @@ import SlackAuth from '../../components/Slack/slack_auth';
 const NewWorkspaceScreen = (props) => {
   const [token, setToken] = useState('');
 
-  const textChangeHangler = (text) => {
+  const textChangeHandler = (text) => {
     setToken(text);
   };
 
@@ -40,7 +40,7 @@ const NewWorkspaceScreen = (props) => {
         <Text style={styles.tag}>Token:</Text>
         <TextInput
           placeholder='Ingresar token'
-          onChangeText={textChangeHangler}
+          onChangeText={textChangeHandler}
           value={token}
           autoCompleteType='off'
           style={styles.textInput}
@@ -58,10 +58,10 @@ const NewWorkspaceScreen = (props) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => props.navigation.goBack()}>
             <Text style={styles.textButton}>
+
             Listo
-            </Text>
-          </TouchableOpacity>
-        </View>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

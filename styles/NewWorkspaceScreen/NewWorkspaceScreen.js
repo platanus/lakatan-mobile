@@ -27,27 +27,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
   button: {
     backgroundColor: color.blue,
     borderRadius: 5,
     height: 40,
-    width: '40%',
+    width: 110,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textButton: {
     fontSize: 18,
     color: color.white,
-
   },
-  bottomContent: {
+  buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 40,
+    alignItems: 'center',
   },
   slackContent: {
     alignItems: 'center'
