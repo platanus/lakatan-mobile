@@ -42,7 +42,7 @@ const Navigation = () => {
             <>
               <TeamStack.Screen name="Teams" component={LandingScreen} options={{ title: 'Equipos', gestureEnabled: false, headerLeft: null }} />
               <TeamStack.Screen name="Team" component={TeamScreen} options={{ title: 'Equipo' }} />
-              <TeamStack.Screen name="Feedback" component={FeedbackScreen} />
+              <TeamStack.Screen name="Feedback" component={FeedbackScreen} />g
               <TeamStack.Screen name="New Team" component={NewTeamScreen} options={{ title: 'Nuevo Equipo' }} />
               <TeamStack.Screen name="Add Users" component={NewUserToTeamScreen} options={{ title: 'Agregar Usuarios' }} />
               <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
@@ -58,12 +58,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<Splash />} persistor={persistor} onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}>
-        <NavigationContainer>
-          <TeamStack.Navigator>
-            <TeamStack.Screen name="Step One Sync" component={StepOneSyncScreen} options={{ title: 'Paso 1' }} />
-            <TeamStack.Screen name="Step Two Sync" component={StepTwoSyncScreen} options={{ title: 'Paso 2' }} />
-          </TeamStack.Navigator>
-        </NavigationContainer>
+        <Navigation />
       </PersistGate>
     </Provider>
   );
