@@ -5,7 +5,7 @@ import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
 const NewWorkspaceScreen = () => {
   const [token, setToken] = useState('');
 
-  const textChangeHangler = (text) => {
+  const textChangeHandler = (text) => {
     setToken(text);
   };
 
@@ -15,20 +15,18 @@ const NewWorkspaceScreen = () => {
         <Text style={styles.tag}>Token:</Text>
         <TextInput
           placeholder='Ingresar token'
-          onChangeText={textChangeHangler}
+          onChangeText={textChangeHandler}
           value={token}
           autoCompleteType='off'
           style={styles.textInput}
         />
       </View>
-      <View style={styles.bottomContent}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.textButton}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.textButton}>
             Listo
-            </Text>
-          </TouchableOpacity>
-        </View>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

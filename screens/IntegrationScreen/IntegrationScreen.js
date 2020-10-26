@@ -31,17 +31,17 @@ const IntegrationScreen = (props) => {
     });
   }, [props.navigation]);
 
-  let workspaceMessaje = '';
+  let workspaceMessage = '';
   if (workspace) {
-    workspaceMessaje = 'Configurado con workspace ';
+    workspaceMessage = 'Configurado con workspace';
   } else {
-    workspaceMessaje = 'No hay Workspace configurado';
+    workspaceMessage = 'No hay Workspace configurado';
   }
 
   return (
     <View>
       <View style={styles.description}>
-        <Text style={styles.textDescription}>{workspaceMessaje}</Text>
+        <Text style={styles.textDescription}>{workspaceMessage} </Text>
         <Text style={styles.textWorkspace}>{workspace}</Text>
       </View>
       <View style={styles.buttonContainer}>
