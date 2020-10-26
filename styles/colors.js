@@ -7,4 +7,9 @@ export default {
   softGray: '#CCC',
   white: '#ffffff',
   black: '#000000',
+  lightBlue: '#DEF0FE',
+  lightRed: '#F5D8D8',
+  lightGray: '#F0F6FA',
+  darkRed: '#993739',
+  darkBlue: '#1D4699',
 };

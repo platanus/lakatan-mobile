@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useLayoutEffect } from 'react';
 import {
   Text, View, TouchableOpacity, FlatList, RefreshControl,
 } from 'react-native';
@@ -8,6 +8,7 @@ import {
   NEW_TEAM_REQUEST,
    SIGN_OUT_REQUEST,
   } from '../../store/types';
+import MenuButton from '../../components/LandingScreen/MenuButton';
 
 import styles from '../../styles/LandingScreen/LandingScreen';
 
@@ -52,6 +53,14 @@ function LandingScreen(props) {
     }
   }, [props.route.params?.name]);
 
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerLeft: () => (
+        <MenuButton navigation={props.navigation}/>
+      ),
+    });
+  }, [props.navigation]);
 
   return (
     <View style={styles.container}>
