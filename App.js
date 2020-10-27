@@ -17,6 +17,7 @@ import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScre
 import IntegrationListScreen from './screens/IntegrationsListScreen/IntegrationsListScreen';
 import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
 import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen';
+import NewHookScreen from './screens/NewHookScreen/NewHookScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
 
@@ -59,6 +60,7 @@ const Teams = () => (
     />
     <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
+    <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
   </TeamStack.Navigator>
 );
 

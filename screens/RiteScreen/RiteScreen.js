@@ -113,7 +113,7 @@ const RiteScreen = ({
     </TouchableWithoutFeedback>
   );
 
-  const hooksRoute = () => (
+  const hooksRoute = (props) => (
     <View style={styles.subScreenContainer}>
       <View style={styles.subScreen}>
         <View style={styles.listHooksContainer}>
@@ -125,7 +125,7 @@ const RiteScreen = ({
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
             <TouchableOpacity style={styles.applyButton}>
-              <Text style={styles.textApplyButton}>
+              <Text style={styles.textApplyButton} onPress={() => ''}>
                 nuevo hook
               </Text>
             </TouchableOpacity>
