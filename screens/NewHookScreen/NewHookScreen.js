@@ -4,6 +4,10 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import DropDownPicker from 'react-native-dropdown-picker';
+import RNPickerSelect from 'react-native-picker-select';
+import Icon from 'react-native-vector-icons/FontAwesome';
+// import { Picker } from '@react-native-picker/picker';
+// import Dropdown from '../../components/HookScreen/Dropdown';
 import styles from '../../styles/NewHookScreen/NewHookScreen';
 import colors from '../../styles/colors';
 
@@ -12,8 +16,8 @@ const NewHookScreen = (props) => {
   const [hookOf, setHookOf] = useState('salida');
   const [hookType, setHookType] = useState('webhook');
 
-  const hookNameHandler = (item) => {
-    setHookName(item);
+  const hookOfHandler = (item) => {
+    setHookOf(item);
   };
   // const createHookButtonDisable = () => (
   //   { ...styles.confirmButton, backgroundColor: hookName ? colors.blue : colors.gray });
@@ -23,30 +27,52 @@ const NewHookScreen = (props) => {
       <View style={styles.container}>
         <View style={styles.infoContainer}>
           <Text style={styles.textHeader}>Hook de</Text>
-          <DropDownPicker
-            items={[
-              { label: 'Salida', value: 'salida' },
-              { label: 'Entrada', value: 'entrada' },
-            ]}
-            defaultValue={hookOf}
-            containerStyle={{ height: 40 }}
-            style={styles.picker}
-            itemStyle={{ justifyContent: 'flex-start' }}
-            dropDownStyle={styles.dropDownPicker}
-            // onChangeItem={hookNameHandler}
-          />
-          <Text style={styles.textHeader}>Tipo</Text>
-          <DropDownPicker
-            items={[
-              { label: 'Webhook', value: 'webhook' },
-            ]}
-            defaultValue={hookType}
-            containerStyle={{ height: 40 }}
-            style={styles.picker}
-            itemStyle={{ justifyContent: 'flex-start' }}
-            dropDownStyle={styles.dropDownPicker}
-            // onChangeItem={hookNameHandler}
-          />
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={hookOf}
+              onValueChange={hookOfHandler}
+              placeholder={{}}
+              items={[
+                { label: 'Salida', value: 'salida', key: 'salida' },
+                { label: 'Entrada', value: 'entrada', key: 'salida' },
+              ]}
+              style={ {
+                inputIOS: {
+                  color: colors.black,
+                  paddingTop: 13,
+                  paddingHorizontal: 10,
+                  paddingBottom: 12,
+                },
+                inputAndroid: {
+                  color: colors.black,
+                },
+              } }
+            />
+            <Icon name="angle-down" style={styles.icon} size={22} color={colors.darkBlue} />
+          </View>
+          <Text style={styles.textHeader}>Tipo 2</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={hookOf}
+              onValueChange={hookOfHandler}
+              placeholder={{}}
+              items={[
+                { label: 'Webhook', value: 'webhook', key: 'value' },
+              ]}
+              style={ {
+                inputIOS: {
+                  color: colors.black,
+                  paddingTop: 13,
+                  paddingHorizontal: 10,
+                  paddingBottom: 12,
+                },
+                inputAndroid: {
+                  color: colors.black,
+                },
+              } }
+            />
+            <Icon name="angle-down" style={styles.icon} size={22} color={colors.darkBlue} />
+          </View>
           <Text style={styles.textHeader}>Nombre</Text>
           <TextInput
             style={styles.areaInput}

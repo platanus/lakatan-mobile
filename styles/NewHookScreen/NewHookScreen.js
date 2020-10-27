@@ -17,19 +17,27 @@ const styles = StyleSheet.create({
     color: color.darkBlue,
     paddingBottom: '3%',
   },
-  picker: {
+  pickerContainer: {
     backgroundColor: color.softGray,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
+    borderRadius: 25,
+    height: 40,
+  },
+  icon: {
+    position: 'absolute',
+    right: 1,
+    bottom: '25%',
+    paddingRight: '5%',
+  },
+  itemPicker: {
+    height: '100%',
+    fontSize: 14,
   },
   dropDownPicker: {
     backgroundColor: color.white,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   areaInput: {
     width: '100%',
