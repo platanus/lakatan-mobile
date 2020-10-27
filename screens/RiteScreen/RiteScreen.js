@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
 import { CREATE_RAFFLE_REQUEST } from '../../store/types';
 
@@ -11,6 +12,12 @@ import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
 import color from '../../styles/colors';
+
+const HooksView = (props) => (
+  <View>
+    <Text>Hook View</Text>
+  </View>
+);
 
 const RiteScreen = ({
   navigation, route: {
@@ -44,17 +51,15 @@ const RiteScreen = ({
     setRaffleButton(userMinimum <= selected.length);
   };
 
-  return (
+  const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.screen}>
-          <Text style={styles.riteTitle}>{name}</Text>
+      <View style={styles.subScreenContainer}>
+        <View style={styles.subScreen}>
           <View>
-            <Text style={styles.textHeader}>Objetivo</Text>
-            <Text>{goal}</Text>
-            <Text style={styles.textHeader}>Cantidad de personas</Text>
-            <Text style={styles.textInfo}>{userMinimum}</Text>
+            <Text style={styles.textHeader}>Personas</Text>
+            <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
           </View>
+
           <View>
             <Text style={styles.textHeader}>Sortear</Text>
             <MultiSelect
@@ -80,30 +85,161 @@ const RiteScreen = ({
               button="40"
             />
           </View>
+        
+          {raffleButton ? (
+            <View style={styles.buttonContainer}>
+              <View style={styles.raffleButtonContainer}>
+                <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
+                  <Text style={styles.textRaffleButton}>Sortear</Text>
+                </TouchableOpacity>
+                {isModalVisible &&
+                  <Raffle
+                    visible={isModalVisible}
+                    setVisible={setModalVisible}
+                    users={members.filter((member) => selectedItems.includes(member.id))}
+                    navigation={navigation}
+                  />}
+              </View>
+            </View>
+          ) : (
+            <View>
+              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
-        {raffleButton ? (
-          <View>
-            <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
-              <Text style={styles.textRaffleButton}>Sortear</Text>
-            </TouchableOpacity>
-            {isModalVisible &&
-            <Raffle
-              visible={isModalVisible}
-              setVisible={setModalVisible}
-              users={members.filter((member) => selectedItems.includes(member.id))}
-              navigation={navigation}
-            />}
-          </View>
-        ) : (
-          <View style={styles.raffleButtonContainer}>
-            <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-              <Text style={styles.textRaffleButton}>Sortear</Text>
-            </TouchableOpacity>
-          </View>
-        )}
       </View>
     </TouchableWithoutFeedback>
   );
+
+  const hooksRoute = () => (
+    <View style={styles.subScreenContainer}>
+      <View style={styles.subScreen}>
+        <View style={styles.listHooksContainer}>
+          <Text style={styles.hookHeader}>Entrada</Text>
+        </View>
+        <View style={styles.listHooksContainer}>
+          <Text style={styles.hookHeader}>Salida</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.newHookContainer}>
+            <TouchableOpacity style={styles.applyButton}>
+              <Text style={styles.textApplyButton}>
+                nuevo hook
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+
+  const initialLayout = {};
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'first', title: 'Sortear' },
+    { key: 'second', title: 'Hooks' },
+  ]);
+
+  const renderScene = SceneMap({
+    first: raffleRoute,
+    second: hooksRoute,
+  });
+
+  const renderTabBar = (tabProps) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.screen}>
+          <Text style={styles.riteTitle}>{name}</Text>
+          <View>
+            <Text style={styles.textSharedHeader}>Objetivo</Text>
+            <Text>{goal}</Text>
+          </View>
+        </View>
+        <View>
+          <TabBar
+            {...tabProps}
+            indicatorStyle={{ backgroundColor: color.yellow }}
+            style={{ backgroundColor: color.blue }}
+            getLabelText={({ route }) => route.title}
+            labelStyle={{ fontSize: 16 }}
+          />
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+
+  return (
+    <TabView
+      renderTabBar={renderTabBar}
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={initialLayout}
+    />
+  );
+  // return (
+  //   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+  //     <View style={styles.container}>
+  //       <View style={styles.screen}>
+  //         <Text style={styles.riteTitle}>{name}</Text>
+  //         <View>
+  //           <Text style={styles.textHeader}>Objetivo</Text>
+  //           <Text>{goal}</Text>
+  //           <Text style={styles.textHeader}>Cantidad de personas</Text>
+  //           <Text style={styles.textInfo}>{userMinimum}</Text>
+  //         </View>
+  //         <View>
+  //           <Text style={styles.textHeader}>Sortear</Text>
+  //           <MultiSelect
+  //             items={availableMembers}
+  //             uniqueKey="id"
+  //             alwaysShowSelectText
+  //             onSelectedItemsChange={selectedHandler}
+  //             selectedItems={selectedItems}
+  //             colors={{ primary: color.blue, success: color.blue, text: color.black }}
+  //             confirmText="Confirmar"
+  //             selectText="Elige usuarios"
+  //             searchInputPlaceholderText="Elige un usuario a agregar..."
+  //             tagRemoveIconColor={color.softGray}
+  //             tagBorderColor={color.softGray}
+  //             tagTextColor={color.black}
+  //             selectedItemTextColor={color.blue}
+  //             selectedItemIconColor={color.softGray}
+  //             itemTextColor={color.black}
+  //             displayKey="name"
+  //             searchInputStyle={{ color: color.softGray }}
+  //             submitButtonColor={color.blue}
+  //             submitButtonText="Ok"
+  //             button="40"
+  //           />
+  //         </View>
+  //       </View>
+  //       {raffleButton ? (
+  //         <View>
+  //           <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
+  //             <Text style={styles.textRaffleButton}>Sortear</Text>
+  //           </TouchableOpacity>
+  //           {isModalVisible &&
+  //           <Raffle
+  //             visible={isModalVisible}
+  //             setVisible={setModalVisible}
+  //             users={members.filter((member) => selectedItems.includes(member.id))}
+  //             navigation={navigation}
+  //           />}
+  //         </View>
+  //       ) : (
+  //         <View style={styles.raffleButtonContainer}>
+  //           <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+  //             <Text style={styles.textRaffleButton}>Sortear</Text>
+  //           </TouchableOpacity>
+  //         </View>
+  //       )}
+  //     </View>
+  //   </TouchableWithoutFeedback>
+  // );
 };
 
 export default RiteScreen;
