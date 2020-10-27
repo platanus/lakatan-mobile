@@ -115,8 +115,32 @@ const styles = StyleSheet.create({
 
   hookHeader: {
     color: color.darkBlue,
+    paddingTop: '5%',
   },
-
+  hookButton: {
+    width: '100%',
+    backgroundColor: color.lightBlue,
+    borderRadius: 50,
+    // alignItems: 'left',
+    // justifyContent: 'left',
+    paddingVertical: 10,
+    marginVertical: '2%',
+    paddingLeft: '10%',
+    height: 55,
+  },
+  titleHookText: {
+    color: color.darkBlue,
+    fontSize: 16,
+  },
+  descriptionHookText: {
+    color: '#00CCFF',
+  },
+  icon: {
+    position: 'absolute',
+    right: 1,
+    bottom: '50%',
+    paddingRight: '5%',
+  },
 });
 
 export default { ...styles };

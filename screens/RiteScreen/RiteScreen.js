@@ -11,13 +11,9 @@ import { CREATE_RAFFLE_REQUEST } from '../../store/types';
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
+import { hooksDataIn, hooksDataOut } from './HooksData';
+import ItemList from '../../components/RiteScreen/ItemList';
 import color from '../../styles/colors';
-
-const HooksView = (props) => (
-  <View>
-    <Text>Hook View</Text>
-  </View>
-);
 
 const RiteScreen = ({
   navigation, route: {
@@ -29,6 +25,8 @@ const RiteScreen = ({
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
+  const [dataIn, setDataIn] = useState(hooksDataIn)
+  const [dataOut, setDataOut] = useState(hooksDataOut)
 
   const { email, token } = useSelector((store) => store.authentication);
 
@@ -85,7 +83,7 @@ const RiteScreen = ({
               button="40"
             />
           </View>
-        
+
           {raffleButton ? (
             <View style={styles.buttonContainer}>
               <View style={styles.raffleButtonContainer}>
@@ -118,9 +116,15 @@ const RiteScreen = ({
       <View style={styles.subScreen}>
         <View style={styles.listHooksContainer}>
           <Text style={styles.hookHeader}>Entrada</Text>
+          <ItemList
+            data={dataIn}
+          />
         </View>
         <View style={styles.listHooksContainer}>
           <Text style={styles.hookHeader}>Salida</Text>
+          <ItemList
+            data={dataOut}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
