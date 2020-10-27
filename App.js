@@ -19,6 +19,8 @@ import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
 import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
+import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
+import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
 
 runSagas();
 const AppStack = createStackNavigator();
