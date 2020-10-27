@@ -49,7 +49,7 @@ const Team = (props) => {
   const ritesRoute = () => (
     <View style={styles.riteContainer}>
       <View style={styles.riteScreen}>
-        <View>
+        <View style={styles.listRites}>
           <FlatList
             data={rites}
             renderItem={
@@ -57,9 +57,13 @@ const Team = (props) => {
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
-          <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
-            <Text style={styles.newRiteText}>+</Text>
-          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.applyContainer}>
+            <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
+              <Text style={styles.newRiteText}>+</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -75,8 +79,8 @@ const Team = (props) => {
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'first', title: 'Ritos' },
-    { key: 'second', title: 'Usuarios' },
+    { key: 'first', title: 'ritos' },
+    { key: 'second', title: 'usuarios' },
   ]);
   const renderScene = SceneMap({
     first: ritesRoute,
@@ -93,10 +97,10 @@ const Team = (props) => {
       <View>
         <TabBar
           {...tabProps}
-          indicatorStyle={{ backgroundColor: color.yellow }}
-          style={{ backgroundColor: color.blue }}
+          indicatorStyle={{ backgroundColor: color.darkBlue }}
+          style={{ backgroundColor: color.white }}
           getLabelText={({ route }) => route.title}
-          labelStyle={{ fontSize: 16 }}
+          labelStyle={{ fontSize: 16, color: color.darkBlue }}
         />
       </View>
     </View>

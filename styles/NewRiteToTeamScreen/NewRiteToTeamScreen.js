@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   teamTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: '5%',
