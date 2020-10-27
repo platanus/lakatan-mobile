@@ -54,12 +54,12 @@ const RiteScreen = ({
       <View style={styles.subScreenContainer}>
         <View style={styles.subScreen}>
           <View>
-            <Text style={styles.textHeader}>Personas</Text>
+            <Text style={styles.hookHeader}>Personas</Text>
             <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
           </View>
 
           <View>
-            <Text style={styles.textHeader}>Sortear</Text>
+            <Text style={styles.hookHeader}>Sortear</Text>
             <MultiSelect
               items={availableMembers}
               uniqueKey="id"
@@ -86,8 +86,8 @@ const RiteScreen = ({
 
           {raffleButton ? (
             <View style={styles.buttonContainer}>
-              <View style={styles.raffleButtonContainer}>
-                <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
+              <View style={styles.newHookContainer}>
+                <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
                   <Text style={styles.textRaffleButton}>Sortear</Text>
                 </TouchableOpacity>
                 {isModalVisible &&
@@ -143,8 +143,8 @@ const RiteScreen = ({
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'first', title: 'Sortear' },
-    { key: 'second', title: 'Hooks' },
+    { key: 'first', title: 'sortear' },
+    { key: 'second', title: 'hooks' },
   ]);
 
   const renderScene = SceneMap({
@@ -165,10 +165,10 @@ const RiteScreen = ({
         <View>
           <TabBar
             {...tabProps}
-            indicatorStyle={{ backgroundColor: color.yellow }}
-            style={{ backgroundColor: color.blue }}
+            indicatorStyle={{ backgroundColor: color.darkBlue }}
+            style={{ backgroundColor: color.white }}
             getLabelText={({ route }) => route.title}
-            labelStyle={{ fontSize: 16 }}
+            labelStyle={{ fontSize: 16, color: color.darkBlue }}
           />
         </View>
       </View>

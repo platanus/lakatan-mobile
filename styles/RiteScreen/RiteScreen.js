@@ -3,25 +3,23 @@ import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
-    marginHorizontal: '5%',
-    marginTop: '5%',
+    width: '100%',
+    paddingHorizontal: '7%',
+    backgroundColor: color.white,
   },
 
   screen: {
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     // height: '90%',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: 'white',
+    // shadowColor: 'black',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowRadius: 3,
+    // shadowOpacity: 0.26,
+    // elevation: 8,
+    // backgroundColor: 'white',
     // marginBottom: '5%',
-    paddingTop: '10%',
-    paddingHorizontal: '5%',
-    paddingBottom: '5%',
+    paddingTop: '7%',
   },
 
   riteTitle: {
@@ -29,7 +27,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-
+  textSharedHeader: {
+    color: color.darkBlue,
+    paddingTop: '5%',
+  },
   textHeader: {
     fontWeight: 'bold',
     fontSize: 16,
@@ -40,8 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'absolute',
+    alignSelf: 'center',
     bottom: '5%',
-    // left: '5%'
   },
 
   raffleButtonContainer: {
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
 
   newHookContainer: {
     width: '100%',
-    marginLeft: '7%',
+    // marginLeft: '7%',
   },
 
   raffleButton: {
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
-    marginLeft: '5%',
+    // marginLeft: '5%',
   },
 
   disabledRaffleButton: {
@@ -80,20 +81,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   subScreenContainer: {
-    width: '90%',
-    marginHorizontal: '5%',
+    width: '100%',
+    height: '100%',
+    // marginHorizontal: '5%',
   },
   subScreen: {
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
-    height: '95%',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
+    height: '100%',
+    // shadowColor: 'black',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowRadius: 3,
+    // shadowOpacity: 0.26,
     elevation: 8,
     backgroundColor: 'white',
-    padding: '5%',
+    padding: '7%',
   },
 
   listHooksContainer: {},
