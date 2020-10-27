@@ -88,7 +88,7 @@ const RiteScreen = ({
             <View style={styles.buttonContainer}>
               <View style={styles.newHookContainer}>
                 <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
-                  <Text style={styles.textRaffleButton}>Sortear</Text>
+                  <Text style={styles.textRaffleButton}>sortear</Text>
                 </TouchableOpacity>
                 {isModalVisible &&
                   <Raffle
@@ -100,10 +100,12 @@ const RiteScreen = ({
               </View>
             </View>
           ) : (
-            <View>
-              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-                <Text style={styles.textRaffleButton}>Sortear</Text>
-              </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <View style={styles.newHookContainer}>
+                <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+                  <Text style={styles.textRaffleButton}>sortear</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
         </View>

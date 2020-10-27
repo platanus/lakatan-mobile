@@ -18,7 +18,7 @@ const NewRiteToTeamScreen = (props) => {
   const dispatch = useDispatch();
 
   const createRiteButtonDisable = () => (
-    { ...styles.confirmButton, backgroundColor: name && purpose && numberOfPeople ? colors.blue : colors.gray });
+    { ...styles.confirmButton, backgroundColor: name && purpose && numberOfPeople ? colors.darkBlue : colors.gray });
 
   const numberOfPeopleHandler = (currentNumber) => {
     const maxPeople = 99;
@@ -74,13 +74,11 @@ const NewRiteToTeamScreen = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              <Text style={styles.textCancelButton}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
           <View style={createRiteButtonDisable()}>
-            <TouchableOpacity onPress={createHandler} disabled={!(name && purpose && numberOfPeople)}>
+            <TouchableOpacity
+              onPress={createHandler}
+              style={styles.applyButton}
+              disabled={!(name && purpose && numberOfPeople)}>
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>

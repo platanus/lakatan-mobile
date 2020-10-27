@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignSelf: 'center',
     position: 'absolute',
     bottom: '5%',
-    left: '7%',
   },
   confirmButton: {
     width: '100%',

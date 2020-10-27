@@ -67,13 +67,14 @@ const styles = StyleSheet.create({
   },
 
   disabledRaffleButton: {
-    backgroundColor: color.blue,
+    backgroundColor: color.darkBlue,
     width: '100%',
-    borderRadius: 5,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-    opacity: 0.3,
+    paddingVertical: 10,
+    height: 55,
+    opacity: 0.5,
   },
 
   textRaffleButton: {

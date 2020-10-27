@@ -3,15 +3,15 @@ import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
-    height: '90%',
-    margin: '5%',
+    width: '100%',
+    height: '100%',
+    // margin: '5%',
     borderRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
+    // shadowColor: 'black',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowRadius: 3,
+    // shadowOpacity: 0.26,
+    // elevation: 8,
     backgroundColor: 'white',
     padding: '5%',
   },
@@ -28,22 +28,33 @@ const styles = StyleSheet.create({
   },
 
   textHeader: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginTop: '10%',
+    // fontWeight: 'bold',
+    // fontSize: 16,
+    // marginTop: '10%',
+    fontSize: 14,
+    paddingTop: '7%',
+    color: color.darkBlue,
+    paddingBottom: '3%',
   },
 
   areaInput: {
+    // width: '100%',
+    // height: 40,
+    // borderBottomWidth: 0.5,
+    // fontSize: 14,
     width: '100%',
+    backgroundColor: color.softGray,
+    borderRadius: 25,
+    paddingLeft: '3%',
     height: 40,
-    borderBottomWidth: 0.5,
-    fontSize: 14,
   },
 
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '40%', // TO DO: separar las view infoContainer y buttonContainer 80-20
+    justifyContent: 'center',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: '5%',
   },
 
   cancelButton: {
@@ -61,12 +72,25 @@ const styles = StyleSheet.create({
   },
 
   confirmButton: {
-    width: '40%',
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    // width: '40%',
+    // backgroundColor: color.blue,
+    // borderRadius: 5,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // height: 40,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  },
+  applyButton: {
+    width: '100%',
+    // backgroundColor: color.darkBlue,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    paddingVertical: 10,
+    height: 55,
   },
 
   textConfirmButton: {
