@@ -18,7 +18,7 @@ import IntegrationListScreen from './screens/IntegrationsListScreen/Integrations
 import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
 import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen';
 import NewHookScreen from './screens/NewHookScreen/NewHookScreen';
-
+import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
 
 runSagas();
@@ -60,6 +60,7 @@ const Teams = () => (
     />
     <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
+    <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
     <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
   </TeamStack.Navigator>
 );

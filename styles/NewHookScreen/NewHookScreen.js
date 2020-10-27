@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontSize: 14,
-    paddingTop: '5%',
+    paddingTop: '7%',
     color: color.darkBlue,
     paddingBottom: '3%',
   },

@@ -75,6 +75,9 @@ function LandingScreen(props) {
       <TouchableOpacity onPress={() => props.navigation.navigate('New Hook')}>
         <Text>Nuevo Hook</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => props.navigation.navigate('Hook')}>
+        <Text>Ver Hook</Text>
+      </TouchableOpacity>
       <View style={styles.listOfTeams}>
         <FlatList
           data={teamsList}
