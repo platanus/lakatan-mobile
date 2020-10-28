@@ -4,9 +4,9 @@ import { Octicons } from '@expo/vector-icons';
 
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 
-const NewWorkspaceButton = ({ navigation }) => {
+const NewWorkspaceButton = ({ navigation, name }) => {
   const pressHandler = () => {
-    navigation.navigate('New Workspace');
+    navigation.navigate('New Workspace', { name });
   };
 
   return (
