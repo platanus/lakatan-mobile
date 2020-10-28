@@ -43,7 +43,7 @@ const IntegrationScreen = (props) => {
   return (
     <View>
       <View style={styles.description}>
-        <Text style={styles.textDescription}>{workspaceMessaje}</Text>
+        <Text style={styles.textDescription}>{workspaceMessage} </Text>
         <Text style={styles.textWorkspace}>{workspace}</Text>
       </View>
       <View style={styles.buttonContainer}>

@@ -14,13 +14,13 @@ import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
-import IntegrationList from './screens/IntegrationsListScreen/IntegrationsListScreen';
+import IntegrationListScreen from './screens/IntegrationsListScreen/IntegrationsListScreen';
 import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
 import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen';
 
 import Splash from './screens/SplashScreen/SplashScreen';
-import StepOneScreen from './screens/SyncScreen/StepOneScreen';
-import StepTwoScreen from './screens/SyncScreen/StepTwoScreen';
+import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
+import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
 
 runSagas();
 const AppStack = createStackNavigator();
@@ -30,15 +30,19 @@ const IntegrationStack = createStackNavigator();
 
 const Integration = () => (
   <IntegrationStack.Navigator>
-    <IntegrationStack.Screen name="Integrations" component={IntegrationList} options={{ title: 'Integraciones' }} />
+    <IntegrationStack.Screen
+      name="Integrations"
+      component={IntegrationListScreen}
+      options={{ title: 'Integraciones' }}
+    />
     <IntegrationStack.Screen name="Integration" component={IntegrationScreen} />
     <IntegrationStack.Screen
       name="New Workspace"
       component={NewWorkspaceScreen}
       options={{ title: 'Configurar Workspace' }}
     />
-    <IntegrationStack.Screen name="Sync step 1" component={StepOneScreen}/>
-    <IntegrationStack.Screen name="StepTwo" component={StepTwoScreen}/>
+    <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
+    <IntegrationStack.Screen name="StepTwo" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
 );
 
@@ -62,14 +66,14 @@ const Teams = () => (
   </TeamStack.Navigator>
 );
 
-const Aplicacion = () => (
+const AppNavigator = () => (
   <AppDrawer.Navigator>
     <AppDrawer.Screen name="Equipos" component={Teams} />
     <AppDrawer.Screen name="Integraciones" component={Integration} />
   </AppDrawer.Navigator>
 );
 
-const Navigator = () => {
+const SignInNavigatior = () => {
   const { authentication: { token } } = useSelector((state) => state);
 
   return (
@@ -77,7 +81,7 @@ const Navigator = () => {
       <AppStack.Navigator>
         {token ? (
           <>
-            <AppStack.Screen name="Aplicacion" component={Aplicacion} options={{ headerShown: false }} />
+            <AppStack.Screen name="App" component={AppNavigator} options={{ headerShown: false }} />
           </>
         ) :
           (
@@ -99,7 +103,7 @@ export default function App() {
         persistor={persistor}
         onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}
       >
-        <Navigator />
+        <SignInNavigatior />
       </PersistGate>
     </Provider>
   );

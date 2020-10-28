@@ -6,13 +6,11 @@ const styles = StyleSheet.create({
     margin: '5%',
     flex: 1,
     shadowOffset: { width: 0, height: 1 },
-
     shadowRadius: 3,
     shadowOpacity: 0.26,
     elevation: 8,
     borderRadius: 15,
     backgroundColor: color.white,
-    
   },
   tag: {
     fontSize: 13,
@@ -27,27 +25,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
   button: {
     backgroundColor: color.blue,
     borderRadius: 5,
     height: 40,
-    width: '40%',
+    width: 110,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textButton: {
     fontSize: 18,
     color: color.white,
-
   },
-  bottomContent: {
+  buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     marginBottom: 40,
+    alignItems: 'center',
   },
   slackContent: {
     alignItems: 'center'

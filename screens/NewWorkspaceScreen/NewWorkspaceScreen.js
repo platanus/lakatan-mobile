@@ -10,7 +10,7 @@ const NewWorkspaceScreen = (props) => {
   const [token, setToken] = useState('');
   const dispatch = useDispatch();
 
-  const textChangeHangler = (text) => {
+  const textChangeHandler = (text) => {
     setToken(text);
   };
   const { name } = props.route.params;
@@ -58,17 +58,17 @@ const NewWorkspaceScreen = (props) => {
       </View>
       <View style={styles.stepContent}>
         <Text style={styles.subTitle}>
-          Paso 2
+          Paso 2 
         </Text>
         <Text style={styles.row}>
-          Copia el código mostrado al final de la autorización e ingrésalo en el siguiente form
+        Copia el código mostrado al final de la autorización e ingrésalo en el siguiente campo.
         </Text>
       </View>
       <View style={styles.input}>
         <Text style={styles.tag}>Token:</Text>
         <TextInput
           placeholder='Ingresar token'
-          onChangeText={textChangeHangler}
+          onChangeText={textChangeHandler}
           value={token}
           autoCompleteType='off'
           style={styles.textInput}
@@ -76,20 +76,20 @@ const NewWorkspaceScreen = (props) => {
       </View>
       <View style={styles.stepContent}>
         <Text style={styles.subTitle}>
-          Paso 3
+          Paso 3 
         </Text>
-        <Text style={styles.row}>
-          Presiona listo
+        <Text style={styles.row}> 
+        Presiona listo.
         </Text>
       </View>
       <View style={styles.bottomContent}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={pressHandler}>
             <Text style={styles.textButton}>
+
             Listo
-            </Text>
-          </TouchableOpacity>
-        </View>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
