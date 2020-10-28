@@ -22,7 +22,7 @@ function requestChanges({ email, token }) {
   return axios({
     method: 'get',
     // arreglar ruta
-    url: `${url}/api/v1/sync`,
+    url: `${url}/api/v1/slack`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -35,7 +35,7 @@ function aprovedChanges({ email, token, changes }) {
   return axios({
     method: 'post',
     // arreglar ruta
-    url: `${url}/api/v1/sync`,
+    url: `${url}/api/v1/slack`,
     data: {
       changes,
     },

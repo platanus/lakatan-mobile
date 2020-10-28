@@ -23,11 +23,11 @@ function *workspaceChangesRequest({ payload }) {
     const firstStep = [];
     const secondStep = [];
     // chequear si esta bien que sea data.data
-    for (let i = 0; i < data.data.length; i++) {
-      if (data.data[i].modelo === 'User' || data.data[i].modelo === 'User') {
-        firstStep.push(data.data[i]);
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].model === 'User' || data[i].model === 'Team') {
+        firstStep.push(data[i]);
       } else {
-        secondStep.push(data.data[i]);
+        secondStep.push(data[i]);
       }
     }
     yield put(syncActions.saveChanges({ firstStep, secondStep }));
