@@ -44,29 +44,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   slackContent: {
-    alignItems: 'center'
-    },
+    alignItems: 'center',
+  },
   stepContent: {
     margin: 20,
-    flexDirection: "row",
+    flexDirection: 'row',
 
   },
   TitleContent: {
     marginTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
-  Title :{
+  Title: {
     fontSize: 16,
-    fontWeight: '400'
+    fontWeight: '400',
   },
-  subTitle :{
+  subTitle: {
     fontSize: 14,
     fontWeight: '600',
     marginRight: 10,
   },
-  row : {
-    marginRight: 40
-  }
+  row: {
+    marginRight: 40,
+  },
 });
 
 export default styles;

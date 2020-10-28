@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
+import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
 
-const StepTwoSyncScreen = ({ route }) => {
+const StepTwoSyncScreen = ({ navigation, route }) => {
   const { stepOneData, syncData2 } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => syncData2.map((item, key) => {
     item.selected = true;
@@ -54,6 +55,14 @@ const StepTwoSyncScreen = ({ route }) => {
 
     console.log('¡Sincronización Completa!');
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (<HeaderLogo name={route.params.name}/>),
+      headerBackTitle: 'Back',
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.mainContainer}>

@@ -32,11 +32,11 @@ const IntegrationScreen = (props) => {
     });
   }, [props.navigation]);
 
-  let workspaceMessaje = '';
+  let workspaceMessage = '';
   if (workspace && name === 'Slack') {
-    workspaceMessaje = 'Configurado con workspace ';
+    workspaceMessage = 'Configurado con workspace ';
   } else {
-    workspaceMessaje = 'No hay Workspace configurado';
+    workspaceMessage = 'No hay Workspace configurado';
     workspace = '';
   }
 

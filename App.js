@@ -42,7 +42,7 @@ const Integration = () => (
       options={{ title: 'Configurar Workspace' }}
     />
     <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
-    <IntegrationStack.Screen name="StepTwo" component={StepTwoSyncScreen}/>
+    <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
 );
 

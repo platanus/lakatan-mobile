@@ -1,32 +1,38 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
 } from 'react-native';
 
+import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import { syncData1, syncData2 } from './SyncData';
 
-const StepOneSyncScreen = ({ navigation }) => {
+const StepOneSyncScreen = ({ navigation, route }) => {
   const [stepOneData, setStepOneData] = useState(() => syncData1.map((item, key) => {
     item.selected = true;
     item.key = key.toString();
+
     return item;
   }));
   const [count, setCount] = useState(syncData1.length);
+  const { name } = route.params;
 
   const itemOnPressHandler = (key) => {
     setStepOneData((prevStepOneData) => {
       const newStepOneData = prevStepOneData.map((item) => {
         if (item.key === key) {
           item.selected = !item.selected;
+
           return item;
         }
+
         return item;
       });
+
       return newStepOneData;
     });
   };
@@ -37,8 +43,16 @@ const StepOneSyncScreen = ({ navigation }) => {
 
   const applyButtonHandler = () => {
     //  super-function
-    navigation.navigate('Step Two Sync', { stepOneData, syncData2 });
+    navigation.navigate('Step Two Sync', { stepOneData, syncData2, name });
   };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (<HeaderLogo name={name}/>),
+      headerBackTitle: 'Back',
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.mainContainer}>
