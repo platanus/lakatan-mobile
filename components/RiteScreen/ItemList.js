@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-const ItemList = ({ data, itemOnPressHandler }) => (
+const ItemList = ({ data }) => (
   <View style={styles.itemsListContainer}>
     <FlatList
       data={data}

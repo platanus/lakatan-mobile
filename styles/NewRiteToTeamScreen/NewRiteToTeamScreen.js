@@ -5,19 +5,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    // margin: '5%',
-    borderRadius: 5,
-    // shadowColor: 'black',
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.26,
-    // elevation: 8,
-    backgroundColor: 'white',
-    padding: '5%',
+    backgroundColor: color.white,
+    paddingHorizontal: '7%',
   },
 
   infoContainer: {
-    padding: '5%',
+    paddingTop: '10%',
   },
 
   teamTitle: {
