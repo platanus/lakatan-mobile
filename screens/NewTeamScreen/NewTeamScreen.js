@@ -17,7 +17,7 @@ const NewTeamScreen = (props) => {
   const membersObjects = [];
 
   const confirmButtonDisable = () => (
-    { ...styles.confirmButton, backgroundColor: name && description ? colors.blue : colors.gray });
+    { ...styles.confirmButton, backgroundColor: name && description ? colors.darkBlue : colors.gray });
 
   if (members) {
     members.forEach((element) => {
@@ -29,43 +29,43 @@ const NewTeamScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.formCard}>
-          <Text style={styles.title}>Crear un nuevo equipo</Text>
           <View style={styles.input}>
-            <Text style={styles.tag}>Nombre:</Text>
+            <Text style={styles.tag}>Nombre</Text>
             <TextInput
               style={styles.areaInput}
-              placeholder="Ej: 'Mobile Capstone'"
+              placeholder="Mobile Capstone"
               value={name} onChangeText={setName}
             />
-            <Text style={styles.tag}>Propósito:</Text>
+            <Text style={styles.tag}>Propósito</Text>
             <TextInput
               style={styles.areaInput}
-              placeholder="Ej: 'Equipo encargado de Lakatan-Mobile'"
+              placeholder="Equipo encargado de Lakatan-Mobile"
               value={description}
               onChangeText={setDescription}
             />
           </View>
         </View>
         <TeamList users={membersObjects} inUserList={true} />
-        <View style={styles.addUser}>
-          <TouchableOpacity
-            style={styles.addUserButton}
-            onPress={() => props.navigation.navigate('Add Users', { name, members })}
-          >
-            <Text style={styles.addUserText}>Agregar usuarios</Text>
-          </TouchableOpacity>
+        <View style={styles.addUserContainer}>
+          <View style={styles.createButtonContainer}>
+            <TouchableOpacity
+              style={styles.addUserButton}
+              onPress={() => props.navigation.navigate('Add Users', { name, members })}
+            >
+              <Text style={styles.addUserText}>Agregar usuarios</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.cancelButton} onPress={() => props.navigation.goBack()}>
-            <Text style={styles.textCancelButton}>Cancelar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            disabled={!name || !description}
-            style={confirmButtonDisable()}
-            onPress={() => props.navigation.navigate('Teams', { name, description, members })}
-          >
-            <Text style={styles.textConfirmButton}>Confirmar</Text>
-          </TouchableOpacity>
+          <View style={styles.createButtonContainer}>
+            <TouchableOpacity
+              disabled={!name || !description}
+              style={confirmButtonDisable()}
+              onPress={() => props.navigation.navigate('Teams', { name, description, members })}
+            >
+              <Text style={styles.textConfirmButton}>Confirmar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </TouchableWithoutFeedback>
