@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   reloadText: {
     color: colors.darkBlue,
   },
