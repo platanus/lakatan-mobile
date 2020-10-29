@@ -3,22 +3,20 @@ import color from '../colors';
 
 const styles = StyleSheet.create({
   container: {
-    margin: '5%',
-    flex: 1,
-    paddingTop: '25%',
-    paddingHorizontal: '10%',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: color.white,
-    borderRadius: 5,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    paddingHorizontal: '7%',
+  },
+  multiselect: {
+    paddingTop: '10%',
   },
   buttonContainer: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingTop: '10%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: '5%',
   },
   cancelButton: {
     backgroundColor: color.gray,
@@ -29,12 +27,18 @@ const styles = StyleSheet.create({
     height: 40,
   },
   confirmButton: {
-    width: '40%',
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  applyButton: {
+    width: '100%',
+    backgroundColor: color.darkBlue,
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    paddingVertical: 10,
+    height: 55,
   },
   textCancelButton: {
     color: color.white,

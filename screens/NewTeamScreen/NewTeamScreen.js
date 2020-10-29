@@ -52,7 +52,7 @@ const NewTeamScreen = (props) => {
               style={styles.addUserButton}
               onPress={() => props.navigation.navigate('Add Users', { name, members })}
             >
-              <Text style={styles.addUserText}>Agregar usuarios</Text>
+              <Text style={styles.addUserText}>agregar usuarios</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -63,7 +63,7 @@ const NewTeamScreen = (props) => {
               style={confirmButtonDisable()}
               onPress={() => props.navigation.navigate('Teams', { name, description, members })}
             >
-              <Text style={styles.textConfirmButton}>Confirmar</Text>
+              <Text style={styles.textConfirmButton}>confirmar</Text>
             </TouchableOpacity>
           </View>
         </View>

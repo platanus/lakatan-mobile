@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     paddingHorizontal: '7%',
   },
-  formCard: {},
-  input: {
+  formCard: {
     paddingTop: '10%',
   },
   title: {

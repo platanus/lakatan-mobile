@@ -31,7 +31,7 @@ const NewUserToTeamScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <View>
+        <View style={styles.multiselect}>
           <MultiSelect
             items={availableUsers}
             uniqueKey="id"
@@ -56,15 +56,11 @@ const NewUserToTeamScreen = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('New Team', { name, members })}>
-              <Text style={styles.textCancelButton}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
           <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
-              <Text style={styles.textConfirmButton}>Confirmar</Text>
+            <TouchableOpacity
+              style={styles.applyButton}
+              onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
+              <Text style={styles.textConfirmButton}>confirmar</Text>
             </TouchableOpacity>
           </View>
         </View>
