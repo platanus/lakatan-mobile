@@ -1,14 +1,17 @@
 import axios from 'axios';
+import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
-// Ver que parametros pide la request
 function createWorkspace({ email, token, slackToken }) {
+  // const integration = decamelizeKeys({ slackToken });
+
   return axios({
     method: 'post',
-    // arreglar ruta
-    url: `${url}/api/v1/sync`,
+    url: `${url}/api/v1/integrations`,
     data: {
-      token: slackToken,
+      integration: {
+        slack_token: slackToken,
+      },
     },
     headers: {
       'X-User-Email': email,

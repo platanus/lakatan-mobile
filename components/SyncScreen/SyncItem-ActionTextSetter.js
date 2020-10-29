@@ -42,13 +42,13 @@ const actionTypeTextSetter = (step, item) => {
 const actionNameTextSetter = (step, item) => {
   switch (step) {
     case 'one':
-      return item.atributtes.name;
+      return item.attributes.name;
     case 'two':
       switch (item.action) {
         case 'Add':
-          return `${item.atributtes.user.user_name} se ha unido a ${item.atributtes.team.team_name}`;
+          return `${item.attributes.user.name} se ha unido a ${item.attributes.team.team}`;
         case 'Delete':
-          return `${item.atributtes.user.user_name} ha dejado ${item.atributtes.team.team_name}`;
+          return `${item.attributes.user.name} ha dejado ${item.attributes.team.team}`;
         default:
           return 'Error Acción Paso 2';
       }

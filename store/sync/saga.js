@@ -11,7 +11,6 @@ function *createWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
   try {
     const data = yield call(api.createWorkspace, payload);
-    // hacer algo con data cuando este definido que retorna la consulta
   } catch (error) {
     // hacer algo con los errores cuando esten definidos
     console.log(error);
@@ -23,7 +22,7 @@ function *createWorkspaceRequest({ payload }) {
 function *workspaceChangesRequest({ payload }) {
   yield put(syncActions.start());
   try {
-    const data = yield call(api.requestChanges, payload);
+    const { data } = yield call(api.requestChanges, payload);
     const firstStep = [];
     const secondStep = [];
     // chequear si esta bien que sea data.data

@@ -1,14 +1,15 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import SlackAuth from '../../components/Slack/slack_auth';
-import { SET_WORKSPACE } from '../../store/types';
+import { SET_WORKSPACE, CREATE_WORKSPACE_REQUEST } from '../../store/types';
 
 const NewWorkspaceScreen = (props) => {
   const [token, setToken] = useState('');
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.authentication);
 
   const textChangeHandler = (text) => {
     setToken(text);
@@ -35,6 +36,7 @@ const NewWorkspaceScreen = (props) => {
 
   const pressHandler = () => {
     dispatch({ type: SET_WORKSPACE, payload: { workspace: 'Platanus' } });
+    dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: auth.token, email: auth.email } });
     props.navigation.goBack();
   };
 

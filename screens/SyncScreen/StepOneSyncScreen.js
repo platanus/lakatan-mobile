@@ -1,24 +1,31 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
-import { syncData1, syncData2 } from './SyncData';
 
 const StepOneSyncScreen = ({ navigation, route }) => {
-  const [stepOneData, setStepOneData] = useState(() => syncData1.map((item, key) => {
-    item.selected = true;
-    item.key = key.toString();
+  const stepOneChanges = useSelector((state) => state.sync.step1changes);
+  const [stepOneData, setStepOneData] = useState([]);
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (stepOneChanges.length > 0) {
+      setStepOneData(stepOneChanges.map((item, key) => {
+        item.selected = true;
+        item.key = key.toString();
 
-    return item;
-  }));
-  const [count, setCount] = useState(syncData1.length);
+        return item;
+      }));
+      setCount(stepOneChanges.length);
+    }
+  }, [stepOneChanges]);
   const { name } = route.params;
 
   const itemOnPressHandler = (key) => {
@@ -43,7 +50,7 @@ const StepOneSyncScreen = ({ navigation, route }) => {
 
   const applyButtonHandler = () => {
     //  super-function
-    navigation.navigate('Step Two Sync', { stepOneData, syncData2, name });
+    navigation.navigate('Step Two Sync', { stepOneData, name });
   };
 
   useLayoutEffect(() => {

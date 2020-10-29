@@ -1,19 +1,24 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 import NewWorksapceButton from '../../components/IntegrationScreen/NewWorkspaceButton';
 import colors from '../../styles/colors';
-import { useSelector } from 'react-redux';
+import { WORKSPACE_CHANGES_REQUEST } from '../../store/types';
+
+const img = {
+  'Slack': require('../../assets/Slack/logoSlack.png'),
+  'Google': require('../../assets/Google/google_logo_2.png'),
+  'Notion': require('../../assets/Notion/logoNotion.png'),
+};
+let workspaceMessage = '';
 
 const IntegrationScreen = (props) => {
   const { name } = props.route.params;
-  const img = {
-    'Slack': require('../../assets/Slack/logoSlack.png'),
-    'Google': require('../../assets/Google/google_logo_2.png'),
-    'Notion': require('../../assets/Notion/logoNotion.png'),
-  };
-  let { workspace } = useSelector((state) => state.sync);
+  const { workspace } = useSelector((state) => state.sync);
+  const { token, email } = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -32,13 +37,16 @@ const IntegrationScreen = (props) => {
     });
   }, [props.navigation]);
 
-  let workspaceMessage = '';
   if (workspace && name === 'Slack') {
     workspaceMessage = 'Configurado con workspace ';
   } else {
     workspaceMessage = 'No hay Workspace configurado';
-    workspace = '';
   }
+
+  const pressHandler = () => {
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
+    props.navigation.navigate('Sync step 1', { name });
+  };
 
   return (
     <View>
@@ -48,9 +56,9 @@ const IntegrationScreen = (props) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={{ ...styles.button, backgroundColor: workspace && name==='Slack' ? colors.darkBlue : colors.gray }}
-          disabled={name != 'Slack'}
-          onPress={() => props.navigation.navigate('Sync step 1', { name })}
+          style={{ ...styles.button, backgroundColor: workspace && name === 'Slack' ? colors.darkBlue : colors.gray }}
+          disabled={name !== 'Slack'}
+          onPress={pressHandler}
         >
           <Text style={styles.textButton}>
           Sincronizar

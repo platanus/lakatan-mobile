@@ -1,33 +1,43 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable max-statements */
 import React, { useState, useLayoutEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 
 import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
+import { END_SYNC_REQUEST } from '../../store/types';
 
 const StepTwoSyncScreen = ({ navigation, route }) => {
-  const { stepOneData, syncData2 } = route.params;
+  const syncData2 = useSelector((state) => state.sync.step2changes);
+  const { token, email } = useSelector((state) => state.authentication);
+  const { stepOneData } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => syncData2.map((item, key) => {
     item.selected = true;
     item.key = key.toString();
+
     return item;
   }));
   const [count, setCount] = useState(syncData2.length);
+  const dispatch = useDispatch();
 
   const itemOnPressHandler = (key) => {
     setStepTwoData((prevStepTwoData) => {
       const newStepTwoData = prevStepTwoData.map((item) => {
         if (item.key === key) {
           item.selected = !item.selected;
+
           return item;
         }
+
         return item;
       });
+
       return newStepTwoData;
     });
   };
@@ -51,9 +61,16 @@ const StepTwoSyncScreen = ({ navigation, route }) => {
       return item;
     }); */
 
-    // dispatch (stepOneSelectedData, stepTwoSelectedData)
-
-    console.log('¡Sincronización Completa!');
+    dispatch({ type: END_SYNC_REQUEST, payload: { token, email, changes: [...stepOneData, ...stepTwoData] } });
+    Alert.alert(
+      '¡Sincronización Completa!',
+      '',
+      [
+        { text: 'OK' },
+      ],
+      { cancelable: false },
+    );
+    navigation.navigate('Integration', { name: route.params.name });
   };
 
   useLayoutEffect(() => {
