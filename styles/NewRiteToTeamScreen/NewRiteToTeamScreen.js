@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
 
   infoContainer: {
-    paddingTop: '10%',
+    paddingTop: '5%',
   },
 
   teamTitle: {
@@ -90,7 +90,14 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: 18,
   },
-
+  headerScreen: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  titleScreen: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };

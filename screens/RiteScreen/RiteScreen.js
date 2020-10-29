@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -13,6 +13,7 @@ import styles from '../../styles/RiteScreen/RiteScreen';
 
 import { hooksDataIn, hooksDataOut } from './HooksData';
 import ItemList from '../../components/RiteScreen/ItemList';
+import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 
 const RiteScreen = ({
@@ -25,12 +26,26 @@ const RiteScreen = ({
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
-  const [dataIn, setDataIn] = useState(hooksDataIn)
-  const [dataOut, setDataOut] = useState(hooksDataOut)
+  const [dataIn, setDataIn] = useState(hooksDataIn);
+  const [dataOut, setDataOut] = useState(hooksDataOut);
 
   const { email, token } = useSelector((store) => store.authentication);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>{name}</Text>
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   const dispatch = useDispatch();
+
   const availableMembers = [];
   members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name }));
 
@@ -130,7 +145,7 @@ const RiteScreen = ({
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
-            <TouchableOpacity style={styles.applyButton}>
+            <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('New Hook')}>
               <Text style={styles.textApplyButton} onPress={() => ''}>
                 nuevo hook
               </Text>
@@ -158,7 +173,6 @@ const RiteScreen = ({
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.screen}>
-          <Text style={styles.riteTitle}>{name}</Text>
           <View>
             <Text style={styles.textSharedHeader}>Objetivo</Text>
             <Text>{goal}</Text>
@@ -186,66 +200,6 @@ const RiteScreen = ({
       initialLayout={initialLayout}
     />
   );
-  // return (
-  //   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-  //     <View style={styles.container}>
-  //       <View style={styles.screen}>
-  //         <Text style={styles.riteTitle}>{name}</Text>
-  //         <View>
-  //           <Text style={styles.textHeader}>Objetivo</Text>
-  //           <Text>{goal}</Text>
-  //           <Text style={styles.textHeader}>Cantidad de personas</Text>
-  //           <Text style={styles.textInfo}>{userMinimum}</Text>
-  //         </View>
-  //         <View>
-  //           <Text style={styles.textHeader}>Sortear</Text>
-  //           <MultiSelect
-  //             items={availableMembers}
-  //             uniqueKey="id"
-  //             alwaysShowSelectText
-  //             onSelectedItemsChange={selectedHandler}
-  //             selectedItems={selectedItems}
-  //             colors={{ primary: color.blue, success: color.blue, text: color.black }}
-  //             confirmText="Confirmar"
-  //             selectText="Elige usuarios"
-  //             searchInputPlaceholderText="Elige un usuario a agregar..."
-  //             tagRemoveIconColor={color.softGray}
-  //             tagBorderColor={color.softGray}
-  //             tagTextColor={color.black}
-  //             selectedItemTextColor={color.blue}
-  //             selectedItemIconColor={color.softGray}
-  //             itemTextColor={color.black}
-  //             displayKey="name"
-  //             searchInputStyle={{ color: color.softGray }}
-  //             submitButtonColor={color.blue}
-  //             submitButtonText="Ok"
-  //             button="40"
-  //           />
-  //         </View>
-  //       </View>
-  //       {raffleButton ? (
-  //         <View>
-  //           <TouchableOpacity style={styles.raffleButton} onPress={raffleHandler}>
-  //             <Text style={styles.textRaffleButton}>Sortear</Text>
-  //           </TouchableOpacity>
-  //           {isModalVisible &&
-  //           <Raffle
-  //             visible={isModalVisible}
-  //             setVisible={setModalVisible}
-  //             users={members.filter((member) => selectedItems.includes(member.id))}
-  //             navigation={navigation}
-  //           />}
-  //         </View>
-  //       ) : (
-  //         <View style={styles.raffleButtonContainer}>
-  //           <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-  //             <Text style={styles.textRaffleButton}>Sortear</Text>
-  //           </TouchableOpacity>
-  //         </View>
-  //       )}
-  //     </View>
-  //   </TouchableWithoutFeedback>
-  // );
 };
 
 export default RiteScreen;

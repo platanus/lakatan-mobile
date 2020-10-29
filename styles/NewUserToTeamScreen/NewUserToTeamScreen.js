@@ -48,7 +48,14 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: 18,
   },
-
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };

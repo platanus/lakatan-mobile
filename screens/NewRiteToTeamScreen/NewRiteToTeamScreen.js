@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
@@ -16,6 +16,17 @@ const NewRiteToTeamScreen = (props) => {
   const { token, email } = useSelector((state) => state.authentication);
   const { id } = useSelector((state) => state.teams.currentTeam);
   const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (
+        <View style={styles.headerScreen}>
+          <Text style={styles.titleScreen}>Nuevo rito</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
 
   const createRiteButtonDisable = () => (
     { ...styles.confirmButton, backgroundColor: name && purpose && numberOfPeople ? colors.darkBlue : colors.gray });
@@ -50,7 +61,7 @@ const NewRiteToTeamScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.teamTitle}>{name}</Text>
+          <Text style={styles.textHeader}>{name}</Text>
           <Text>{purpose}</Text>
           <Text style={styles.textHeader}>Nombre del rito</Text>
           <TextInput

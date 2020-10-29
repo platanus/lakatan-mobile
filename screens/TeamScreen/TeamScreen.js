@@ -1,15 +1,16 @@
 /* eslint-disable max-statements */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import {
   View, Text, TouchableOpacity, FlatList,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { CURRENT_TEAM_REQUEST } from '../../store/types';
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
-
 import TeamList from '../../components/TeamScreen/TeamList';
+import BackButton from '../../components/LandingScreen/BackButton';
 
 const RiteView = (props) => {
   const { name, goal, id } = props.rite.item;
@@ -18,14 +19,17 @@ const RiteView = (props) => {
   const taskId = id;
 
   return (
-    <TouchableOpacity
-      style={styles.riteButton}
-      onPress={() => props.navigation.navigate('Rite', {
-        name, userMinimum, goal, members, taskId,
-      })}
-    >
-      <Text style={styles.riteText}>{name}</Text>
-    </TouchableOpacity>
+    <View style={styles.cardOfRite}>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('Rite', {
+          name, userMinimum, goal, members, taskId,
+        })}
+      >
+        <Text style={styles.riteText}>{name}</Text>
+        <Text style={styles.ritePeople}>{userMinimum} persona(s)</Text>
+        <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -44,6 +48,20 @@ const Team = (props) => {
     });
 
     return refresh;
+  }, [props.navigation]);
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>{name}</Text>
+        </View>
+      ),
+    });
   }, [props.navigation]);
 
   const ritesRoute = () => (
@@ -90,7 +108,6 @@ const Team = (props) => {
   const renderTabBar = (tabProps) => (
     <View style={styles.teamContainer}>
       <View style={styles.teamScreen}>
-        <Text style={styles.teamTitle}>{name}</Text>
         <Text style={styles.textHeader}>Propósito</Text>
         <Text style={styles.description}>{purpose}</Text>
       </View>

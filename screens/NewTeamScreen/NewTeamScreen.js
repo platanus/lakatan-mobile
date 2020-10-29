@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import colors from '../../styles/colors'
+import colors from '../../styles/colors';
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
+import BackButton from '../../components/LandingScreen/BackButton';
 
 const NewTeamScreen = (props) => {
   const { members } = props.route.params;
@@ -13,6 +14,20 @@ const NewTeamScreen = (props) => {
   const [description, setDescription] = useState('');
 
   const { users } = useSelector((state) => state.users);
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.headerScreen}>
+          <Text style={styles.titleScreen}>Nuevo equipo</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
 
   const membersObjects = [];
 

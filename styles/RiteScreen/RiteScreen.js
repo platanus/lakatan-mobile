@@ -136,13 +136,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   descriptionHookText: {
-    color: '#00CCFF',
+    color: color.cian,
   },
   icon: {
     position: 'absolute',
     right: 1,
     bottom: '50%',
     paddingRight: '5%',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
   },
 });
 

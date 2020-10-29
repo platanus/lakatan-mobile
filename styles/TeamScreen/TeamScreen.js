@@ -47,20 +47,16 @@ const styles = StyleSheet.create({
     paddingTop: '5%',
     // fontSize: 16,
   },
-  riteButton: {
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: 'white',
-    width: '98%',
-    borderRadius: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+  cardOfRite: {
+    width: '100%',
+    backgroundColor: color.lightBlue,
+    borderRadius: 50,
+    // alignItems: 'left',
+    // justifyContent: 'left',
+    paddingLeft: '8%',
+    paddingVertical: 10,
+    height: 55,
     marginVertical: '2%',
-    height: 40,
-    marginHorizontal: '1%',
   },
   newRiteButton: {
     // backgroundColor: color.blue,
@@ -83,6 +79,17 @@ const styles = StyleSheet.create({
   },
   riteText: {
     fontSize: 16,
+    color: color.darkBlue,
+  },
+  ritePeople: {
+    fontSize: 13,
+    color: color.cian,
+  },
+  icon: {
+    position: 'absolute',
+    right: 1,
+    bottom: '15%',
+    paddingRight: '5%',
   },
   listOfTeam: {
     height: '100%',
@@ -180,6 +187,14 @@ const styles = StyleSheet.create({
   },
   listRites: {
     height: '85%',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
   },
 });
 

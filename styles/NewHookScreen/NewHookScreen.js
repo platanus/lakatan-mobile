@@ -87,6 +87,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };

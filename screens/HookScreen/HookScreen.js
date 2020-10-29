@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect } from 'react';
 import {
-  View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TextInput, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import DropDownPicker from 'react-native-dropdown-picker';
+import BackButton from '../../components/LandingScreen/BackButton';
 import styles from '../../styles/HookScreen/HookScreen';
 import colors from '../../styles/colors';
 
 const HookScreen = (props) => {
-  const [hookName, setHookName] = useState('');
-  const [hookOf, setHookOf] = useState('salida');
-  const [hookType, setHookType] = useState('webhook');
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Webhook 1</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

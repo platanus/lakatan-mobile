@@ -9,7 +9,6 @@ import {
    SIGN_OUT_REQUEST,
   } from '../../store/types';
 import MenuButton from '../../components/LandingScreen/MenuButton';
-
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
@@ -59,6 +58,11 @@ function LandingScreen(props) {
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
       ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Equipos</Text>
+        </View>
+      ),
     });
   }, [props.navigation]);
 
@@ -71,12 +75,6 @@ function LandingScreen(props) {
         <View style={styles.viewAddTeamButton}>
           <Text style={styles.textAddTeamButton}>+</Text>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('New Hook')}>
-        <Text>Nuevo Hook</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Hook')}>
-        <Text>Ver Hook</Text>
       </TouchableOpacity>
       <View style={styles.listOfTeams}>
         <FlatList

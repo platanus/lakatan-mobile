@@ -12,4 +12,5 @@ export default {
   lightGray: '#F0F6FA',
   darkRed: '#993739',
   darkBlue: '#1D4699',
+  cian: '#00CCFF',
 };

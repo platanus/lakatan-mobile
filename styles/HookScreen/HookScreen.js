@@ -25,6 +25,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: '5%',
   },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import DropDownPicker from 'react-native-dropdown-picker';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import { Picker } from '@react-native-picker/picker';
-// import Dropdown from '../../components/HookScreen/Dropdown';
+import BackButton from '../../components/LandingScreen/BackButton';
 import styles from '../../styles/NewHookScreen/NewHookScreen';
 import colors from '../../styles/colors';
 
@@ -15,6 +12,20 @@ const NewHookScreen = (props) => {
   const [hookName, setHookName] = useState('');
   const [hookOf, setHookOf] = useState('salida');
   const [hookType, setHookType] = useState('webhook');
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Nuevo hook</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
 
   const hookOfHandler = (item) => {
     setHookOf(item);
@@ -88,8 +99,10 @@ const NewHookScreen = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.createButtonContainer}>
-            <TouchableOpacity onPress={() => ''} style={styles.applyButton} disabled={false}>
-              <Text style={styles.textConfirmButton}>Crear</Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('Hook')}
+              style={styles.applyButton} disabled={false}>
+              <Text style={styles.textConfirmButton}>crear</Text>
             </TouchableOpacity>
           </View>
         </View>

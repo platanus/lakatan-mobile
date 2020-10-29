@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
-
 import MultiSelect from 'react-native-multiple-select';
-
+import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
-
 import { USERS_REQUEST } from '../../store/types';
 
 const NewUserToTeamScreen = (props) => {
@@ -27,6 +25,20 @@ const NewUserToTeamScreen = (props) => {
     return aux;
   };
   const availableUsers = dataHandler(users);
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Agregar usuarios</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

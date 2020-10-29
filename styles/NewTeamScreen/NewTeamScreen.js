@@ -98,6 +98,14 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: 18,
   },
+  headerScreen: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  titleScreen: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };

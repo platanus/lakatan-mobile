@@ -72,6 +72,19 @@ const styles = StyleSheet.create({
     paddingLeft: '70%',
     flexDirection: 'column',
   },
+  backButton: {
+    width: '200%',
+    paddingLeft: '100%',
+    flexDirection: 'column',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: 20,
+  },
 });
 
 export default { ...styles };
