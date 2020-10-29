@@ -1,7 +1,7 @@
 const syncChangesHandler = (stepOneData, stepTwoChanges, users = []) => {
   const selectedData = stepOneData.filter((item) => item.selected);
-  // let futureUsers = users.map(user => user.attributes.email)
-  let futureUsers = ['fapablaza@uc.cl'];
+  let futureUsers = users.map(user => user.attributes.email);
+  //let futureUsers = ['fapablaza@uc.cl'];
   let futureTeams = ['General'];
 
   selectedData.forEach(item => {

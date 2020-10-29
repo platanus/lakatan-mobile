@@ -54,6 +54,7 @@ function *endSyncRequest({ payload }) {
     // hacer algo con data cuando este definido que retorna la consulta
   } catch (error) {
     // hacer algo con los errores cuando esten definidos
+    console.log('errrror');
     console.log(error);
   }
   yield put(syncActions.finish());

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
-  workspace: '',
+  workspace: 'Platanus',
   step1changes: [],
   step2changes: [],
 };

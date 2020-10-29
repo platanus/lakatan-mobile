@@ -14,14 +14,14 @@ import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import colors from '../../styles/colors';
-import { stepOneChanges, stepTwoChanges } from './SyncData';
+// import { stepOneChanges, stepTwoChanges } from './SyncData';
 
 const StepOneSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
   const { users } = useSelector(state => state.users);
- /*  const stepOneChanges = useSelector(state => state.sync.step1changes);
-  const stepTwoChanges = useSelector(state => state.sync.step2changes); */
+  const stepOneChanges = useSelector(state => state.sync.step1changes);
+  const stepTwoChanges = useSelector(state => state.sync.step2changes);
   const { loading } = useSelector(state => state.sync);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
@@ -69,8 +69,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
       return element;
     }));
 
-    // setCount(stepOneChanges.length);
-    setCount(0);
+    setCount(stepOneChanges.length);
   }, [stepOneChanges, stepTwoChanges]);
 
   const name = 'Slack'; // This will change with correct integration.

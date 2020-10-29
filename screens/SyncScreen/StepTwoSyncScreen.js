@@ -62,10 +62,11 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
       return item;
     });
 
-   /*  dispatch({
+    console.log(stepOneSelectedData);
+    dispatch({
       type: END_SYNC_REQUEST,
       payload: { token, email, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
- */
+
     /* dispatch({
       type: CLEAR_WORKSPACE,
     }); */
