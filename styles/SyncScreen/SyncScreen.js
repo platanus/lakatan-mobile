@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 110,
     alignItems: 'center',
+    marginTop: 5,
   },
   stepText: {
     color: colors.white,

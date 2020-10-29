@@ -1,50 +1,109 @@
-const syncData1 = [
+const stepOneChanges = [
   {
     action: 'Add',
     model: 'User',
-    atributtes: {
-      name: 'Ejemplo',
-      email: 'ejemplo@ejemplo.com',
+    attributes: {
+      name: 'cjprieto',
+      email: 'cjprieto@uc.cl',
     },
   },
   {
     action: 'Delete',
     model: 'User',
-    atributtes: {
-      id: 1,
-      name: 'Ejemplo1',
-      email: 'ejemplo1@ejemplo.com',
+    attributes: {
+      id: 2,
+      name: 'francisca hohlberg',
+      email: 'fran_prueba@uc.cl',
+    },
+  },
+  {
+    action: 'Delete',
+    model: 'User',
+    attributes: {
+      id: 6,
+      name: 'Ejemplo',
+      email: 'ej@ejemplo.com',
     },
   },
   {
     action: 'Add',
     model: 'Team',
-    atributtes: {
+    attributes: {
+      name: 'random',
+      purpose: '',
+      slack_id: 'C01CJFU7L3X',
+    },
+  },
+  {
+    action: 'Delete',
+    model: 'Team',
+    attributes: {
+      id: 5,
       name: 'EjemploEquipo',
       purpose: 'EjemploPropuesta',
-      slack_id: 1,
     },
   },
 ];
 
-const syncData2 = [
+const stepTwoChanges = [
   {
     action: 'Add',
     model: 'Member',
-    atributtes: {
-      user: { user_id: undefined, user_name: 'Ejemplo Ejemplo', email: 'ejemplo@ejemplo.com' },
-      team: { team_id: undefined, team_name: 'EjemploEquipo', slack_id: 1 },
+    attributes: {
+      user: {
+        name: 'cjprieto',
+        email: 'cjprieto@uc.cl',
+      },
+      team: {
+        name: 'random',
+        slack_id: 'C01CJFU7L3X' },
+    },
+  },
+  {
+    action: 'Add',
+    model: 'Member',
+    attributes: {
+      user: {
+        name: 'FRANCISCA HOHLBERG RODRIGUEZ',
+        email: 'fhohlberg@uc.cl',
+      },
+      team: {
+        name: 'random',
+        slack_id: 'C01CJFU7L3X',
+      },
+    },
+  },
+  {
+    action: 'Add',
+    model: 'Member',
+    attributes: {
+      user: {
+        name: 'JAVIER TRAMON HIDALGO',
+        email: 'jotramon@uc.cl',
+      },
+      team: {
+        name: 'random',
+        slack_id: 'C01CJFU7L3X',
+      },
     },
   },
   {
     action: 'Delete',
     model: 'Member',
-    atributtes: {
-      id: 1,
-      user: { user_id: 1, user_name: 'Diego Andai' },
-      team: { team_id: 1, team_name: 'Visibilidad' },
+    attributes: {
+      id: 45,
+      user: {
+        id: 16,
+        name: 'Ignacio Madariaga',
+        email: 'ignacio@uc.cl',
+      },
+      team: {
+        id: 24,
+        name: 'general',
+        slack_id: 'C01CESCMCP8',
+      },
     },
   },
 ];
 
-export { syncData1, syncData2 };
+export { stepOneChanges, stepTwoChanges };
