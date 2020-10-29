@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 110,
     alignItems: 'center',
+    marginTop: 5,
   },
   stepText: {
     color: colors.white,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   reloadText: {
     color: colors.darkBlue,
   },

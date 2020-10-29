@@ -42,11 +42,11 @@ const SyncItemList = ({
         </View>
 
         {item.selected && (
-        <Icon
-          name="check"
-          size={15}
-          color={item.action === 'Add' ? colors.darkBlue : colors.darkRed}
-        />
+          <Icon
+            name="check"
+            size={15}
+            color={item.action === 'Add' ? colors.darkBlue : colors.darkRed}
+          />
         ) }
 
       </TouchableOpacity>

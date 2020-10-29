@@ -1,30 +1,29 @@
 /* eslint-disable max-statements */
+/* eslint-disable react/jsx-filename-extension */
 import React, { useState, useLayoutEffect } from 'react';
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-
-import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
+import { useDispatch, useSelector } from 'react-redux';
+import { USERS_REQUEST } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
+import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import styles from '../../styles/SyncScreen/SyncScreen';
-import { END_SYNC_REQUEST } from '../../store/types';
 
-const StepTwoSyncScreen = ({ navigation, route }) => {
-  const syncData2 = useSelector((state) => state.sync.step2changes);
-  const { token, email } = useSelector((state) => state.authentication);
-  const { stepOneData } = route.params;
-  const [stepTwoData, setStepTwoData] = useState(() => syncData2.map((item, key) => {
+const StepTwoSyncScreen = ({ route, navigation }) => {
+  const dispatch = useDispatch();
+  const { token, email } = useSelector(state => state.authentication);
+  const { stepOneData, stepTwoDataToShow } = route.params;
+  const [stepTwoData, setStepTwoData] = useState(() => stepTwoDataToShow.map((item, key) => {
     item.selected = true;
     item.key = key.toString();
 
     return item;
   }));
-  const [count, setCount] = useState(syncData2.length);
-  const dispatch = useDispatch();
+  const [count, setCount] = useState(stepTwoDataToShow.length);
 
   const itemOnPressHandler = (key) => {
     setStepTwoData((prevStepTwoData) => {
@@ -53,7 +52,6 @@ const StepTwoSyncScreen = ({ navigation, route }) => {
       delete item.key;
       return item;
     });
-
     let stepTwoSelectedData = stepTwoData.filter((item) => item.selected);
     stepTwoSelectedData = stepTwoSelectedData.map((item) => {
       delete item.selected;
@@ -61,23 +59,32 @@ const StepTwoSyncScreen = ({ navigation, route }) => {
       return item;
     }); */
 
-    dispatch({ type: END_SYNC_REQUEST, payload: { token, email, changes: [...stepOneData, ...stepTwoData] } });
-    Alert.alert(
-      '¡Sincronización Completa!',
-      '',
-      [
-        { text: 'OK' },
-      ],
-      { cancelable: false },
-    );
-    navigation.navigate('Integration', { name: route.params.name });
+    // dispatch (stepOneSelectedData, stepTwoSelectedData)
+
+    console.log('¡Sincronización Completa!');
+  };
+
+  const stepTwoReloadButtonHandler = () => {
+    navigation.goBack();
+  };
+
+  const name = 'Slack'; // This will change with correct integration.
+  const img = {
+    'Slack': require('../../assets/Slack/logoSlack.png'),
+    'Google': require('../../assets/Google/google_logo_2.png'),
+    'Notion': require('../../assets/Notion/logoNotion.png'),
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
-      headerTitle: () => (<HeaderLogo name={route.params.name}/>),
-      headerBackTitle: 'Back',
+      headerTitle: () => (
+        <View style={stylesHeader.header}>
+          <Image style={stylesHeader.logo} source={img[name]} />
+          <Text style={stylesHeader.title}>{name}</Text>
+        </View>
+      ),
+      headerBackTitle: 'Volver',
     });
   }, [navigation]);
 
@@ -118,7 +125,10 @@ const StepTwoSyncScreen = ({ navigation, route }) => {
         />
       </View>
 
-      <TouchableOpacity style={styles.reloadTouchable}>
+      <TouchableOpacity
+        style={styles.reloadTouchable}
+        onPress={stepTwoReloadButtonHandler}
+      >
         <Text style={styles.reloadText}>recargar</Text>
       </TouchableOpacity>
 

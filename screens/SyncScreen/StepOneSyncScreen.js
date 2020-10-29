@@ -1,32 +1,26 @@
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable max-statements */
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-
-import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
+import { useDispatch, useSelector } from 'react-redux';
+import { USERS_REQUEST } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
+import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
+import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
+import { stepOneChanges, stepTwoChanges } from './SyncData';
 
-const StepOneSyncScreen = ({ navigation, route }) => {
-  const stepOneChanges = useSelector((state) => state.sync.step1changes);
+const StepOneSyncScreen = ({ route, navigation }) => {
+  const dispatch = useDispatch();
+  const { token, email } = useSelector(state => state.authentication);
+  const { users } = useSelector(state => state.users);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (stepOneChanges.length > 0) {
-      setStepOneData(stepOneChanges.map((item, key) => {
-        item.selected = true;
-        item.key = key.toString();
-
-        return item;
-      }));
-      setCount(stepOneChanges.length);
-    }
-  }, [stepOneChanges]);
-  const { name } = route.params;
 
   const itemOnPressHandler = (key) => {
     setStepOneData((prevStepOneData) => {
@@ -48,16 +42,51 @@ const StepOneSyncScreen = ({ navigation, route }) => {
     setCount(stepOneData.filter((item) => (item.selected)).length);
   };
 
+  const stepOneReloadButtonHandler = () => {
+    console.log('reload');
+    // dispatch
+  };
+
   const applyButtonHandler = () => {
-    //  super-function
-    navigation.navigate('Step Two Sync', { stepOneData, name });
+    const stepTwoDataToShow = syncChangesHandler(stepOneData, stepTwoChanges, users);
+    navigation.navigate('Step Two Sync', { stepOneData, stepTwoDataToShow });
+  };
+
+  useEffect(() => {
+    dispatch({ type: USERS_REQUEST, payload: { token, email } });
+    console.log('first load');
+    // dispatch
+  }, [dispatch, token, email]);
+
+  useEffect(() => {
+    if (stepOneChanges.length > 0) {
+      setStepOneData(stepOneChanges.map((item, key) => {
+        item.selected = true;
+        item.key = key.toString();
+
+        return item;
+      }));
+      setCount(stepOneChanges.length);
+    }
+  }, [stepOneChanges, stepTwoChanges]);
+
+  const name = 'Slack'; // This will change with correct integration.
+  const img = {
+    'Slack': require('../../assets/Slack/logoSlack.png'),
+    'Google': require('../../assets/Google/google_logo_2.png'),
+    'Notion': require('../../assets/Notion/logoNotion.png'),
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
-      headerTitle: () => (<HeaderLogo name={name}/>),
-      headerBackTitle: 'Back',
+      headerTitle: () => (
+        <View style={stylesHeader.header}>
+          <Image style={stylesHeader.logo} source={img[name]} />
+          <Text style={stylesHeader.title}>{name}</Text>
+        </View>
+      ),
+      headerBackTitle: 'Volver',
     });
   }, [navigation]);
 
@@ -91,15 +120,21 @@ const StepOneSyncScreen = ({ navigation, route }) => {
       </TouchableOpacity>
 
       <View style={styles.syncItemListContainer}>
-        <SyncItemList
-          syncData={stepOneData}
-          itemOnPressHandler={itemOnPressHandler}
-          countSelectedItemsHandler={countSelectedItemsHandler}
-          step="one"
-        />
+        { false ?
+          (stepOneData && <SyncItemList
+            syncData={stepOneData}
+            itemOnPressHandler={itemOnPressHandler}
+            countSelectedItemsHandler={countSelectedItemsHandler}
+            step="one"
+          />) :
+          <ActivityIndicator size='large' style={{ flex: 1 }}/>
+        }
       </View>
 
-      <TouchableOpacity style={styles.reloadTouchable}>
+      <TouchableOpacity
+        style={styles.reloadTouchable}
+        onPress={stepOneReloadButtonHandler}
+      >
         <Text style={styles.reloadText}>recargar</Text>
       </TouchableOpacity>
 
