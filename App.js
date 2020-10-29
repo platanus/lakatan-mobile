@@ -103,12 +103,7 @@ export default function App() {
         persistor={persistor}
         onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
       >
-        <NavigationContainer>
-          <AppStack.Navigator>
-            <AppStack.Screen name="Step One Sync" component={StepOneSyncScreen} />
-            <AppStack.Screen name="Step Two Sync" component={StepTwoSyncScreen} />
-          </AppStack.Navigator>
-        </NavigationContainer>
+        <SignInNavigatior />
       </PersistGate>
     </Provider>
   );

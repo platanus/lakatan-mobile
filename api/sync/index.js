@@ -39,9 +39,7 @@ function aprovedChanges({ email, token, changes }) {
     method: 'post',
     // arreglar ruta
     url: `${url}/api/v1/slack`,
-    data: {
-      changes,
-    },
+    data: changes,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,

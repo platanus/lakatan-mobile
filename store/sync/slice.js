@@ -25,6 +25,7 @@ const slice = createSlice({
       state.loading = false;
     },
     reset(state) {
+      console.log('reser')
       state = initialState;
     },
   },

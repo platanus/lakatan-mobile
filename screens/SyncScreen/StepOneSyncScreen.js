@@ -8,17 +8,21 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { USERS_REQUEST } from '../../store/types';
+import { USERS_REQUEST, WORKSPACE_CHANGES_REQUEST } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
+import colors from '../../styles/colors';
 import { stepOneChanges, stepTwoChanges } from './SyncData';
 
 const StepOneSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
   const { users } = useSelector(state => state.users);
+ /*  const stepOneChanges = useSelector(state => state.sync.step1changes);
+  const stepTwoChanges = useSelector(state => state.sync.step2changes); */
+  const { loading } = useSelector(state => state.sync);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
 
@@ -43,8 +47,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   };
 
   const stepOneReloadButtonHandler = () => {
-    console.log('reload');
-    // dispatch
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
   };
 
   const applyButtonHandler = () => {
@@ -54,20 +57,20 @@ const StepOneSyncScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     dispatch({ type: USERS_REQUEST, payload: { token, email } });
-    console.log('first load');
     // dispatch
   }, [dispatch, token, email]);
 
   useEffect(() => {
-    if (stepOneChanges.length > 0) {
-      setStepOneData(stepOneChanges.map((item, key) => {
-        item.selected = true;
-        item.key = key.toString();
+    setStepOneData(stepOneChanges.map((item, key) => {
+      const element = { ...item };
+      element.selected = false;
+      element.key = key.toString();
 
-        return item;
-      }));
-      setCount(stepOneChanges.length);
-    }
+      return element;
+    }));
+
+    // setCount(stepOneChanges.length);
+    setCount(0);
   }, [stepOneChanges, stepTwoChanges]);
 
   const name = 'Slack'; // This will change with correct integration.
@@ -109,8 +112,9 @@ const StepOneSyncScreen = ({ route, navigation }) => {
       </View>
 
       <TouchableOpacity
-        style={styles.applyTouchable}
+        style={{ ...styles.applyTouchable, backgroundColor: loading ? colors.gray : colors.darkBlue }}
         onPress={applyButtonHandler}
+        disabled={loading}
       >
         <Text style={styles.applyText}>
           aplicar
@@ -120,7 +124,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
       </TouchableOpacity>
 
       <View style={styles.syncItemListContainer}>
-        { false ?
+        { !loading ?
           (stepOneData && <SyncItemList
             syncData={stepOneData}
             itemOnPressHandler={itemOnPressHandler}

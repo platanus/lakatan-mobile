@@ -1,6 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as syncActions } from './slice';
-import { CREATE_WORKSPACE_REQUEST, WORKSPACE_CHANGES_REQUEST, END_SYNC_REQUEST, SET_WORKSPACE } from '../types';
+import {
+  CREATE_WORKSPACE_REQUEST,
+  WORKSPACE_CHANGES_REQUEST,
+  END_SYNC_REQUEST,
+  SET_WORKSPACE,
+  CLEAR_WORKSPACE,
+} from '../types';
 import api from '../../api/sync';
 
 function *setWorkspace({ payload }) {
@@ -38,6 +44,7 @@ function *workspaceChangesRequest({ payload }) {
     // hacer algo con los errores cuando esten definidos
     console.log(error);
   }
+  yield put(syncActions.finish());
 }
 
 function *endSyncRequest({ payload }) {
@@ -52,9 +59,14 @@ function *endSyncRequest({ payload }) {
   yield put(syncActions.finish());
 }
 
+function *clearWorkspace() {
+  yield put(syncActions.reset());
+}
+
 export default function *syncSaga() {
   yield takeLatest(CREATE_WORKSPACE_REQUEST, createWorkspaceRequest);
   yield takeLatest(WORKSPACE_CHANGES_REQUEST, workspaceChangesRequest);
   yield takeLatest(END_SYNC_REQUEST, endSyncRequest);
   yield takeLatest(SET_WORKSPACE, setWorkspace);
+  yield takeLatest(CLEAR_WORKSPACE, clearWorkspace);
 }

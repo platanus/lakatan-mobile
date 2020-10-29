@@ -3,33 +3,24 @@ const stepOneChanges = [
     action: 'Add',
     model: 'User',
     attributes: {
-      name: 'cjprieto',
-      email: 'cjprieto@uc.cl',
+      name: 'Claudio Prieto',
+      email: 'claudio@uc.cl',
     },
   },
   {
-    action: 'Delete',
+    action: 'Add',
     model: 'User',
     attributes: {
       id: 2,
-      name: 'francisca hohlberg',
-      email: 'fran_prueba@uc.cl',
-    },
-  },
-  {
-    action: 'Delete',
-    model: 'User',
-    attributes: {
-      id: 6,
-      name: 'Ejemplo',
-      email: 'ej@ejemplo.com',
+      name: 'Francisca Hohlberg',
+      email: 'francisca@uc.cl',
     },
   },
   {
     action: 'Add',
     model: 'Team',
     attributes: {
-      name: 'random',
+      name: 'Visibilidad',
       purpose: '',
       slack_id: 'C01CJFU7L3X',
     },
@@ -39,7 +30,7 @@ const stepOneChanges = [
     model: 'Team',
     attributes: {
       id: 5,
-      name: 'EjemploEquipo',
+      name: 'Entrevista',
       purpose: 'EjemploPropuesta',
     },
   },
@@ -51,11 +42,11 @@ const stepTwoChanges = [
     model: 'Member',
     attributes: {
       user: {
-        name: 'cjprieto',
-        email: 'cjprieto@uc.cl',
+        name: 'Claudio Prieto',
+        email: 'claudio@uc.cl',
       },
       team: {
-        name: 'random',
+        name: 'Visibilidad',
         slack_id: 'C01CJFU7L3X' },
     },
   },
@@ -64,25 +55,11 @@ const stepTwoChanges = [
     model: 'Member',
     attributes: {
       user: {
-        name: 'FRANCISCA HOHLBERG RODRIGUEZ',
-        email: 'fhohlberg@uc.cl',
+        name: 'Francisca Hohlberg',
+        email: 'francisca@uc.cl',
       },
       team: {
-        name: 'random',
-        slack_id: 'C01CJFU7L3X',
-      },
-    },
-  },
-  {
-    action: 'Add',
-    model: 'Member',
-    attributes: {
-      user: {
-        name: 'JAVIER TRAMON HIDALGO',
-        email: 'jotramon@uc.cl',
-      },
-      team: {
-        name: 'random',
+        name: 'Visibilidad',
         slack_id: 'C01CJFU7L3X',
       },
     },
@@ -94,12 +71,12 @@ const stepTwoChanges = [
       id: 45,
       user: {
         id: 16,
-        name: 'Ignacio Madariaga',
-        email: 'ignacio@uc.cl',
+        name: 'Felipe Apablaza',
+        email: 'fapablaza@uc.cl',
       },
       team: {
         id: 24,
-        name: 'general',
+        name: 'General',
         slack_id: 'C01CESCMCP8',
       },
     },

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { USERS_REQUEST } from '../../store/types';
+import { END_SYNC_REQUEST, CLEAR_WORKSPACE, WORKSPACE_CHANGES_REQUEST } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import styles from '../../styles/SyncScreen/SyncScreen';
@@ -18,10 +18,11 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
   const { token, email } = useSelector(state => state.authentication);
   const { stepOneData, stepTwoDataToShow } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => stepTwoDataToShow.map((item, key) => {
-    item.selected = true;
-    item.key = key.toString();
+    const element = { ... item };
+    element.selected = true;
+    element.key = key.toString();
 
-    return item;
+    return element;
   }));
   const [count, setCount] = useState(stepTwoDataToShow.length);
 
@@ -46,25 +47,33 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
   };
 
   const applyButtonHandler = () => {
-    /* let stepOneSelectedData = stepOneData.filter((item) => item.selected);
+    let stepOneSelectedData = stepOneData.filter((item) => item.selected);
     stepOneSelectedData = stepOneSelectedData.map((item) => {
       delete item.selected;
       delete item.key;
+
       return item;
     });
     let stepTwoSelectedData = stepTwoData.filter((item) => item.selected);
     stepTwoSelectedData = stepTwoSelectedData.map((item) => {
       delete item.selected;
       delete item.key;
+
       return item;
+    });
+
+   /*  dispatch({
+      type: END_SYNC_REQUEST,
+      payload: { token, email, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
+ */
+    /* dispatch({
+      type: CLEAR_WORKSPACE,
     }); */
-
-    // dispatch (stepOneSelectedData, stepTwoSelectedData)
-
-    console.log('¡Sincronización Completa!');
+    navigation.navigate('Integration');
   };
 
   const stepTwoReloadButtonHandler = () => {
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
     navigation.goBack();
   };
 

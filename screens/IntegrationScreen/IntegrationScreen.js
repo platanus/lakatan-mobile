@@ -33,7 +33,7 @@ const IntegrationScreen = (props) => {
       headerRight: () => (
         <NewWorksapceButton navigation={props.navigation} name={name}/>
       ),
-      headerBackTitle: 'Back',
+      headerBackTitle: 'Volver',
     });
   }, [props.navigation]);
 
