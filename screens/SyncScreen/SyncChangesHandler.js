@@ -1,8 +1,11 @@
-const syncChangesHandler = (stepOneData, stepTwoChanges, users = []) => {
+const syncChangesHandler = (stepOneData, stepTwoChanges, users = [], teamList = []) => {
   const selectedData = stepOneData.filter((item) => item.selected);
   let futureUsers = users.map(user => user.attributes.email);
-  //let futureUsers = ['fapablaza@uc.cl'];
-  let futureTeams = ['General'];
+  let futureTeams = [];
+  teamList.forEach(team => {
+    if (!!team.id) futureTeams.push(parseInt(team.id, 10));
+    if (!!team.attributes.slack_id) futureTeams.push(team.attributes.slack_id);
+  });
 
   selectedData.forEach(item => {
     switch (item.model) {
@@ -22,10 +25,10 @@ const syncChangesHandler = (stepOneData, stepTwoChanges, users = []) => {
     case 'Team':
       switch (item.action) {
       case 'Add':
-        futureTeams.push(item.attributes.name);
+        futureTeams.push(item.attributes.slack_id);
         break;
       case 'Delete':
-        futureTeams = futureTeams.filter((name) => name !== item.attributes.name);
+        futureTeams = futureTeams.filter((id) => id !== item.attributes.id);
         break;
       default:
         console.log('Sync Changes Handler Team Error');
@@ -39,11 +42,25 @@ const syncChangesHandler = (stepOneData, stepTwoChanges, users = []) => {
 
   const stepTwoDataToShow = stepTwoChanges.filter((item) => {
     const userCheck = futureUsers.find(element => element === item.attributes.user.email);
-    const teamCheck = futureTeams.find(element => element === item.attributes.team.name);
+    let teamCheck;
+    switch (item.action) {
+    case 'Add':
+      teamCheck = futureTeams.find(element =>
+        element === item.attributes.team.slack_id,
+      );
+      break;
+    case 'Delete':
+      teamCheck = futureTeams.find(element =>
+        element === item.attributes.team.id,
+      );
+      break;
+    default:
+      console.log('Error TeamCheak');
+    }
+
     if (!!userCheck && !!teamCheck) return item;
   });
 
-  // console.log(stepTwoDataToShow)
   return stepTwoDataToShow;
 };
 

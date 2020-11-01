@@ -5,6 +5,7 @@ const initialState = {
   workspace: 'Platanus',
   step1changes: [],
   step2changes: [],
+  success: false,
 };
 
 const slice = createSlice({
@@ -18,6 +19,9 @@ const slice = createSlice({
       state.step1changes = action.payload.firstStep;
       state.step2changes = action.payload.secondStep;
     },
+    saveSuccess(state) {
+      state.success = true;
+    },
     setWorkspace(state, action) {
       state.workspace = action.payload.payload.workspace;
     },
@@ -25,8 +29,10 @@ const slice = createSlice({
       state.loading = false;
     },
     reset(state) {
-      console.log('reser')
-      state = initialState;
+      state.loading = false;
+      state.step1changes = [];
+      state.step2changes = [];
+      state.success = false;
     },
   },
 });

@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { USERS_REQUEST, WORKSPACE_CHANGES_REQUEST } from '../../store/types';
+import { USERS_REQUEST, ALL_TEAMS_REQUEST, WORKSPACE_CHANGES_REQUEST } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
@@ -20,11 +20,17 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
   const { users } = useSelector(state => state.users);
+  const { teamsList } = useSelector((state) => state.teams);
   const stepOneChanges = useSelector(state => state.sync.step1changes);
   const stepTwoChanges = useSelector(state => state.sync.step2changes);
   const { loading } = useSelector(state => state.sync);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
+
+  const applyButtonHandler = () => {
+    const stepTwoDataToShow = syncChangesHandler(stepOneData, stepTwoChanges, users, teamsList);
+    navigation.navigate('Step Two Sync', { stepOneData, stepTwoDataToShow });
+  };
 
   const itemOnPressHandler = (key) => {
     setStepOneData((prevStepOneData) => {
@@ -46,24 +52,46 @@ const StepOneSyncScreen = ({ route, navigation }) => {
     setCount(stepOneData.filter((item) => (item.selected)).length);
   };
 
+  const stepOneAllTouchable = () => {
+    setStepOneData((prevStepOneData) => {
+      const newStepOneData = prevStepOneData.map((item) => {
+        item.selected = true;
+
+        return item;
+      });
+
+      return newStepOneData;
+    });
+    setCount(stepOneChanges.length);
+  };
+
+  const stepOneNoneTouchable = () => {
+    setStepOneData((prevStepOneData) => {
+      const newStepOneData = prevStepOneData.map((item) => {
+        item.selected = false;
+
+        return item;
+      });
+
+      return newStepOneData;
+    });
+    setCount(0);
+  };
+
   const stepOneReloadButtonHandler = () => {
     dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
   };
 
-  const applyButtonHandler = () => {
-    const stepTwoDataToShow = syncChangesHandler(stepOneData, stepTwoChanges, users);
-    navigation.navigate('Step Two Sync', { stepOneData, stepTwoDataToShow });
-  };
-
   useEffect(() => {
     dispatch({ type: USERS_REQUEST, payload: { token, email } });
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
     // dispatch
   }, [dispatch, token, email]);
 
   useEffect(() => {
     setStepOneData(stepOneChanges.map((item, key) => {
       const element = { ...item };
-      element.selected = false;
+      element.selected = true;
       element.key = key.toString();
 
       return element;
@@ -123,23 +151,45 @@ const StepOneSyncScreen = ({ route, navigation }) => {
       </TouchableOpacity>
 
       <View style={styles.syncItemListContainer}>
-        { !loading ?
-          (stepOneData && <SyncItemList
+        { loading ?
+          <ActivityIndicator size='large' style={{ flex: 1 }}/> :
+          (stepOneData.length > 0 && <SyncItemList
             syncData={stepOneData}
             itemOnPressHandler={itemOnPressHandler}
             countSelectedItemsHandler={countSelectedItemsHandler}
             step="one"
-          />) :
-          <ActivityIndicator size='large' style={{ flex: 1 }}/>
+          /> || <Text>
+            No hay cambios para mostrar en el paso 1
+          </Text>)
         }
       </View>
 
-      <TouchableOpacity
-        style={styles.reloadTouchable}
-        onPress={stepOneReloadButtonHandler}
-      >
-        <Text style={styles.reloadText}>recargar</Text>
-      </TouchableOpacity>
+      <View style={styles.footContainer}>
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneAllTouchable}>
+          <Text style={styles.footText}>
+            todos
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneNoneTouchable}>
+          <Text style={styles.footText}>
+            ninguno
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneReloadButtonHandler}
+        >
+          <Text style={styles.footText}>
+            recargar
+          </Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   );

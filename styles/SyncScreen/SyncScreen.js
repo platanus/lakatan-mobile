@@ -56,14 +56,20 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
 
-  reloadTouchable: {
+  footContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
+
+  footTouchable: {
     width: '20%',
     paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  reloadText: {
+  footText: {
     color: colors.darkBlue,
   },
 });

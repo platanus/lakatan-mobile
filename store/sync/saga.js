@@ -51,10 +51,11 @@ function *endSyncRequest({ payload }) {
   yield put(syncActions.start());
   try {
     const data = yield call(api.aprovedChanges, payload);
+    yield put(syncActions.saveSuccess());
+    // console.log(data);
     // hacer algo con data cuando este definido que retorna la consulta
   } catch (error) {
     // hacer algo con los errores cuando esten definidos
-    console.log('errrror');
     console.log(error);
   }
   yield put(syncActions.finish());

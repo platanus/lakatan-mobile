@@ -1,14 +1,15 @@
 /* eslint-disable max-statements */
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { END_SYNC_REQUEST, CLEAR_WORKSPACE, WORKSPACE_CHANGES_REQUEST } from '../../store/types';
+import { END_SYNC_REQUEST, WORKSPACE_CHANGES_REQUEST, ALL_TEAMS_REQUEST, CLEAR_WORKSPACE } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import styles from '../../styles/SyncScreen/SyncScreen';
@@ -16,6 +17,7 @@ import styles from '../../styles/SyncScreen/SyncScreen';
 const StepTwoSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
+  const { success } = useSelector(state => state.sync);
   const { stepOneData, stepTwoDataToShow } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => stepTwoDataToShow.map((item, key) => {
     const element = { ... item };
@@ -25,6 +27,33 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
     return element;
   }));
   const [count, setCount] = useState(stepTwoDataToShow.length);
+
+  const applyButtonHandler = () => {
+    let stepOneSelectedData = stepOneData.filter((item) => item.selected);
+    stepOneSelectedData = stepOneSelectedData.map((item) => {
+      const auxItem = { ...item };
+      delete auxItem.selected;
+      delete auxItem.key;
+
+      return auxItem;
+    });
+    let stepTwoSelectedData = stepTwoData.filter((item) => item.selected);
+    stepTwoSelectedData = stepTwoSelectedData.map((item) => {
+      const auxItem = { ...item };
+      delete auxItem.selected;
+      delete auxItem.key;
+
+      return auxItem;
+    });
+
+    if (stepOneSelectedData.length > 0 || stepTwoSelectedData.length > 0) {
+      dispatch({
+        type: END_SYNC_REQUEST,
+        payload: { token, email, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
+    } else {
+      navigation.navigate('Integration');
+    }
+  };
 
   const itemOnPressHandler = (key) => {
     setStepTwoData((prevStepTwoData) => {
@@ -46,31 +75,30 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
     setCount(stepTwoData.filter((item) => (item.selected)).length);
   };
 
-  const applyButtonHandler = () => {
-    let stepOneSelectedData = stepOneData.filter((item) => item.selected);
-    stepOneSelectedData = stepOneSelectedData.map((item) => {
-      delete item.selected;
-      delete item.key;
+  const stepTwoAllTouchable = () => {
+    setStepTwoData((prevStepTwoData) => {
+      const newStepTwoData = prevStepTwoData.map((item) => {
+        item.selected = true;
 
-      return item;
+        return item;
+      });
+
+      return newStepTwoData;
     });
-    let stepTwoSelectedData = stepTwoData.filter((item) => item.selected);
-    stepTwoSelectedData = stepTwoSelectedData.map((item) => {
-      delete item.selected;
-      delete item.key;
+    setCount(stepTwoData.length);
+  };
 
-      return item;
+  const stepTwoNoneTouchable = () => {
+    setStepTwoData((prevStepTwoData) => {
+      const newStepTwoData = prevStepTwoData.map((item) => {
+        item.selected = false;
+
+        return item;
+      });
+
+      return newStepTwoData;
     });
-
-    console.log(stepOneSelectedData);
-    dispatch({
-      type: END_SYNC_REQUEST,
-      payload: { token, email, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
-
-    /* dispatch({
-      type: CLEAR_WORKSPACE,
-    }); */
-    navigation.navigate('Integration');
+    setCount(0);
   };
 
   const stepTwoReloadButtonHandler = () => {
@@ -97,6 +125,19 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
       headerBackTitle: 'Volver',
     });
   }, [navigation]);
+
+  useEffect(() => {
+    if (success) {
+      Alert.alert(
+        '¡Sincronización Completa!', '', [{ text: 'OK', onPress: () => {
+          dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+          dispatch({ type: CLEAR_WORKSPACE });
+          navigation.navigate('Integration');
+        } }],
+        { cancelable: false },
+      );
+    }
+  }, [dispatch, email, navigation, success, token]);
 
   return (
     <View style={styles.mainContainer}>
@@ -127,20 +168,42 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
       </TouchableOpacity>
 
       <View style={styles.syncItemListContainer}>
-        <SyncItemList
+        {(stepTwoData.length > 0 && <SyncItemList
           syncData={stepTwoData}
           itemOnPressHandler={itemOnPressHandler}
           countSelectedItemsHandler={countSelectedItemsHandler}
           step="two"
-        />
+        /> || <Text>
+         No hay cambios para mostrar en el paso 2
+        </Text>)}
       </View>
 
-      <TouchableOpacity
-        style={styles.reloadTouchable}
-        onPress={stepTwoReloadButtonHandler}
-      >
-        <Text style={styles.reloadText}>recargar</Text>
-      </TouchableOpacity>
+      <View style={styles.footContainer}>
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoAllTouchable}>
+          <Text style={styles.footText}>
+            todos
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoNoneTouchable}>
+          <Text style={styles.footText}>
+            ninguno
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoReloadButtonHandler}
+        >
+          <Text style={styles.footText}>
+            recargar
+          </Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   );
