@@ -3,7 +3,6 @@ import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
@@ -12,9 +11,8 @@ import { USERS_REQUEST, ALL_TEAMS_REQUEST, WORKSPACE_CHANGES_REQUEST } from '../
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
-import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import colors from '../../styles/colors';
-// import { stepOneChanges, stepTwoChanges } from './SyncData';
+import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 
 const StepOneSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -23,13 +21,14 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   const { teamsList } = useSelector((state) => state.teams);
   const stepOneChanges = useSelector(state => state.sync.step1changes);
   const stepTwoChanges = useSelector(state => state.sync.step2changes);
-  const { loading } = useSelector(state => state.sync);
+  const { loading, workspace } = useSelector(state => state.sync);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
+  const { name } = route.params;
 
   const applyButtonHandler = () => {
     const stepTwoDataToShow = syncChangesHandler(stepOneData, stepTwoChanges, users, teamsList);
-    navigation.navigate('Step Two Sync', { stepOneData, stepTwoDataToShow });
+    navigation.navigate('Step Two Sync', { stepOneData, stepTwoDataToShow, name });
   };
 
   const itemOnPressHandler = (key) => {
@@ -85,7 +84,6 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   useEffect(() => {
     dispatch({ type: USERS_REQUEST, payload: { token, email } });
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-    // dispatch
   }, [dispatch, token, email]);
 
   useEffect(() => {
@@ -100,21 +98,11 @@ const StepOneSyncScreen = ({ route, navigation }) => {
     setCount(stepOneChanges.length);
   }, [stepOneChanges, stepTwoChanges]);
 
-  const name = 'Slack'; // This will change with correct integration.
-  const img = {
-    'Slack': require('../../assets/Slack/logoSlack.png'),
-    'Google': require('../../assets/Google/google_logo_2.png'),
-    'Notion': require('../../assets/Notion/logoNotion.png'),
-  };
-
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
       headerTitle: () => (
-        <View style={stylesHeader.header}>
-          <Image style={stylesHeader.logo} source={img[name]} />
-          <Text style={stylesHeader.title}>{name}</Text>
-        </View>
+        <HeaderLogo name={name} />
       ),
       headerBackTitle: 'Volver',
     });
@@ -134,7 +122,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
           Configurado con workspace
         </Text>
         <Text style={styles.workspaceText}>
-          Palatanus
+          {workspace}
         </Text>
       </View>
 

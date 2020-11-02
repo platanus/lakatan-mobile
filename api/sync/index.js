@@ -3,16 +3,26 @@ import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
 function createWorkspace({ email, token, slackToken }) {
-  // const integration = decamelizeKeys({ slackToken });
+  const integration = decamelizeKeys({ slackToken });
 
   return axios({
     method: 'post',
     url: `${url}/api/v1/integrations`,
     data: {
-      integration: {
-        slack_token: slackToken,
-      },
+      integration,
     },
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
+function requestWorkpaceName({ email, token }) {
+  return axios({
+    method: 'get',
+    url: `${url}/api/v1/integrations`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -52,6 +62,7 @@ const apiSync = {
   createWorkspace,
   requestChanges,
   aprovedChanges,
+  requestWorkpaceName,
 };
 
 export default apiSync;

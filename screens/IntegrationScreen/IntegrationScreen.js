@@ -1,22 +1,19 @@
 import React, { useLayoutEffect } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
+import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 import NewWorksapceButton from '../../components/IntegrationScreen/NewWorkspaceButton';
 import colors from '../../styles/colors';
 import { WORKSPACE_CHANGES_REQUEST } from '../../store/types';
 
-const img = {
-  'Slack': require('../../assets/Slack/logoSlack.png'),
-  'Google': require('../../assets/Google/google_logo_2.png'),
-  'Notion': require('../../assets/Notion/logoNotion.png'),
-};
 let workspaceMessage = '';
 
+// eslint-disable-next-line max-statements
 const IntegrationScreen = (props) => {
   const { name } = props.route.params;
-  const { workspace } = useSelector((state) => state.sync);
+  let { workspace } = useSelector((state) => state.sync);
   const { token, email } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
@@ -24,23 +21,22 @@ const IntegrationScreen = (props) => {
     props.navigation.setOptions({
       // eslint-disable-next-line react/display-name
       headerTitle: () => (
-        <View style={styles.header}>
-          <Image style={styles.logo} source={img[name]} />
-          <Text style={styles.title}>{name}</Text>
-        </View>
+        <HeaderLogo name={name} />
       ),
       // eslint-disable-next-line react/display-name
       headerRight: () => (
-        <NewWorksapceButton navigation={props.navigation} name={name}/>
+        (name === 'Slack') ?
+          <NewWorksapceButton navigation={props.navigation} name={name}/> : undefined
       ),
       headerBackTitle: 'Volver',
     });
   }, [props.navigation]);
 
   if (workspace && name === 'Slack') {
-    workspaceMessage = 'Configurado con workspace ';
+    workspaceMessage = 'Configurado con workspace';
   } else {
     workspaceMessage = 'No hay Workspace configurado';
+    workspace = '';
   }
 
   const pressHandler = () => {
@@ -57,7 +53,7 @@ const IntegrationScreen = (props) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={{ ...styles.button, backgroundColor: workspace && name === 'Slack' ? colors.darkBlue : colors.gray }}
-          disabled={name !== 'Slack'}
+          disabled={name !== 'Slack' || !workspace}
           onPress={pressHandler}
         >
           <Text style={styles.textButton}>

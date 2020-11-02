@@ -2,18 +2,17 @@ import React, { useState, useLayoutEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
+import colors from '../../styles/colors';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import SlackAuth from '../../components/Slack/slack_auth';
-import { SET_WORKSPACE, CREATE_WORKSPACE_REQUEST } from '../../store/types';
+import { CREATE_WORKSPACE_REQUEST } from '../../store/types';
 
 const NewWorkspaceScreen = (props) => {
   const [token, setToken] = useState('');
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.authentication);
+  const userToken = useSelector((state) => state.authentication.token);
+  const { email } = useSelector((state) => state.authentication);
 
-  const textChangeHandler = (text) => {
-    setToken(text);
-  };
   const { name } = props.route.params;
   const img = {
     'Slack': require('../../assets/Slack/logoSlack.png'),
@@ -35,8 +34,7 @@ const NewWorkspaceScreen = (props) => {
   }, [props.navigation]);
 
   const pressHandler = () => {
-    dispatch({ type: SET_WORKSPACE, payload: { workspace: 'Platanus' } });
-    dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: auth.token, email: auth.email } });
+    dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
     props.navigation.goBack();
   };
 
@@ -70,7 +68,7 @@ const NewWorkspaceScreen = (props) => {
         <Text style={styles.tag}>Token:</Text>
         <TextInput
           placeholder='Ingresar token'
-          onChangeText={textChangeHandler}
+          onChangeText={setToken}
           value={token}
           autoCompleteType='off'
           style={styles.textInput}
@@ -85,7 +83,11 @@ const NewWorkspaceScreen = (props) => {
         </Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={pressHandler}>
+        <TouchableOpacity
+          style={{ ...styles.button, backgroundColor: token ? colors.blue : colors.gray }}
+          onPress={pressHandler}
+          disabled={!token}
+        >
           <Text style={styles.textButton}>
 
             Listo

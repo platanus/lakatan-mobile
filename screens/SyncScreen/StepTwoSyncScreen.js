@@ -4,20 +4,19 @@ import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { END_SYNC_REQUEST, WORKSPACE_CHANGES_REQUEST, ALL_TEAMS_REQUEST, CLEAR_WORKSPACE } from '../../store/types';
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
-import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import styles from '../../styles/SyncScreen/SyncScreen';
+import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
 
 const StepTwoSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
-  const { success } = useSelector(state => state.sync);
+  const { success, workspace } = useSelector(state => state.sync);
   const { stepOneData, stepTwoDataToShow } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => stepTwoDataToShow.map((item, key) => {
     const element = { ... item };
@@ -106,21 +105,11 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
     navigation.goBack();
   };
 
-  const name = 'Slack'; // This will change with correct integration.
-  const img = {
-    'Slack': require('../../assets/Slack/logoSlack.png'),
-    'Google': require('../../assets/Google/google_logo_2.png'),
-    'Notion': require('../../assets/Notion/logoNotion.png'),
-  };
-
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
       headerTitle: () => (
-        <View style={stylesHeader.header}>
-          <Image style={stylesHeader.logo} source={img[name]} />
-          <Text style={stylesHeader.title}>{name}</Text>
-        </View>
+        <HeaderLogo name={route.params.name} />
       ),
       headerBackTitle: 'Volver',
     });
@@ -152,7 +141,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
           Configurado con workspace
         </Text>
         <Text style={styles.workspaceText}>
-          Palatanus
+          {workspace}
         </Text>
       </View>
 

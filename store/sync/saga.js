@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { camelizeKeys } from 'humps';
 import { actions as syncActions } from './slice';
 import {
   CREATE_WORKSPACE_REQUEST,
@@ -10,15 +11,25 @@ import {
 import api from '../../api/sync';
 
 function *setWorkspace({ payload }) {
-  yield put(syncActions.setWorkspace({ payload }));
+  yield put(syncActions.start());
+  try {
+    const response = yield call(api.requestWorkpaceName, payload);
+    const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
+    yield put(syncActions.setWorkspace({ slackWorkspaceName }));
+  } catch (error) {
+    console.log(error);
+  }
+  yield put(syncActions.finish());
 }
 
 function *createWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
   try {
-    const data = yield call(api.createWorkspace, payload);
+    yield call(api.createWorkspace, payload);
+    const response = yield call(api.requestWorkpaceName, { token: payload.token, email: payload.email });
+    const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
+    yield put(syncActions.setWorkspace({ slackWorkspaceName }));
   } catch (error) {
-    // hacer algo con los errores cuando esten definidos
     console.log(error);
   }
   yield put(syncActions.finish());
@@ -31,7 +42,6 @@ function *workspaceChangesRequest({ payload }) {
     const { data } = yield call(api.requestChanges, payload);
     const firstStep = [];
     const secondStep = [];
-    // chequear si esta bien que sea data.data
     for (let i = 0; i < data.length; i++) {
       if (data[i].model === 'User' || data[i].model === 'Team') {
         firstStep.push(data[i]);
@@ -41,7 +51,6 @@ function *workspaceChangesRequest({ payload }) {
     }
     yield put(syncActions.saveChanges({ firstStep, secondStep }));
   } catch (error) {
-    // hacer algo con los errores cuando esten definidos
     console.log(error);
   }
   yield put(syncActions.finish());
@@ -50,12 +59,9 @@ function *workspaceChangesRequest({ payload }) {
 function *endSyncRequest({ payload }) {
   yield put(syncActions.start());
   try {
-    const data = yield call(api.aprovedChanges, payload);
+    yield call(api.aprovedChanges, payload);
     yield put(syncActions.saveSuccess());
-    // console.log(data);
-    // hacer algo con data cuando este definido que retorna la consulta
   } catch (error) {
-    // hacer algo con los errores cuando esten definidos
     console.log(error);
   }
   yield put(syncActions.finish());

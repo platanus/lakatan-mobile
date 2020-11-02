@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loading: false,
-  workspace: 'Platanus',
+  workspace: '',
   step1changes: [],
   step2changes: [],
   success: false,
@@ -23,7 +23,7 @@ const slice = createSlice({
       state.success = true;
     },
     setWorkspace(state, action) {
-      state.workspace = action.payload.payload.workspace;
+      state.workspace = action.payload.slackWorkspaceName;
     },
     finish(state) {
       state.loading = false;
