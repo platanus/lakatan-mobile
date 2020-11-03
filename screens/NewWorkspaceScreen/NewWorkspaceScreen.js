@@ -19,7 +19,7 @@ const NewWorkspaceScreen = (props) => {
       </View>
       <View style={styles.stepContent}>
         <Text style={styles.subTitle}>
-          Paso 1 
+          Paso 1
         </Text>
         <Text style={styles.row}>
           Presiona el siguente botón para autorizar nuestra app a acceder al workspace
@@ -30,7 +30,7 @@ const NewWorkspaceScreen = (props) => {
       </View>
       <View style={styles.stepContent}>
         <Text style={styles.subTitle}>
-          Paso 2 
+          Paso 2
         </Text>
         <Text style={styles.row}>
         Copia el código mostrado al final de la autorización e ingrésalo en el siguiente campo.
@@ -48,18 +48,16 @@ const NewWorkspaceScreen = (props) => {
       </View>
       <View style={styles.stepContent}>
         <Text style={styles.subTitle}>
-          Paso 3 
+          Paso 3
         </Text>
-        <Text style={styles.row}> 
+        <Text style={styles.row}>
         Presiona listo.
         </Text>
       </View>
-      <View style={styles.bottomContent}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.goBack()}>
-            <Text style={styles.textButton}>
-
-            Listo
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.goBack()}>
+          <Text style={styles.textButton}>
+              Listo
           </Text>
         </TouchableOpacity>
       </View>
