@@ -85,6 +85,10 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: globalStyle.fontSizeButton,
   },
+  textCancelButton: {
+    color: color.white,
+    fontSize: globalStyle.fontSizeButton,
+  },
 });
 
 export default { ...styles };
