@@ -1,21 +1,22 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     backgroundColor: 'white',
-    paddingHorizontal: '7%',
+    paddingHorizontal: globalStyle.paddingContainer,
   },
   infoContainer: {
-    paddingTop: '10%',
+    paddingTop: globalStyle.paddingContainer,
   },
   textHeader: {
-    fontSize: 14,
-    paddingTop: '7%',
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingTop: globalStyle.paddingTopInput,
     color: color.darkBlue,
-    paddingBottom: '3%',
+    paddingBottom: globalStyle.paddingBottomButton,
   },
   instructionContainer: {
     marginTop: '5%',
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

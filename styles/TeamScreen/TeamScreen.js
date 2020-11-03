@@ -1,61 +1,63 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   teamContainer: {
     width: '100%',
-    paddingHorizontal: '7%',
+    paddingHorizontal: globalStyle.paddingContainer,
     backgroundColor: color.white,
   },
   riteContainer: {
     width: '100%',
   },
   teamScreen: {
-    backgroundColor: 'white',
-    paddingTop: '7%',
+    backgroundColor: color.white,
+    paddingTop: globalStyle.paddingContainer,
   },
   riteScreen: {
     height: '100%',
-    backgroundColor: 'white',
-    padding: '5%',
+    backgroundColor: color.white,
+    padding: globalStyle.paddingContainer,
   },
   teamTitle: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeTitle,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   textHeader: {
     color: color.darkBlue,
-    paddingTop: '5%',
+    paddingTop: globalStyle.paddingContainer,
+    fontSize: globalStyle.fontSizePrincipalText,
   },
   cardOfRite: {
     width: '100%',
     backgroundColor: color.lightBlue,
-    borderRadius: 50,
-    paddingLeft: '8%',
+    borderRadius: globalStyle.borderRadiusButton,
+    paddingLeft: '10%',
     paddingVertical: 10,
-    height: 55,
-    marginVertical: '2%',
+    marginVertical: globalStyle.marginVerticalPrincipal,
+    height: globalStyle.heightButton,
   },
   newRiteButton: {
     backgroundColor: color.darkBlue,
     width: '100%',
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    height: 55,
+    height: globalStyle.heightButton,
   },
   newRiteText: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   riteText: {
-    fontSize: 16,
+    fontSize: globalStyle.fontSizePrincipalText,
     color: color.darkBlue,
   },
   ritePeople: {
-    fontSize: 13,
+    fontSize: globalStyle.fontSizeSecondaryText,
     color: color.cian,
   },
   icon: {
@@ -71,22 +73,19 @@ const styles = StyleSheet.create({
   cardOfMember: {
     width: '100%',
     backgroundColor: color.lightBlue,
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
-    height: 55,
-    marginVertical: '2%',
+    height: globalStyle.heightButton,
+    marginVertical: globalStyle.marginVerticalPrincipal,
   },
   cardOfMemberView: {
     width: '100%',
-    paddingHorizontal: '1%',
     overflow: 'hidden',
   },
   items: {
-    fontSize: 16,
+    fontSize: globalStyle.fontSizePrincipalText,
     color: color.darkBlue,
-
   },
   teamListContainer: {
     height: '60%',
@@ -133,14 +132,14 @@ const styles = StyleSheet.create({
   },
   textExitButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
-    bottom: '5%',
+    bottom: globalStyle.paddingBottomButton,
   },
   applyContainer: {
     width: '100%',
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

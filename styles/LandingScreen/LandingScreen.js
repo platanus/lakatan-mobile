@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,20 +8,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    padding: '5%',
+    padding: globalStyle.paddingContainer,
     backgroundColor: 'white',
   },
   addTeamButton: {
-    width: '98%',
-    height: 50,
+    width: '100%',
+    height: globalStyle.heightButton,
     backgroundColor: color.darkBlue,
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textAddTeamButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   buttonPlus: {
     opacity: 0.1,
@@ -32,13 +33,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   teamCard: {
-    width: '98%',
-    marginHorizontal: '1%',
+    width: '100%',
     height: 170,
     marginVertical: 10,
     justifyContent: 'center',
     backgroundColor: color.lightBlue,
-    borderRadius: 40,
+    borderRadius: globalStyle.borderRadiusButton,
   },
   teamName: {
     textAlign: 'center',
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     width: '40%',
     height: 30,
     borderRadius: 5,
-    marginTop: 12,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textSignOutButton: {
     color: color.red,
-    fontSize: 15,
+    fontSize: globalStyle.fontSizeButton,
   },
   viewSignOutButton: {
     width: '100%',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

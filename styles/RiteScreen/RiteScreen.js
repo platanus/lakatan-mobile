@@ -1,29 +1,29 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: '7%',
     backgroundColor: color.white,
+    paddingHorizontal: globalStyle.paddingContainer,
   },
   screen: {
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    paddingTop: '7%',
+    paddingTop: globalStyle.paddingContainer,
   },
   riteTitle: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeTitle,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   textSharedHeader: {
     color: color.darkBlue,
-    paddingTop: '5%',
+    paddingTop: globalStyle.paddingContainer,
+    fontSize: globalStyle.fontSizePrincipalText
   },
   textHeader: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: globalStyle.fontSizePrincipalText,
     paddingTop: '5%',
   },
   buttonContainer: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     alignSelf: 'center',
-    bottom: '5%',
+    bottom: globalStyle.paddingBottomButton,
   },
   raffleButtonContainer: {
     width: '100%',
@@ -42,68 +42,67 @@ const styles = StyleSheet.create({
   raffleButton: {
     backgroundColor: color.blue,
     width: '100%',
-    borderRadius: 5,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    height: globalStyle.heightButton,
   },
   disabledRaffleButton: {
     backgroundColor: color.darkBlue,
     width: '100%',
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    height: 55,
+    height: globalStyle.heightButton,
     opacity: 0.5,
   },
   textRaffleButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   subScreenContainer: {
     width: '100%',
     height: '100%',
   },
   subScreen: {
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
     height: '100%',
-    elevation: 8,
     backgroundColor: 'white',
-    padding: '7%',
+    padding: globalStyle.paddingContainer,
   },
-  listHooksContainer: {},
   applyButton: {
     width: '100%',
     backgroundColor: color.darkBlue,
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    height: 55,
+    height: globalStyle.heightButton,
   },
   textApplyButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
     fontWeight: '500',
   },
   hookHeader: {
     color: color.darkBlue,
-    paddingTop: '5%',
+    fontSize: globalStyle.fontSizePrincipalText,
+  },
+  textInfo: {
+    paddingBottom: globalStyle.paddingTopInput,
   },
   hookButton: {
     width: '100%',
     backgroundColor: color.lightBlue,
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     paddingVertical: 10,
     marginVertical: '2%',
     paddingLeft: '10%',
-    height: 55,
+    height: globalStyle.heightButton,
   },
   titleHookText: {
     color: color.darkBlue,
-    fontSize: 16,
+    fontSize: globalStyle.fontSizePrincipalText,
   },
   descriptionHookText: {
     color: color.cian,
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

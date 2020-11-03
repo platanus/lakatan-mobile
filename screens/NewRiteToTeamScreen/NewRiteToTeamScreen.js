@@ -61,8 +61,8 @@ const NewRiteToTeamScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.textHeader}>{name}</Text>
-          <Text>{purpose}</Text>
+          <Text style={styles.textHeader}>Equipo: {name}</Text>
+          <Text>Propósito: {purpose}</Text>
           <Text style={styles.textHeader}>Nombre del rito</Text>
           <TextInput
             style={styles.areaInput}

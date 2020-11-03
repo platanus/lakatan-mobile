@@ -1,71 +1,60 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     backgroundColor: color.white,
-    paddingHorizontal: '7%',
+    paddingHorizontal: globalStyle.paddingContainer,
   },
   infoContainer: {
-    paddingTop: '5%',
+    paddingTop: globalStyle.paddingContainer,
   },
   teamTitle: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeTitle,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: '5%',
+    marginBottom: globalStyle.paddingContainer,
   },
   textHeader: {
-    fontSize: 14,
-    paddingTop: '7%',
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingTop: globalStyle.paddingTopInput,
     color: color.darkBlue,
-    paddingBottom: '3%',
+    paddingBottom: globalStyle.paddingBottomInput,
   },
   areaInput: {
     width: '100%',
     backgroundColor: color.softGray,
-    borderRadius: 25,
-    paddingLeft: '3%',
-    height: 40,
+    borderRadius: globalStyle.borderRadiusButton,
+    paddingLeft: globalStyle.paddingInput,
+    height: globalStyle.heightInput,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: '5%',
-  },
-  cancelButton: {
-    backgroundColor: color.red,
-    width: '40%',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 40,
-  },
-  textCancelButton: {
-    color: color.white,
-    fontSize: 18,
+    bottom: globalStyle.paddingBottomButton,
   },
   confirmButton: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
   },
   applyButton: {
     width: '100%',
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    height: 55,
+    height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   headerScreen: {
     flexDirection: 'row',
@@ -73,7 +62,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   titleScreen: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

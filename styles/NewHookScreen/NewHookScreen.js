@@ -1,26 +1,27 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
     backgroundColor: 'white',
-    paddingHorizontal: '7%',
+    paddingHorizontal: globalStyle.paddingContainer,
   },
   infoContainer: {
-    paddingTop: '10%',
+    paddingTop: globalStyle.paddingContainer,
   },
   textHeader: {
-    fontSize: 14,
-    paddingTop: '7%',
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingTop: globalStyle.paddingTopInput,
     color: color.darkBlue,
-    paddingBottom: '3%',
+    paddingBottom: globalStyle.paddingBottomInput,
   },
   pickerContainer: {
     backgroundColor: color.softGray,
-    borderRadius: 25,
-    height: 40,
+    borderRadius: globalStyle.borderRadiusButton,
+    height: globalStyle.heightInput,
   },
   icon: {
     position: 'absolute',
@@ -30,40 +31,29 @@ const styles = StyleSheet.create({
   },
   itemPicker: {
     height: '100%',
-    fontSize: 14,
-  },
-  dropDownPicker: {
-    backgroundColor: color.white,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    fontSize: globalStyle.fontSizeSecondaryText,
   },
   areaInput: {
     width: '100%',
     backgroundColor: color.softGray,
-    borderRadius: 25,
+    borderRadius: globalStyle.borderRadiusButton,
     paddingLeft: '3%',
-    height: 40,
+    height: globalStyle.heightInput,
   },
   instructionContainer: {
-    marginTop: '5%',
+    marginTop: globalStyle.paddingContainer,
   },
   instructionText: {
     color: color.gray,
     textAlign: 'center',
-    paddingTop: '5%',
+    paddingTop: globalStyle.paddingContainer,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
     position: 'absolute',
-    bottom: '5%',
-  },
-  confirmButton: {
-    width: '100%',
-    marginLeft: '7%',
+    bottom: globalStyle.paddingBottomButton,
   },
   createButtonContainer: {
     width: '100%',
@@ -73,15 +63,15 @@ const styles = StyleSheet.create({
   applyButton: {
     width: '100%',
     backgroundColor: color.darkBlue,
-    borderRadius: 50,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
-    height: 55,
+    height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
     fontWeight: '500',
   },
   header: {
@@ -90,7 +80,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 
