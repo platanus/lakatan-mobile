@@ -90,7 +90,7 @@ const NewRiteToTeamScreen = (props) => {
               onPress={createHandler}
               style={styles.applyButton}
               disabled={!(name && purpose && numberOfPeople)}>
-              <Text style={styles.textConfirmButton}>Crear</Text>
+              <Text style={styles.textConfirmButton}>crear</Text>
             </TouchableOpacity>
           </View>
         </View>

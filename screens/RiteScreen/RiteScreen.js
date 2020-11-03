@@ -105,13 +105,12 @@ const RiteScreen = ({
                 <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
                   <Text style={styles.textRaffleButton}>sortear</Text>
                 </TouchableOpacity>
-                {isModalVisible &&
-                  <Raffle
-                    visible={isModalVisible}
-                    setVisible={setModalVisible}
-                    users={members.filter((member) => selectedItems.includes(member.id))}
-                    navigation={navigation}
-                  />}
+                <Raffle
+                  visible={isModalVisible}
+                  setVisible={setModalVisible}
+                  users={members.filter((member) => selectedItems.includes(member.id))}
+                  navigation={navigation}
+                />
               </View>
             </View>
           ) : (
@@ -146,7 +145,7 @@ const RiteScreen = ({
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
             <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('New Hook')}>
-              <Text style={styles.textApplyButton} onPress={() => ''}>
+              <Text style={styles.textApplyButton}>
                 nuevo hook
               </Text>
             </TouchableOpacity>
@@ -159,10 +158,10 @@ const RiteScreen = ({
   const initialLayout = {};
 
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
+  const routes = [
     { key: 'first', title: 'sortear' },
     { key: 'second', title: 'hooks' },
-  ]);
+  ];
 
   const renderScene = SceneMap({
     first: raffleRoute,
