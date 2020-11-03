@@ -20,6 +20,8 @@ import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen'
 import NewHookScreen from './screens/NewHookScreen/NewHookScreen';
 import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
+import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
+import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
 
 runSagas();
 const AppStack = createStackNavigator();
@@ -40,6 +42,8 @@ const Integration = () => (
       component={NewWorkspaceScreen}
       options={{ title: 'Configurar Workspace' }}
     />
+    <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
+    <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
 );
 
@@ -100,10 +104,12 @@ export default function App() {
       <PersistGate
         loading={<Splash />}
         persistor={persistor}
-        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}
+        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
       >
         <SignInNavigatior />
       </PersistGate>
     </Provider>
   );
 }
+
+//  <SignInNavigatior />

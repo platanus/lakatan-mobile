@@ -10,6 +10,7 @@ import {
   } from '../../store/types';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/LandingScreen/LandingScreen';
+import SlackAuth from '../../components/Slack/slack_auth'
 
 const TeamView = (props) => {
   const { id, attributes: { name } } = props.team.item;
