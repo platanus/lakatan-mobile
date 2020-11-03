@@ -41,6 +41,8 @@ const Integration = () => (
       component={NewWorkspaceScreen}
       options={{ title: 'Configurar Workspace' }}
     />
+    <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
+    <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
 );
 
@@ -99,10 +101,12 @@ export default function App() {
       <PersistGate
         loading={<Splash />}
         persistor={persistor}
-        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}
+        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
       >
         <SignInNavigatior />
       </PersistGate>
     </Provider>
   );
 }
+
+//  <SignInNavigatior />
