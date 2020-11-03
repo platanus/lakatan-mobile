@@ -7,21 +7,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: '7%',
     backgroundColor: color.white,
   },
-
   screen: {
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
-    // height: '90%',
-    // shadowColor: 'black',
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.26,
-    // elevation: 8,
-    // backgroundColor: 'white',
-    // marginBottom: '5%',
     paddingTop: '7%',
   },
-
   riteTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -36,7 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: '5%',
   },
-
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -44,18 +33,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: '5%',
   },
-
   raffleButtonContainer: {
     width: '100%',
-    // paddingHorizontal: '5%',
-    // marginLeft: '7%',
   },
-
   newHookContainer: {
     width: '100%',
-    // marginLeft: '7%',
   },
-
   raffleButton: {
     backgroundColor: color.blue,
     width: '100%',
@@ -63,9 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
-    // marginLeft: '5%',
   },
-
   disabledRaffleButton: {
     backgroundColor: color.darkBlue,
     width: '100%',
@@ -76,7 +57,6 @@ const styles = StyleSheet.create({
     height: 55,
     opacity: 0.5,
   },
-
   textRaffleButton: {
     color: color.white,
     fontSize: 18,
@@ -84,23 +64,16 @@ const styles = StyleSheet.create({
   subScreenContainer: {
     width: '100%',
     height: '100%',
-    // marginHorizontal: '5%',
   },
   subScreen: {
     borderBottomLeftRadius: 5,
     borderBottomRightRadius: 5,
     height: '100%',
-    // shadowColor: 'black',
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.26,
     elevation: 8,
     backgroundColor: 'white',
     padding: '7%',
   },
-
   listHooksContainer: {},
-
   applyButton: {
     width: '100%',
     backgroundColor: color.darkBlue,
@@ -115,7 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
-
   hookHeader: {
     color: color.darkBlue,
     paddingTop: '5%',
@@ -124,8 +96,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: color.lightBlue,
     borderRadius: 50,
-    // alignItems: 'left',
-    // justifyContent: 'left',
     paddingVertical: 10,
     marginVertical: '2%',
     paddingLeft: '10%',

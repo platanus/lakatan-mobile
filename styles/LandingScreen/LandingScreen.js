@@ -37,11 +37,6 @@ const styles = StyleSheet.create({
     height: 170,
     marginVertical: 10,
     justifyContent: 'center',
-    // shadowColor: color.black,
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowRadius: 3,
-    // shadowOpacity: 0.26,
-    // elevation: 8,
     backgroundColor: color.lightBlue,
     borderRadius: 40,
   },
@@ -51,7 +46,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: color.darkBlue,
   },
-
   signOutButton: {
     width: '40%',
     height: 30,

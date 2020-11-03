@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     margin: '5%',
     flex: 1,
     shadowOffset: { width: 0, height: 1 },
-
     shadowRadius: 3,
     shadowOpacity: 0.26,
     elevation: 8,
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
-
   passwordInput: {
     flexDirection: 'row',
     width: '90%',
@@ -43,7 +41,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     fontSize: 15,
   },
-
   buttonContainer: {
     flexDirection: 'column',
     width: '100%',
