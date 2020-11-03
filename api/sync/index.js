@@ -34,7 +34,6 @@ function requestWorkpaceName({ email, token }) {
 function requestChanges({ email, token }) {
   return axios({
     method: 'get',
-    // arreglar ruta
     url: `${url}/api/v1/slack`,
     headers: {
       'X-User-Email': email,
@@ -47,7 +46,6 @@ function requestChanges({ email, token }) {
 function aprovedChanges({ email, token, changes }) {
   return axios({
     method: 'post',
-    // arreglar ruta
     url: `${url}/api/v1/slack`,
     data: changes,
     headers: {

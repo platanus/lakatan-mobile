@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 7,
   },
-
   footContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
 
   footTouchable: {
     width: '20%',
-    paddingVertical: 5,
+    paddingVertical: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },
