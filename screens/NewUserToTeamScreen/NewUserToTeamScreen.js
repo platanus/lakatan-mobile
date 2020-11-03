@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
-
 import MultiSelect from 'react-native-multiple-select';
-
+import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
-
 import { USERS_REQUEST } from '../../store/types';
 
 const NewUserToTeamScreen = (props) => {
@@ -28,10 +26,24 @@ const NewUserToTeamScreen = (props) => {
   };
   const availableUsers = dataHandler(users);
 
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Agregar usuarios</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <View>
+        <View style={styles.multiselect}>
           <MultiSelect
             items={availableUsers}
             uniqueKey="id"
@@ -56,15 +68,11 @@ const NewUserToTeamScreen = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('New Team', { name, members })}>
-              <Text style={styles.textCancelButton}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
           <View style={styles.confirmButton}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
-              <Text style={styles.textConfirmButton}>Confirmar</Text>
+            <TouchableOpacity
+              style={styles.applyButton}
+              onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
+              <Text style={styles.textConfirmButton}>confirmar</Text>
             </TouchableOpacity>
           </View>
         </View>

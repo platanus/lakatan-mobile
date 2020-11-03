@@ -37,7 +37,7 @@ const SignUpScreen = ({ navigation }) => {
     {
       ...styles.confirmButton,
       backgroundColor:
-      email && password && confirmPassword && name ? colors.blue : colors.gray,
+      email && password && confirmPassword && name ? colors.darkBlue : colors.gray,
     });
 
   const signUpButtonHandler = () => {
@@ -110,7 +110,7 @@ const SignUpScreen = ({ navigation }) => {
                   value={password}
                 />
                 <TouchableWithoutFeedback onPress={() => setHiddenPassword(!hiddenPassword)}>
-                  <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={{ marginTop: 7 }} />
+                  <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={styles.eyeIcon} />
                 </TouchableWithoutFeedback>
               </View>
               <Text style={styles.tag}>Confirma tu contraseña:</Text>
@@ -127,10 +127,11 @@ const SignUpScreen = ({ navigation }) => {
         <View style={styles.buttonContainer}>
           <View style={signUpButtonDisable()}>
             <TouchableOpacity
+              style={styles.applyButton}
               disabled={!(email && password && confirmPassword && name)}
               onPress={signUpButtonHandler}
             >
-              <Text style={styles.textConfirmButton}>Registrar</Text>
+              <Text style={styles.textConfirmButton}>registrar</Text>
             </TouchableOpacity>
           </View>
         </View>

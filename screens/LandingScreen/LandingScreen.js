@@ -9,7 +9,6 @@ import {
    SIGN_OUT_REQUEST,
   } from '../../store/types';
 import MenuButton from '../../components/LandingScreen/MenuButton';
-
 import styles from '../../styles/LandingScreen/LandingScreen';
 import SlackAuth from '../../components/Slack/slack_auth'
 
@@ -59,6 +58,11 @@ function LandingScreen(props) {
     props.navigation.setOptions({
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Equipos</Text>
+        </View>
       ),
     });
   }, [props.navigation]);
