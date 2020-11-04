@@ -62,7 +62,7 @@ const Team = (props) => {
         </View>
       ),
     });
-  }, [props.navigation]);
+  }, [name]);
 
   const ritesRoute = () => (
     <View style={styles.riteContainer}>
