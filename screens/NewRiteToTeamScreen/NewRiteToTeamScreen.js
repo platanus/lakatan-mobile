@@ -29,7 +29,10 @@ const NewRiteToTeamScreen = (props) => {
   }, [props.navigation]);
 
   const createRiteButtonDisable = () => (
-    { ...styles.confirmButton, backgroundColor: riteName && objective && numberOfPeople ? colors.blue : colors.gray });
+    {
+      ...styles.confirmButton,
+      backgroundColor: riteName && objective && numberOfPeople ? colors.darkBlue : colors.gray,
+    });
 
   const numberOfPeopleHandler = (currentNumber) => {
     const maxPeople = 99;
