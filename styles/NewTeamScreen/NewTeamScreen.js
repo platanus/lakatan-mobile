@@ -1,89 +1,90 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
-    margin: '5%',
-    flex: 1,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    borderRadius: 5,
+    width: '100%',
+    height: '100%',
     backgroundColor: color.white,
-    paddingTop: '10%',
+    paddingHorizontal: globalStyle.paddingContainer,
   },
   formCard: {
-
-  },
-  input: {
-    width: '90%',
-    marginHorizontal: '10%',
-    margin: '1%',
+    paddingTop: globalStyle.paddingContainer,
   },
   title: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: globalStyle.fontSizeTitle,
     fontWeight: 'bold',
-    paddingBottom: '3%',
   },
   tag: {
-    marginTop: '10%',
-    fontSize: 13,
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingTop: '7%',
+    color: color.darkBlue,
+    paddingBottom: '3%',
   },
   areaInput: {
-    width: '90%',
-    height: 40,
-    borderBottomWidth: 0.5,
-    fontSize: 15,
-    marginBottom: '2%',
+    width: '100%',
+    backgroundColor: color.softGray,
+    borderRadius: globalStyle.borderRadiusButton,
+    paddingHorizontal: '3%',
+    height: globalStyle.heightInput,
   },
   buttonContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: globalStyle.paddingBottomButton,
+  },
+  createButtonContainer: {
     width: '100%',
-    justifyContent: 'space-between',
-    padding: '10%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addUserContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: '15%',
   },
   addUser: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   addUserButton: {
+    width: '100%',
     backgroundColor: color.yellow,
-    width: '80%',
-    borderRadius: 5,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-    marginTop: '15%', // TO DO: ordenar botones
+    // paddingVertical: 10,
+    height: globalStyle.heightButton,
   },
   addUserText: {
     color: color.white,
-    fontSize: 18,
-  },
-  cancelButton: {
-    backgroundColor: color.red,
-    width: '40%',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 40,
-  },
-  textCancelButton: {
-    color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   confirmButton: {
-    width: '40%',
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    width: '100%',
+    backgroundColor: color.darkBlue,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
+  },
+  headerScreen: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  titleScreen: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

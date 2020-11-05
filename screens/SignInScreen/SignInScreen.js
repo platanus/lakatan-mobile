@@ -23,7 +23,7 @@ const SignInScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
   const signInButtonDisable = () => (
-    { ...styles.confirmButton, backgroundColor: email && password ? colors.blue : colors.gray });
+    { ...styles.confirmButton, backgroundColor: email && password ? colors.darkBlue : colors.gray });
 
   const signInButtonHandler = () => {
     if (emailHandler(email)) {
@@ -77,20 +77,27 @@ const SignInScreen = ({navigation}) => {
                 value={password}
               />
               <TouchableWithoutFeedback onPress={() => setHiddenPassword(!hiddenPassword)}>
-                <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={{ marginTop: 7 }} />
+                <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={styles.eyeIcon} />
               </TouchableWithoutFeedback>
             </View>
           </View>
         </View>
         <View style={styles.buttonContainer}>
           <View style={signInButtonDisable()}>
-            <TouchableOpacity disabled={!(email && password)} onPress={signInButtonHandler}>
-              <Text style={styles.textConfirmButton}>Ingresar</Text>
+            <TouchableOpacity
+              style={styles.signInButton}
+              disabled={!(email && password)}
+              onPress={signInButtonHandler}>
+              <Text style={styles.textConfirmButton}>ingresar</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={styles.registerButtonContainer}>
           <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={signUpButtonHandler}>
-              <Text style={styles.textCancelButton}>Registrar</Text>
+            <TouchableOpacity
+              style={styles.registerButton}
+              onPress={signUpButtonHandler}>
+              <Text style={styles.textCancelButton}>registrar</Text>
             </TouchableOpacity>
           </View>
         </View>
