@@ -19,6 +19,23 @@ function createWorkspace({ email, token, slackToken }) {
   });
 }
 
+function updateWorkspace({ email, token, slackToken }) {
+  const integration = decamelizeKeys({ slackToken });
+
+  return axios({
+    method: 'put',
+    url: `${url}/api/v1/integrations`,
+    data: {
+      integration,
+    },
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 function requestWorkpaceName({ email, token }) {
   return axios({
     method: 'get',
@@ -61,6 +78,7 @@ const apiSync = {
   requestChanges,
   aprovedChanges,
   requestWorkpaceName,
+  updateWorkspace,
 };
 
 export default apiSync;

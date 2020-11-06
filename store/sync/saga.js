@@ -11,6 +11,7 @@ import {
   CLEAR_WORKSPACE,
   RESET_WORKSPACE_SUCCESS,
   CLEAR_WORKSPACE_ERROR,
+  UPDATE_WORKSPACE_REQUEST,
 } from '../types';
 import api from '../../api/sync';
 
@@ -47,6 +48,20 @@ function *createWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
   try {
     yield call(api.createWorkspace, payload);
+    const response = yield call(api.requestWorkpaceName, { token: payload.token, email: payload.email });
+    const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
+    yield put(syncActions.setWorkspace({ slackWorkspaceName }));
+    yield put(syncActions.success());
+  } catch (error) {
+    yield createWorkspaceErrorHendler(error);
+  }
+  yield put(syncActions.finish());
+}
+
+function *updateWorkspaceRequest({ payload }) {
+  yield put(syncActions.start());
+  try {
+    yield call(api.updateWorkspace, payload);
     const response = yield call(api.requestWorkpaceName, { token: payload.token, email: payload.email });
     const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
     yield put(syncActions.setWorkspace({ slackWorkspaceName }));
@@ -109,4 +124,5 @@ export default function *syncSaga() {
   yield takeLatest(CLEAR_WORKSPACE, clearWorkspace);
   yield takeLatest(RESET_WORKSPACE_SUCCESS, resetSuccess);
   yield takeLatest(CLEAR_WORKSPACE_ERROR, clearWorkspaceError);
+  yield takeLatest(UPDATE_WORKSPACE_REQUEST, updateWorkspaceRequest);
 }

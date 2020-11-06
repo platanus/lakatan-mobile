@@ -5,7 +5,12 @@ import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
 import colors from '../../styles/colors';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import SlackAuth from '../../components/Slack/slack_auth';
-import { CREATE_WORKSPACE_REQUEST, CLEAR_WORKSPACE_ERROR, RESET_WORKSPACE_SUCCESS } from '../../store/types';
+import {
+  CREATE_WORKSPACE_REQUEST,
+  CLEAR_WORKSPACE_ERROR,
+  RESET_WORKSPACE_SUCCESS,
+  UPDATE_WORKSPACE_REQUEST,
+} from '../../store/types';
 
 // eslint-disable-next-line max-statements
 const NewWorkspaceScreen = (props) => {
@@ -13,7 +18,7 @@ const NewWorkspaceScreen = (props) => {
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.authentication.token);
   const { email } = useSelector((state) => state.authentication);
-  const { success, error } = useSelector((state) => state.sync);
+  const { success, error, workspace } = useSelector((state) => state.sync);
 
   const { name } = props.route.params;
   const img = {
@@ -51,7 +56,11 @@ const NewWorkspaceScreen = (props) => {
   }, [props.navigation]);
 
   const pressHandler = () => {
-    dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+    if (workspace) {
+      dispatch({ type: UPDATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+    } else {
+      dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+    }
   };
 
   return (
