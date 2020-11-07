@@ -12,6 +12,7 @@ import LandingScreen from './screens/LandingScreen/LandingScreen';
 import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen/ForgotPasswordScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import IntegrationListScreen from './screens/IntegrationsListScreen/IntegrationsListScreen';
@@ -91,6 +92,8 @@ const SignInNavigatior = () => {
             <>
               <AppStack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
               <AppStack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+              <AppStack.Screen name="Forgot Password" component={ForgotPasswordScreen}
+                options={{ headerShown: false }} />
             </>
           )}
       </AppStack.Navigator>

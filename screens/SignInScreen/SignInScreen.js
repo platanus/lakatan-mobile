@@ -11,7 +11,7 @@ import styles from '../../styles/SignInScreen/SignInScreen';
 import emailHandler from '../../components/Authentication/EmailHandler';
 
 // eslint-disable-next-line max-statements
-const SignInScreen = ({navigation}) => {
+const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -101,6 +101,13 @@ const SignInScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
+        <TouchableOpacity
+          style={styles.forgotPasswordView}
+          onPress={() => navigation.navigate('Forgot Password')}>
+          <Text style={styles.forgotPasswordText}>
+            ¿Olvidaste tu constraseña?
+          </Text>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
 
