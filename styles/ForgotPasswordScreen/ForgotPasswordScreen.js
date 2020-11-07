@@ -19,8 +19,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: '10%',
   },
   instructionText: {
-    fontSize: globalStyle.fontSizeSecondaryText,
+    fontSize: globalStyle.fontSizePrincipalText,
     textAlign: 'center',
+    color: color.darkBlue,
   },
   emailView: {
     width: '100%',

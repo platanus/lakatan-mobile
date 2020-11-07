@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import styles from '../../styles/ForgotPasswordScreen/ForgotPasswordScreen';
 import color from '../../styles/colors';
 
 const ForgotPasswordScreen = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
 
-  console.log(email);
+  const sendTouchableHandler = () => {
+    // dispatch
+    console.log('dispatch');
+  };
 
   return (
     <TouchableWithoutFeedback>
@@ -16,7 +21,7 @@ const ForgotPasswordScreen = () => {
         <View style={styles.bodyContainer}>
           <View style={styles.instructionView}>
             <Text style={styles.instructionText}>
-              Ingresa tu email y te enviaremos un link para restablecer tu contraseña.
+              Ingresa tu email y te enviaremos un link para restablecer tu contraseña
             </Text>
           </View>
 
@@ -35,6 +40,7 @@ const ForgotPasswordScreen = () => {
         <View style={styles.footContainer}>
           <TouchableOpacity
             style={{ ...styles.sendTouchable, backgroundColor: email ? color.darkBlue : color.gray }}
+            onPress={sendTouchableHandler}
           >
             <Text style={styles.sendText}>
               Enviar
