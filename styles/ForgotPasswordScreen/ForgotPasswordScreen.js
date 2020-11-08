@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: globalStyle.fontSizeSecondaryText,
   },
+  messageView: {
+    height: 30,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
 
   footContainer: {
     height: '10%',

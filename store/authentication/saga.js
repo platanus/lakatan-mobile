@@ -5,6 +5,7 @@ import {
   SIGN_IN_REQUEST,
   SIGN_UP_REQUEST,
   SIGN_OUT_REQUEST,
+  PASSWORD_CHANGE_REQUEST,
   CLEAR_AUTH_ERROR,
   CLEAR_AUTH_SUCCESS,
 } from '../types';
@@ -84,6 +85,34 @@ function *signOutRequest({ payload }) {
   yield put(authenticationActions.finish());
 }
 
+function *passwordChangeErrorHandler(error) {
+  switch (error) {
+  case '422' :
+    yield put(authenticationActions.authError('¡Este email no está registrado!'));
+    break;
+  default :
+    yield put(authenticationActions.authError('¡Oops, hubo un error!'));
+  }
+}
+
+function *passwordChangeRequest({ payload }) {
+  yield put(authenticationActions.start());
+  try {
+    const response = yield call(api.passwordChangeApi, payload);
+    const camelResponse = camelizeKeys(response);
+    const { isSuccess } = camelResponse.data;
+    if (isSuccess) {
+      yield put(authenticationActions.changePasswordSuccess(
+        '¡Ya puedes revisar tu correo!'));
+    }
+    yield put(authenticationActions.changePasswordSuccess(
+      '¡Ya puedes revisar tu correo!'));
+  } catch (error) {
+    yield passwordChangeErrorHandler(error.response.status.toString());
+  }
+  yield put(authenticationActions.finish());
+}
+
 function *clearAuthError() {
   yield put(authenticationActions.clearError());
 }
@@ -96,6 +125,7 @@ export default function *authenticactionSaga() {
   yield takeLatest(SIGN_IN_REQUEST, signInRequest);
   yield takeLatest(SIGN_UP_REQUEST, signUpRequest);
   yield takeLatest(SIGN_OUT_REQUEST, signOutRequest);
+  yield takeLatest(PASSWORD_CHANGE_REQUEST, passwordChangeRequest);
   yield takeLatest(CLEAR_AUTH_ERROR, clearAuthError);
   yield takeLatest(CLEAR_AUTH_SUCCESS, clearAuthSuccess);
 }

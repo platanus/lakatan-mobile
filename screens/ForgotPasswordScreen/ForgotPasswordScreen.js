@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { PASSWORD_CHANGE_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
 import styles from '../../styles/ForgotPasswordScreen/ForgotPasswordScreen';
 import color from '../../styles/colors';
 
-const ForgotPasswordScreen = () => {
+const ForgotPasswordScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { loading, error, success } = useSelector(store => store.authentication);
   const [email, setEmail] = useState('');
 
   const sendTouchableHandler = () => {
-    // dispatch
-    console.log('dispatch');
+    dispatch({ type: CLEAR_AUTH_ERROR });
+    dispatch({ type: CLEAR_AUTH_SUCCESS });
+    dispatch({ type: PASSWORD_CHANGE_REQUEST, payload: { email } });
   };
+
+  useEffect(() => {
+    navigation.addListener('blur', () => {
+      dispatch({ type: CLEAR_AUTH_ERROR });
+      dispatch({ type: CLEAR_AUTH_SUCCESS });
+    });
+  }, [navigation, dispatch]);
 
   return (
     <TouchableWithoutFeedback>
@@ -35,12 +45,21 @@ const ForgotPasswordScreen = () => {
               onChangeText={(text) => setEmail(text)}
             />
           </View>
+
+          <View style={styles.messageView}>
+            <Text style={{ color: success ? color.darkBlue : color.darkRed }}>
+              {success || error}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.footContainer}>
           <TouchableOpacity
-            style={{ ...styles.sendTouchable, backgroundColor: email ? color.darkBlue : color.gray }}
+            style={{
+              ...styles.sendTouchable,
+              backgroundColor: email && !loading ? color.darkBlue : color.gray }}
             onPress={sendTouchableHandler}
+            disabled={(!email && loading)}
           >
             <Text style={styles.sendText}>
               Enviar
