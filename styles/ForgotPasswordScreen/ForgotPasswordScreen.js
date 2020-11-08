@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
   },
+  messageText: {
+    fontSize: globalStyle.fontSizeSecondaryText,
+  },
 
   footContainer: {
     height: '10%',

@@ -47,7 +47,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
           </View>
 
           <View style={styles.messageView}>
-            <Text style={{ color: success ? color.darkBlue : color.darkRed }}>
+            <Text style={{ ...styles.messageText,
+              color: success ? color.darkBlue : color.darkRed }}>
               {success || error}
             </Text>
           </View>
