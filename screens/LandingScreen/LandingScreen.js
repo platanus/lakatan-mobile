@@ -86,13 +86,6 @@ function LandingScreen(props) {
           }
         />
       </View>
-      {/* <View style={styles.signOutButton}>
-        <TouchableOpacity onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}>
-          <View style={styles.viewSignOutButton}>
-            <Text style={styles.textSignOutButton}>Cerrar Sesión</Text>
-          </View>
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 }
