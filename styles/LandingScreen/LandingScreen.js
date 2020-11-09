@@ -1,25 +1,27 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
-    margin: '5%',
+    width: '100%',
+    padding: globalStyle.paddingContainer,
+    backgroundColor: 'white',
   },
   addTeamButton: {
-    width: '98%',
-    height: 50,
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    width: '100%',
+    height: globalStyle.heightButton,
+    backgroundColor: color.darkBlue,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textAddTeamButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
   buttonPlus: {
     opacity: 0.1,
@@ -31,37 +33,30 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   teamCard: {
-    width: '98%',
-    marginHorizontal: '1%',
+    width: '100%',
     height: 170,
     marginVertical: 10,
     justifyContent: 'center',
-    shadowColor: color.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: color.white,
-    borderRadius: 5,
+    backgroundColor: color.lightBlue,
+    borderRadius: globalStyle.borderRadiusButton,
   },
   teamName: {
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
-    color: color.blue,
+    color: color.darkBlue,
   },
-
   signOutButton: {
     width: '40%',
     height: 30,
     borderRadius: 5,
-    marginTop: 12,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textSignOutButton: {
     color: color.red,
-    fontSize: 15,
+    fontSize: globalStyle.fontSizeButton,
   },
   viewSignOutButton: {
     width: '100%',
@@ -70,6 +65,19 @@ const styles = StyleSheet.create({
     width: '170%',
     paddingLeft: '70%',
     flexDirection: 'column',
+  },
+  backButton: {
+    width: '200%',
+    paddingLeft: '100%',
+    flexDirection: 'column',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '65%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

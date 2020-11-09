@@ -1,50 +1,50 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
-    margin: '5%',
-    flex: 1,
-    paddingTop: '25%',
-    paddingHorizontal: '10%',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: color.white,
-    borderRadius: 5,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    paddingHorizontal: globalStyle.paddingContainer,
+  },
+  multiselect: {
+    paddingTop: globalStyle.paddingContainer,
   },
   buttonContainer: {
     flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingTop: '10%',
-  },
-  cancelButton: {
-    backgroundColor: color.gray,
-    width: '40%',
-    borderRadius: 5,
-    alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: globalStyle.paddingBottomButton,
   },
   confirmButton: {
-    width: '40%',
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  applyButton: {
+    width: '100%',
+    backgroundColor: color.darkBlue,
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
-  },
-  textCancelButton: {
-    color: color.white,
-    fontSize: 18,
+    paddingVertical: 10,
+    height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
-
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
+  },
 });
 
 export default { ...styles };

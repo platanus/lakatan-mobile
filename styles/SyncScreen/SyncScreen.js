@@ -11,19 +11,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
   },
-
   stepView: {
     backgroundColor: colors.yellow,
     borderRadius: 50,
     width: 110,
     alignItems: 'center',
+    marginTop: 5,
   },
   stepText: {
     color: colors.white,
     fontWeight: 'bold',
     fontSize: 15,
   },
-
   descriptionView: {
     flexDirection: 'row',
     width: '100%',
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     color: colors.blue,
   },
-
   applyTouchable: {
     width: '100%',
     backgroundColor: colors.darkBlue,
@@ -52,20 +50,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
   },
-
   syncItemListContainer: {
     flex: 1,
     width: '100%',
     marginTop: 7,
   },
+  footContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
 
-  reloadTouchable: {
+  footTouchable: {
     width: '20%',
-    paddingVertical: 5,
+    paddingVertical: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  reloadText: {
+  footText: {
     color: colors.darkBlue,
   },
 });

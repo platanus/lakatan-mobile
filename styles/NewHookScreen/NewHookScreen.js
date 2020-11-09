@@ -8,38 +8,45 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'white',
     paddingHorizontal: globalStyle.paddingContainer,
-    paddingTop: '20%',
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingBottom: '10%',
+  infoContainer: {
+    paddingTop: globalStyle.paddingContainer,
   },
-  tag: {
+  textHeader: {
     fontSize: globalStyle.fontSizePrincipalText,
-    color: color.darkBlue,
     paddingTop: globalStyle.paddingTopInput,
+    color: color.darkBlue,
     paddingBottom: globalStyle.paddingBottomInput,
+  },
+  pickerContainer: {
+    backgroundColor: color.softGray,
+    borderRadius: globalStyle.borderRadiusButton,
+    height: globalStyle.heightInput,
+  },
+  icon: {
+    position: 'absolute',
+    right: 1,
+    bottom: '25%',
+    paddingRight: '5%',
+  },
+  itemPicker: {
+    height: '100%',
+    fontSize: globalStyle.fontSizeSecondaryText,
   },
   areaInput: {
     width: '100%',
-    backgroundColor: color.lightSoftGray,
+    backgroundColor: color.softGray,
     borderRadius: globalStyle.borderRadiusButton,
-    paddingHorizontal: globalStyle.paddingInput,
+    paddingLeft: '3%',
     height: globalStyle.heightInput,
   },
-  passwordInput: {
-    width: '100%',
-    backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusButton,
-    height: globalStyle.heightInput,
+  instructionContainer: {
+    marginTop: globalStyle.paddingContainer,
   },
-  eyeIcon: {
-    marginTop: 7,
-    position: 'absolute',
-    right: 15,
-    bottom: '15%',
+  instructionText: {
+    color: color.gray,
+    textAlign: 'center',
+    paddingTop: globalStyle.paddingContainer,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -48,22 +55,32 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: globalStyle.paddingBottomButton,
   },
-  confirmButton: {
+  createButtonContainer: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: globalStyle.borderRadiusButton,
   },
   applyButton: {
     width: '100%',
+    backgroundColor: color.darkBlue,
     borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 10,
     height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
     fontSize: globalStyle.fontSizeButton,
+    fontWeight: '500',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

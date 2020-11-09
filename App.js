@@ -20,7 +20,8 @@ import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScre
 import IntegrationListScreen from './screens/IntegrationsListScreen/IntegrationsListScreen';
 import IntegrationScreen from './screens/IntegrationScreen/IntegrationScreen';
 import NewWorkspaceScreen from './screens/NewWorkspaceScreen/NewWorkspaceScreen';
-
+import NewHookScreen from './screens/NewHookScreen/NewHookScreen';
+import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
 import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
 import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
@@ -44,6 +45,8 @@ const Integration = () => (
       component={NewWorkspaceScreen}
       options={{ title: 'Configurar Workspace' }}
     />
+    <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
+    <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
 );
 
@@ -64,6 +67,8 @@ const Teams = () => (
     />
     <TeamStack.Screen name="Rite" component={RiteScreen} options={{ title: 'Rito' }} />
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
+    <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
+    <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
   </TeamStack.Navigator>
 );
 
@@ -117,10 +122,12 @@ export default function App() {
       <PersistGate
         loading={<Splash />}
         persistor={persistor}
-        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 3000))}
+        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
       >
         <SignInNavigatior />
       </PersistGate>
     </Provider>
   );
 }
+
+//  <SignInNavigatior />

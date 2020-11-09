@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
@@ -17,8 +17,22 @@ const NewRiteToTeamScreen = (props) => {
   const { id } = useSelector((state) => state.teams.currentTeam);
   const dispatch = useDispatch();
 
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerTitle: () => (
+        <View style={styles.headerScreen}>
+          <Text style={styles.titleScreen}>Nuevo rito</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
+
   const createRiteButtonDisable = () => (
-    { ...styles.confirmButton, backgroundColor: name && purpose && numberOfPeople ? colors.blue : colors.gray });
+    {
+      ...styles.confirmButton,
+      backgroundColor: riteName && objective && numberOfPeople ? colors.darkBlue : colors.gray,
+    });
 
   const numberOfPeopleHandler = (currentNumber) => {
     const maxPeople = 99;
@@ -50,8 +64,8 @@ const NewRiteToTeamScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.teamTitle}>{name}</Text>
-          <Text>{purpose}</Text>
+          <Text style={styles.textHeader}>Equipo: {name}</Text>
+          <Text>Propósito: {purpose}</Text>
           <Text style={styles.textHeader}>Nombre del rito</Text>
           <TextInput
             style={styles.areaInput}
@@ -74,13 +88,12 @@ const NewRiteToTeamScreen = (props) => {
           />
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.cancelButton}>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
-              <Text style={styles.textCancelButton}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
           <View style={createRiteButtonDisable()}>
-            <TouchableOpacity onPress={createHandler} disabled={!(name && purpose && numberOfPeople)}>
+            <TouchableOpacity
+               onPress={createHandler}
+               style={styles.applyButton}
+               disabled={!(riteName && objective && numberOfPeople)}
+            >
               <Text style={styles.textConfirmButton}>Crear</Text>
             </TouchableOpacity>
           </View>

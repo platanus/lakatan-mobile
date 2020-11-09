@@ -66,6 +66,7 @@ const itemStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: 35,
+    width: '90%',
   },
 });
 

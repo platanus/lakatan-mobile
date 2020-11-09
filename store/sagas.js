@@ -4,6 +4,7 @@ import teamsSaga from './Teams/saga';
 import usersSaga from './users/saga';
 import ritesSaga from './rites/saga';
 import rafflesSaga from './raffles/saga';
+import syncSaga from './sync/saga';
 
 export default function *rootSagas() {
   yield all([
@@ -12,5 +13,6 @@ export default function *rootSagas() {
     usersSaga(),
     ritesSaga(),
     rafflesSaga(),
+    syncSaga(),
   ]);
 }

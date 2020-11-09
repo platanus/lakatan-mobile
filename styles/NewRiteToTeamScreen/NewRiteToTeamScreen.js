@@ -1,79 +1,69 @@
 import { StyleSheet } from 'react-native';
 import color from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
-    height: '90%',
-    margin: '5%',
-    borderRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 3,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: 'white',
-    padding: '5%',
+    width: '100%',
+    height: '100%',
+    backgroundColor: color.white,
+    paddingHorizontal: globalStyle.paddingContainer,
   },
-
   infoContainer: {
-    padding: '5%',
+    paddingTop: globalStyle.paddingContainer,
   },
-
   teamTitle: {
-    fontSize: 24,
+    fontSize: globalStyle.fontSizeTitle,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: '5%',
+    marginBottom: globalStyle.paddingContainer,
   },
-
   textHeader: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginTop: '10%',
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingTop: globalStyle.paddingTopInput,
+    color: color.darkBlue,
+    paddingBottom: globalStyle.paddingBottomInput,
   },
-
   areaInput: {
     width: '100%',
-    height: 40,
-    borderBottomWidth: 0.5,
-    fontSize: 14,
+    backgroundColor: color.softGray,
+    borderRadius: globalStyle.borderRadiusButton,
+    paddingLeft: globalStyle.paddingInput,
+    height: globalStyle.heightInput,
   },
-
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: '40%', // TO DO: separar las view infoContainer y buttonContainer 80-20
-  },
-
-  cancelButton: {
-    backgroundColor: color.red,
-    width: '40%',
-    borderRadius: 5,
-    alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: globalStyle.paddingBottomButton,
   },
-
-  textCancelButton: {
-    color: color.white,
-    fontSize: 18,
-  },
-
   confirmButton: {
-    width: '40%',
-    backgroundColor: color.blue,
-    borderRadius: 5,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: globalStyle.borderRadiusButton,
+  },
+  applyButton: {
+    width: '100%',
+    borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    paddingVertical: 10,
+    height: globalStyle.heightButton,
   },
-
   textConfirmButton: {
     color: color.white,
-    fontSize: 18,
+    fontSize: globalStyle.fontSizeButton,
   },
-
+  headerScreen: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  titleScreen: {
+    fontSize: globalStyle.fontSizeHeader,
+  },
 });
 
 export default { ...styles };

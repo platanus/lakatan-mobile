@@ -3,13 +3,13 @@ import colors from '../colors';
 
 const styles = StyleSheet.create({
   logo: {
-    height: '70%',
+    height: '80%',
     width: '23%',
     marginRight: '5%',
   },
   header: {
     flexDirection: 'row',
-    height: '105%',
+    height: '100%',
     width: '100%',
   },
   title: {
