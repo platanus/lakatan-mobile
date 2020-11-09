@@ -114,7 +114,6 @@ const NewWorkspaceScreen = (props) => {
           disabled={!token}
         >
           <Text style={styles.textButton}>
-
             Listo
           </Text>
         </TouchableOpacity>
