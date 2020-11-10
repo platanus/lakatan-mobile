@@ -123,6 +123,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '90%',
     flex: 1,
+    marginBottom: '3%',
+    borderBottomWidth: 1,
+    borderColor: color.lightGray,
   },
 });
 

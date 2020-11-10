@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
-} from 'react-native';
+  TextInput } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
 import { CREATE_RAFFLE_REQUEST } from '../../store/types';
@@ -34,7 +34,7 @@ const RiteScreen = ({
   const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
   const [dataIn, setDataIn] = useState(hooksDataIn);
   const [dataOut, setDataOut] = useState(hooksDataOut);
-
+  const [searchWord, setSearchWord] = useState('');
   const { email, token } = useSelector((store) => store.authentication);
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -92,7 +92,6 @@ const RiteScreen = ({
   // const selectedHandler = () => {
   //   setRaffleButton(userMinimum <= selected.length);
   // };
-
   const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.subScreenContainer}>
@@ -104,9 +103,15 @@ const RiteScreen = ({
 
           <View style={styles.raffleUserList}>
             <Text style={styles.hookHeader}>Sortear</Text>
+            <TextInput
+              placeholder= 'Filtro'
+              onChangeText={(text) => setSearchWord(text)}
+              value={searchWord}
+            />
             <RaffleUserList
               selectedMembers={selectedMembers}
-              itemOnPressHandler={itemOnPressHandler} />
+              itemOnPressHandler={itemOnPressHandler}
+              searchWord={searchWord} />
           </View>
 
           {raffleButton ? (
