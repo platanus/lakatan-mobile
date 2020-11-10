@@ -11,7 +11,7 @@ import { CREATE_RAFFLE_REQUEST } from '../../store/types';
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-import { hooksDataIn, hooksDataOut } from './HooksData';
+// import { hooksDataIn, hooksDataOut } from './HooksData';
 import ItemList from '../../components/RiteScreen/ItemList';
 import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
@@ -145,7 +145,9 @@ const RiteScreen = ({
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
-            <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('New Hook')}>
+            <TouchableOpacity
+              style={styles.applyButton}
+              onPress={() => navigation.navigate('New Hook', { taskId })}>
               <Text style={styles.textApplyButton}>
                 nuevo hook
               </Text>
