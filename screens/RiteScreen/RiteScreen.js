@@ -1,4 +1,5 @@
-import React, { useState, useLayoutEffect } from 'react';
+/* eslint-disable max-statements */
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -7,7 +8,7 @@ import {
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
 import { CREATE_RAFFLE_REQUEST } from '../../store/types';
-
+import RaffleUserList from './RaffleUserList';
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
@@ -23,9 +24,14 @@ const RiteScreen = ({
     },
   },
 }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const availableMembers = [];
+  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name, selected: true }));
+  const [selectedMembers, setSelectedMembers] = useState(availableMembers);
+  const [selectedItems, setSelectedItems] = useState(() => availableMembers.map((item) =>
+    item.id,
+  ));
   const [isModalVisible, setModalVisible] = useState(false);
-  const [raffleButton, setRaffleButton] = useState(false);
+  const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
   const [dataIn, setDataIn] = useState(hooksDataIn);
   const [dataOut, setDataOut] = useState(hooksDataOut);
 
@@ -46,9 +52,6 @@ const RiteScreen = ({
 
   const dispatch = useDispatch();
 
-  const availableMembers = [];
-  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name }));
-
   const raffleHandler = () => {
     dispatch({
       type: CREATE_RAFFLE_REQUEST,
@@ -59,10 +62,36 @@ const RiteScreen = ({
     setModalVisible(true);
   };
 
-  const selectedHandler = (selected) => {
-    setSelectedItems(selected);
-    setRaffleButton(userMinimum <= selected.length);
+  const itemOnPressHandler = (id) => {
+    setSelectedMembers((prevData) => {
+      const newData = prevData.map((item) => {
+        if (item.id === id) {
+          item.selected = !item.selected;
+
+          return item;
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
   };
+
+  useEffect(() => {
+    const list = [];
+    selectedMembers.forEach((item) => {
+      if (item.selected) {
+        list.push(item.id);
+      }
+    });
+    setSelectedItems(list);
+    setRaffleButton(userMinimum <= list.length);
+  }, [selectedMembers, userMinimum]);
+
+  // const selectedHandler = () => {
+  //   setRaffleButton(userMinimum <= selected.length);
+  // };
 
   const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -73,30 +102,11 @@ const RiteScreen = ({
             <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
           </View>
 
-          <View>
+          <View style={styles.raffleUserList}>
             <Text style={styles.hookHeader}>Sortear</Text>
-            <MultiSelect
-              items={availableMembers}
-              uniqueKey="id"
-              alwaysShowSelectText
-              onSelectedItemsChange={selectedHandler}
-              selectedItems={selectedItems}
-              colors={{ primary: color.blue, success: color.blue, text: color.black }}
-              confirmText="Confirmar"
-              selectText="Elige usuarios"
-              searchInputPlaceholderText="Elige un usuario a agregar..."
-              tagRemoveIconColor={color.softGray}
-              tagBorderColor={color.softGray}
-              tagTextColor={color.black}
-              selectedItemTextColor={color.blue}
-              selectedItemIconColor={color.softGray}
-              itemTextColor={color.black}
-              displayKey="name"
-              searchInputStyle={{ color: color.softGray }}
-              submitButtonColor={color.blue}
-              submitButtonText="Ok"
-              button="40"
-            />
+            <RaffleUserList
+              selectedMembers={selectedMembers}
+              itemOnPressHandler={itemOnPressHandler} />
           </View>
 
           {raffleButton ? (
