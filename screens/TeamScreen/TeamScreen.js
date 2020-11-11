@@ -19,7 +19,6 @@ const RiteView = (props) => {
   const taskId = id;
   const dispatch = useDispatch();
   const pressHandeler = () => {
-    dispatch({ type: GET_HOOKS_REQUEST, payload: { token, email, taskId: id } });
     props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId });
   };
 

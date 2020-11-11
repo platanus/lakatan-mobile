@@ -40,6 +40,15 @@ const styles = StyleSheet.create({
     paddingLeft: '3%',
     height: globalStyle.heightInput,
   },
+  httpAreaInput: {
+    width: '100%',
+    backgroundColor: color.softGray,
+    borderRadius: globalStyle.borderRadiusButton,
+    paddingLeft: '3%',
+    height: globalStyle.heightInput,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   instructionContainer: {
     marginTop: globalStyle.paddingContainer,
   },

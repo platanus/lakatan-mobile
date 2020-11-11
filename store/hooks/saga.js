@@ -42,7 +42,6 @@ function *setHookRequest({ payload }) {
   yield put(hooksActions.start());
   try {
     const response = yield call(api.setHookRequest, payload);
-    console.log(response);
   } catch (error) {
     console.log(error);
   }

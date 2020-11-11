@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
-import { CREATE_RAFFLE_REQUEST } from '../../store/types';
+import { CREATE_RAFFLE_REQUEST, GET_SLACK_ENTITIES_REQUEST, GET_HOOKS_REQUEST } from '../../store/types';
 
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
@@ -64,6 +64,13 @@ const RiteScreen = ({
     setSelectedItems(selected);
     setRaffleButton(userMinimum <= selected.length);
   };
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      dispatch({ type: GET_HOOKS_REQUEST, payload: { token, email, taskId } });
+      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
+    });
+  }, [dispatch, navigation, email, token, taskId]);
 
   const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

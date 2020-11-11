@@ -26,7 +26,8 @@ function slackEntitiesRequest({ email, token }) {
 }
 
 function setHookRequest({ email, token, hookOf, hookType, hookName, hookUrl, taskId, reference }) {
-  //console.log(email, token, hookOf, hookType, hookName, hookUrl, taskId, reference);
+  console.log(email, token, hookOf, hookType, hookName, hookUrl, taskId, reference);
+
   return axios({
     method: 'post',
     url: `${url}/api/v1/hooks`,

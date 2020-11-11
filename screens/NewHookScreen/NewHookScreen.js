@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from '../../components/LandingScreen/BackButton';
 import styles from '../../styles/NewHookScreen/NewHookScreen';
 import colors from '../../styles/colors';
+import url from '../../env';
 import { GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST } from '../../store/types';
 
 const NewHookScreen = (props) => {
@@ -49,7 +50,19 @@ const NewHookScreen = (props) => {
   };
 
   const createHookHandler = () => {
-    dispatch({ type: SET_HOOK_REQUEST, payload: { email, token, hookOf, hookType, hookName, hookUrl, taskId, reference } });
+    let auxUrl;
+    if (hookOf === 'input') {
+      auxUrl = `${url}webhook/raffle_task/${taskId}`;
+    } else {
+      if (hookUrl.includes('https://')) {
+        auxUrl = hookUrl;
+      } else {
+        auxUrl = `https://${hookUrl}`;
+      }
+    }
+    dispatch({
+      type: SET_HOOK_REQUEST,
+      payload: { email, token, hookOf, hookType, hookName, hookUrl: auxUrl, taskId, reference } });
   };
   // const createHookButtonDisable = () => (
   //   { ...styles.confirmButton, backgroundColor: hookName ? colors.blue : colors.gray });
@@ -59,8 +72,6 @@ const NewHookScreen = (props) => {
       dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
     });
   }, [dispatch, props.navigation, email, token]);
-
-  console.log('aaa.e.');
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -96,9 +107,11 @@ const NewHookScreen = (props) => {
               value={hookType}
               onValueChange={hookTypeHandler}
               placeholder={{}}
-              items={[
+              items={hookOf === 'output' ? [
                 { label: 'Webhook', value: 'Webhook', key: 'Webhook' },
                 { label: 'Slack', value: 'SlackHook', key: 'SlackHook' },
+              ] : [
+                { label: 'Webhook', value: 'Webhook', key: 'Webhook' },
               ]}
               style={ {
                 inputIOS: {
@@ -144,13 +157,15 @@ const NewHookScreen = (props) => {
             </View></>)}
 
           {(hookType === 'Webhook' && hookOf === 'output') && (<><Text style={styles.textHeader}>Link</Text>
-            <TextInput
-              style={styles.areaInput}
-              value={hookUrl} onChangeText={setHookUrl}
-              placeholder="Ingresar link"
-              autoCapitalize="none"
-              autoCorrect={false}
-            /></>)}
+            <View style={styles.httpAreaInput}>
+              <Text>https:// </Text>
+              <TextInput style={{ width: '100%' }}
+                value={hookUrl} onChangeText={setHookUrl}
+                placeholder="Ingresar url"
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+            </View></>)}
 
           <Text style={styles.textHeader}>Nombre</Text>
           <TextInput
