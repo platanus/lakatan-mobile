@@ -29,9 +29,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    position: 'absolute',
     alignSelf: 'center',
-    bottom: globalStyle.paddingBottomButton,
   },
   raffleButtonContainer: {
     width: '100%',
@@ -121,6 +119,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
+  },
+  raffleUserList: {
+    alignSelf: 'center',
+    width: '90%',
+    flex: 1,
+    marginBottom: '3%',
+    borderBottomWidth: 1,
+    borderColor: color.lightGray,
   },
   listHooksContainer: {
     minHeight: 120,
