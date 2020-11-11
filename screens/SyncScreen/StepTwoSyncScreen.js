@@ -163,7 +163,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
           countSelectedItemsHandler={countSelectedItemsHandler}
           step="two"
         /> || <Text>
-         No hay cambios para mostrar en el paso 2
+         No hay cambios de membresías
         </Text>)}
       </View>
 

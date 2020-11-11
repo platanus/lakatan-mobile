@@ -147,7 +147,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
             countSelectedItemsHandler={countSelectedItemsHandler}
             step="one"
           /> || <Text>
-            No hay cambios para mostrar en el paso 1
+            No hay cambios de equipos ni de usuarios
           </Text>)
         }
       </View>

@@ -28,7 +28,7 @@ const syncChangesHandler = (stepOneData, stepTwoChanges, users = [], teamList = 
         futureTeams.push(item.attributes.slack_id);
         break;
       case 'Delete':
-        futureTeams = futureTeams.filter((id) => id !== item.attributes.id);
+        futureTeams = futureTeams.filter((id) => id !== item.attributes.slack_id);
         break;
       default:
         console.log('Sync Changes Handler Team Error');
@@ -42,21 +42,9 @@ const syncChangesHandler = (stepOneData, stepTwoChanges, users = [], teamList = 
 
   const stepTwoDataToShow = stepTwoChanges.filter((item) => {
     const userCheck = futureUsers.find(element => element === item.attributes.user.email);
-    let teamCheck;
-    switch (item.action) {
-    case 'Add':
-      teamCheck = futureTeams.find(element =>
-        element === item.attributes.team.slack_id,
-      );
-      break;
-    case 'Delete':
-      teamCheck = futureTeams.find(element =>
-        element === item.attributes.team.id,
-      );
-      break;
-    default:
-      console.log('Error TeamCheak');
-    }
+    const teamCheck = futureTeams.find(element =>
+      element === item.attributes.team.slack_id,
+    );
 
     if (!!userCheck && !!teamCheck) return item;
   });

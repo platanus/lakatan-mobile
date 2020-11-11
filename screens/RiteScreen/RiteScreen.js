@@ -11,7 +11,6 @@ import { CREATE_RAFFLE_REQUEST, GET_SLACK_ENTITIES_REQUEST, GET_HOOKS_REQUEST } 
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-// import { hooksDataIn, hooksDataOut } from './HooksData';
 import ItemList from '../../components/RiteScreen/ItemList';
 import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
@@ -28,7 +27,27 @@ const RiteScreen = ({
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
 
-  const { inHooks, outHooks } = useSelector((state) => state.hooks);
+  const { inHooks, outHooks, slackEntities } = useSelector((state) => state.hooks);
+  const outHooksName = [];
+  outHooks.forEach((hook) => {
+    let slackReference = hook.attributes.slackReference;
+    if (hook.attributes.type === 'SlackHook') {
+      for (let i = 0; i < slackEntities.length; i++) {
+        if (slackEntities[i].slack_id === hook.attributes.slackReference) {
+          slackReference = 'purpose' in slackEntities[i] ? `#${slackEntities[i].name}` : slackEntities[i].name;
+        }
+      }
+    }
+    outHooksName.push({
+      id: hook.id,
+      attributes: {
+        type: hook.attributes.type,
+        name: hook.attributes.name,
+        url: hook.attributes.url,
+        slackReference,
+      },
+    });
+  });
 
   const { email, token } = useSelector((state) => state.authentication);
   useLayoutEffect(() => {
@@ -147,7 +166,7 @@ const RiteScreen = ({
         <View style={styles.listHooksContainer}>
           <Text style={styles.hookHeader}>Salida</Text>
           <ItemList
-            data={outHooks}
+            data={outHooksName}
           />
         </View>
         <View style={styles.buttonContainer}>
