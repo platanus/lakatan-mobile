@@ -19,7 +19,7 @@ const slice = createSlice({
       state.outHooks = action.payload.outHooks;
     },
     saveEntities(state, action) {
-      state.slackEntities = action.payload.entities;
+      state.slackEntities = action.payload;
     },
     finish(state) {
       state.loading = false;
