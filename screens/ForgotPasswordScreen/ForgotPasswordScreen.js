@@ -59,7 +59,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
             style={{
               ...styles.sendTouchable,
               backgroundColor: email && !loading ? color.darkBlue : color.gray }}
-            onPress={sendTouchableHandler}
+            onPress={() => sendTouchableHandler()}
             disabled={(!email && loading)}
           >
             <Text style={styles.sendText}>

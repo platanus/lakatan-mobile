@@ -105,8 +105,6 @@ function *passwordChangeRequest({ payload }) {
       yield put(authenticationActions.changePasswordSuccess(
         '¡Ya puedes revisar tu correo!'));
     }
-    yield put(authenticationActions.changePasswordSuccess(
-      '¡Ya puedes revisar tu correo!'));
   } catch (error) {
     yield passwordChangeErrorHandler(error.response.status.toString());
   }

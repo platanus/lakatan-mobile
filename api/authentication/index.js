@@ -50,7 +50,7 @@ function signOutApi({ email, token }) {
 function passwordChangeApi({ email }) {
   return axios({
     method: 'post',
-    url: `${url}/api/v1/registrations/password_change`,
+    url: `${url}api/v1/registrations/password_change`,
     data: {
       user: {
         email,
