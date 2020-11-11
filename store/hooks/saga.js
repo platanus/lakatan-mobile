@@ -41,7 +41,7 @@ function *getSlackEntitiesRequest({ payload }) {
 function *setHookRequest({ payload }) {
   yield put(hooksActions.start());
   try {
-    const response = yield call(api.setHookRequest, payload);
+    yield call(api.setHookRequest, payload);
   } catch (error) {
     console.log(error);
   }

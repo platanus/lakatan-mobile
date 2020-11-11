@@ -18,14 +18,14 @@ const RiteView = (props) => {
   const { members, token, email } = props;
   const taskId = id;
   const dispatch = useDispatch();
-  const pressHandeler = () => {
+  const pressHandler = () => {
     props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId });
   };
 
   return (
     <View style={styles.cardOfRite}>
       <TouchableOpacity
-        onPress={pressHandeler}
+        onPress={pressHandler}
       >
         <Text style={styles.riteText}>{name}</Text>
         <Text style={styles.ritePeople}>{userMinimum} persona(s)</Text>

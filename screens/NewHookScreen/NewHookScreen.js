@@ -53,13 +53,12 @@ const NewHookScreen = (props) => {
     let auxUrl;
     if (hookOf === 'input') {
       auxUrl = `${url}webhook/raffle_task/${taskId}`;
+    } else if (hookUrl.includes('https://')) {
+      auxUrl = hookUrl;
     } else {
-      if (hookUrl.includes('https://')) {
-        auxUrl = hookUrl;
-      } else {
-        auxUrl = `https://${hookUrl}`;
-      }
+      auxUrl = `https://${hookUrl}`;
     }
+
     dispatch({
       type: SET_HOOK_REQUEST,
       payload: { email, token, hookOf, hookType, hookName, hookUrl: auxUrl, taskId, reference } });
