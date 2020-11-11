@@ -34,7 +34,19 @@ function requestWorkpaceName({ email, token }) {
 function requestChanges({ email, token }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/slack`,
+    url: `${url}/api/v1/slack/request_changes`,
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
+function showChanges({ email, token, id }) {
+  return axios({
+    method: 'get',
+    url: `${url}/api/v1/slack/show_changes/${id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -61,6 +73,7 @@ const apiSync = {
   requestChanges,
   aprovedChanges,
   requestWorkpaceName,
+  showChanges,
 };
 
 export default apiSync;

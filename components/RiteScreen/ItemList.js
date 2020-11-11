@@ -1,10 +1,9 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
-  View, Text, FlatList, TouchableOpacity, Clipboard, Alert
+  View, Text, FlatList, TouchableOpacity, Clipboard, Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import url from '../../env';
 import colors from '../../styles/colors';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
@@ -12,11 +11,7 @@ const Item = ({ item }) => {
   let description = '';
 
   if (item.attributes.type === 'Webhook') {
-    if (item.attributes.hookType === 'input') {
-      description = `${url}webhook${item.attributes.url}`;
-    } else {
-      description = item.attributes.url;
-    }
+    description = item.attributes.url;
   } else {
     description = item.attributes.slackReference;
   }
@@ -25,7 +20,7 @@ const Item = ({ item }) => {
     <TouchableOpacity
       onPress={() => {
         Clipboard.setString(description);
-        Alert.alert("Link copiado")
+        Alert.alert("Link copiado");
       }}
       style={styles.hookButton}
       key={item.id}
