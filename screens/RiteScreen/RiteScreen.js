@@ -35,10 +35,10 @@ const RiteScreen = ({
   ));
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
-  const [dataIn, setDataIn] = useState(hooksDataIn);
-  const [dataOut, setDataOut] = useState(hooksDataOut);
+  // const [dataIn, setDataIn] = useState(hooksDataIn);
+  // const [dataOut, setDataOut] = useState(hooksDataOut);
   const [searchWord, setSearchWord] = useState('');
-  const { email, token } = useSelector((store) => store.authentication); 
+  const { email, token } = useSelector((store) => store.authentication);
 
   const { inHooks, outHooks, slackEntities } = useSelector((state) => state.hooks);
   const outHooksName = [];
@@ -118,14 +118,13 @@ const RiteScreen = ({
   // const selectedHandler = () => {
   //   setRaffleButton(userMinimum <= selected.length);
   // };
-  
+
   useEffect(() => {
     navigation.addListener('focus', () => {
       dispatch({ type: GET_HOOKS_REQUEST, payload: { token, email, taskId } });
       dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
     });
   }, [dispatch, navigation, email, token, taskId]);
-
 
   const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
