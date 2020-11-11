@@ -1,17 +1,24 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
 import colors from '../../styles/colors';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import SlackAuth from '../../components/Slack/slack_auth';
-import { CREATE_WORKSPACE_REQUEST } from '../../store/types';
+import {
+  CREATE_WORKSPACE_REQUEST,
+  CLEAR_WORKSPACE_ERROR,
+  RESET_WORKSPACE_SUCCESS,
+  UPDATE_WORKSPACE_REQUEST,
+} from '../../store/types';
 
+// eslint-disable-next-line max-statements
 const NewWorkspaceScreen = (props) => {
   const [token, setToken] = useState('');
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.authentication.token);
   const { email } = useSelector((state) => state.authentication);
+  const { success, error, workspace } = useSelector((state) => state.sync);
 
   const { name } = props.route.params;
   const img = {
@@ -19,6 +26,21 @@ const NewWorkspaceScreen = (props) => {
     'Google': require('../../assets/Google/google_logo_2.png'),
     'Notion': require('../../assets/Notion/logoNotion.png'),
   };
+
+  useEffect(() => {
+    if (success) {
+      dispatch({ type: RESET_WORKSPACE_SUCCESS });
+      props.navigation.goBack();
+    }
+    if (error) {
+      Alert.alert(
+        'Token invalida',
+        '',
+        [{ text: 'OK', onPress: () => dispatch({ type: CLEAR_WORKSPACE_ERROR }) }],
+        { cancelable: false },
+      );
+    }
+  }, [success, error]);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -34,8 +56,11 @@ const NewWorkspaceScreen = (props) => {
   }, [props.navigation]);
 
   const pressHandler = () => {
-    dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
-    props.navigation.goBack();
+    if (workspace) {
+      dispatch({ type: UPDATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+    } else {
+      dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+    }
   };
 
   return (
@@ -89,7 +114,6 @@ const NewWorkspaceScreen = (props) => {
           disabled={!token}
         >
           <Text style={styles.textButton}>
-
             Listo
           </Text>
         </TouchableOpacity>

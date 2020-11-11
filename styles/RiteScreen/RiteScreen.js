@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: '2%',
     paddingLeft: '10%',
-    height: globalStyle.heightButton,
+    height: 65,
   },
   titleHookText: {
     color: color.darkBlue,
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   },
   descriptionHookText: {
     color: color.cian,
+    fontSize: 12,
   },
   icon: {
     position: 'absolute',
@@ -127,6 +128,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: color.lightGray,
   },
+  listHooksContainer: {
+    minHeight: 120,
+  }
 });
 
 export default { ...styles };

@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { CURRENT_TEAM_REQUEST } from '../../store/types';
+import { CURRENT_TEAM_REQUEST, GET_HOOKS_REQUEST } from '../../store/types';
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
@@ -15,15 +15,17 @@ import BackButton from '../../components/LandingScreen/BackButton';
 const RiteView = (props) => {
   const { name, goal, id } = props.rite.item;
   const userMinimum = props.rite.item.user_minimum;
-  const { members } = props;
+  const { members, token, email } = props;
   const taskId = id;
+  const dispatch = useDispatch();
+  const pressHandler = () => {
+    props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId });
+  };
 
   return (
     <View style={styles.cardOfRite}>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('Rite', {
-          name, userMinimum, goal, members, taskId,
-        })}
+        onPress={pressHandler}
       >
         <Text style={styles.riteText}>{name}</Text>
         <Text style={styles.ritePeople}>{userMinimum} persona(s)</Text>
@@ -71,7 +73,7 @@ const Team = (props) => {
           <FlatList
             data={rites}
             renderItem={
-              (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} />
+              (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} token={token} email={email}/>
             }
             keyExtractor={(rite) => rite.id.toString()}
           />
