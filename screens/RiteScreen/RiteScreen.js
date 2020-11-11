@@ -34,11 +34,7 @@ const RiteScreen = ({
     if (hook.attributes.type === 'SlackHook') {
       for (let i = 0; i < slackEntities.length; i++) {
         if (slackEntities[i].slack_id === hook.attributes.slackReference) {
-          if ('purpose' in slackEntities[i]) {
-            slackReference = `#${slackEntities[i].name}`;
-          } else {
-            slackReference = slackEntities[i].name;
-          }
+          slackReference = 'purpose' in slackEntities[i] ? `#${slackEntities[i].name}` : slackEntities[i].name;
         }
       }
     }
