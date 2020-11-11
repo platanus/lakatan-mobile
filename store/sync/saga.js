@@ -15,6 +15,8 @@ import {
 } from '../types';
 import api from '../../api/sync';
 
+const sleep = (time) => new Promise(resolve => setTimeout(resolve, time));
+
 function *setWorkspace({ payload }) {
   yield put(syncActions.start());
   try {
@@ -76,7 +78,13 @@ function *updateWorkspaceRequest({ payload }) {
 function *workspaceChangesRequest({ payload }) {
   yield put(syncActions.start());
   try {
-    const { data } = yield call(api.requestChanges, payload);
+    let data = yield call(api.requestChanges, payload);
+    const { id } = data.data;
+    while (data.data.status !== 'ready') {
+      data = yield call(api.showChanges, { ...payload, id });
+      yield sleep(1000);
+    }
+    data = data.data.changes_list;
     const firstStep = [];
     const secondStep = [];
     for (let i = 0; i < data.length; i++) {

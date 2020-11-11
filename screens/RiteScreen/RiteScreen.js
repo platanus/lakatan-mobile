@@ -11,11 +11,11 @@ import { CREATE_RAFFLE_REQUEST } from '../../store/types';
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-import { hooksDataIn, hooksDataOut } from './HooksData';
 import ItemList from '../../components/RiteScreen/ItemList';
 import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 
+// eslint-disable-next-line max-statements
 const RiteScreen = ({
   navigation, route: {
     params: {
@@ -26,10 +26,30 @@ const RiteScreen = ({
   const [selectedItems, setSelectedItems] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(false);
-  const [dataIn, setDataIn] = useState(hooksDataIn);
-  const [dataOut, setDataOut] = useState(hooksDataOut);
 
-  const { email, token } = useSelector((store) => store.authentication);
+  const { inHooks, outHooks, slackEntities } = useSelector((state) => state.hooks);
+  const outHooksName = [];
+  outHooks.forEach((hook) => {
+    let slackReference = hook.attributes.slackReference;
+    if (hook.attributes.type === 'SlackHook') {
+      for (let i = 0; i < slackEntities.length; i++) {
+        if (slackEntities[i].slack_id === hook.attributes.slackReference) {
+          slackReference = 'purpose' in slackEntities[i] ? `#${slackEntities[i].name}` : slackEntities[i].name;
+        }
+      }
+    }
+    outHooksName.push({
+      id: hook.id,
+      attributes: {
+        type: hook.attributes.type,
+        name: hook.attributes.name,
+        url: hook.attributes.url,
+        slackReference,
+      },
+    });
+  });
+
+  const { email, token } = useSelector((state) => state.authentication);
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
@@ -42,7 +62,7 @@ const RiteScreen = ({
         </View>
       ),
     });
-  }, [navigation]);
+  }, [name]);
 
   const dispatch = useDispatch();
 
@@ -133,13 +153,13 @@ const RiteScreen = ({
         <View style={styles.listHooksContainer}>
           <Text style={styles.hookHeader}>Entrada</Text>
           <ItemList
-            data={dataIn}
+            data={inHooks}
           />
         </View>
         <View style={styles.listHooksContainer}>
           <Text style={styles.hookHeader}>Salida</Text>
           <ItemList
-            data={dataOut}
+            data={outHooksName}
           />
         </View>
         <View style={styles.buttonContainer}>
