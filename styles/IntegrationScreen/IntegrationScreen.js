@@ -2,6 +2,10 @@ import { StyleSheet } from 'react-native';
 import colors from '../colors';
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
   logo: {
     height: '80%',
     width: '23%',

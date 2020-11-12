@@ -1,21 +1,25 @@
-import React, { useState, useLayoutEffect } from 'react';
+/* eslint-disable max-statements */
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard,
-} from 'react-native';
+  TextInput } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
-import { CREATE_RAFFLE_REQUEST } from '../../store/types';
+
+import RaffleUserList from './RaffleUserList';
+
+import { CREATE_RAFFLE_REQUEST, GET_SLACK_ENTITIES_REQUEST, GET_HOOKS_REQUEST } from '../../store/types';
 
 import Raffle from '../../components/TeamScreen/Raffle';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-import { hooksDataIn, hooksDataOut } from './HooksData';
 import ItemList from '../../components/RiteScreen/ItemList';
 import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 
+// eslint-disable-next-line max-statements
 const RiteScreen = ({
   navigation, route: {
     params: {
@@ -23,13 +27,41 @@ const RiteScreen = ({
     },
   },
 }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+  const availableMembers = [];
+  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name, selected: true }));
+  const [selectedMembers, setSelectedMembers] = useState(availableMembers);
+  const [selectedItems, setSelectedItems] = useState(() => availableMembers.map((item) =>
+    item.id,
+  ));
   const [isModalVisible, setModalVisible] = useState(false);
-  const [raffleButton, setRaffleButton] = useState(false);
-  const [dataIn, setDataIn] = useState(hooksDataIn);
-  const [dataOut, setDataOut] = useState(hooksDataOut);
-
+  const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
+  // const [dataIn, setDataIn] = useState(hooksDataIn);
+  // const [dataOut, setDataOut] = useState(hooksDataOut);
+  const [searchWord, setSearchWord] = useState('');
   const { email, token } = useSelector((store) => store.authentication);
+
+  const { inHooks, outHooks, slackEntities } = useSelector((state) => state.hooks);
+  const outHooksName = [];
+  outHooks.forEach((hook) => {
+    let slackReference = hook.attributes.slackReference;
+    if (hook.attributes.type === 'SlackHook') {
+      for (let i = 0; i < slackEntities.length; i++) {
+        if (slackEntities[i].slack_id === hook.attributes.slackReference) {
+          slackReference = 'purpose' in slackEntities[i] ? `#${slackEntities[i].name}` : slackEntities[i].name;
+        }
+      }
+    }
+    outHooksName.push({
+      id: hook.id,
+      attributes: {
+        type: hook.attributes.type,
+        name: hook.attributes.name,
+        url: hook.attributes.url,
+        slackReference,
+      },
+    });
+  });
+
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
@@ -42,12 +74,9 @@ const RiteScreen = ({
         </View>
       ),
     });
-  }, [navigation]);
+  }, [name]);
 
   const dispatch = useDispatch();
-
-  const availableMembers = [];
-  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name }));
 
   const raffleHandler = () => {
     dispatch({
@@ -59,10 +88,43 @@ const RiteScreen = ({
     setModalVisible(true);
   };
 
-  const selectedHandler = (selected) => {
-    setSelectedItems(selected);
-    setRaffleButton(userMinimum <= selected.length);
+  const itemOnPressHandler = (id) => {
+    setSelectedMembers((prevData) => {
+      const newData = prevData.map((item) => {
+        if (item.id === id) {
+          item.selected = !item.selected;
+
+          return item;
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
   };
+
+  useEffect(() => {
+    const list = [];
+    selectedMembers.forEach((item) => {
+      if (item.selected) {
+        list.push(item.id);
+      }
+    });
+    setSelectedItems(list);
+    setRaffleButton(userMinimum <= list.length);
+  }, [selectedMembers, userMinimum]);
+
+  // const selectedHandler = () => {
+  //   setRaffleButton(userMinimum <= selected.length);
+  // };
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      dispatch({ type: GET_HOOKS_REQUEST, payload: { token, email, taskId } });
+      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
+    });
+  }, [dispatch, navigation, email, token, taskId]);
 
   const raffleRoute = () => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -73,30 +135,12 @@ const RiteScreen = ({
             <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
           </View>
 
-          <View>
+          <View style={styles.raffleUserList}>
             <Text style={styles.hookHeader}>Sortear</Text>
-            <MultiSelect
-              items={availableMembers}
-              uniqueKey="id"
-              alwaysShowSelectText
-              onSelectedItemsChange={selectedHandler}
-              selectedItems={selectedItems}
-              colors={{ primary: color.blue, success: color.blue, text: color.black }}
-              confirmText="Confirmar"
-              selectText="Elige usuarios"
-              searchInputPlaceholderText="Elige un usuario a agregar..."
-              tagRemoveIconColor={color.softGray}
-              tagBorderColor={color.softGray}
-              tagTextColor={color.black}
-              selectedItemTextColor={color.blue}
-              selectedItemIconColor={color.softGray}
-              itemTextColor={color.black}
-              displayKey="name"
-              searchInputStyle={{ color: color.softGray }}
-              submitButtonColor={color.blue}
-              submitButtonText="Ok"
-              button="40"
-            />
+            <RaffleUserList
+              selectedMembers={selectedMembers}
+              itemOnPressHandler={itemOnPressHandler}
+              searchWord={searchWord} />
           </View>
 
           {raffleButton ? (
@@ -130,21 +174,23 @@ const RiteScreen = ({
   const hooksRoute = (props) => (
     <View style={styles.subScreenContainer}>
       <View style={styles.subScreen}>
-        <View style={styles.listHooksContainer}>
+        <View style={styles.listHooksContainerInput}>
           <Text style={styles.hookHeader}>Entrada</Text>
           <ItemList
-            data={dataIn}
+            data={inHooks}
           />
         </View>
-        <View style={styles.listHooksContainer}>
+        <View style={styles.listHooksContainerOutput}>
           <Text style={styles.hookHeader}>Salida</Text>
           <ItemList
-            data={dataOut}
+            data={outHooksName}
           />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
-            <TouchableOpacity style={styles.applyButton} onPress={() => navigation.navigate('New Hook')}>
+            <TouchableOpacity
+              style={styles.applyButton}
+              onPress={() => navigation.navigate('New Hook', { taskId })}>
               <Text style={styles.textApplyButton}>
                 nuevo hook
               </Text>

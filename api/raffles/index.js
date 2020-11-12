@@ -8,7 +8,6 @@ function createRaffle({
   const selectedItemsInt = [];
   selectedItems.forEach((item) => selectedItemsInt.push(parseInt(item, 10)));
   const data = decamelizeKeys({ usersList: selectedItemsInt, id: taskId });
-
   return axios({
     method: 'post',
     url: `${url}/api/v1/raffle`,

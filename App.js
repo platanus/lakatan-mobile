@@ -1,10 +1,13 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { store, persistor, runSagas } from './store';
+import colors from './styles/colors';
+import styles from './styles/App/App';
+import { SIGN_OUT_REQUEST } from './store/types';
 import TeamScreen from './screens/TeamScreen/TeamScreen';
 import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
 import NewTeamScreen from './screens/NewTeamScreen/NewTeamScreen';
@@ -12,6 +15,7 @@ import LandingScreen from './screens/LandingScreen/LandingScreen';
 import NewUserToTeamScreen from './screens/NewUserToTeamScreen/NewUserToTeamScreen';
 import SignInScreen from './screens/SignInScreen/SignInScreen';
 import SignUpScreen from './screens/SignUpScreen/SignUpScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen/ForgotPasswordScreen';
 import RiteScreen from './screens/RiteScreen/RiteScreen';
 import NewRiteToTeamScreen from './screens/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import IntegrationListScreen from './screens/IntegrationsListScreen/IntegrationsListScreen';
@@ -69,12 +73,27 @@ const Teams = () => (
   </TeamStack.Navigator>
 );
 
-const AppNavigator = () => (
-  <AppDrawer.Navigator>
-    <AppDrawer.Screen name="Equipos" component={Teams} />
-    <AppDrawer.Screen name="Integraciones" component={Integration} />
-  </AppDrawer.Navigator>
-);
+const AppNavigator = () => {
+  const dispatch = useDispatch();
+  const { email, token } = useSelector((state) => state.authentication);
+
+  return (
+    <AppDrawer.Navigator drawerContent= {props => (
+      <DrawerContentScrollView {...props} contentContainerStyle={styles.contentContainer}>
+        <DrawerItemList {...props} />
+        <DrawerItem
+          label='Cerrar Sesión'
+          style={styles.signoutButton}
+          inactiveTintColor={colors.red}
+          onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}
+        />
+      </DrawerContentScrollView>
+    )}>
+      <AppDrawer.Screen name="Equipos" component={Teams} />
+      <AppDrawer.Screen name="Integraciones" component={Integration} />
+    </AppDrawer.Navigator>
+  );
+};
 
 const SignInNavigatior = () => {
   const { authentication: { token } } = useSelector((state) => state);
@@ -91,6 +110,8 @@ const SignInNavigatior = () => {
             <>
               <AppStack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
               <AppStack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+              <AppStack.Screen name="Forgot Password" component={ForgotPasswordScreen}
+                options={{ headerShown: false }} />
             </>
           )}
       </AppStack.Navigator>

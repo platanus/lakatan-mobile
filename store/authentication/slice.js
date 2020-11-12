@@ -29,6 +29,9 @@ const slice = createSlice({
       state.email = undefined;
       state.name = undefined;
     },
+    changePasswordSuccess(state, action) {
+      state.success = action.payload;
+    },
     clearSuccess(state) {
       state.success = undefined;
     },

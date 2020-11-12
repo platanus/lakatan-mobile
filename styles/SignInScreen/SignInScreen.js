@@ -89,6 +89,16 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: globalStyle.fontSizeButton,
   },
+  forgotPasswordView: {
+    marginTop: 30,
+    alignSelf: 'center',
+  },
+  forgotPasswordText: {
+    alignSelf: 'center',
+    color: color.darkBlue,
+    fontSize: globalStyle.fontSizePrincipalText,
+    textDecorationLine: 'underline',
+  },
 });
 
 export default { ...styles };

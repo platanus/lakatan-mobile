@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import colors from '../colors';
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: colors.white,
+  },
   button: {
     backgroundColor: colors.lightBlue,
     flexDirection: 'row',
@@ -19,6 +22,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     paddingTop: 10,
+    backgroundColor: colors.white,
+    flex: 1,
   },
   buttonText: {
     color: colors.darkBlue,
