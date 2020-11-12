@@ -24,16 +24,13 @@ const TeamView = (props) => {
 };
 
 function LandingScreen(props) {
-  const [refreshing, setRefreshing] = useState(false);
-  const { teamsList } = useSelector((state) => state.teams);
+  const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
 
   const onRefresh = useCallback(() => {
-    setRefreshing(true);
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-    setRefreshing(false);
   });
 
   if (teamsList.length === 0) {
@@ -82,7 +79,7 @@ function LandingScreen(props) {
           renderItem={(team) => <TeamView navigation={props.navigation} team={team} />}
           keyExtractor={(team) => team.id.toString()}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={loading} onRefresh={onRefresh} />
           }
         />
       </View>
