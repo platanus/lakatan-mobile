@@ -137,11 +137,6 @@ const RiteScreen = ({
 
           <View style={styles.raffleUserList}>
             <Text style={styles.hookHeader}>Sortear</Text>
-            <TextInput
-              placeholder= 'Filtro'
-              onChangeText={(text) => setSearchWord(text)}
-              value={searchWord}
-            />
             <RaffleUserList
               selectedMembers={selectedMembers}
               itemOnPressHandler={itemOnPressHandler}
@@ -179,13 +174,13 @@ const RiteScreen = ({
   const hooksRoute = (props) => (
     <View style={styles.subScreenContainer}>
       <View style={styles.subScreen}>
-        <View style={styles.listHooksContainer}>
+        <View style={styles.listHooksContainerInput}>
           <Text style={styles.hookHeader}>Entrada</Text>
           <ItemList
             data={inHooks}
           />
         </View>
-        <View style={styles.listHooksContainer}>
+        <View style={styles.listHooksContainerOutput}>
           <Text style={styles.hookHeader}>Salida</Text>
           <ItemList
             data={outHooksName}

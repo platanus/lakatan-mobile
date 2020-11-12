@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   textSharedHeader: {
     color: color.darkBlue,
     paddingTop: globalStyle.paddingContainer,
-    fontSize: globalStyle.fontSizePrincipalText
+    fontSize: globalStyle.fontSizePrincipalText,
   },
   textHeader: {
     fontWeight: 'bold',
@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
+    position: 'absolute',
+    bottom: globalStyle.paddingBottomButton,
   },
   raffleButtonContainer: {
     width: '100%',
@@ -123,14 +125,18 @@ const styles = StyleSheet.create({
   raffleUserList: {
     alignSelf: 'center',
     width: '90%',
-    flex: 1,
+    height: '80%',
     marginBottom: '3%',
     borderBottomWidth: 1,
     borderColor: color.lightGray,
   },
-  listHooksContainer: {
-    minHeight: 120,
-  }
+  listHooksContainerInput: {
+    height: '20%',
+  },
+  listHooksContainerOutput: {
+    minHeight: '30%',
+    maxHeight: '70%',
+  },
 });
 
 export default { ...styles };

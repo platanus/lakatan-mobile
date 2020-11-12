@@ -49,6 +49,10 @@ const NewHookScreen = (props) => {
     setReference(item);
   };
 
+  const createButtonDisable = () => {
+
+  };
+
   const createHookHandler = () => {
     let auxUrl;
     if (hookOf === 'input') {
@@ -132,7 +136,7 @@ const NewHookScreen = (props) => {
               <RNPickerSelect
                 value={reference}
                 onValueChange={slackReferenceHandler}
-                placeholder={{}}
+                placeholder={{ label: 'Selecciona entidad', color: colors.black, value: null }}
                 items={slackEntities.map((item) => {
                   if ('purpose' in item) {
                     return { label: `#${item.name}`, value: item.slack_id, key: item.slack_id };
@@ -150,6 +154,7 @@ const NewHookScreen = (props) => {
                   inputAndroid: {
                     color: colors.black,
                   },
+                  placeholder: { color: colors.black },
                 } }
               />
               <Icon name="angle-down" style={styles.icon} size={22} color={colors.darkBlue} />
@@ -157,10 +162,10 @@ const NewHookScreen = (props) => {
 
           {(hookType === 'Webhook' && hookOf === 'output') && (<><Text style={styles.textHeader}>Link</Text>
             <View style={styles.httpAreaInput}>
-              <Text>https:// </Text>
+              <Text>https://</Text>
               <TextInput style={{ width: '100%' }}
                 value={hookUrl} onChangeText={setHookUrl}
-                placeholder="Ingresar url"
+                placeholder="example.com"
                 autoCapitalize="none"
                 autoCorrect={false}
               />
@@ -185,8 +190,12 @@ const NewHookScreen = (props) => {
           <View style={styles.createButtonContainer}>
             <TouchableOpacity
               onPress={() => createHookHandler()}
-
-              style={styles.applyButton} disabled={false}>
+              disabled={hookOf === 'output' ? ((!hookUrl && !reference) || !hookName) : !hookName}
+              style={{ ...styles.applyButton,
+                backgroundColor:
+                ((hookOf === 'output' ? ((!hookUrl && !reference) || !hookName) : !hookName) ?
+                  colors.gray : colors.darkBlue),
+              }} >
               <Text style={styles.textConfirmButton}>crear</Text>
             </TouchableOpacity>
           </View>
