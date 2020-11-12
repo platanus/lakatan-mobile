@@ -163,7 +163,7 @@ const NewHookScreen = (props) => {
           {(hookType === 'Webhook' && hookOf === 'output') && (<><Text style={styles.textHeader}>Link</Text>
             <View style={styles.httpAreaInput}>
               <Text>https://</Text>
-              <TextInput style={{ width: '100%' }}
+              <TextInput style={{ width: '80%' }}
                 value={hookUrl} onChangeText={setHookUrl}
                 placeholder="example.com"
                 autoCapitalize="none"
@@ -179,12 +179,6 @@ const NewHookScreen = (props) => {
             autoCapitalize="none"
             autoCorrect={false}
           />
-          <View style={styles.instructionContainer}>
-            <Text style={styles.instructionText}>Acá tienen que ir los campos necesarios según el tipo de hook, por ejemplo:</Text>
-            <Text style={styles.instructionText}>para un hook de entrada webhook, definir el endpoint después del dominio</Text>
-            <Text style={styles.instructionText}>para un hook de salida slack, debiera poder asignarse un canal o una persona y el mensaje</Text>
-            <Text style={styles.instructionText}>para un hook de salida webhook debiera poder ingresarse la URL</Text>
-          </View>
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.createButtonContainer}>
