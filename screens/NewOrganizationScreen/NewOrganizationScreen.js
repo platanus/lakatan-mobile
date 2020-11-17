@@ -10,6 +10,20 @@ import BackButton from '../../components/LandingScreen/BackButton';
 const NewOrganizationScreen = (props) => {
   const [name, setName] = useState('');
 
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Nueva Organización</Text>
+        </View>
+      ),
+    });
+  }, [props.navigation]);
+
   const confirmButtonDisable = () => (
     { ...styles.confirmButton, backgroundColor: name ? colors.darkBlue : colors.gray });
 

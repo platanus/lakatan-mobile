@@ -49,6 +49,14 @@ const styles = StyleSheet.create({
     color: color.white,
     fontSize: globalStyle.fontSizeButton,
   },
+  header: {
+    flexDirection: 'row',
+    height: '50%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
+  },
 });
 
 export default { ...styles };
