@@ -26,12 +26,16 @@ import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
 import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
 import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import EditPhotoScreen from './screens/ProfileScreen/EditPhotoScreen';
+import EditNameScreen from './screens/ProfileScreen/EditNameScreen';
 
 runSagas();
 const AppStack = createStackNavigator();
 const TeamStack = createStackNavigator();
 const AppDrawer = createDrawerNavigator();
 const IntegrationStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 
 const Integration = () => (
   <IntegrationStack.Navigator>
@@ -70,7 +74,16 @@ const Teams = () => (
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
     <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
     <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
+    
   </TeamStack.Navigator>
+);
+
+const Profile = () => (
+  <ProfileStack.Navigator>
+    <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Perfil' }} />
+    <ProfileStack.Screen name="EditPhoto" component={EditPhotoScreen} options={{ title: 'Perfil' }} />
+    <ProfileStack.Screen name="EditName" component={EditNameScreen} options={{ title: 'Perfil' }} />
+  </ProfileStack.Navigator>
 );
 
 const AppNavigator = () => {
@@ -91,6 +104,7 @@ const AppNavigator = () => {
     )}>
       <AppDrawer.Screen name="Equipos" component={Teams} />
       <AppDrawer.Screen name="Integraciones" component={Integration} />
+      <AppDrawer.Screen name="Perfil" component={Profile}/>
     </AppDrawer.Navigator>
   );
 };

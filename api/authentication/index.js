@@ -47,6 +47,18 @@ function signOutApi({ email, token }) {
   });
 }
 
+function getSesionApi({ email, token }) {
+  return axios({
+    method: 'get',
+    url: `${url}/api/v1/sessions`,
+    headers: {
+      'X-User-Email': email,
+      'X-User-token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 function passwordChangeApi({ email }) {
   return axios({
     method: 'post',
@@ -62,11 +74,31 @@ function passwordChangeApi({ email }) {
   });
 }
 
+function name_change({ token, email, name }) {
+  return axios({
+    method: 'put',
+    url: `${url}api/v1/registrations`,
+    data: {
+      user: {
+        name,
+      },
+    },
+    headers: {
+      'X-User-Email': email,
+      'X-User-token': token,
+      'Content-type': 'application/json',
+    },
+
+  });
+}
+
 const authenticactionApi = {
   signInApi,
   signUpApi,
   signOutApi,
+  getSesionApi,
   passwordChangeApi,
+  name_change,
 };
 
 export default authenticactionApi;

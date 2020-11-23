@@ -55,11 +55,6 @@ function LandingScreen(props) {
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
       ),
-      headerTitle: () => (
-        <View style={styles.header}>
-          <Text style={styles.title}>Equipos</Text>
-        </View>
-      ),
     });
   }, [props.navigation]);
 

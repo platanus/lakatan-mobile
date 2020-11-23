@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Image } from 'react-native';
+import defaultImage from '../../assets/user.png';
+
 
 const initialState = {
   token: undefined,
@@ -7,6 +10,7 @@ const initialState = {
   loading: false,
   error: undefined,
   success: undefined,
+  imageProfile: Image.resolveAssetSource(defaultImage).uri,
 };
 
 const slice = createSlice({
@@ -19,6 +23,8 @@ const slice = createSlice({
     signInSuccess(state, action) {
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
+      // state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
+      // console.log(state.imageProfile);
     },
     signUpSuccess(state, action) {
       state.success = action.payload;
@@ -34,6 +40,12 @@ const slice = createSlice({
     },
     clearSuccess(state) {
       state.success = undefined;
+    },
+    changeNameSuccess(state, action) {
+      state.name = action.payload.name;
+    },
+    refreshProfile(state, action) {
+      state.name = action.payload.data.attributes.name;
     },
     authError(state, action) {
       state.error = action.payload;
