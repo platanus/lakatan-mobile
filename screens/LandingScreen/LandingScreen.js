@@ -35,8 +35,7 @@ function LandingScreen(props) {
 
   useEffect(() => {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-    console.log("actualiza")
-  }, [email])
+  }, [props.navigation])
     
 
   useEffect(() => {
