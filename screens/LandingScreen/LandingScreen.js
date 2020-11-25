@@ -17,7 +17,8 @@ const TeamView = (props) => {
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
       <View style={styles.teamCard}>
-        <Text style={styles.teamName}>{name}</Text>
+        {/* <Text style={styles.teamName}>{name}</Text> */}
+        <Text style={styles.teamName}>asd</Text>
       </View>
     </TouchableOpacity>
   );
