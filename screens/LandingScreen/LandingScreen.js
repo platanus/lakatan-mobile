@@ -33,9 +33,10 @@ function LandingScreen(props) {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
   });
 
-  if (teamsList.length === 0) {
+  useEffect(() => {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-  }
+  }, [props.navigation])
+    
 
   useEffect(() => {
     if (props.route.params?.name) {
