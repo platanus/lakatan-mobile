@@ -5,17 +5,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/OrganizationsListScreen/OrganizationsListScreen';
 import {
-  // CURRENT_ORGANIZATION_REQUEST,
   USER_ORGANIZATIONS_REQUEST,
+  CHANGE_CURRENT_ORGANIZATION,
 } from '../../store/types';
 import { FlatList } from 'react-native-gesture-handler';
 
 const OrganizationView = (props) => {
-  const { id, attributes: { name, picture } } = props.organization;
+  const { id, attributes: { name, picture } } = props.organization.item;
+  const dispatch = useDispatch();
+
+  const pressHandler = () => {
+    dispatch({ type: CHANGE_CURRENT_ORGANIZATION, payload: { name, picture, id } });
+    props.navigation.jumpTo('Equipos');
+  };
 
   return (
     <TouchableOpacity
-      onPress={() => props.navigation.navigate('Teams')}
+      onPress={pressHandler}
       style={styles.button}
     >
       <Text style={styles.buttonText}>
@@ -27,15 +33,14 @@ const OrganizationView = (props) => {
 
 const OrganizationList = (props) => {
   const dispatch = useDispatch();
-  const { token, email } = useSelector((state) => state.authentication);
-  const { organizationList } = useSelector((state) => state.organizations);
+  const { token, email, id } = useSelector((state) => state.authentication);
+  const { organizationsList } = useSelector((state) => state.organizations);
   useEffect(() => {
     dispatch({
       type: USER_ORGANIZATIONS_REQUEST,
-      payload: { token, email },
+      payload: { token, email, user_id: id },
     });
-  });
-
+  }, [props.navigation]);
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => (
@@ -47,9 +52,9 @@ const OrganizationList = (props) => {
   return (
     <View style={styles.buttonContainer}>
 
-      <View>
+      <View style={{ width: '100%' }}>
         <FlatList
-          data={organizationList}
+          data={organizationsList}
           renderItem={(organization) => <OrganizationView navigation={props.navigation} organization={organization} />}
           keyExtractor={(organization) => organization.id.toString()}
         />

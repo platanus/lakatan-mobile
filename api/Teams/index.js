@@ -1,10 +1,10 @@
 import axios from 'axios';
 import url from '../../env';
 
-function allTeams({ email, token }) {
+function allTeams({ email, token, id }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/teams`,
+    url: `${url}/api/v1/teams?org_id=${id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -26,16 +26,16 @@ function team({ email, token, id }) {
 }
 
 function newTeam({
-  name, purpose, members, token, email, organization_id,
+  name, purpose, members, token, email, id,
 }) {
   return axios({
     method: 'post',
     url: `${url}/api/v1/teams`,
     data: {
-      organization_id,
       name,
       purpose,
       users: members,
+      organization_id: id,
     },
     headers: {
       'X-User-Email': email,

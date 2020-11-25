@@ -60,11 +60,12 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email } } } = camelResponse.data;
+    const { isSuccess, data: { user: { authenticationToken, email, id } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
+        id,
       }));
     }
   } catch (error) {

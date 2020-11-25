@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: undefined,
   success: undefined,
+  id: undefined,
 };
 
 const slice = createSlice({
@@ -19,6 +20,7 @@ const slice = createSlice({
     signInSuccess(state, action) {
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
+      state.id = action.payload.id;
     },
     signUpSuccess(state, action) {
       state.success = action.payload;
