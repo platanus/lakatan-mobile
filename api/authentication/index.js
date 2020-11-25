@@ -91,6 +91,34 @@ function name_change({ token, email, name }) {
 
   });
 }
+function get_url_temp({ token, email }) {
+  console.log(token);
+  return axios({
+    method: 'get',
+    url: `${url}upload`,
+    headers: {
+      'X-User-Email': email,
+      'X-User-token': token,
+      'Content-type': 'application/json',
+    },
+
+  });
+}
+function send_file({ formData }, info) {
+  const {method, fields} = info;
+  const link = info.url;
+  return axios({
+    method,
+    url: link,
+    data: {
+      formData,
+    },
+    headers: { fields,
+      'content-type': 'multipart/form-data'  
+    },
+
+  });
+}
 
 const authenticactionApi = {
   signInApi,
@@ -99,6 +127,8 @@ const authenticactionApi = {
   getSesionApi,
   passwordChangeApi,
   name_change,
+  get_url_temp,
+  send_file,
 };
 
 export default authenticactionApi;

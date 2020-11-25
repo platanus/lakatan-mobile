@@ -9,7 +9,8 @@ import {
   CLEAR_AUTH_ERROR,
   CLEAR_AUTH_SUCCESS,
   CHANGE_NAME_REQUEST,
-  REFRESH_PROFILE_REQUEST
+  REFRESH_PROFILE_REQUEST,
+  SEND_FILE_REQUEST
 } from '../types';
 import api from '../../api/authentication';
 
@@ -62,11 +63,12 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email } } } = camelResponse.data;
+    const { isSuccess, data: { user: { authenticationToken, email, id } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
+        id,
       }));
     }
   } catch (error) {
@@ -141,6 +143,20 @@ function *getSessionRequest({ payload }) {
   yield put(authenticationActions.finish());
 }
 
+function *getUrlTempRequest({ payload }) {
+  yield put(authenticationActions.start());
+  try {
+    const response = yield call(api.get_url_temp, payload);
+    console.log(response);
+    const data = response.data;
+    const repon = yield call(api.send_file, payload, data);
+    console.log(repon);
+  } catch (error) {
+    console.log(error);
+  }
+  yield put(authenticationActions.finish());
+}
+
 function *clearAuthError() {
   yield put(authenticationActions.clearError());
 }
@@ -158,4 +174,5 @@ export default function *authenticactionSaga() {
   yield takeLatest(CLEAR_AUTH_SUCCESS, clearAuthSuccess);
   yield takeLatest(CHANGE_NAME_REQUEST, nameChangeRequest);
   yield takeLatest(REFRESH_PROFILE_REQUEST, getSessionRequest);
+  yield takeLatest(SEND_FILE_REQUEST, getUrlTempRequest);
 }

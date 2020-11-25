@@ -26,6 +26,8 @@ import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
 import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
 import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
+import OrganizationListScreen from './screens/OrganizationsListScreen/OrganizationsListScreen';
+import NewOrganizationScreen from './screens/NewOrganizationScreen/NewOrganizationScreen';
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import EditPhotoScreen from './screens/ProfileScreen/EditPhotoScreen';
 import EditNameScreen from './screens/ProfileScreen/EditNameScreen';
@@ -36,6 +38,7 @@ const TeamStack = createStackNavigator();
 const AppDrawer = createDrawerNavigator();
 const IntegrationStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
+const OrganizationStack = createStackNavigator();
 
 const Integration = () => (
   <IntegrationStack.Navigator>
@@ -53,6 +56,17 @@ const Integration = () => (
     <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
     <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
+);
+
+const Organization = () => (
+  <OrganizationStack.Navigator>
+    <OrganizationStack.Screen
+      name="Organizations"
+      component={OrganizationListScreen}
+      options={{ title: 'Organizaciones' }}
+    />
+    <OrganizationStack.Screen name="New Organization" component={NewOrganizationScreen} />
+  </OrganizationStack.Navigator>
 );
 
 const Teams = () => (
@@ -102,6 +116,7 @@ const AppNavigator = () => {
         />
       </DrawerContentScrollView>
     )}>
+      <AppDrawer.Screen name="Organizaciones" component={Organization} />
       <AppDrawer.Screen name="Equipos" component={Teams} />
       <AppDrawer.Screen name="Integraciones" component={Integration} />
       <AppDrawer.Screen name="Perfil" component={Profile}/>

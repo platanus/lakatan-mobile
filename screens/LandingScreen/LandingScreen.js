@@ -26,6 +26,7 @@ const TeamView = (props) => {
 function LandingScreen(props) {
   const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
 
   const dispatch = useDispatch();
 
@@ -33,9 +34,10 @@ function LandingScreen(props) {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
   });
 
-  if (teamsList.length === 0) {
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-  }
+
+  useEffect(() => {
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
+  }, [id])
 
   useEffect(() => {
     if (props.route.params?.name) {
@@ -43,7 +45,7 @@ function LandingScreen(props) {
       dispatch({
         type: NEW_TEAM_REQUEST,
         payload: {
-          token, email, name, purpose: description, members,
+          token, email, name, purpose: description, members, id
         },
       });
     }

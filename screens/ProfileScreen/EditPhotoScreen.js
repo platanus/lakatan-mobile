@@ -9,7 +9,9 @@ import Constants from 'expo-constants';
 import colors from '../../styles/colors';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
-
+import {
+  SEND_FILE_REQUEST,
+} from '../../store/types';
 
 const EditPhoto = (props) => {
   // const { id, name, mail } = props.route.params;
@@ -43,11 +45,38 @@ const EditPhoto = (props) => {
     })();
   }, []);
 
+  function uploadImageAsync(pictureuri) {
+    const apiUrl = 'http://123.123.123.123/ABC';
+    const data = new FormData();
+    data.append('file', {
+      uri: pictureuri,
+      name: 'file',
+      type: 'image/jpg',
+    });
+
+    fetch(apiUrl, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      method: 'POST',
+      body: data,
+    }).then(
+      response => {
+        console.log('succ ');
+        console.log(response);
+      },
+    ).catch(err => {
+      console.log('err ');
+      console.log(err);
+    });
+  }
+
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [1,1],
+      aspect: [1, 1],
       quality: 1,
     });
 
@@ -55,6 +84,19 @@ const EditPhoto = (props) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      // ImagePicker saves the taken photo to disk and returns a local URI to it
+      const localUri = result.uri;
+      const filename = localUri.split('/').pop();
+
+      // Infer the type of the image
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : 'image';
+
+      // Upload the image using the fetch and FormData APIs
+      const formData = new FormData();
+      // Assume "photo" is the name of the form field the server expects
+      formData.append('photo', { uri: localUri, name: email, type });
+      dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, formData } });
     }
   };
 

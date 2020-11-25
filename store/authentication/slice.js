@@ -11,6 +11,7 @@ const initialState = {
   error: undefined,
   success: undefined,
   imageProfile: Image.resolveAssetSource(defaultImage).uri,
+  id: undefined,
 };
 
 const slice = createSlice({
@@ -23,6 +24,7 @@ const slice = createSlice({
     signInSuccess(state, action) {
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
+      state.id = action.payload.id;
       // state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
       // console.log(state.imageProfile);
     },
