@@ -19,13 +19,10 @@ const OrganizationView = (props) => {
   };
 
   return (
-    <TouchableOpacity
-      onPress={pressHandler}
-      style={styles.button}
-    >
-      <Text style={styles.buttonText}>
-        {name}
-      </Text>
+    <TouchableOpacity onPress={pressHandler}>
+      <View style={styles.buttonTextContainer}>
+        <Text style={styles.buttonText}>{name}</Text>
+      </View>
     </TouchableOpacity>
   );
 };
@@ -52,13 +49,17 @@ const OrganizationList = (props) => {
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
       ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Organizaciones</Text>
+        </View>
+      ),
     });
   }, [props.navigation]);
 
   return (
     <View style={styles.buttonContainer}>
-
-      <View style={{ width: '100%' }}>
+      <View style={styles.mainContainer}>
         <FlatList
           data={organizationsList}
           renderItem={(organization) => <OrganizationView organization={organization} />}
@@ -66,11 +67,11 @@ const OrganizationList = (props) => {
         />
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => props.navigation.navigate('New Organization')}
       >
         <Text>New Organization</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
