@@ -27,11 +27,10 @@ function LandingScreen(props) {
   const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const { id } = useSelector((state) => state.organizations.currentOrganization);
-
   const dispatch = useDispatch();
 
   const onRefresh = useCallback(() => {
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
   });
 
 

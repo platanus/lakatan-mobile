@@ -9,6 +9,7 @@ import { SET_WORKSPACE } from '../../store/types';
 const IntegrationList = (props) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -20,7 +21,7 @@ const IntegrationList = (props) => {
 
   const navigate = (name) => {
     props.navigation.navigate('Integration', { name });
-    dispatch({ type: SET_WORKSPACE, payload: { token, email } });
+    dispatch({ type: SET_WORKSPACE, payload: { token, email, id } });
   };
 
   return (

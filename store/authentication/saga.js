@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { camelizeKeys } from 'humps';
 import { actions as authenticationActions } from './slice';
+import { actions as organizationsActions } from '../organizations/slice';
 import {
   SIGN_IN_REQUEST,
   SIGN_UP_REQUEST,
@@ -83,6 +84,7 @@ function *signOutRequest({ payload }) {
     yield put(authenticationActions.authError('¡Oops, hubo un error!'));
     yield put(authenticationActions.reset());
   }
+  yield put(organizationsActions.reset());
   yield put(authenticationActions.finish());
 }
 

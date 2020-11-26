@@ -2,8 +2,8 @@ import axios from 'axios';
 import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
-function createWorkspace({ email, token, slackToken }) {
-  const integration = decamelizeKeys({ slackToken });
+function createWorkspace({ email, token, slackToken, organizationId }) {
+  const integration = decamelizeKeys({ slackToken, organizationId });
 
   return axios({
     method: 'post',
@@ -19,8 +19,8 @@ function createWorkspace({ email, token, slackToken }) {
   });
 }
 
-function updateWorkspace({ email, token, slackToken }) {
-  const integration = decamelizeKeys({ slackToken });
+function updateWorkspace({ email, token, slackToken, organizationId }) {
+  const integration = decamelizeKeys({ slackToken, organizationId });
 
   return axios({
     method: 'put',
@@ -36,10 +36,10 @@ function updateWorkspace({ email, token, slackToken }) {
   });
 }
 
-function requestWorkpaceName({ email, token }) {
+function requestWorkpaceName({ email, token, id }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/integrations`,
+    url: `${url}/api/v1/integrations?org_id=${id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,

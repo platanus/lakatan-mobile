@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as organizationsActions } from './slice';
-import { actions as authActions } from '../authentication/slice';
+import { actions as syncActions } from '../sync/slice';
+import { actions as teamsActions } from '../Teams/slice';
 import { CURRENT_ORGANIZATION_REQUEST, USER_ORGANIZATIONS_REQUEST, CHANGE_CURRENT_ORGANIZATION } from '../types';
 import apiOrganizations from '../../api/organizations';
 
@@ -44,6 +45,8 @@ function *userOrganizationsRequest({ payload }) {
 function *changeCurrentOrganization({ payload }) {
   const { id, name, picture } = payload;
   yield put(organizationsActions.start());
+  yield put(syncActions.reset());
+  yield put(teamsActions.reset());
   yield put(organizationsActions.loadOrganizationSuccess({
     organization: {
       id, name, picture,
