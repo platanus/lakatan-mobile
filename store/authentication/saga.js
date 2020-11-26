@@ -150,7 +150,7 @@ function *uploadFileRequest({ payload, data }) {
     console.log('repon', repon);
     const link = `${data.url}/${data.fields.key}`;
     yield put(authenticationActions.updateImageProfile(link));
-    yield call(api.update_image, payload, link);
+    yield call(api.update_image, payload, link); 
   } catch (error) {
     console.log('error 2');
     console.log(error);

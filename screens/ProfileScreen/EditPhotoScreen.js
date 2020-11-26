@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import {
-  View, Text, TouchableOpacity, Image,
+  View, Text, TouchableOpacity, Image, ActivityIndicator,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,12 +10,12 @@ import colors from '../../styles/colors';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
 import {
-  SEND_FILE_REQUEST,
+  SEND_FILE_REQUEST, CLEAR_AUTH_SUCCESS,
 } from '../../store/types';
 
 const EditPhoto = (props) => {
   // const { id, name, mail } = props.route.params;
-  const { token, email, imageProfile, loading } = useSelector((state) => state.authentication);
+  const { token, email, imageProfile, loading, success } = useSelector((state) => state.authentication);
   const [image, setImage] = useState(imageProfile);
   const [selected, setSetelected] = useState(false);
   const dispatch = useDispatch();
@@ -81,10 +81,14 @@ const EditPhoto = (props) => {
     // Assume "photo" is the name of the form field the server expects
     const data = { uri: localUri, type };
     dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data } });
-    if (!loading) {
+  };
+
+  useEffect(() => {
+    if (props.navigation.isFocused() && success) {
+      dispatch({ type: CLEAR_AUTH_SUCCESS });
       props.navigation.navigate('Profile');
     }
-  };
+  }, [dispatch, props.navigation, success]);
 
   return (
     <View style={styles.buttonContainer}>
@@ -98,6 +102,7 @@ const EditPhoto = (props) => {
         <TouchableOpacity
           style={styles.button}
           onPress={pickImage}
+          disabled={loading}
         ><Text style={styles.buttonText}>
           Selecionar
           </Text>
@@ -107,10 +112,11 @@ const EditPhoto = (props) => {
         <TouchableOpacity
           style={createRiteButtonDisable()}
           onPress={() => navigate()}
-          disabled={!(selected)}
-        ><Text style={styles.buttonText}>
+          disabled={!(selected) || loading}
+        >
+          { loading ? (<ActivityIndicator size='large' style={{ flex: 1 }}/>) : (<Text style={styles.buttonText}>
           Guardar
-          </Text>
+          </Text>)}
         </TouchableOpacity>
       </View>
     </View>

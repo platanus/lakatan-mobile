@@ -42,6 +42,7 @@ const slice = createSlice({
     },
     updateImageProfile(state, action) {
       state.imageProfile = action.payload;
+      state.success = 'uploaded';
     },
     changePasswordSuccess(state, action) {
       state.success = action.payload;
