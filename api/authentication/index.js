@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { decamelizeKeys } from 'humps';
 import url from '../../env';
+import { snakeCase, kebabCase, startsWith } from 'lodash';
 
 function signInApi({ email, password }) {
   return axios({
@@ -93,9 +94,10 @@ function name_change({ token, email, name }) {
 }
 function get_url_temp({ token, email }) {
   console.log(token);
+
   return axios({
     method: 'get',
-    url: `${url}upload`,
+    url: `${url}api/v1/s3/presign`,
     headers: {
       'X-User-Email': email,
       'X-User-token': token,
@@ -104,20 +106,21 @@ function get_url_temp({ token, email }) {
 
   });
 }
-function send_file({ formData }, info) {
-  const {method, fields} = info;
+function send_file({ data }, info) {
+  const { method, fields } = info;
   const link = info.url;
-  return axios({
-    method,
-    url: link,
-    data: {
-      formData,
-    },
-    headers: { fields,
-      'content-type': 'multipart/form-data'  
-    },
-
+  Object.keys(fields).forEach((fieldKey) => {
+    if (startsWith(fieldKey, 'xAmz')) {
+      data.append(kebabCase(fieldKey), fields[fieldKey]);
+    } else {
+      data.append(fieldKey, fields[fieldKey]);
+    }
   });
+  console.log("data: ",data);
+
+  return axios.post(link, data, {headers: {
+      'Content-type': 'multipart/form-data',
+    },});
 }
 
 const authenticactionApi = {

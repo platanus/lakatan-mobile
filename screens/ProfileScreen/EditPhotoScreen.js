@@ -93,10 +93,10 @@ const EditPhoto = (props) => {
       const type = match ? `image/${match[1]}` : 'image';
 
       // Upload the image using the fetch and FormData APIs
-      const formData = new FormData();
+      const data = new FormData();
       // Assume "photo" is the name of the form field the server expects
-      formData.append('photo', { uri: localUri, name: email, type });
-      dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, formData } });
+      data.append('file', { uri: localUri, type });
+      dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data } });
     }
   };
 

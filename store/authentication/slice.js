@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Image } from 'react-native';
 import defaultImage from '../../assets/user.png';
 
-
 const initialState = {
   token: undefined,
   email: undefined,
@@ -36,6 +35,9 @@ const slice = createSlice({
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;
+    },
+    updateImageProfile(state, action) {
+      state.imageProfile = action.payload.url;
     },
     changePasswordSuccess(state, action) {
       state.success = action.payload;

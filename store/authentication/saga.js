@@ -10,7 +10,7 @@ import {
   CLEAR_AUTH_SUCCESS,
   CHANGE_NAME_REQUEST,
   REFRESH_PROFILE_REQUEST,
-  SEND_FILE_REQUEST
+  SEND_FILE_REQUEST,
 } from '../types';
 import api from '../../api/authentication';
 
@@ -147,15 +147,31 @@ function *getUrlTempRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
     const response = yield call(api.get_url_temp, payload);
-    console.log(response);
+    console.log(response.data);
     const data = response.data;
-    const repon = yield call(api.send_file, payload, data);
-    console.log(repon);
+    yield uploadFileRequest({ payload, data});
+    // const url = `${repon.data.url}/${repon.data.key}`;
+    // const res = yield put(authenticationActions.updateImageProfile, url);
+    // console.log(res);
   } catch (error) {
-    console.log(error);
+    console.log("error 1");
   }
   yield put(authenticationActions.finish());
 }
+
+function *uploadFileRequest({ payload, data }) {
+  try {
+    const repon = yield call(api.send_file, payload, data);
+    // const url = `${repon.data.url}/${repon.data.key}`;
+    console.log('url: ', repon);
+    // const res = yield put(authenticationActions.updateImageProfile, url);
+    // console.log(res);
+  } catch (error) {
+    console.log("error 2");
+    console.log(error)
+  }
+}
+
 
 function *clearAuthError() {
   yield put(authenticationActions.clearError());
