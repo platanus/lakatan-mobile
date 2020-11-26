@@ -73,12 +73,6 @@ const OrganizationList = (props) => {
           }
         />
       </View>
-
-      {/* <TouchableOpacity
-        onPress={() => props.navigation.navigate('New Organization')}
-      >
-        <Text>New Organization</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
