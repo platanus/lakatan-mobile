@@ -27,9 +27,9 @@ function LandingScreen(props) {
   const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
   const { id, name } = useSelector((state) => state.organizations.currentOrganization);
-  console.log("id")
-  console.log(id)
-  console.log(name)
+  // console.log("id")
+  // console.log(id)
+  // console.log(name)
   const dispatch = useDispatch();
 
   const onRefresh = useCallback(() => {

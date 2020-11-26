@@ -1,14 +1,13 @@
-import React, { useLayoutEffect, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useLayoutEffect, useEffect, useCallback } from 'react';
+import { View, Text, TouchableOpacity, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { FlatList } from 'react-native-gesture-handler';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/OrganizationsListScreen/OrganizationsListScreen';
 import {
   USER_ORGANIZATIONS_REQUEST,
   CHANGE_CURRENT_ORGANIZATION,
 } from '../../store/types';
-import { FlatList } from 'react-native-gesture-handler';
 
 const OrganizationView = (props) => {
   const { id, attributes: { name, picture } } = props.organization.item;
@@ -30,7 +29,12 @@ const OrganizationView = (props) => {
 const OrganizationList = (props) => {
   const dispatch = useDispatch();
   const { token, email, id } = useSelector((state) => state.authentication);
-  const { organizationsList, currentOrganization } = useSelector((state) => state.organizations);
+  const { organizationsList, loading, currentOrganization } = useSelector((state) => state.organizations);
+
+  const onRefresh = useCallback(() => {
+    dispatch({ type: USER_ORGANIZATIONS_REQUEST, payload: { token, email, user_id: id } });
+  });
+
   useEffect(() => {
     dispatch({
       type: USER_ORGANIZATIONS_REQUEST,
@@ -64,6 +68,9 @@ const OrganizationList = (props) => {
           data={organizationsList}
           renderItem={(organization) => <OrganizationView organization={organization} />}
           keyExtractor={(organization) => organization.id.toString()}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={onRefresh} />
+          }
         />
       </View>
 
