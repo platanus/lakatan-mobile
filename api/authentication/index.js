@@ -92,12 +92,12 @@ function name_change({ token, email, name }) {
 
   });
 }
-function get_url_temp({ token, email, data}) {
-  const {uri, type} = data;
+function get_url_temp({ token, email, data }) {
+  const { uri, type } = data;
   const exten = type.split('/').pop();
-  const filename = 'hola.'+exten;
+  const filename = `hola.${exten}`;
   console.log(filename);
-  console.log(type)
+  console.log(type);
 
   return axios({
     method: 'get',
@@ -110,6 +110,7 @@ function get_url_temp({ token, email, data}) {
 
   });
 }
+
 function send_file({ data }, info) {
   const body = new FormData();
   const { method, fields } = info;
@@ -123,7 +124,6 @@ function send_file({ data }, info) {
   });
   body.append('file', data);
 
-
   return axios({
     method: 'post',
     url: link,
@@ -131,6 +131,26 @@ function send_file({ data }, info) {
     headers: {
       'Content-type': 'multipart/form-data',
     },
+  });
+}
+
+function update_image({ token, email }, link) {
+  const picture = link;
+  console.log(picture);
+  return axios({
+    method: 'put',
+    url: `${url}api/v1/registrations`,
+    data: {
+      user: {
+        picture: {picture},
+      },
+    },
+    headers: {
+      'X-User-Email': email,
+      'X-User-token': token,
+      'Content-type': 'application/json',
+    },
+
   });
 }
 
@@ -143,6 +163,7 @@ const authenticactionApi = {
   name_change,
   get_url_temp,
   send_file,
+  update_image,
 };
 
 export default authenticactionApi;

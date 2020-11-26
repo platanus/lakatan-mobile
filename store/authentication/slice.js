@@ -21,10 +21,13 @@ const slice = createSlice({
       state.loading = true;
     },
     signInSuccess(state, action) {
+      console.log(action);
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
       state.id = action.payload.id;
-      // state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
+      if (action.payload.picture !== undefined) {
+        state.imageProfile = action.payload.picture;
+      }
       // console.log(state.imageProfile);
     },
     signUpSuccess(state, action) {
@@ -35,6 +38,7 @@ const slice = createSlice({
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;
+      state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
     },
     updateImageProfile(state, action) {
       state.imageProfile = action.payload;
@@ -64,6 +68,7 @@ const slice = createSlice({
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;
+      state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
     },
   },
 });

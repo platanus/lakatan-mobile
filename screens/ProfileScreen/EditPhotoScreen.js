@@ -15,8 +15,9 @@ import {
 
 const EditPhoto = (props) => {
   // const { id, name, mail } = props.route.params;
-  const { token, email, imageProfile } = useSelector((state) => state.authentication);
+  const { token, email, imageProfile, loading } = useSelector((state) => state.authentication);
   const [image, setImage] = useState(imageProfile);
+  const [selected, setSetelected] = useState(false);
   const dispatch = useDispatch();
 
   //   useEffect(() => {
@@ -45,33 +46,6 @@ const EditPhoto = (props) => {
     })();
   }, []);
 
-  function uploadImageAsync(pictureuri) {
-    const apiUrl = 'http://123.123.123.123/ABC';
-    const data = new FormData();
-    data.append('file', {
-      uri: pictureuri,
-      name: 'file',
-      type: 'image/jpg',
-    });
-
-    fetch(apiUrl, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-      method: 'POST',
-      body: data,
-    }).then(
-      response => {
-        console.log('succ ');
-        console.log(response);
-      },
-    ).catch(err => {
-      console.log('err ');
-      console.log(err);
-    });
-  }
-
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -84,25 +58,32 @@ const EditPhoto = (props) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      setSetelected(true);
       // ImagePicker saves the taken photo to disk and returns a local URI to it
-      const localUri = result.uri;
-      const filename = localUri.split('/').pop();
-
-      // Infer the type of the image
-      const match = /\.(\w+)$/.exec(filename);
-      const type = match ? `image/${match[1]}` : 'image';
-
-      // Upload the image using the fetch and FormData APIs
-      // const data = new FormData();
-      // Assume "photo" is the name of the form field the server expects
-      const data = { uri: localUri, type }
-      dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data } });
     }
   };
+  const createRiteButtonDisable = () => (
+    {
+      ...styles.button,
+      backgroundColor: selected ? colors.lightBlue : colors.gray,
+    });
 
-  const navigate = (name) => {
-    props.navigation.navigate('Profile');
-    // despachar la imagen
+  const navigate = () => {
+    const localUri = image;
+    const filename = localUri.split('/').pop();
+
+    // Infer the type of the image
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `image/${match[1]}` : 'image';
+
+    // Upload the image using the fetch and FormData APIs
+    // const data = new FormData();
+    // Assume "photo" is the name of the form field the server expects
+    const data = { uri: localUri, type };
+    dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data } });
+    if (!loading) {
+      props.navigation.navigate('Profile');
+    }
   };
 
   return (
@@ -124,8 +105,9 @@ const EditPhoto = (props) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.button}
+          style={createRiteButtonDisable()}
           onPress={() => navigate()}
+          disabled={!(selected)}
         ><Text style={styles.buttonText}>
           Guardar
           </Text>
