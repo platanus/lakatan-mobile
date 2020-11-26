@@ -9,12 +9,11 @@ import color from '../../styles/colors';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import {
   REFRESH_PROFILE_REQUEST,
-  } from '../../store/types';
-
+} from '../../store/types';
 
 const Profile = (props) => {
   // const { id, name, mail } = props.route.params;
-  const { token, email , name} = useSelector((state) => state.authentication);
+  const { token, email, name, imageProfile } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
   //   useEffect(() => {
   //     const refresh = props.navigation.addListener('focus', () => {
@@ -34,16 +33,16 @@ const Profile = (props) => {
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      
     });
   }, [dispatch, props.navigation, email, token]);
+
 
   return (
     <View style={styles.buttonContainer}>
       <View>
         <Image
           style={styles.image}
-          source={require('../../assets/user.png')}
+          source={{ uri: imageProfile }}
         />
       </View>
       <View style={styles.emailContainer}>

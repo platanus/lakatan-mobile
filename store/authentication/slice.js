@@ -37,7 +37,7 @@ const slice = createSlice({
       state.name = undefined;
     },
     updateImageProfile(state, action) {
-      state.imageProfile = action.payload.url;
+      state.imageProfile = action.payload;
     },
     changePasswordSuccess(state, action) {
       state.success = action.payload;

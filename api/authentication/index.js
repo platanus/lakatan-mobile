@@ -92,12 +92,16 @@ function name_change({ token, email, name }) {
 
   });
 }
-function get_url_temp({ token, email }) {
-  console.log(token);
+function get_url_temp({ token, email, data}) {
+  const {uri, type} = data;
+  const exten = type.split('/').pop();
+  const filename = 'hola.'+exten;
+  console.log(filename);
+  console.log(type)
 
   return axios({
     method: 'get',
-    url: `${url}api/v1/s3/presign`,
+    url: `${url}api/v1/s3/presign?filename=${filename}&type=${type}`,
     headers: {
       'X-User-Email': email,
       'X-User-token': token,
@@ -107,20 +111,27 @@ function get_url_temp({ token, email }) {
   });
 }
 function send_file({ data }, info) {
+  const body = new FormData();
   const { method, fields } = info;
   const link = info.url;
   Object.keys(fields).forEach((fieldKey) => {
     if (startsWith(fieldKey, 'xAmz')) {
-      data.append(kebabCase(fieldKey), fields[fieldKey]);
+      body.append(kebabCase(fieldKey), fields[fieldKey]);
     } else {
-      data.append(fieldKey, fields[fieldKey]);
+      body.append(fieldKey, fields[fieldKey]);
     }
   });
-  console.log("data: ",data);
+  body.append('file', data);
 
-  return axios.post(link, data, {headers: {
+
+  return axios({
+    method: 'post',
+    url: link,
+    data: body,
+    headers: {
       'Content-type': 'multipart/form-data',
-    },});
+    },
+  });
 }
 
 const authenticactionApi = {

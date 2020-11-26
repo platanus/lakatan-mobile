@@ -143,35 +143,35 @@ function *getSessionRequest({ payload }) {
   yield put(authenticationActions.finish());
 }
 
+function *uploadFileRequest({ payload, data }) {
+  try {
+    const repon = yield call(api.send_file, payload, data);
+    console.log('repon', repon)
+    const url = `${data.url}/${data.fields.key}`;
+    const res = yield put(authenticationActions.updateImageProfile(url));
+    console.log(res);
+  } catch (error) {
+    console.log('error 2');
+    console.log(error);
+  }
+}
+
 function *getUrlTempRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
     const response = yield call(api.get_url_temp, payload);
-    console.log(response.data);
+    // console.log(response.data);
     const data = response.data;
-    yield uploadFileRequest({ payload, data});
+    yield uploadFileRequest({ payload, data });
     // const url = `${repon.data.url}/${repon.data.key}`;
     // const res = yield put(authenticationActions.updateImageProfile, url);
     // console.log(res);
   } catch (error) {
-    console.log("error 1");
+    console.log('error 1');
+    console.log(error)
   }
   yield put(authenticationActions.finish());
 }
-
-function *uploadFileRequest({ payload, data }) {
-  try {
-    const repon = yield call(api.send_file, payload, data);
-    // const url = `${repon.data.url}/${repon.data.key}`;
-    console.log('url: ', repon);
-    // const res = yield put(authenticationActions.updateImageProfile, url);
-    // console.log(res);
-  } catch (error) {
-    console.log("error 2");
-    console.log(error)
-  }
-}
-
 
 function *clearAuthError() {
   yield put(authenticationActions.clearError());
