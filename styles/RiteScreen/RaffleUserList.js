@@ -28,12 +28,15 @@ const styles = StyleSheet.create({
   selectedItemText: {
     fontSize: globalStyle.fontSizeSecondaryText,
     color: color.darkBlue,
-    width: '90%',
+    flex: 1,
+    marginHorizontal: '2%',
+
   },
   unselectedItemText: {
     fontSize: globalStyle.fontSizeSecondaryText,
     color: color.gray,
-    width: '90%',
+    flex: 1,
+    marginHorizontal: '2%',
   },
 });
 
