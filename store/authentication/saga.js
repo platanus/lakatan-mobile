@@ -63,13 +63,14 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email, id, picture_data } } } = camelResponse.data;
+    const { isSuccess, data: { user: { authenticationToken, email, id, name ,pictureData } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
         id,
-        picture_data,
+        name,
+        pictureData,
       }));
     }
   } catch (error) {
@@ -147,10 +148,21 @@ function *getSessionRequest({ payload }) {
 function *uploadFileRequest({ payload, data }) {
   try {
     const repon = yield call(api.send_file, payload, data);
-    console.log('repon', repon);
-    const link = `${data.url}/${data.fields.key}`;
-    yield put(authenticationActions.updateImageProfile(link));
-    yield call(api.update_image, payload, link); 
+    const uploadedFileData = {
+      id: data.fields.key.match(/^cache\/(.+)/)[1], // object key without prefix
+      storage: 'cache',
+      metadata: {
+        size: payload.information.size,
+        filename: payload.information.filename,
+        mime_type: payload.data.type,
+      }
+    }
+    try {  
+      yield call(api.update_image, payload, JSON.stringify(uploadedFileData)); 
+    } catch (error) {
+      console.log(error);
+    }
+    yield put(authenticationActions.updateImageProfile())
   } catch (error) {
     console.log('error 2');
     console.log(error);
@@ -163,7 +175,6 @@ function *getUrlTempRequest({ payload }) {
     const response = yield call(api.get_url_temp, payload);
     const data = response.data;
     yield uploadFileRequest({ payload, data });
-    
   } catch (error) {
     console.log('error 1');
     console.log(error);

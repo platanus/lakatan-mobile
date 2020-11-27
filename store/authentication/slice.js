@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Image } from 'react-native';
 import defaultImage from '../../assets/user.png';
 
+const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
 const initialState = {
   token: undefined,
   email: undefined,
@@ -21,14 +22,17 @@ const slice = createSlice({
       state.loading = true;
     },
     signInSuccess(state, action) {
-      console.log(action);
+      state.name = action.payload.name;
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
       state.id = action.payload.id;
-      if (action.payload.picture !== undefined) {
-        state.imageProfile = action.payload.picture;
+      if (action.payload.pictureData !== undefined) {
+        console.log(action.payload.pictureData);
+        const picdata = JSON.parse(action.payload.pictureData);
+        const link = `${bucket}${picdata.id}`;
+        state.imageProfile = link;
+        console.log(state.imageProfile);
       }
-      // console.log(state.imageProfile);
     },
     signUpSuccess(state, action) {
       state.success = action.payload;
@@ -41,7 +45,6 @@ const slice = createSlice({
       state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
     },
     updateImageProfile(state, action) {
-      state.imageProfile = action.payload;
       state.success = 'uploaded';
     },
     changePasswordSuccess(state, action) {
@@ -55,6 +58,11 @@ const slice = createSlice({
     },
     refreshProfile(state, action) {
       state.name = action.payload.data.attributes.name;
+      if (action.payload.data.attributes.picture !== undefined) {
+        const picdata = action.payload.data.attributes.picture;
+        const link = `${bucket}${picdata.id}`;
+        state.imageProfile = link;
+      }
     },
     authError(state, action) {
       state.error = action.payload;

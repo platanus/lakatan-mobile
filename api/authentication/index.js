@@ -95,9 +95,8 @@ function name_change({ token, email, name }) {
 function get_url_temp({ token, email, data }) {
   const { uri, type } = data;
   const exten = type.split('/').pop();
-  const filename = `hola.${exten}`;
-  console.log(filename);
-  console.log(type);
+  const name = email.split('.')[0];
+  const filename = `${name}.${exten}`;
 
   return axios({
     method: 'get',
@@ -136,13 +135,13 @@ function send_file({ data }, info) {
 
 function update_image({ token, email }, link) {
   const picture = link;
-  console.log(picture);
+
   return axios({
     method: 'put',
     url: `${url}api/v1/registrations`,
     data: {
       user: {
-        picture: {picture},
+        picture,
       },
     },
     headers: {

@@ -18,6 +18,7 @@ const EditPhoto = (props) => {
   const { token, email, imageProfile, loading, success } = useSelector((state) => state.authentication);
   const [image, setImage] = useState(imageProfile);
   const [selected, setSetelected] = useState(false);
+  const [info, setinfo] = useState(undefined);
   const dispatch = useDispatch();
 
   //   useEffect(() => {
@@ -58,6 +59,7 @@ const EditPhoto = (props) => {
 
     if (!result.cancelled) {
       setImage(result.uri);
+      setinfo(result);
       setSetelected(true);
       // ImagePicker saves the taken photo to disk and returns a local URI to it
     }
@@ -79,8 +81,12 @@ const EditPhoto = (props) => {
     // Upload the image using the fetch and FormData APIs
     // const data = new FormData();
     // Assume "photo" is the name of the form field the server expects
+    const exten = type.split('/').pop();
+    const name = email.split('.')[0]
+    const fileName = `${name}.${exten}`;
     const data = { uri: localUri, type };
-    dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data } });
+    const information = {size: info.height*info.width, filename: fileName};
+    dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data, information } });
   };
 
   useEffect(() => {
@@ -94,6 +100,9 @@ const EditPhoto = (props) => {
     <View style={styles.buttonContainer}>
       <View>
         {image && <Image source={{ uri: image }} style={styles.image} />}
+      </View>
+      <View>
+        <Image source={{uri: "https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/cache/cb075b110d30c333f86d4a311cce0e16.jpg"}}/>
       </View>
       <View style={styles.emailContainer}>
         <Text style={styles.name}>
