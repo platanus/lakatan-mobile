@@ -63,7 +63,8 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email, id, name ,pictureData } } } = camelResponse.data;
+    console.log(response);
+    const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,

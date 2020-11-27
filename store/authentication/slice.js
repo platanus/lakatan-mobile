@@ -26,12 +26,12 @@ const slice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.authenticationToken;
       state.id = action.payload.id;
-      if (action.payload.pictureData !== undefined) {
-        console.log(action.payload.pictureData);
-        const picdata = JSON.parse(action.payload.pictureData);
+      if (action.payload.pictureData !== null) {
+        console.log("datos ",action.payload);
+        const picdata = JSON.parse(action.payload.picture);
         const link = `${bucket}${picdata.id}`;
         state.imageProfile = link;
-        console.log(state.imageProfile);
+        console.log("url ",state.imageProfile);
       }
     },
     signUpSuccess(state, action) {
@@ -58,7 +58,7 @@ const slice = createSlice({
     },
     refreshProfile(state, action) {
       state.name = action.payload.data.attributes.name;
-      if (action.payload.data.attributes.picture !== undefined) {
+      if (action.payload.data.attributes.picture !== null) {
         const picdata = action.payload.data.attributes.picture;
         const link = `${bucket}${picdata.id}`;
         state.imageProfile = link;

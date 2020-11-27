@@ -101,9 +101,6 @@ const EditPhoto = (props) => {
       <View>
         {image && <Image source={{ uri: image }} style={styles.image} />}
       </View>
-      <View>
-        <Image source={{uri: "https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/cache/cb075b110d30c333f86d4a311cce0e16.jpg"}}/>
-      </View>
       <View style={styles.emailContainer}>
         <Text style={styles.name}>
             Subir foto:
