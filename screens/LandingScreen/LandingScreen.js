@@ -26,17 +26,16 @@ const TeamView = (props) => {
 function LandingScreen(props) {
   const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
-
+  const { id, name } = useSelector((state) => state.organizations.currentOrganization);
   const dispatch = useDispatch();
 
   const onRefresh = useCallback(() => {
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
   });
 
   useEffect(() => {
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
-  }, [props.navigation])
-    
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
+  }, [id])
 
   useEffect(() => {
     if (props.route.params?.name) {
@@ -44,12 +43,11 @@ function LandingScreen(props) {
       dispatch({
         type: NEW_TEAM_REQUEST,
         payload: {
-          token, email, name, purpose: description, members,
+          token, email, name, purpose: description, members, id
         },
       });
     }
   }, [props.route.params?.name]);
-
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -58,11 +56,11 @@ function LandingScreen(props) {
       ),
       headerTitle: () => (
         <View style={styles.header}>
-          <Text style={styles.title}>Equipos</Text>
+          <Text style={styles.title}>{name}</Text>
         </View>
       ),
     });
-  }, [props.navigation]);
+  }, [name]);
 
   return (
     <View style={styles.container}>

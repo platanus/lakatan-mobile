@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { camelizeKeys } from 'humps';
 import { actions as authenticationActions } from './slice';
+import { actions as organizationsActions } from '../organizations/slice';
 import {
   SIGN_IN_REQUEST,
   SIGN_UP_REQUEST,
@@ -60,11 +61,12 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email } } } = camelResponse.data;
+    const { isSuccess, data: { user: { authenticationToken, email, id } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
+        id,
       }));
     }
   } catch (error) {
@@ -82,6 +84,7 @@ function *signOutRequest({ payload }) {
     yield put(authenticationActions.authError('¡Oops, hubo un error!'));
     yield put(authenticationActions.reset());
   }
+  yield put(organizationsActions.reset());
   yield put(authenticationActions.finish());
 }
 

@@ -13,10 +13,10 @@ function requestHooks({ email, token, taskId }) {
   });
 }
 
-function slackEntitiesRequest({ email, token }) {
+function slackEntitiesRequest({ email, token, organizationId }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/slack/entities`,
+    url: `${url}/api/v1/slack/entities?org_id=${organizationId}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,

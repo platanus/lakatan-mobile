@@ -22,6 +22,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   const stepOneChanges = useSelector(state => state.sync.step1changes);
   const stepTwoChanges = useSelector(state => state.sync.step2changes);
   const { loading, workspace } = useSelector(state => state.sync);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
   const [stepOneData, setStepOneData] = useState([]);
   const [count, setCount] = useState(0);
   const { name } = route.params;
@@ -78,12 +79,12 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   };
 
   const stepOneReloadButtonHandler = () => {
-    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email, id } });
   };
 
   useEffect(() => {
-    dispatch({ type: USERS_REQUEST, payload: { token, email } });
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+    dispatch({ type: USERS_REQUEST, payload: { token, email, id } });
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
   }, [dispatch, token, email]);
 
   useEffect(() => {

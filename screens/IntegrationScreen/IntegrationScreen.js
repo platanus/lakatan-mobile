@@ -15,6 +15,7 @@ const IntegrationScreen = (props) => {
   const { name } = props.route.params;
   let { workspace } = useSelector((state) => state.sync);
   const { token, email } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -40,7 +41,7 @@ const IntegrationScreen = (props) => {
   }
 
   const pressHandler = () => {
-    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email, id } });
     props.navigation.navigate('Sync step 1', { name });
   };
 

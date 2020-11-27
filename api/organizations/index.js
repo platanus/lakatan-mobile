@@ -1,10 +1,10 @@
 import axios from 'axios';
 import url from '../../env';
 
-function allTeams({ email, token, id }) {
+function allOrganizations({ email, token, user_id }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/teams?org_id=${id}`,
+    url: `${url}/api/v1/organizations?user_id=${user_id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -13,29 +13,15 @@ function allTeams({ email, token, id }) {
   });
 }
 
-function team({ email, token, id }) {
-  return axios({
-    method: 'get',
-    url: `${url}/api/v1/teams/${id}`,
-    headers: {
-      'X-User-Email': email,
-      'X-User-Token': token,
-      'Content-type': 'application/json',
-    },
-  });
-}
-
-function newTeam({
-  name, purpose, members, token, email, id,
+function newOrganization({
+  name, picture, token, email,
 }) {
   return axios({
     method: 'post',
-    url: `${url}/api/v1/teams`,
+    url: `${url}/api/v1/organizations`,
     data: {
       name,
-      purpose,
-      users: members,
-      organization_id: id,
+      picture,
     },
     headers: {
       'X-User-Email': email,
@@ -45,10 +31,22 @@ function newTeam({
   });
 }
 
-const apiTeams = {
-  allTeams,
-  team,
-  newTeam,
+function organization({ email, token, id }) {
+  return axios({
+    method: 'get',
+    url: `${url}/api/v1/organizations/${id}`,
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
+const apiOrganizations = {
+  organization,
+  newOrganization,
+  allOrganizations,
 };
 
-export default apiTeams;
+export default apiOrganizations;

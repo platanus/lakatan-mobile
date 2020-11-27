@@ -17,6 +17,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector(state => state.authentication);
   const { success, workspace } = useSelector(state => state.sync);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
   const { stepOneData, stepTwoDataToShow } = route.params;
   const [stepTwoData, setStepTwoData] = useState(() => stepTwoDataToShow.map((item, key) => {
     const element = { ... item };
@@ -48,7 +49,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
     if (stepOneSelectedData.length > 0 || stepTwoSelectedData.length > 0) {
       dispatch({
         type: END_SYNC_REQUEST,
-        payload: { token, email, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
+        payload: { token, email, id, changes: [...stepOneSelectedData, ...stepTwoSelectedData] } });
     } else {
       navigation.navigate('Integration');
     }
@@ -101,7 +102,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
   };
 
   const stepTwoReloadButtonHandler = () => {
-    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email } });
+    dispatch({ type: WORKSPACE_CHANGES_REQUEST, payload: { token, email, id } });
     navigation.goBack();
   };
 
@@ -119,7 +120,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
     if (success) {
       Alert.alert(
         '¡Sincronización Completa!', '', [{ text: 'OK', onPress: () => {
-          dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+          dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
           dispatch({ type: CLEAR_WORKSPACE });
           navigation.navigate('Integration');
         } }],

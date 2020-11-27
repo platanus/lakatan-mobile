@@ -19,6 +19,7 @@ const NewWorkspaceScreen = (props) => {
   const userToken = useSelector((state) => state.authentication.token);
   const { email } = useSelector((state) => state.authentication);
   const { success, error, workspace } = useSelector((state) => state.sync);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
 
   const { name } = props.route.params;
   const img = {
@@ -57,9 +58,25 @@ const NewWorkspaceScreen = (props) => {
 
   const pressHandler = () => {
     if (workspace) {
-      dispatch({ type: UPDATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+      dispatch({
+        type: UPDATE_WORKSPACE_REQUEST,
+        payload: {
+          slackToken: token,
+          token: userToken,
+          email,
+          organizationId: id,
+        },
+      });
     } else {
-      dispatch({ type: CREATE_WORKSPACE_REQUEST, payload: { slackToken: token, token: userToken, email } });
+      dispatch({
+        type: CREATE_WORKSPACE_REQUEST,
+        payload: {
+          slackToken: token,
+          token: userToken,
+          email,
+          organizationId: id,
+        },
+      });
     }
   };
 

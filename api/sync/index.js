@@ -2,8 +2,8 @@ import axios from 'axios';
 import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
-function createWorkspace({ email, token, slackToken }) {
-  const integration = decamelizeKeys({ slackToken });
+function createWorkspace({ email, token, slackToken, organizationId }) {
+  const integration = decamelizeKeys({ slackToken, organizationId });
 
   return axios({
     method: 'post',
@@ -19,12 +19,12 @@ function createWorkspace({ email, token, slackToken }) {
   });
 }
 
-function updateWorkspace({ email, token, slackToken }) {
-  const integration = decamelizeKeys({ slackToken });
+function updateWorkspace({ email, token, slackToken, organizationId }) {
+  const integration = decamelizeKeys({ slackToken, organizationId });
 
   return axios({
     method: 'put',
-    url: `${url}/api/v1/integrations`,
+    url: `${url}/api/v1/integrations/${organizationId}`,
     data: {
       integration,
     },
@@ -36,10 +36,10 @@ function updateWorkspace({ email, token, slackToken }) {
   });
 }
 
-function requestWorkpaceName({ email, token }) {
+function requestWorkpaceName({ email, token, id }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/integrations`,
+    url: `${url}/api/v1/integrations/${id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -48,10 +48,10 @@ function requestWorkpaceName({ email, token }) {
   });
 }
 
-function requestChanges({ email, token }) {
+function requestChanges({ email, token, id }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/slack/request_changes`,
+    url: `${url}/api/v1/slack/request_changes/${id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -72,10 +72,10 @@ function showChanges({ email, token, id }) {
   });
 }
 
-function aprovedChanges({ email, token, changes }) {
+function aprovedChanges({ email, token, changes, id }) {
   return axios({
     method: 'post',
-    url: `${url}/api/v1/slack`,
+    url: `${url}/api/v1/slack?org_id=${id}`,
     data: changes,
     headers: {
       'X-User-Email': email,

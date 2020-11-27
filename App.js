@@ -26,12 +26,15 @@ import HookScreen from './screens/HookScreen/HookScreen';
 import Splash from './screens/SplashScreen/SplashScreen';
 import StepOneSyncScreen from './screens/SyncScreen/StepOneSyncScreen';
 import StepTwoSyncScreen from './screens/SyncScreen/StepTwoSyncScreen';
+import OrganizationListScreen from './screens/OrganizationsListScreen/OrganizationsListScreen';
+import NewOrganizationScreen from './screens/NewOrganizationScreen/NewOrganizationScreen';
 
 runSagas();
 const AppStack = createStackNavigator();
 const TeamStack = createStackNavigator();
 const AppDrawer = createDrawerNavigator();
 const IntegrationStack = createStackNavigator();
+const OrganizationStack = createStackNavigator();
 
 const Integration = () => (
   <IntegrationStack.Navigator>
@@ -49,6 +52,17 @@ const Integration = () => (
     <IntegrationStack.Screen name="Sync step 1" component={StepOneSyncScreen}/>
     <IntegrationStack.Screen name="Step Two Sync" component={StepTwoSyncScreen}/>
   </IntegrationStack.Navigator>
+);
+
+const Organization = () => (
+  <OrganizationStack.Navigator>
+    <OrganizationStack.Screen
+      name="Organizations"
+      component={OrganizationListScreen}
+      options={{ title: 'Organizaciones' }}
+    />
+    <OrganizationStack.Screen name="New Organization" component={NewOrganizationScreen} />
+  </OrganizationStack.Navigator>
 );
 
 const Teams = () => (
@@ -76,6 +90,7 @@ const Teams = () => (
 const AppNavigator = () => {
   const dispatch = useDispatch();
   const { email, token } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
 
   return (
     <AppDrawer.Navigator drawerContent= {props => (
@@ -88,9 +103,19 @@ const AppNavigator = () => {
           onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}
         />
       </DrawerContentScrollView>
-    )}>
-      <AppDrawer.Screen name="Equipos" component={Teams} />
-      <AppDrawer.Screen name="Integraciones" component={Integration} />
+    )}
+    initialRouteName={id ? 'Equipos' : 'Organizaciones'}
+    >
+      { id ? (
+        <>
+          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+          <AppDrawer.Screen name="Equipos" component={Teams} />
+          <AppDrawer.Screen name="Integraciones" component={Integration} />
+        </>
+      ) :
+        (
+          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+        )}
     </AppDrawer.Navigator>
   );
 };

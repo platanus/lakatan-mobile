@@ -49,9 +49,8 @@ function *createWorkspaceErrorHendler(error) {
 function *createWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
   try {
-    yield call(api.createWorkspace, payload);
-    const response = yield call(api.requestWorkpaceName, { token: payload.token, email: payload.email });
-    const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
+    const { data } = yield call(api.createWorkspace, payload);
+    const { slackWorkspaceName } = camelizeKeys(data).data.attributes;
     yield put(syncActions.setWorkspace({ slackWorkspaceName }));
     yield put(syncActions.success());
   } catch (error) {
@@ -64,7 +63,11 @@ function *updateWorkspaceRequest({ payload }) {
   yield put(syncActions.start());
   try {
     yield call(api.updateWorkspace, payload);
-    const response = yield call(api.requestWorkpaceName, { token: payload.token, email: payload.email });
+    const response = yield call(api.requestWorkpaceName, {
+      token: payload.token,
+      email: payload.email,
+      id: payload.organizationId,
+    });
     const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
     yield put(syncActions.setWorkspace({ slackWorkspaceName }));
     yield put(syncActions.success());

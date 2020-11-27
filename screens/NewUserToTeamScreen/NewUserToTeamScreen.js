@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
@@ -9,12 +9,16 @@ import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 import { USERS_REQUEST } from '../../store/types';
 
+// eslint-disable-next-line max-statements
 const NewUserToTeamScreen = (props) => {
   const { members, name } = props.route.params;
   const [selectedItems, setSelectedItems] = useState(members);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
   const dispatch = useDispatch();
   const { token, email } = useSelector((state) => state.authentication);
-  dispatch({ type: USERS_REQUEST, payload: { token, email } });
+  useEffect(() => {
+    dispatch({ type: USERS_REQUEST, payload: { token, email, id } });
+  }, [name]);
   const { users } = useSelector((state) => state.users);
   const dataHandler = (data) => {
     const aux = [];
