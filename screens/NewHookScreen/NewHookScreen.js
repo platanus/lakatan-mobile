@@ -21,6 +21,7 @@ const NewHookScreen = (props) => {
   const [hookUrl, setHookUrl] = useState('');
   const { email, token } = useSelector(store => store.authentication);
   const { slackEntities } = useSelector(store => store.hooks);
+  const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -72,7 +73,7 @@ const NewHookScreen = (props) => {
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
-      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
+      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token, organizationId } });
     });
   }, [dispatch, props.navigation, email, token]);
 
