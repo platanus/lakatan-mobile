@@ -39,6 +39,7 @@ const RiteScreen = ({
   // const [dataOut, setDataOut] = useState(hooksDataOut);
   const [searchWord, setSearchWord] = useState('');
   const { email, token } = useSelector((store) => store.authentication);
+  const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
 
   const { inHooks, outHooks, slackEntities } = useSelector((state) => state.hooks);
   const outHooksName = [];
@@ -122,7 +123,7 @@ const RiteScreen = ({
   useEffect(() => {
     navigation.addListener('focus', () => {
       dispatch({ type: GET_HOOKS_REQUEST, payload: { token, email, taskId } });
-      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token } });
+      dispatch({ type: GET_SLACK_ENTITIES_REQUEST, payload: { email, token, organizationId } });
     });
   }, [dispatch, navigation, email, token, taskId]);
 

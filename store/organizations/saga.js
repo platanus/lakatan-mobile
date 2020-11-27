@@ -45,7 +45,7 @@ function *userOrganizationsRequest({ payload }) {
 function *changeCurrentOrganization({ payload }) {
   const { id, name, picture } = payload;
   yield put(organizationsActions.start());
-  yield put(syncActions.reset());
+  yield put(syncActions.clearWorkspace());
   yield put(teamsActions.reset());
   yield put(organizationsActions.loadOrganizationSuccess({
     organization: {

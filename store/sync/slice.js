@@ -46,6 +46,9 @@ const slice = createSlice({
       state.success = false;
       state.error = false;
     },
+    clearWorkspace(state) {
+      state.workspace = '';
+    },
   },
 });
 
