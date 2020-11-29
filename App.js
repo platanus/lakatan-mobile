@@ -103,6 +103,7 @@ const Profile = () => (
 const AppNavigator = () => {
   const dispatch = useDispatch();
   const { email, token } = useSelector((state) => state.authentication);
+  const { id } = useSelector((state) => state.organizations.currentOrganization);
 
   return (
     <AppDrawer.Navigator drawerContent= {props => (
@@ -115,11 +116,20 @@ const AppNavigator = () => {
           onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}
         />
       </DrawerContentScrollView>
-    )}>
-      <AppDrawer.Screen name="Organizaciones" component={Organization} />
-      <AppDrawer.Screen name="Equipos" component={Teams} />
-      <AppDrawer.Screen name="Integraciones" component={Integration} />
-      <AppDrawer.Screen name="Perfil" component={Profile}/>
+    )}
+    initialRouteName={id ? 'Equipos' : 'Organizaciones'}
+    >
+      { id ? (
+        <>
+          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+          <AppDrawer.Screen name="Equipos" component={Teams} />
+          <AppDrawer.Screen name="Integraciones" component={Integration} />
+          <AppDrawer.Screen name="Perfil" component={Profile}/>
+        </>
+      ) :
+        (
+          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+        )}
     </AppDrawer.Navigator>
   );
 };

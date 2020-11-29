@@ -26,14 +26,12 @@ const TeamView = (props) => {
 function LandingScreen(props) {
   const { teamsList, loading } = useSelector((state) => state.teams);
   const { token, email } = useSelector((state) => state.authentication);
-  const { id } = useSelector((state) => state.organizations.currentOrganization);
-
+  const { id, name } = useSelector((state) => state.organizations.currentOrganization);
   const dispatch = useDispatch();
 
   const onRefresh = useCallback(() => {
-    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email } });
+    dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
   });
-
 
   useEffect(() => {
     dispatch({ type: ALL_TEAMS_REQUEST, payload: { token, email, id } });
@@ -51,14 +49,18 @@ function LandingScreen(props) {
     }
   }, [props.route.params?.name]);
 
-
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
       ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>{name}</Text>
+        </View>
+      ),
     });
-  }, [props.navigation]);
+  }, [name]);
 
   return (
     <View style={styles.container}>

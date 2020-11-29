@@ -1,19 +1,13 @@
 import { StyleSheet } from 'react-native';
 import colors from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   mainContainer: {
+    flex: 1,
     backgroundColor: colors.white,
-  },
-  button: {
-    backgroundColor: colors.lightBlue,
-    flexDirection: 'row',
-    borderRadius: 50,
-    width: '90%',
-    marginVertical: 5,
-    height: 60,
-    alignItems: 'center',
-    paddingLeft: 20,
+    width: '100%',
+    padding: globalStyle.paddingContainer,
   },
   image: {
     height: 31,
@@ -21,13 +15,30 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    paddingTop: 10,
     backgroundColor: colors.white,
     flex: 1,
   },
+  buttonTextContainer: {
+    width: '100%',
+    height: 50,
+    marginVertical: 5,
+    justifyContent: 'center',
+    backgroundColor: colors.lightBlue,
+    borderRadius: globalStyle.borderRadiusButton,
+  },
   buttonText: {
+    textAlign: 'center',
+    fontSize: 20,
+    // fontWeight: 'bold',
     color: colors.darkBlue,
-    marginLeft: 15,
+  },
+  header: {
+    flexDirection: 'row',
+    height: '65%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 
