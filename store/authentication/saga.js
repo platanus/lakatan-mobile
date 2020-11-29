@@ -63,7 +63,6 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    console.log(response);
     const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
@@ -121,7 +120,7 @@ function *passwordChangeRequest({ payload }) {
 function *nameChangeRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
-    const response = yield call(api.name_change, payload);
+    const response = yield call(api.nameChange, payload);
     const camelResponse = camelizeKeys(response);
     const { isSuccess } = camelResponse.data;
     if (isSuccess) {
@@ -156,16 +155,15 @@ function *uploadFileRequest({ payload, data }) {
         size: payload.information.size,
         filename: payload.information.filename,
         mime_type: payload.data.type,
-      }
-    }
-    try {  
-      yield call(api.update_image, payload, JSON.stringify(uploadedFileData)); 
+      },
+    };
+    try {
+      yield call(api.update_image, payload, JSON.stringify(uploadedFileData));
     } catch (error) {
       console.log(error);
     }
-    yield put(authenticationActions.updateImageProfile())
+    yield put(authenticationActions.updateImageProfile());
   } catch (error) {
-    console.log('error 2');
     console.log(error);
   }
 }
@@ -173,7 +171,7 @@ function *uploadFileRequest({ payload, data }) {
 function *getUrlTempRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
-    const response = yield call(api.get_url_temp, payload);
+    const response = yield call(api.getUrlTemp, payload);
     const data = response.data;
     yield uploadFileRequest({ payload, data });
   } catch (error) {

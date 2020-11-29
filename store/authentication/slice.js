@@ -27,11 +27,9 @@ const slice = createSlice({
       state.token = action.payload.authenticationToken;
       state.id = action.payload.id;
       if (action.payload.pictureData !== null) {
-        console.log("datos ",action.payload);
-        const picdata = JSON.parse(action.payload.picture);
+        const picdata = JSON.parse(action.payload.pictureData);
         const link = `${bucket}${picdata.id}`;
         state.imageProfile = link;
-        console.log("url ",state.imageProfile);
       }
     },
     signUpSuccess(state, action) {
@@ -44,7 +42,7 @@ const slice = createSlice({
       state.name = undefined;
       state.imageProfile = Image.resolveAssetSource(defaultImage).uri;
     },
-    updateImageProfile(state, action) {
+    updateImageProfile(state) {
       state.success = 'uploaded';
     },
     changePasswordSuccess(state, action) {

@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import { useDispatch, useSelector } from 'react-redux';
-import color from '../../styles/colors';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import {
   REFRESH_PROFILE_REQUEST,
@@ -35,7 +34,6 @@ const Profile = (props) => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
     });
   }, [dispatch, props.navigation, email, token]);
-
 
   return (
     <View style={styles.buttonContainer}>

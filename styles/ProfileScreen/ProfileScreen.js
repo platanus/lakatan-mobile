@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     resizeMode: 'stretch',
+    borderRadius: 75,
   },
   buttonContainer: {
     alignItems: 'center',
@@ -30,12 +31,12 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   email: {
-    fontSize: 20
+    fontSize: 20,
   },
-  name :{
+  name: {
     fontSize: 45,
   },
-  emailContainer:{
+  emailContainer: {
     alignItems: 'center',
     marginVertical: 30,
   },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusButton,
     paddingHorizontal: '3%',
     height: globalStyle.heightInput,
-  }
+  },
 });
 
 export default styles;

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { decamelizeKeys } from 'humps';
 import url from '../../env';
-import { snakeCase, kebabCase, startsWith } from 'lodash';
+import { kebabCase, startsWith } from 'lodash';
 
 function signInApi({ email, password }) {
   return axios({
     method: 'post',
-    url: `${url}/api/v1/sessions`,
+    url: `${url}api/v1/sessions`,
     data: {
       user: {
         email,
@@ -26,7 +26,7 @@ function signUpApi({
 
   return axios({
     method: 'post',
-    url: `${url}/api/v1/registrations`,
+    url: `${url}api/v1/registrations`,
     data: {
       user,
     },
@@ -39,7 +39,7 @@ function signUpApi({
 function signOutApi({ email, token }) {
   return axios({
     method: 'delete',
-    url: `${url}/api/v1/sessions`,
+    url: `${url}api/v1/sessions`,
     headers: {
       'X-User-Email': email,
       'X-User-token': token,
@@ -51,7 +51,7 @@ function signOutApi({ email, token }) {
 function getSesionApi({ email, token }) {
   return axios({
     method: 'get',
-    url: `${url}/api/v1/sessions`,
+    url: `${url}api/v1/sessions`,
     headers: {
       'X-User-Email': email,
       'X-User-token': token,
@@ -75,7 +75,7 @@ function passwordChangeApi({ email }) {
   });
 }
 
-function name_change({ token, email, name }) {
+function nameChange({ token, email, name }) {
   return axios({
     method: 'put',
     url: `${url}api/v1/registrations`,
@@ -92,7 +92,7 @@ function name_change({ token, email, name }) {
 
   });
 }
-function get_url_temp({ token, email, data }) {
+function getUrlTemp({ token, email, data }) {
   const { uri, type } = data;
   const exten = type.split('/').pop();
   const name = email.split('.')[0];
@@ -159,8 +159,8 @@ const authenticactionApi = {
   signOutApi,
   getSesionApi,
   passwordChangeApi,
-  name_change,
-  get_url_temp,
+  nameChange,
+  getUrlTemp,
   send_file,
   update_image,
 };

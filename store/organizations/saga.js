@@ -31,7 +31,7 @@ function *currentOrganizationRequest({ payload }) {
 function *userOrganizationsRequest({ payload }) {
   yield put(organizationsActions.start());
   try {
-    const { data: data } = yield call(apiOrganizations.allOrganizations, payload);
+    const { data } = yield call(apiOrganizations.allOrganizations, payload);
     yield put(organizationsActions.loadUserOrganizations({
       organizations: data.data,
     }));

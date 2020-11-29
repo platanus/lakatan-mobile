@@ -2,7 +2,6 @@ import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
-import { useSelector } from 'react-redux';
 import colors from '../../styles/colors';
 import styles from '../../styles/NewOrganizationScreen/NewOrganizationScreen';
 import BackButton from '../../components/LandingScreen/BackButton';

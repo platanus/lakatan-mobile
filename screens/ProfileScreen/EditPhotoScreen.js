@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
 import colors from '../../styles/colors';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
@@ -20,13 +19,6 @@ const EditPhoto = (props) => {
   const [selected, setSetelected] = useState(false);
   const [info, setinfo] = useState(undefined);
   const dispatch = useDispatch();
-
-  //   useEffect(() => {
-  //     const refresh = props.navigation.addListener('focus', () => {
-  //       dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
-  //     });
-  //     return refresh;
-  //   }, [props.navigation]);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -55,8 +47,6 @@ const EditPhoto = (props) => {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
       setinfo(result);
@@ -82,10 +72,10 @@ const EditPhoto = (props) => {
     // const data = new FormData();
     // Assume "photo" is the name of the form field the server expects
     const exten = type.split('/').pop();
-    const name = email.split('.')[0]
+    const name = email.split('.')[0];
     const fileName = `${name}.${exten}`;
     const data = { uri: localUri, type };
-    const information = {size: info.height*info.width, filename: fileName};
+    const information = { size: info.height * info.width, filename: fileName };
     dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data, information } });
   };
 
@@ -117,7 +107,7 @@ const EditPhoto = (props) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={createRiteButtonDisable()}
-          onPress={() => navigate()}
+          onPress={navigate}
           disabled={!(selected) || loading}
         >
           { loading ? (<ActivityIndicator size='large' style={{ flex: 1 }}/>) : (<Text style={styles.buttonText}>
