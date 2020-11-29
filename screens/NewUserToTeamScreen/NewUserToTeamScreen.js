@@ -8,22 +8,29 @@ import BackButton from '../../components/LandingScreen/BackButton';
 import color from '../../styles/colors';
 import styles from '../../styles/NewUserToTeamScreen/NewUserToTeamScreen';
 import { USERS_REQUEST } from '../../store/types';
+import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
 
 // eslint-disable-next-line max-statements
 const NewUserToTeamScreen = (props) => {
   const { members, name } = props.route.params;
   const [selectedItems, setSelectedItems] = useState(members);
+  const [selectedMembers, setSelectedMembers] = useState([]);
   const { id } = useSelector((state) => state.organizations.currentOrganization);
   const dispatch = useDispatch();
   const { token, email } = useSelector((state) => state.authentication);
   useEffect(() => {
     dispatch({ type: USERS_REQUEST, payload: { token, email, id } });
   }, [name]);
+
   const { users } = useSelector((state) => state.users);
   const dataHandler = (data) => {
     const aux = [];
     data.forEach((element) => {
-      aux.push({ id: element.id, name: element.attributes.name });
+      aux.push({
+        id: element.id,
+        name: element.attributes.name,
+        picture: element.attributes.picture,
+        selected: false });
     });
 
     return aux;
@@ -44,10 +51,46 @@ const NewUserToTeamScreen = (props) => {
     });
   }, [props.navigation]);
 
+  const itemOnPressHandler = (id) => {
+    setSelectedMembers((prevData) => {
+      const newData = prevData.map((item) => {
+        if (item.id === id) {
+          item.selected = !item.selected;
+
+          return item;
+        }
+
+        return item;
+      });
+
+      return newData;
+    });
+  };
+
+  useEffect(() => {
+    const list = [];
+    selectedMembers.forEach((item) => {
+      if (item.selected) {
+        list.push(item.id);
+      }
+    });
+    setSelectedItems(list);
+  }, [selectedMembers]);
+
+  useEffect(() => {
+    setSelectedMembers(dataHandler(users));
+  }, [users]);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        <View style={styles.multiselect}>
+        
+          <UsersListComponent
+            selectedMembers={selectedMembers}
+            itemOnPressHandler={itemOnPressHandler}
+          />
+       
+        {/* <View style={styles.multiselect}>
           <MultiSelect
             items={availableUsers}
             uniqueKey="id"
@@ -70,7 +113,7 @@ const NewUserToTeamScreen = (props) => {
             submitButtonText="Submit"
             button="40"
           />
-        </View>
+        </View> */}
         <View style={styles.buttonContainer}>
           <View style={styles.confirmButton}>
             <TouchableOpacity

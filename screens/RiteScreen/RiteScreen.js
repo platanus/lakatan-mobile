@@ -9,6 +9,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import MultiSelect from 'react-native-multiple-select';
 
 import RaffleUserList from './RaffleUserList';
+import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
 
 import { CREATE_RAFFLE_REQUEST, GET_SLACK_ENTITIES_REQUEST, GET_HOOKS_REQUEST } from '../../store/types';
 
@@ -28,7 +29,11 @@ const RiteScreen = ({
   },
 }) => {
   const availableMembers = [];
-  members.forEach((member) => availableMembers.push({ id: member.id.toString(), name: member.name, selected: true }));
+  members.forEach((member) => availableMembers.push({
+    id: member.id.toString(),
+    name: member.name,
+    picture: member.picture,
+    selected: true }));
   const [selectedMembers, setSelectedMembers] = useState(availableMembers);
   const [selectedItems, setSelectedItems] = useState(() => availableMembers.map((item) =>
     item.id,
@@ -128,48 +133,50 @@ const RiteScreen = ({
   }, [dispatch, navigation, email, token, taskId]);
 
   const raffleRoute = () => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.subScreenContainer}>
-        <View style={styles.subScreen}>
-          <View>
-            <Text style={styles.hookHeader}>Personas</Text>
-            <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
-          </View>
+    <View style={styles.subScreenContainer}>
+      <View style={styles.subScreen}>
+        <View>
+          <Text style={styles.hookHeader}>Personas</Text>
+          <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
+        </View>
 
-          <View style={styles.raffleUserList}>
-            <Text style={styles.hookHeader}>Sortear</Text>
-            <RaffleUserList
+        <View style={styles.raffleUserList}>
+          <Text style={styles.hookHeader}>Sortear</Text>
+          <UsersListComponent
+            selectedMembers={selectedMembers}
+            itemOnPressHandler={itemOnPressHandler}
+          />
+          {/* <RaffleUserList
               selectedMembers={selectedMembers}
               itemOnPressHandler={itemOnPressHandler}
-              searchWord={searchWord} />
-          </View>
-
-          {raffleButton ? (
-            <View style={styles.buttonContainer}>
-              <View style={styles.newHookContainer}>
-                <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
-                  <Text style={styles.textRaffleButton}>sortear</Text>
-                </TouchableOpacity>
-                <Raffle
-                  visible={isModalVisible}
-                  setVisible={setModalVisible}
-                  users={members.filter((member) => selectedItems.includes(member.id))}
-                  navigation={navigation}
-                />
-              </View>
-            </View>
-          ) : (
-            <View style={styles.buttonContainer}>
-              <View style={styles.newHookContainer}>
-                <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-                  <Text style={styles.textRaffleButton}>sortear</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+              searchWord={searchWord} /> */}
         </View>
+
+        {raffleButton ? (
+          <View style={styles.buttonContainer}>
+            <View style={styles.newHookContainer}>
+              <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
+                <Text style={styles.textRaffleButton}>sortear</Text>
+              </TouchableOpacity>
+              <Raffle
+                visible={isModalVisible}
+                setVisible={setModalVisible}
+                users={members.filter((member) => selectedItems.includes(member.id))}
+                navigation={navigation}
+              />
+            </View>
+          </View>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <View style={styles.newHookContainer}>
+              <TouchableOpacity disabled style={styles.disabledRaffleButton}>
+                <Text style={styles.textRaffleButton}>sortear</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 
   const hooksRoute = (props) => (
@@ -216,25 +223,25 @@ const RiteScreen = ({
   });
 
   const renderTabBar = (tabProps) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.screen}>
-          <View>
-            <Text style={styles.textSharedHeader}>Objetivo</Text>
-            <Text>{goal}</Text>
-          </View>
-        </View>
+
+    <View style={styles.container}>
+      <View style={styles.screen}>
         <View>
-          <TabBar
-            {...tabProps}
-            indicatorStyle={{ backgroundColor: color.darkBlue }}
-            style={{ backgroundColor: color.white }}
-            getLabelText={({ route }) => route.title}
-            labelStyle={{ fontSize: 16, color: color.darkBlue }}
-          />
+          <Text style={styles.textSharedHeader}>Objetivo</Text>
+          <Text>{goal}</Text>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+      <View>
+        <TabBar
+          {...tabProps}
+          indicatorStyle={{ backgroundColor: color.darkBlue }}
+          style={{ backgroundColor: color.white }}
+          getLabelText={({ route }) => route.title}
+          labelStyle={{ fontSize: 16, color: color.darkBlue }}
+        />
+      </View>
+    </View>
+
   );
 
   return (
