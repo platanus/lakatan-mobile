@@ -18,9 +18,9 @@ const UserList = ({ selectedMembers, itemOnPressHandler }) =>
       renderItem={({ item }) => (
         <TouchableOpacity
           key={item.id}
-          onPress={() => {
-            itemOnPressHandler(item.id);
-          }}
+          disabled={ !itemOnPressHandler}
+          onPress={() => (itemOnPressHandler(item.id))
+          }
         >
           <View style={item.selected ? (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
 
@@ -32,13 +32,14 @@ const UserList = ({ selectedMembers, itemOnPressHandler }) =>
                 height: 40,
                 width: 40,
                 borderRadius: 50,
+                opacity: item.selected ? (1) : (0.5),
               }} />
             </View>
 
             <Text style={item.selected ? (styles.selectedItemText) : (styles.unselectedItemText)}>
               {item.name}
             </Text>
-            { item.selected && <Icon
+            { itemOnPressHandler && item.selected && <Icon
               name="check"
               size={15}
               color={color.darkBlue}

@@ -11,6 +11,7 @@ import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
 import BackButton from '../../components/LandingScreen/BackButton';
+import UserList from '../NewUserToTeamScreen/UserList'
 
 const RiteView = (props) => {
   const { name, goal, id } = props.rite.item;
@@ -91,6 +92,7 @@ const Team = (props) => {
   const membersRoute = () => (
     <View style={styles.riteContainer}>
       <View style={styles.riteScreen}>
+
         <TeamList users={members} inUserList={false} />
       </View>
     </View>

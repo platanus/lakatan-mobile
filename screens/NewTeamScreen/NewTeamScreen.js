@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, { useState, useLayoutEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
@@ -7,6 +8,7 @@ import colors from '../../styles/colors';
 import styles from '../../styles/NewTeamScreen/NewTeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
 import BackButton from '../../components/LandingScreen/BackButton';
+import UserList from '../NewUserToTeamScreen/UserList';
 
 const NewTeamScreen = (props) => {
   const { members } = props.route.params;
@@ -35,8 +37,16 @@ const NewTeamScreen = (props) => {
     { ...styles.confirmButton, backgroundColor: name && description ? colors.darkBlue : colors.gray });
 
   if (members) {
+    const auxData = [];
     members.forEach((element) => {
-      membersObjects.push(users.find((x) => x.id === element));
+      auxData.push(users.find((x) => x.id === element));
+    });
+    auxData.forEach((element) => {
+      membersObjects.push(
+        { id: element.id,
+          name: element.attributes.name,
+          picture: element.attributes.picture,
+          selected: true });
     });
   }
 
@@ -60,7 +70,11 @@ const NewTeamScreen = (props) => {
             />
           </View>
         </View>
-        <TeamList users={membersObjects} inUserList={true} />
+
+        <View style={{ padding: '3%' }}>
+          <UserList selectedMembers={membersObjects}/>
+        </View>
+
         <View style={styles.addUserContainer}>
           <View style={styles.createButtonContainer}>
             <TouchableOpacity

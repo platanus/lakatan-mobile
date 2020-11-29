@@ -26,7 +26,7 @@ const NewUserToTeamScreen = (props) => {
   const dataHandler = (data) => {
     const aux = [];
     data.forEach((element) => {
-      aux.push({ id: element.id, name: element.attributes.name, picture: element.attributes.picture, selected: true });
+      aux.push({ id: element.id, name: element.attributes.name, picture: element.attributes.picture, selected: false });
     });
 
     return aux;
