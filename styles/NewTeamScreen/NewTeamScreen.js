@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
   },
   headerScreen: {
     flexDirection: 'row',
-    height: '50%',
     width: '100%',
   },
   titleScreen: {

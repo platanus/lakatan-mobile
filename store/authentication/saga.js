@@ -9,6 +9,9 @@ import {
   PASSWORD_CHANGE_REQUEST,
   CLEAR_AUTH_ERROR,
   CLEAR_AUTH_SUCCESS,
+  CHANGE_NAME_REQUEST,
+  REFRESH_PROFILE_REQUEST,
+  SEND_FILE_REQUEST,
 } from '../types';
 import api from '../../api/authentication';
 
@@ -61,12 +64,15 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    const { isSuccess, data: { user: { authenticationToken, email, id } } } = camelResponse.data;
+
+    const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
         id,
+        name,
+        pictureData,
       }));
     }
   } catch (error) {
@@ -114,6 +120,70 @@ function *passwordChangeRequest({ payload }) {
   yield put(authenticationActions.finish());
 }
 
+function *nameChangeRequest({ payload }) {
+  yield put(authenticationActions.start());
+  try {
+    const response = yield call(api.nameChange, payload);
+    const camelResponse = camelizeKeys(response);
+    const { isSuccess } = camelResponse.data;
+    if (isSuccess) {
+      yield put(authenticationActions.changeNameSuccess(
+        payload));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  yield put(authenticationActions.finish());
+}
+
+function *getSessionRequest({ payload }) {
+  yield put(authenticationActions.start());
+  try {
+    const response = yield call(api.getSesionApi, payload);
+    const data = response.data;
+    yield put(authenticationActions.refreshProfile(data));
+  } catch (error) {
+    console.log(error);
+  }
+  yield put(authenticationActions.finish());
+}
+
+function *uploadFileRequest({ payload, data }) {
+  try {
+    const repon = yield call(api.send_file, payload, data);
+    const uploadedFileData = {
+      id: data.fields.key.match(/^cache\/(.+)/)[1], // object key without prefix
+      storage: 'cache',
+      metadata: {
+        size: payload.information.size,
+        filename: payload.information.filename,
+        mime_type: payload.data.type,
+      },
+    };
+    try {
+      yield call(api.update_image, payload, JSON.stringify(uploadedFileData));
+    } catch (error) {
+      console.log(error);
+    }
+    yield put(authenticationActions.updateImageProfile());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function *getUrlTempRequest({ payload }) {
+  yield put(authenticationActions.start());
+  try {
+    const response = yield call(api.getUrlTemp, payload);
+    const data = response.data;
+    yield uploadFileRequest({ payload, data });
+  } catch (error) {
+    console.log('error 1');
+    console.log(error);
+  }
+  yield put(authenticationActions.finish());
+}
+
 function *clearAuthError() {
   yield put(authenticationActions.clearError());
 }
@@ -129,4 +199,7 @@ export default function *authenticactionSaga() {
   yield takeLatest(PASSWORD_CHANGE_REQUEST, passwordChangeRequest);
   yield takeLatest(CLEAR_AUTH_ERROR, clearAuthError);
   yield takeLatest(CLEAR_AUTH_SUCCESS, clearAuthSuccess);
+  yield takeLatest(CHANGE_NAME_REQUEST, nameChangeRequest);
+  yield takeLatest(REFRESH_PROFILE_REQUEST, getSessionRequest);
+  yield takeLatest(SEND_FILE_REQUEST, getUrlTempRequest);
 }
