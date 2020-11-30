@@ -8,33 +8,33 @@ import defaultImage from '../../assets/user.png';
 
 const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
 
-const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) =>
+const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
 
-  (
-    <FlatList
-      data={selectedMembers}
-      renderItem={({ item }) => (
-        <TouchableOpacity
-          key={item.id.toString()}
-          disabled={ !itemOnPressHandler}
-          onPress={() => (itemOnPressHandler(item.id))
-          }
-        >
-          <View style={item.selected ? (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
+  <FlatList
+    data={selectedMembers}
+    renderItem={({ item }) => (
+      <TouchableOpacity
+        key={item.id}
+        disabled={ !itemOnPressHandler}
+        onPress={() => (itemOnPressHandler(item.id))
+        }
+      >
+        <View style={(item.selected || !item.hasOwnProperty('selected')) ?
+          (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
 
-            <View>
-              <Image source={{
-                uri: item.picture ? `${bucket}${item.picture.id}` :
-                  Image.resolveAssetSource(defaultImage).uri }}
-              style={styles.picture} />
-            </View>
+          <View>
+            <Image source={{
+              uri: item.picture ? `${bucket}${item.picture.id}` :
+                Image.resolveAssetSource(defaultImage).uri }}
+            style={styles.picture} />
+          </View>
 
-            <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
-              (styles.selectedItemText) : (styles.unselectedItemText)}>
-              {item.name}
-            </Text>
+          <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
+            (styles.selectedItemText) : (styles.unselectedItemText)}>
+            {item.name}
+          </Text>
 
-            { itemOnPressHandler && item.selected &&
+          { itemOnPressHandler && item.selected &&
             <View style={styles.check}>
               <Icon
                 name="check"
@@ -43,14 +43,14 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) =>
               />
             </View> }
 
-          </View>
+        </View>
 
-        </TouchableOpacity>
-      )
-      }
-    />
-  )
+      </TouchableOpacity>
+    )
+    }
+    keyExtractor={item => item.id.toString()}
+  />)
 
 ;
 
-export default UsersListComponent;
+export default React.memo(UsersListComponent);

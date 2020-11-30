@@ -89,7 +89,7 @@ const Team = (props) => {
       </View>
     </View>
   );
-
+ 
   const membersRoute = () => (
     <View style={styles.riteContainer}>
       <View style={styles.riteScreen}>
