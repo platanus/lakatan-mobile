@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   teamScreen: {
     backgroundColor: color.white,
     paddingTop: globalStyle.paddingContainer,
+    paddingVertical: '8%',
   },
   riteScreen: {
     height: '100%',
@@ -27,14 +28,18 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     color: color.darkBlue,
-    paddingTop: globalStyle.paddingContainer,
+    paddingTop: '8%',
+    paddingVertical: '2%',
     fontSize: globalStyle.fontSizePrincipalText,
+  },
+  description: {
+    fontSize: 13,
   },
   cardOfRite: {
     width: '100%',
     backgroundColor: color.lightBlue,
-    borderRadius: globalStyle.borderRadiusButton,
-    paddingLeft: '10%',
+    borderRadius: 20,
+    paddingLeft: '7.5%',
     paddingVertical: 10,
     marginVertical: globalStyle.marginVerticalPrincipal,
     height: globalStyle.heightButton,
@@ -53,12 +58,16 @@ const styles = StyleSheet.create({
     fontSize: globalStyle.fontSizeButton,
   },
   riteText: {
+    paddingTop: '1%',
     fontSize: globalStyle.fontSizePrincipalText,
     color: color.darkBlue,
   },
   ritePeople: {
-    fontSize: globalStyle.fontSizeSecondaryText,
+    fontSize: 11,
     color: color.cian,
+  },
+  voting: {
+    fontSize: 11,
   },
   icon: {
     position: 'absolute',
@@ -154,6 +163,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
+    textTransform: 'capitalize',
   },
 });
 

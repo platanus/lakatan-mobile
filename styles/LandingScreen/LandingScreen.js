@@ -36,14 +36,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 170,
     marginVertical: 10,
-    justifyContent: 'center',
+    // justifyContent: 'left',
     backgroundColor: color.lightBlue,
-    borderRadius: globalStyle.borderRadiusButton,
+    borderRadius: globalStyle.borderRadiusTouchable,
+    padding: '8%',
   },
   teamName: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 30,
-    fontWeight: 'bold',
+    color: color.darkBlue,
+    textTransform: 'capitalize',
+  },
+  teamPurpose: {
+    color: color.darkGray,
+    paddingTop: '2%',
+  },
+  teamPeople: {
+    position: 'absolute',
+    paddingLeft: '9%',
+    bottom: '20%',
     color: color.darkBlue,
   },
   signOutButton: {
@@ -78,6 +89,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
+    textTransform: 'capitalize',
+  },
+  bullet: {
+    fontSize: 14,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    color: color.gray,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  memberOfTeam: {
+    color: '#949c9c',
+    marginLeft: '10%',
   },
 });
 

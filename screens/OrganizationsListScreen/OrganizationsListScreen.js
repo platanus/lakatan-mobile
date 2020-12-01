@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useEffect, useCallback } from 'react';
-import { View, Text, TouchableOpacity, RefreshControl } from 'react-native';
+import { View, Text, TouchableOpacity, RefreshControl, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlatList } from 'react-native-gesture-handler';
 import MenuButton from '../../components/LandingScreen/MenuButton';
@@ -20,6 +20,7 @@ const OrganizationView = (props) => {
   return (
     <TouchableOpacity onPress={pressHandler}>
       <View style={styles.buttonTextContainer}>
+        <Image source={require('../../assets/platanus/logoPlatanus.png')} style={styles.image} />
         <Text style={styles.buttonText}>{name}</Text>
       </View>
     </TouchableOpacity>

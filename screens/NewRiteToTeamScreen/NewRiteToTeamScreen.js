@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
+import BackButton from '../../components/LandingScreen/BackButton';
 import colors from '../../styles/colors';
 import { CREATE_RITE_REQUEST } from '../../store/types';
 
@@ -11,7 +12,6 @@ import { CREATE_RITE_REQUEST } from '../../store/types';
 const NewRiteToTeamScreen = (props) => {
   const { name, purpose } = useSelector((state) => state.teams.currentTeam);
   const [numberOfPeople, setNumberOfPeople] = useState('');
-  const [riteName, setRiteName] = useState('');
   const [objective, setObjective] = useState('');
   const { token, email } = useSelector((state) => state.authentication);
   const { id } = useSelector((state) => state.teams.currentTeam);
@@ -31,7 +31,7 @@ const NewRiteToTeamScreen = (props) => {
   const createRiteButtonDisable = () => (
     {
       ...styles.confirmButton,
-      backgroundColor: riteName && objective && numberOfPeople ? colors.darkBlue : colors.gray,
+      backgroundColor: objective && numberOfPeople ? colors.darkBlue : colors.gray,
     });
 
   const numberOfPeopleHandler = (currentNumber) => {
@@ -49,7 +49,6 @@ const NewRiteToTeamScreen = (props) => {
       type: CREATE_RITE_REQUEST,
       payload:
     {
-      name: riteName,
       goal: objective,
       teamId: parseInt(id, 10),
       userMinimum: parseInt(numberOfPeople, 10),
@@ -60,30 +59,37 @@ const NewRiteToTeamScreen = (props) => {
     props.navigation.navigate('Team');
   };
 
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>{name}</Text>
+        </View>
+      ),
+    });
+  }, [name]);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <Text style={styles.textHeader}>Equipo: {name}</Text>
-          <Text>Propósito: {purpose}</Text>
-          <Text style={styles.textHeader}>Nombre del rito</Text>
-          <TextInput
-            style={styles.areaInput}
-            value={riteName} onChangeText={setRiteName}
-            placeholder="Ingresar nombre"
-          />
-          <Text style={styles.textHeader}>Objetivo del rito</Text>
+          <Text style={styles.textHeader}>Propósito</Text>
+          <Text>{purpose}</Text>
+          <Text style={styles.newRiteText}>Nuevo rito</Text>
+          <Text style={styles.textHeader}>Objetivo</Text>
           <TextInput
             style={styles.areaInput}
             value={objective} onChangeText={setObjective}
-            placeholder="Ingresar objetivo"
           />
-          <Text style={styles.textHeader}>Personas requeridas</Text>
+          <Text style={styles.textHeader}>Cantidad de personas</Text>
           <TextInput
             style={styles.areaInput}
             value={numberOfPeople.toString()}
             onChangeText={numberOfPeopleHandler}
-            placeholder="Ingresar cantidad de personas"
             keyboardType={'number-pad'}
           />
         </View>
@@ -92,9 +98,9 @@ const NewRiteToTeamScreen = (props) => {
             <TouchableOpacity
                onPress={createHandler}
                style={styles.applyButton}
-               disabled={!(riteName && objective && numberOfPeople)}
+               disabled={!(objective && numberOfPeople)}
             >
-              <Text style={styles.textConfirmButton}>Crear</Text>
+              <Text style={styles.textConfirmButton}>Crear rito</Text>
             </TouchableOpacity>
           </View>
         </View>

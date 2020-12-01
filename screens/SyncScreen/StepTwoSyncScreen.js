@@ -12,6 +12,7 @@ import { END_SYNC_REQUEST, WORKSPACE_CHANGES_REQUEST, ALL_TEAMS_REQUEST, CLEAR_W
 import SyncItemList from '../../components/SyncScreen/SyncItemList';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
+import BackButton from '../../components/LandingScreen/BackButton';
 
 const StepTwoSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -109,10 +110,12 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={navigation}/>
+      ),
       headerTitle: () => (
         <HeaderLogo name={route.params.name} />
       ),
-      headerBackTitle: 'Volver',
     });
   }, [navigation]);
 
@@ -131,18 +134,18 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.mainContainer}>
-
-      <View style={styles.stepView}>
-        <Text style={styles.stepText}>
-          Paso 2 de 2
-        </Text>
-      </View>
       <View style={styles.descriptionView}>
         <Text style={styles.descriptionText}>
           Configurado con workspace
         </Text>
         <Text style={styles.workspaceText}>
           {workspace}
+        </Text>
+      </View>
+
+      <View style={styles.stepView}>
+        <Text style={styles.stepText}>
+          Paso 2
         </Text>
       </View>
 
@@ -157,6 +160,33 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
         </Text>
       </TouchableOpacity>
 
+      <View style={styles.footContainer}>
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoAllTouchable}>
+          <Text style={styles.footText}>
+            Todos
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoNoneTouchable}>
+          <Text style={styles.footText}>
+            Ninguno
+          </Text>
+        </TouchableOpacity>
+
+        {/* <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepTwoReloadButtonHandler}
+        >
+          <Text style={styles.footText}>
+            recargar
+          </Text>
+        </TouchableOpacity> */}
+      </View>
+
       <View style={styles.syncItemListContainer}>
         {(stepTwoData.length > 0 && <SyncItemList
           syncData={stepTwoData}
@@ -166,33 +196,6 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
         /> || <Text>
          No hay cambios de membresías
         </Text>)}
-      </View>
-
-      <View style={styles.footContainer}>
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepTwoAllTouchable}>
-          <Text style={styles.footText}>
-            todos
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepTwoNoneTouchable}>
-          <Text style={styles.footText}>
-            ninguno
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepTwoReloadButtonHandler}
-        >
-          <Text style={styles.footText}>
-            recargar
-          </Text>
-        </TouchableOpacity>
       </View>
 
     </View>

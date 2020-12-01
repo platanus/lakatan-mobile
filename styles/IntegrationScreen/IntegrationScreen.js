@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     height: '80%',
-    width: '23%',
+    width: '28%',
     marginRight: '5%',
   },
   header: {
@@ -17,9 +17,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontWeight: '700',
-    marginTop: '3%',
-    fontSize: 23,
+    marginTop: '5%',
+    fontSize: 20,
   },
   gearButton: {
     paddingRight: '80%',

@@ -13,6 +13,7 @@ import syncChangesHandler from './SyncChangesHandler';
 import styles from '../../styles/SyncScreen/SyncScreen';
 import colors from '../../styles/colors';
 import HeaderLogo from '../../components/IntegrationScreen/HeaderLogo';
+import BackButton from '../../components/LandingScreen/BackButton';
 
 const StepOneSyncScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -102,21 +103,17 @@ const StepOneSyncScreen = ({ route, navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={navigation}/>
+      ),
       headerTitle: () => (
         <HeaderLogo name={name} />
       ),
-      headerBackTitle: 'Volver',
     });
   }, [navigation]);
 
   return (
     <View style={styles.mainContainer}>
-
-      <View style={styles.stepView}>
-        <Text style={styles.stepText}>
-          Paso 1 de 2
-        </Text>
-      </View>
 
       <View style={styles.descriptionView}>
         <Text style={styles.descriptionText}>
@@ -124,6 +121,12 @@ const StepOneSyncScreen = ({ route, navigation }) => {
         </Text>
         <Text style={styles.workspaceText}>
           {workspace}
+        </Text>
+      </View>
+
+      <View style={styles.stepView}>
+        <Text style={styles.stepText}>
+          Paso 1
         </Text>
       </View>
 
@@ -139,6 +142,33 @@ const StepOneSyncScreen = ({ route, navigation }) => {
         </Text>
       </TouchableOpacity>
 
+      <View style={styles.footContainer}>
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneAllTouchable}>
+          <Text style={styles.footText}>
+            Todos
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneNoneTouchable}>
+          <Text style={styles.footText}>
+            Ninguno
+          </Text>
+        </TouchableOpacity>
+
+        {/* <TouchableOpacity
+          style={styles.footTouchable}
+          onPress={stepOneReloadButtonHandler}
+        >
+          <Text style={styles.footText}>
+            recargar
+          </Text>
+        </TouchableOpacity> */}
+      </View>
+
       <View style={styles.syncItemListContainer}>
         { loading ?
           <ActivityIndicator size='large' style={{ flex: 1 }}/> :
@@ -151,33 +181,6 @@ const StepOneSyncScreen = ({ route, navigation }) => {
             No hay cambios de equipos ni de usuarios
           </Text>)
         }
-      </View>
-
-      <View style={styles.footContainer}>
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepOneAllTouchable}>
-          <Text style={styles.footText}>
-            todos
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepOneNoneTouchable}>
-          <Text style={styles.footText}>
-            ninguno
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.footTouchable}
-          onPress={stepOneReloadButtonHandler}
-        >
-          <Text style={styles.footText}>
-            recargar
-          </Text>
-        </TouchableOpacity>
       </View>
 
     </View>

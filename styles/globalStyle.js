@@ -7,6 +7,8 @@ export default {
   paddingBottomButton: '5%',
   borderRadiusButton: 50,
 
+  borderRadiusTextInput: 10,
+  borderRadiusTouchable: 25,
   fontSizeHeader: 20,
   fontSizeTitle: 20,
   fontSizePrincipalText: 16,

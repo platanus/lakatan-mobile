@@ -12,12 +12,24 @@ import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
-  const { id, attributes: { name } } = props.team.item;
+  const { id, attributes: { name, purpose, people } } = props.team.item;
+  const soyMiembro = true; // TO DO: traer de backend
+  const cantidadDeMiembros = 8;
 
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
       <View style={styles.teamCard}>
         <Text style={styles.teamName}>{name}</Text>
+        <Text style={styles.teamPurpose}>{purpose}</Text>
+        {soyMiembro ? (
+          <Text style={styles.teamPeople}>{cantidadDeMiembros} miembros
+          <Text style={styles.bullet}> •</Text>
+          <Text style={styles.memberOfTeam}> eres miembro</Text>
+        </Text>
+        ) : (
+          <Text style={styles.teamPeople}>8 miembros</Text>
+        )}
+        
       </View>
     </TouchableOpacity>
   );
@@ -69,7 +81,7 @@ function LandingScreen(props) {
         onPress={() => props.navigation.navigate('New Team', { members: [] })}
       >
         <View style={styles.viewAddTeamButton}>
-          <Text style={styles.textAddTeamButton}>+</Text>
+          <Text style={styles.textAddTeamButton}>Nuevo equipo</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.listOfTeams}>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/IntegrationsListScreen/IntegrationListScreen';
 import { SET_WORKSPACE } from '../../store/types';
+import color from '../../styles/colors';
 
 const IntegrationList = (props) => {
   const dispatch = useDispatch();
@@ -16,6 +17,11 @@ const IntegrationList = (props) => {
       headerLeft: () => (
         <MenuButton navigation={props.navigation}/>
       ),
+      headerTitle: () => (
+        <View style={styles.header}>
+          <Text style={styles.title}>Integraciones</Text>
+        </View>
+      ),
     });
   }, [props.navigation]);
 
@@ -24,18 +30,28 @@ const IntegrationList = (props) => {
     dispatch({ type: SET_WORKSPACE, payload: { token, email, id } });
   };
 
+  const activado = true; // TO DO: esto viene de backend
+
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigate('Slack')}
       >
-        <Image source={require('../../assets/Slack/logoSlack.png')} style={styles.image} />
-        <Text style={styles.buttonText}>
-          Slack
-        </Text>
+        <View style={styles.integrationContainer}>
+          <Image source={require('../../assets/Slack/logoSlack.png')} style={styles.image} />
+          <Text style={styles.buttonText}>Slack</Text>
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>Sincronización y mensajería</Text>
+          {activado ? (
+            <Text style={{ ...styles.activate, color: color.blue }}>Activado</Text>
+          ) : (
+            <Text style={{ ...styles.activate, color: color.red }}>No activado</Text>
+          )}
+        </View>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigate('Google')}
       >
@@ -43,6 +59,7 @@ const IntegrationList = (props) => {
         <Text style={styles.buttonText}>
           Google
         </Text>
+        <Text>Sincronización y mensajería</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -52,7 +69,8 @@ const IntegrationList = (props) => {
         <Text style={styles.buttonText}>
           Notion
         </Text>
-      </TouchableOpacity>
+        <Text>Sincronización y mensajería</Text>
+      </TouchableOpacity> */}
     </View>
   );
 };

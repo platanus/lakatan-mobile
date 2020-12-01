@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: globalStyle.paddingContainer,
   },
   infoContainer: {
+    paddingVertical: '8%',
     paddingTop: globalStyle.paddingContainer,
   },
   teamTitle: {
@@ -24,10 +25,15 @@ const styles = StyleSheet.create({
     color: color.darkBlue,
     paddingBottom: globalStyle.paddingBottomInput,
   },
+  newRiteText: {
+    fontSize: 20,
+    paddingBottom: '5%',
+    paddingTop: '10%',
+  },
   areaInput: {
     width: '100%',
-    backgroundColor: color.softGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: globalStyle.paddingInput,
     height: globalStyle.heightInput,
   },
@@ -63,6 +69,15 @@ const styles = StyleSheet.create({
   },
   titleScreen: {
     fontSize: globalStyle.fontSizeHeader,
+  },
+  header: {
+    flexDirection: 'row',
+    height: '65%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
+    textTransform: 'capitalize',
   },
 });
 

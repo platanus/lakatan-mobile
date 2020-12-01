@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert,
+  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert, Image,
 } from 'react-native';
 import colors from '../../styles/colors';
 import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
@@ -55,19 +55,21 @@ const SignInScreen = ({ navigation }) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <View style={styles.formCard}>
-          <Text style={styles.title}>¡Bienvenido a Lakatan! </Text>
+          <View>
+            {/* <Image style={styles.logo} source={require('../../assets/lakatan2.png')} /> */}
+            <Text style={styles.title}>lakatan</Text>
+          </View>
           <View style={styles.input}>
-            <Text style={styles.tag}>Correo electrónico:</Text>
+            <Text style={styles.tag}>Correo electrónico</Text>
             <TextInput
               style={styles.areaInput}
-              placeholder="Ej: 'baldana@uc.cl'"
               onChangeText={(text) => setEmail(text)}
               autoCapitalize="none"
               value={email}
               keyboardType="email-address"
               autoCompleteType="off"
             />
-            <Text style={styles.tag}>Contraseña:</Text>
+            <Text style={styles.tag}>Contraseña</Text>
             <View style={styles.passwordInput}>
               <TextInput
                 style={styles.areaInput}
@@ -88,7 +90,7 @@ const SignInScreen = ({ navigation }) => {
               style={styles.signInButton}
               disabled={!(email && password)}
               onPress={signInButtonHandler}>
-              <Text style={styles.textConfirmButton}>ingresar</Text>
+              <Text style={styles.textConfirmButton}>Ingresar</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -96,7 +98,7 @@ const SignInScreen = ({ navigation }) => {
           style={styles.forgotPasswordView}
           onPress={() => navigation.navigate('Forgot Password')}>
           <Text style={styles.forgotPasswordText}>
-            ¿Olvidaste tu constraseña?
+            Recuperar contraseña
           </Text>
         </TouchableOpacity>
       </View>

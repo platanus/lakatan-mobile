@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     paddingBottom: globalStyle.paddingBottomInput,
   },
   pickerContainer: {
-    backgroundColor: color.softGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
     height: globalStyle.heightInput,
   },
   icon: {
@@ -35,15 +35,15 @@ const styles = StyleSheet.create({
   },
   areaInput: {
     width: '100%',
-    backgroundColor: color.softGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: '3%',
     height: globalStyle.heightInput,
   },
   httpAreaInput: {
     width: '100%',
-    backgroundColor: color.softGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: '3%',
     height: globalStyle.heightInput,
     flexDirection: 'row',

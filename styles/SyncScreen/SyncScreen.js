@@ -12,16 +12,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   stepView: {
-    backgroundColor: colors.yellow,
-    borderRadius: 50,
-    width: 110,
-    alignItems: 'center',
-    marginTop: 5,
+    // backgroundColor: colors.yellow,
+    // borderRadius: 50,
+    // width: 110,
+    // alignItems: 'left',
+    marginTop: '5%',
+    alignSelf: 'flex-start',
   },
   stepText: {
-    color: colors.white,
-    fontWeight: 'bold',
-    fontSize: 15,
+    // color: colors.white,
+    // fontWeight: 'bold',
+    // fontSize: 15,
+    fontSize: 18,
+    color: colors.darkBlue,
+    marginBottom: '5%',
+    textAlign: 'left',
   },
   descriptionView: {
     flexDirection: 'row',
@@ -51,9 +56,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   syncItemListContainer: {
-    flex: 1,
+    flex: 0.95,
     width: '100%',
-    marginTop: 7,
   },
   footContainer: {
     flexDirection: 'row',
@@ -64,12 +68,13 @@ const styles = StyleSheet.create({
 
   footTouchable: {
     width: '20%',
-    paddingVertical: 25,
+    paddingVertical: '5%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   footText: {
     color: colors.darkBlue,
+    textDecorationLine: 'underline',
   },
 });
 

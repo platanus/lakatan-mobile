@@ -7,6 +7,7 @@ import styles from '../../styles/IntegrationScreen/IntegrationScreen';
 import NewWorksapceButton from '../../components/IntegrationScreen/NewWorkspaceButton';
 import colors from '../../styles/colors';
 import { WORKSPACE_CHANGES_REQUEST } from '../../store/types';
+import BackButton from '../../components/LandingScreen/BackButton';
 
 let workspaceMessage = '';
 
@@ -21,6 +22,9 @@ const IntegrationScreen = (props) => {
   useLayoutEffect(() => {
     props.navigation.setOptions({
       // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
       headerTitle: () => (
         <HeaderLogo name={name} />
       ),
@@ -29,7 +33,6 @@ const IntegrationScreen = (props) => {
         (name === 'Slack') ?
           <NewWorksapceButton navigation={props.navigation} name={name}/> : undefined
       ),
-      headerBackTitle: 'Volver',
     });
   }, [props.navigation]);
 

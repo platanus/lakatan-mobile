@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Linking, Text, TouchableOpacity,
+  Linking, Text, TouchableOpacity, View,
 } from 'react-native';
 
 import { clientID } from '../../env';
@@ -11,9 +11,13 @@ const SlackAuth = () => {
   const link = `https://slack.com/oauth/v2/authorize?scope=channels:read,groups:read,team:read,usergroups:read,users.profile:read,users:read,users:read.email,chat:write,chat:write.public&client_id=${client}`;
 
   return (
-    <TouchableOpacity style={styles.button} onPress={() => Linking.openURL(link)}>
-      <Text style={styles.textButton}>Slack</Text>
-    </TouchableOpacity>
+    <View style={styles.buttonContainer}>
+      <View style={styles.createButtonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => Linking.openURL(link)}>
+          <Text style={styles.textButton}>Autorizar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 export default SlackAuth;

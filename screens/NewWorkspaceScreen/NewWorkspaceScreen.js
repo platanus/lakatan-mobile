@@ -5,6 +5,7 @@ import styles from '../../styles/NewWorkspaceScreen/NewWorkspaceScreen';
 import colors from '../../styles/colors';
 import stylesHeader from '../../styles/IntegrationScreen/IntegrationScreen';
 import SlackAuth from '../../components/Slack/slack_auth';
+import BackButton from '../../components/LandingScreen/BackButton';
 import {
   CREATE_WORKSPACE_REQUEST,
   CLEAR_WORKSPACE_ERROR,
@@ -46,13 +47,15 @@ const NewWorkspaceScreen = (props) => {
   useLayoutEffect(() => {
     props.navigation.setOptions({
       // eslint-disable-next-line react/display-name
+      headerLeft: () => (
+        <BackButton navigation={props.navigation}/>
+      ),
       headerTitle: () => (
         <View style={stylesHeader.header}>
           <Image style={stylesHeader.logo} source={img[name]} />
           <Text style={stylesHeader.title}>{name}</Text>
         </View>
       ),
-      headerBackTitle: 'Back',
     });
   }, [props.navigation]);
 
@@ -82,58 +85,42 @@ const NewWorkspaceScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.TitleContent}>
-        <Text style={styles.Title}>
-          Instrucciones
-        </Text>
-      </View>
+      <Text style={styles.config}>No se ha configurado un workspace</Text>
       <View style={styles.stepContent}>
-        <Text style={styles.subTitle}>
-          Paso 1
-        </Text>
+        <Text style={styles.subTitle}>Paso 1</Text>
         <Text style={styles.row}>
-          Presiona el siguente botón para autorizar nuestra app a acceder al workspace
+          Presiona el siguente botón para autorizar a nuestra app a acceder al workspace
         </Text>
       </View>
       <View style={styles.slackContent}>
         <SlackAuth/>
       </View>
       <View style={styles.stepContent}>
-        <Text style={styles.subTitle}>
-          Paso 2
-        </Text>
+        <Text style={styles.subTitle}>Paso 2</Text>
         <Text style={styles.row}>
-        Copia el código mostrado al final de la autorización e ingrésalo en el siguiente campo.
+        Copia el código mostrado al final de la autorización e ingrésalo en el siguiente campo
         </Text>
       </View>
       <View style={styles.input}>
-        <Text style={styles.tag}>Token:</Text>
         <TextInput
-          placeholder='Ingresar token'
           onChangeText={setToken}
           value={token}
           autoCompleteType='off'
           style={styles.textInput}
         />
       </View>
-      <View style={styles.stepContent}>
-        <Text style={styles.subTitle}>
-          Paso 3
-        </Text>
-        <Text style={styles.row}>
-        Presiona listo.
-        </Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={{ ...styles.button, backgroundColor: token ? colors.blue : colors.gray }}
-          onPress={pressHandler}
-          disabled={!token}
-        >
-          <Text style={styles.textButton}>
-            Listo
-          </Text>
-        </TouchableOpacity>
+      <View style={styles.readyButtonContainer}>
+        <View style={styles.createButtonContainer}>
+          <TouchableOpacity
+            style={{ ...styles.button, backgroundColor: token ? colors.darkBlue : colors.gray }}
+            onPress={pressHandler}
+            disabled={!token}
+          >
+            <Text style={styles.textButton}>
+              Listo
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

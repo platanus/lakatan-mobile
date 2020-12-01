@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
   areaInput: {
     width: '100%',
     backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    borderRadius: globalStyle.borderRadiusTextInput,
     paddingHorizontal: globalStyle.paddingInput,
     height: globalStyle.heightInput,
   },
   passwordInput: {
     width: '100%',
     backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    borderRadius: globalStyle.borderRadiusTextInput,
     height: globalStyle.heightInput,
   },
   buttonContainer: {
@@ -98,6 +98,10 @@ const styles = StyleSheet.create({
     color: color.darkBlue,
     fontSize: globalStyle.fontSizePrincipalText,
     textDecorationLine: 'underline',
+  },
+  logo: {
+    // resizeMode: 'stretch',
+    width: '100%',
   },
 });
 

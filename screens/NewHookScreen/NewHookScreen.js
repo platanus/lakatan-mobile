@@ -105,7 +105,7 @@ const NewHookScreen = (props) => {
             />
             <Icon name="angle-down" style={styles.icon} size={22} color={colors.darkBlue} />
           </View>
-          <Text style={styles.textHeader}>Tipo 2</Text>
+          <Text style={styles.textHeader}>Tipo</Text>
           <View style={styles.pickerContainer}>
             <RNPickerSelect
               value={hookType}
@@ -176,7 +176,6 @@ const NewHookScreen = (props) => {
           <TextInput
             style={styles.areaInput}
             value={hookName} onChangeText={setHookName}
-            placeholder="Ingresar nombre"
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -191,7 +190,7 @@ const NewHookScreen = (props) => {
                 ((hookOf === 'output' ? ((!hookUrl && !reference) || !hookName) : !hookName) ?
                   colors.gray : colors.darkBlue),
               }} >
-              <Text style={styles.textConfirmButton}>crear</Text>
+              <Text style={styles.textConfirmButton}>Crear hook</Text>
             </TouchableOpacity>
           </View>
         </View>

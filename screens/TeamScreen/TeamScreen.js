@@ -28,8 +28,32 @@ const RiteView = (props) => {
       <TouchableOpacity
         onPress={pressHandler}
       >
-        <Text style={styles.riteText}>{name}</Text>
+        <Text style={styles.riteText}>{goal}</Text>
         <Text style={styles.ritePeople}>{userMinimum} persona(s)</Text>
+        <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const VotingView = (props) => {
+  const nombre = 'Votación uno'; // TO DO: traer de backend
+  const vote = false;
+  const votingPressHandler = () => {
+    props.navigation.goBack(); // TO DO: llevar a la vista de votación
+  };
+
+  return (
+    <View style={styles.cardOfRite}>
+      <TouchableOpacity
+        onPress={votingPressHandler}
+      >
+        <Text style={styles.riteText}>{nombre}</Text>
+        {vote ? (
+          <Text style={{ ...styles.voting, color: color.cian }}>Ya votaste</Text>
+        ) : (
+          <Text style={{ ...styles.voting, color: color.red }}>Falta tu voto</Text>
+        )}
         <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
       </TouchableOpacity>
     </View>
@@ -82,14 +106,14 @@ const Team = (props) => {
         <View style={styles.buttonContainer}>
           <View style={styles.applyContainer}>
             <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Rite')}>
-              <Text style={styles.newRiteText}>+</Text>
+              <Text style={styles.newRiteText}>Nuevo rito</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
     </View>
   );
- 
+
   const membersRoute = () => (
     <View style={styles.riteContainer}>
       <View style={styles.riteScreen}>
@@ -97,16 +121,42 @@ const Team = (props) => {
       </View>
     </View>
   );
+
+  const votingRoute = () => (
+    <View style={styles.riteContainer}>
+      <View style={styles.riteScreen}>
+        <View style={styles.listRites}>
+          <FlatList
+            data={rites}
+            renderItem={
+              (vote) => <VotingView navigation={props.navigation} vote={vote}/>
+            }
+            keyExtractor={(vote) => vote.id.toString()}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.applyContainer}>
+            <TouchableOpacity style={styles.newRiteButton} onPress={() => {}}>
+              <Text style={styles.newRiteText}>Nueva votación</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+
   const initialLayout = {};
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'first', title: 'ritos' },
-    { key: 'second', title: 'usuarios' },
+    { key: 'first', title: 'miembros' },
+    { key: 'second', title: 'ritos' },
+    { key: 'third', title: 'votaciones' },
   ]);
   const renderScene = SceneMap({
-    first: ritesRoute,
-    second: membersRoute,
+    first: membersRoute,
+    second: ritesRoute,
+    third: votingRoute,
   });
 
   const renderTabBar = (tabProps) => (

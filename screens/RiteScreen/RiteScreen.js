@@ -141,7 +141,7 @@ const RiteScreen = ({
         </View>
 
         <View style={styles.raffleUserList}>
-          <Text style={styles.hookHeader}>Sortear</Text>
+          <Text style={styles.hookHeader}>Sorteo</Text>
           <UsersListComponent
             selectedMembers={selectedMembers}
             itemOnPressHandler={itemOnPressHandler}
@@ -156,7 +156,7 @@ const RiteScreen = ({
           <View style={styles.buttonContainer}>
             <View style={styles.newHookContainer}>
               <TouchableOpacity style={styles.applyButton} onPress={raffleHandler}>
-                <Text style={styles.textRaffleButton}>sortear</Text>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
               </TouchableOpacity>
               <Raffle
                 visible={isModalVisible}
@@ -170,7 +170,7 @@ const RiteScreen = ({
           <View style={styles.buttonContainer}>
             <View style={styles.newHookContainer}>
               <TouchableOpacity disabled style={styles.disabledRaffleButton}>
-                <Text style={styles.textRaffleButton}>sortear</Text>
+                <Text style={styles.textRaffleButton}>Sortear</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -200,7 +200,7 @@ const RiteScreen = ({
               style={styles.applyButton}
               onPress={() => navigation.navigate('New Hook', { taskId })}>
               <Text style={styles.textApplyButton}>
-                nuevo hook
+                Nuevo hook
               </Text>
             </TouchableOpacity>
           </View>

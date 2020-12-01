@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../colors';
+import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -8,12 +9,12 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.lightBlue,
     flexDirection: 'row',
-    borderRadius: 50,
-    width: '85%',
+    borderRadius: globalStyle.borderRadiusTouchable,
+    width: '90%',
     marginVertical: 5,
-    height: 60,
-    alignItems: 'center',
-    paddingLeft: 20,
+    height: 120,
+    paddingLeft: '5%',
+    paddingTop: '5%',
   },
   image: {
     height: 31,
@@ -25,9 +26,34 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     flex: 1,
   },
+  integrationContainer: {
+    flexDirection: 'row',
+  },
+  descriptionContainer: {
+    flexDirection: 'row',
+  },
   buttonText: {
     color: colors.darkBlue,
-    marginLeft: 15,
+    marginLeft: '5%',
+    paddingTop: '2%',
+    fontSize: 18,
+  },
+  description: {
+    position: 'absolute',
+    bottom: '40%',
+  },
+  activate: {
+    position: 'absolute',
+    // paddingLeft: '9%',
+    bottom: '15%',
+  },
+  header: {
+    flexDirection: 'row',
+    height: '65%',
+    width: '100%',
+  },
+  title: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

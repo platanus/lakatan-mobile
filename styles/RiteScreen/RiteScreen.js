@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     paddingTop: globalStyle.paddingContainer,
+    paddingVertical: '8%',
   },
   riteTitle: {
     fontSize: globalStyle.fontSizeTitle,
@@ -18,7 +19,8 @@ const styles = StyleSheet.create({
   },
   textSharedHeader: {
     color: color.darkBlue,
-    paddingTop: globalStyle.paddingContainer,
+    paddingTop: '8%',
+    paddingVertical: '2%',
     fontSize: globalStyle.fontSizePrincipalText,
   },
   textHeader: {
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     paddingBottom: globalStyle.paddingTopInput,
+    paddingVertical: '2%',
   },
   hookButton: {
     width: '100%',
@@ -124,8 +127,8 @@ const styles = StyleSheet.create({
   },
   raffleUserList: {
     alignSelf: 'center',
-    width: '90%',
-    height: '80%',
+    width: '100%',
+    height: '75%',
     marginBottom: '3%',
     borderBottomWidth: 1,
     borderColor: color.lightGray,
