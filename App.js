@@ -88,7 +88,7 @@ const Teams = () => (
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
     <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
     <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
-    
+
   </TeamStack.Navigator>
 );
 
@@ -128,7 +128,10 @@ const AppNavigator = () => {
         </>
       ) :
         (
-          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+          <>
+            <AppDrawer.Screen name="Organizaciones" component={Organization} />
+            <AppDrawer.Screen name="Perfil" component={Profile}/>
+          </>
         )}
     </AppDrawer.Navigator>
   );
@@ -164,7 +167,7 @@ export default function App() {
       <PersistGate
         loading={<Splash />}
         persistor={persistor}
-        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
+        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 2000))}
       >
         <SignInNavigatior />
       </PersistGate>

@@ -84,12 +84,14 @@ const NewUserToTeamScreen = (props) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
-        
+
+        <View style={styles.usersList}>
           <UsersListComponent
             selectedMembers={selectedMembers}
             itemOnPressHandler={itemOnPressHandler}
           />
-       
+        </View>
+
         {/* <View style={styles.multiselect}>
           <MultiSelect
             items={availableUsers}
@@ -114,14 +116,12 @@ const NewUserToTeamScreen = (props) => {
             button="40"
           />
         </View> */}
-        <View style={styles.buttonContainer}>
-          <View style={styles.confirmButton}>
-            <TouchableOpacity
-              style={styles.applyButton}
-              onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
-              <Text style={styles.textConfirmButton}>confirmar</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.confirmButton}>
+          <TouchableOpacity
+            style={styles.applyButton}
+            onPress={() => props.navigation.navigate('New Team', { name, members: selectedItems })}>
+            <Text style={styles.textConfirmButton}>Confirmar</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>

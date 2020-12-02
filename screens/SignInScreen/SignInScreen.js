@@ -53,13 +53,15 @@ const SignInScreen = ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.formCard}>
-          <View>
-            {/* <Image style={styles.logo} source={require('../../assets/lakatan2.png')} /> */}
-            <Text style={styles.title}>lakatan</Text>
-          </View>
-          <View style={styles.input}>
+      <View style={styles.mainContainer}>
+
+        <View style={styles.lakatanHeader}>
+          <Image style={styles.icon} source={require('../../assets/Lakatan/lakatanIcon.png')} />
+          <Image style={styles.text} source={require('../../assets/Lakatan/lakatanText.png')} />
+        </View>
+
+        <View style={styles.body}>
+          <View style={styles.subBody}>
             <Text style={styles.tag}>Correo electrónico</Text>
             <TextInput
               style={styles.areaInput}
@@ -82,25 +84,26 @@ const SignInScreen = ({ navigation }) => {
                 <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={styles.eyeIcon} />
               </TouchableWithoutFeedback>
             </View>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={signInButtonDisable()}>
+
             <TouchableOpacity
-              style={styles.signInButton}
+              style={styles.forgotPasswordView}
+              onPress={() => navigation.navigate('Forgot Password')}>
+              <Text style={styles.forgotPasswordText}>
+            Recuperar contraseña
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TouchableOpacity
+              style={signInButtonDisable()}
               disabled={!(email && password)}
               onPress={signInButtonHandler}>
               <Text style={styles.textConfirmButton}>Ingresar</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.forgotPasswordView}
-          onPress={() => navigation.navigate('Forgot Password')}>
-          <Text style={styles.forgotPasswordText}>
-            Recuperar contraseña
-          </Text>
-        </TouchableOpacity>
+
       </View>
     </TouchableWithoutFeedback>
 

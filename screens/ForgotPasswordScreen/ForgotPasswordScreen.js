@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { PASSWORD_CHANGE_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
 import styles from '../../styles/ForgotPasswordScreen/ForgotPasswordScreen';
@@ -25,7 +25,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
   }, [navigation, dispatch]);
 
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.mainContainer}>
 
         <View style={styles.bodyContainer}>
@@ -60,7 +60,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
               ...styles.sendTouchable,
               backgroundColor: email && !loading ? color.darkBlue : color.gray }}
             onPress={() => sendTouchableHandler()}
-            disabled={(!email && loading)}
+            disabled={(!email || loading)}
           >
             <Text style={styles.sendText}>
               Enviar

@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions as organizationsActions } from './slice';
 import { actions as syncActions } from '../sync/slice';
 import { actions as teamsActions } from '../Teams/slice';
+import { actions as authActions } from '../authentication/slice';
 import { CURRENT_ORGANIZATION_REQUEST, USER_ORGANIZATIONS_REQUEST, CHANGE_CURRENT_ORGANIZATION } from '../types';
 import apiOrganizations from '../../api/organizations';
 
@@ -38,6 +39,11 @@ function *userOrganizationsRequest({ payload }) {
     }));
   } catch (error) {
     console.log(error);
+    if (error.response.status.toString() === '401') {
+      yield put(authActions.authError('¡Oops, hubo un error!'));
+      yield put(teamsActions.reset());
+      yield put(authActions.reset());
+   }
   }
   yield put(organizationsActions.finish());
 }

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   footContainer: {
-    height: '10%',
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   sendTouchable: {
     width: '100%',

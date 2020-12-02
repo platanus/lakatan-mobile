@@ -42,7 +42,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
                 color={color.darkBlue}
               />
             </View> }
-          { !(itemOnPressHandler && item.selected) &&
+          { itemOnPressHandler && !item.selected &&
             <View style={styles.check}>
               <Icon
                 name="times"

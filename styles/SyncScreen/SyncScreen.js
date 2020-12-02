@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
     // width: 110,
     // alignItems: 'left',
-    marginTop: '5%',
+    marginTop: '3%',
     alignSelf: 'flex-start',
   },
   stepText: {
@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
     // fontSize: 15,
     fontSize: 18,
     color: colors.darkBlue,
-    marginBottom: '5%',
+    marginBottom: '3%',
     textAlign: 'left',
   },
   descriptionView: {
     flexDirection: 'row',
     width: '100%',
-    marginVertical: 5,
+    marginTop: 5,
   },
   descriptionText: {
     fontSize: 12,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   syncItemListContainer: {
-    flex: 0.95,
+    flex: 1,
     width: '100%',
   },
   footContainer: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 
   footTouchable: {
     width: '20%',
-    paddingVertical: '5%',
+    paddingVertical: '3%',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   createButtonContainer: {
     width: '100%',
@@ -46,8 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: '15%',
+    marginTop: globalStyle.buttonMarginVertival,
   },
   addUser: {
     alignItems: 'center',
@@ -81,9 +79,16 @@ const styles = StyleSheet.create({
   headerScreen: {
     flexDirection: 'row',
     width: '100%',
+    height: '100%',
+    alignItems: 'center',
   },
   titleScreen: {
     fontSize: globalStyle.fontSizeHeader,
+  },
+  usersList: {
+    flex: 1,
+    marginTop: 10,
+    paddingHorizontal: '5%',
   },
 });
 

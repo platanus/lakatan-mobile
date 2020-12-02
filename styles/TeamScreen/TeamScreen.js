@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   riteScreen: {
     height: '100%',
     backgroundColor: color.white,
-    padding: globalStyle.paddingContainer,
+    paddingHorizontal: globalStyle.paddingContainer,
+    paddingTop: globalStyle.paddingContainer,
   },
   teamTitle: {
     fontSize: globalStyle.fontSizeTitle,
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
     height: globalStyle.heightButton,
   },
   newRiteText: {
@@ -146,20 +146,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: globalStyle.paddingBottomButton,
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   applyContainer: {
     width: '100%',
   },
   listRites: {
-    height: '85%',
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
-    height: '65%',
+    height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,

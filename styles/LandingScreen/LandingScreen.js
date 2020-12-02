@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    padding: globalStyle.paddingContainer,
+    paddingHorizontal: globalStyle.paddingContainer,
+    paddingTop: globalStyle.paddingContainer,
     backgroundColor: 'white',
   },
   addTeamButton: {
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    height: '65%',
+    alignItems: 'center',
+    height: '100%',
     width: '100%',
   },
   title: {

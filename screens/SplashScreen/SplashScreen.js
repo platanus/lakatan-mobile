@@ -1,19 +1,14 @@
 import React from 'react';
 import {
-  View, Text, Image, TouchableOpacity,
+  View, Image,
 } from 'react-native';
 
 import styles from '../../styles/SplashScreen/SplashScreen';
 
-const SplashScreen = (props) => (
+const SplashScreen = () => (
   <View style={styles.container}>
-    <Image style={styles.logo} source={require('../../assets/platanus/logoPlatanus.png')} />
-    <Text style={styles.platanusTitle}>Platanus</Text>
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.textButton}>Lakatan</Text>
-      </TouchableOpacity>
-    </View>
+    <Image style={styles.icon} source={require('../../assets/Lakatan/lakatanIcon.png')} />
+    <Image style={styles.text} source={require('../../assets/Lakatan/lakatanText.png')} />
   </View>
 );
 

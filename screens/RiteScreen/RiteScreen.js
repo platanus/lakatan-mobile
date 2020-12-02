@@ -182,18 +182,22 @@ const RiteScreen = ({
   const hooksRoute = (props) => (
     <View style={styles.subScreenContainer}>
       <View style={styles.subScreen}>
-        <View style={styles.listHooksContainerInput}>
-          <Text style={styles.hookHeader}>Entrada</Text>
-          <ItemList
-            data={inHooks}
-          />
+        <View style={{ flex: 1 }}>
+          <View style={styles.listHooksContainerInput}>
+            <Text style={styles.hookHeader}>Entrada</Text>
+            <ItemList
+              data={inHooks}
+            />
+          </View>
+
+          <View style={styles.listHooksContainerOutput}>
+            <Text style={styles.hookHeader}>Salida</Text>
+            <ItemList
+              data={outHooksName}
+            />
+          </View>
         </View>
-        <View style={styles.listHooksContainerOutput}>
-          <Text style={styles.hookHeader}>Salida</Text>
-          <ItemList
-            data={outHooksName}
-          />
-        </View>
+
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
             <TouchableOpacity
@@ -213,8 +217,8 @@ const RiteScreen = ({
 
   const [index, setIndex] = useState(0);
   const routes = [
-    { key: 'first', title: 'sortear' },
-    { key: 'second', title: 'hooks' },
+    { key: 'first', title: 'Sortear' },
+    { key: 'second', title: 'Hooks' },
   ];
 
   const renderScene = SceneMap({

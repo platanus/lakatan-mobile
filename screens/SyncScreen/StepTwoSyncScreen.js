@@ -154,7 +154,7 @@ const StepTwoSyncScreen = ({ route, navigation }) => {
         onPress={applyButtonHandler}
       >
         <Text style={styles.applyText}>
-          aplicar
+          Aplicar
           {' '}
           {count}
         </Text>
