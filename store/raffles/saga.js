@@ -8,8 +8,8 @@ import api from '../../api/raffles';
 function *createRaffleRequest({ payload }) {
   yield put(rafflesActions.start());
   try {
-    const data = yield call(api.createRaffle, payload);
-    yield put(rafflesActions.setChosenOnes(data.data));
+    const response = yield call(api.createRaffle, payload);
+    yield put(rafflesActions.setChosenOnes(response.data.data.attributes.users));
   } catch (error) {
     if (error.response.status.toString() === '401') {
       yield put(authActions.authError('¡Oops, hubo un error!'));

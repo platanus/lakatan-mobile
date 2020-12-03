@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: globalStyle.paddingContainer,
   },
   infoContainer: {
-    paddingVertical: '8%',
+    flex: 1,
     paddingTop: globalStyle.paddingContainer,
   },
   teamTitle: {
@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
+    paddingVertical: globalStyle.buttonMarginVertival,
   },
   confirmButton: {
     width: '100%',
@@ -72,8 +71,9 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    height: '65%',
+    height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,

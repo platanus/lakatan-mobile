@@ -85,10 +85,12 @@ const NewUserToTeamScreen = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
 
-        <UsersListComponent
-          selectedMembers={selectedMembers}
-          itemOnPressHandler={itemOnPressHandler}
-        />
+        <View style={styles.usersList}>
+          <UsersListComponent
+            selectedMembers={selectedMembers}
+            itemOnPressHandler={itemOnPressHandler}
+          />
+        </View>
 
         {/* <View style={styles.multiselect}>
           <MultiSelect

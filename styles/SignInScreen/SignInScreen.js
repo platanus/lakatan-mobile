@@ -3,18 +3,32 @@ import color from '../colors';
 import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     width: '100%',
     height: '100%',
+    backgroundColor: color.darkBlue,
+  },
+
+  lakatanHeader: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.darkBlue,
+    flex: 1,
+  },
+  icon: {
+    width: 54,
+    height: 60,
+    marginBottom: 10,
+  },
+  text: {
+    width: 100,
+    height: 23,
+  },
+
+  body: {
     backgroundColor: color.white,
     paddingHorizontal: globalStyle.paddingContainer,
-    paddingTop: '20%',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingBottom: '10%',
+    flex: 3,
   },
   tag: {
     fontSize: globalStyle.fontSizePrincipalText,
@@ -29,65 +43,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: globalStyle.paddingInput,
     height: globalStyle.heightInput,
   },
-  passwordInput: {
-    width: '100%',
-    backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusTextInput,
-    height: globalStyle.heightInput,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
-  },
   eyeIcon: {
     marginTop: 7,
     position: 'absolute',
     right: 15,
     bottom: '15%',
-  },
-  registerButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    position: 'absolute',
-    bottom: '15%',
-  },
-  cancelButton: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  confirmButton: {
-    borderRadius: globalStyle.borderRadiusButton,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signInButton: {
-    width: '100%',
-    borderRadius: globalStyle.borderRadiusButton,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: globalStyle.heightButton,
-  },
-  registerButton: {
-    width: '100%',
-    backgroundColor: color.yellow,
-    borderRadius: globalStyle.borderRadiusButton,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: globalStyle.heightButton,
-  },
-  textConfirmButton: {
-    color: color.white,
-    fontSize: globalStyle.fontSizeButton,
-  },
-  textCancelButton: {
-    color: color.white,
-    fontSize: globalStyle.fontSizeButton,
   },
   forgotPasswordView: {
     marginTop: 30,
@@ -99,9 +59,21 @@ const styles = StyleSheet.create({
     fontSize: globalStyle.fontSizePrincipalText,
     textDecorationLine: 'underline',
   },
-  logo: {
-    // resizeMode: 'stretch',
+
+  confirmButton: {
+    borderRadius: globalStyle.borderRadiusButton,
+    height: globalStyle.heightButton,
     width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: globalStyle.buttonMarginVertival,
+  },
+  textConfirmButton: {
+    color: color.white,
+    fontSize: globalStyle.fontSizeButton,
+  },
+  subBody: {
+    flex: 1,
   },
 });
 

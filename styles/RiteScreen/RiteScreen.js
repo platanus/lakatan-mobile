@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   raffleButtonContainer: {
     width: '100%',
@@ -70,7 +69,8 @@ const styles = StyleSheet.create({
   subScreen: {
     height: '100%',
     backgroundColor: 'white',
-    padding: globalStyle.paddingContainer,
+    paddingHorizontal: globalStyle.paddingContainer,
+    paddingTop: globalStyle.paddingContainer,
   },
   applyButton: {
     width: '100%',
@@ -119,26 +119,21 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    height: '50%',
+    height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
   },
   raffleUserList: {
-    alignSelf: 'center',
+    flex: 1,
     width: '100%',
-    height: '75%',
-    marginBottom: '3%',
-    borderBottomWidth: 1,
-    borderColor: color.lightGray,
+    alignSelf: 'center',
   },
   listHooksContainerInput: {
-    height: '20%',
   },
   listHooksContainerOutput: {
-    minHeight: '30%',
-    maxHeight: '70%',
   },
 });
 

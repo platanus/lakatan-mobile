@@ -149,7 +149,10 @@ const AppNavigator = () => {
         </>
       ) :
         (
-          <AppDrawer.Screen name="Organizaciones" component={Organization} />
+          <>
+            <AppDrawer.Screen name="Organizaciones" component={Organization} />
+            <AppDrawer.Screen name="Perfil" component={Profile}/>
+          </>
         )}
     </AppDrawer.Navigator>
   );
@@ -185,7 +188,7 @@ export default function App() {
       <PersistGate
         loading={<Splash />}
         persistor={persistor}
-        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 1000))}
+        onBeforeLift={() => new Promise((resolve) => setTimeout(resolve, 2000))}
       >
         <SignInNavigatior />
       </PersistGate>

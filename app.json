@@ -4,12 +4,7 @@
     "slug": "lakatan",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "icon": "./assets/Platanus/logoPlatanus.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -18,6 +13,12 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "androidStatusBar": {
+      "translucent": true
     },
     "web": {
       "favicon": "./assets/favicon.png"

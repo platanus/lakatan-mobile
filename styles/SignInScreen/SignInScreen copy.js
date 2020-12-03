@@ -4,59 +4,35 @@ import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: color.white,
     paddingHorizontal: globalStyle.paddingContainer,
   },
-  infoContainer: {
-    flex: 1,
-    paddingTop: globalStyle.paddingContainer,
+  title: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
-  textHeader: {
+  tag: {
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingTop: globalStyle.paddingTopInput,
     color: color.darkBlue,
+    paddingTop: globalStyle.paddingTopInput,
     paddingBottom: globalStyle.paddingBottomInput,
-  },
-  pickerContainer: {
-    backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusTextInput,
-    height: globalStyle.heightInput,
-  },
-  icon: {
-    position: 'absolute',
-    right: 1,
-    bottom: '25%',
-    paddingRight: '5%',
-  },
-  itemPicker: {
-    height: '100%',
-    fontSize: globalStyle.fontSizeSecondaryText,
   },
   areaInput: {
     width: '100%',
     backgroundColor: color.lightSoftGray,
     borderRadius: globalStyle.borderRadiusTextInput,
-    paddingLeft: '3%',
+    paddingHorizontal: globalStyle.paddingInput,
     height: globalStyle.heightInput,
   },
-  httpAreaInput: {
+  passwordInput: {
     width: '100%',
     backgroundColor: color.lightSoftGray,
     borderRadius: globalStyle.borderRadiusTextInput,
-    paddingLeft: '3%',
     height: globalStyle.heightInput,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  instructionContainer: {
-    marginTop: globalStyle.paddingContainer,
-  },
-  instructionText: {
-    color: color.gray,
-    textAlign: 'center',
-    paddingTop: globalStyle.paddingContainer,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -64,33 +40,60 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: globalStyle.buttonMarginVertival,
   },
-  createButtonContainer: {
+  eyeIcon: {
+    marginTop: 7,
+    position: 'absolute',
+    right: 15,
+    bottom: '15%',
+  },
+  cancelButton: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  applyButton: {
+  confirmButton: {
+    borderRadius: globalStyle.borderRadiusButton,
     width: '100%',
-    backgroundColor: color.darkBlue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: globalStyle.buttonMarginVertival,
+  },
+  signInButton: {
+    width: '100%',
     borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
+    height: globalStyle.heightButton,
+  },
+  registerButton: {
+    width: '100%',
+    backgroundColor: color.yellow,
+    borderRadius: globalStyle.borderRadiusButton,
+    alignItems: 'center',
+    justifyContent: 'center',
     height: globalStyle.heightButton,
   },
   textConfirmButton: {
     color: color.white,
     fontSize: globalStyle.fontSizeButton,
-    fontWeight: '500',
   },
-  header: {
-    flexDirection: 'row',
-    height: '100%',
+  textCancelButton: {
+    color: color.white,
+    fontSize: globalStyle.fontSizeButton,
+  },
+  forgotPasswordView: {
+    marginTop: 30,
+    alignSelf: 'center',
+  },
+  forgotPasswordText: {
+    alignSelf: 'center',
+    color: color.darkBlue,
+    fontSize: globalStyle.fontSizePrincipalText,
+    textDecorationLine: 'underline',
+  },
+  logo: {
+    // resizeMode: 'stretch',
     width: '100%',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

@@ -6,42 +6,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3170F5',
+    backgroundColor: color.darkBlue,
   },
-  logo: {
-    resizeMode: 'stretch',
-    height: 100,
-    width: 100,
+  icon: {
+    width: 63,
+    height: 70,
+    marginBottom: 20,
   },
-  platanusTitle: {
-    fontSize: 20,
-    color: 'white',
-  },
-  button: {
-    backgroundColor: '#FAC537',
-    borderColor: 'white',
-    borderRadius: 10,
-    marginTop: 30,
-  },
-  buttonContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: '10%',
-  },
-  signInButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 40,
-    width: '40%',
-    backgroundColor: '#3170F5',
-    borderRadius: 5,
-  },
-  textButton: {
-    color: color.yellow,
-    fontSize: 25,
-    fontStyle: 'italic',
-    fontWeight: '900',
+  text: {
+    width: 130,
+    height: 30,
+    marginBottom: '30%',
   },
 });
 

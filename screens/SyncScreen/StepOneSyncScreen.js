@@ -136,7 +136,7 @@ const StepOneSyncScreen = ({ route, navigation }) => {
         disabled={loading}
       >
         <Text style={styles.applyText}>
-          aplicar
+          Aplicar
           {' '}
           {count}
         </Text>

@@ -69,7 +69,9 @@ const NewTeamScreen = (props) => {
         </View>
       </View>
 
-      <UsersListComponent selectedMembers={membersObjects} />
+      <View style={styles.usersList}>
+        <UsersListComponent selectedMembers={membersObjects} />
+      </View>
 
       <View style={styles.addUserContainer}>
         <View style={styles.createButtonContainer}>

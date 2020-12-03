@@ -16,13 +16,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
   },
   confirmButton: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   applyButton: {
     width: '100%',
@@ -43,6 +42,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
+  },
+  usersList: {
+    flex: 1,
+    marginTop: 5,
   },
 });
 

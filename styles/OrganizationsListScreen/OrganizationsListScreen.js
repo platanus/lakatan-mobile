@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    height: '65%',
+    height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,

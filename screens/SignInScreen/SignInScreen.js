@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert, Image,
+  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert, Image, Animated,
 } from 'react-native';
 import colors from '../../styles/colors';
 import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
@@ -51,15 +51,19 @@ const SignInScreen = ({ navigation }) => {
     );
   }
 
+  
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.formCard}>
-          <View>
-            {/* <Image style={styles.logo} source={require('../../assets/lakatan2.png')} /> */}
-            <Text style={styles.title}>lakatan</Text>
-          </View>
-          <View style={styles.input}>
+      <View style={styles.mainContainer}>
+
+        <Animated.View style={styles.lakatanHeader}>
+          <Image style={styles.icon} source={require('../../assets/Lakatan/lakatanIcon.png')} />
+          <Image style={styles.text} source={require('../../assets/Lakatan/lakatanText.png')} />
+        </Animated.View>
+
+        <View style={styles.body}>
+          <View style={styles.subBody}>
             <Text style={styles.tag}>Correo electrónico</Text>
             <TextInput
               style={styles.areaInput}
@@ -82,25 +86,26 @@ const SignInScreen = ({ navigation }) => {
                 <Icon name={hiddenPassword ? 'eye-slash' : 'eye'} size={25} color="grey" style={styles.eyeIcon} />
               </TouchableWithoutFeedback>
             </View>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={signInButtonDisable()}>
+
             <TouchableOpacity
-              style={styles.signInButton}
+              style={styles.forgotPasswordView}
+              onPress={() => navigation.navigate('Forgot Password')}>
+              <Text style={styles.forgotPasswordText}>
+            Recuperar contraseña
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TouchableOpacity
+              style={signInButtonDisable()}
               disabled={!(email && password)}
               onPress={signInButtonHandler}>
               <Text style={styles.textConfirmButton}>Ingresar</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.forgotPasswordView}
-          onPress={() => navigation.navigate('Forgot Password')}>
-          <Text style={styles.forgotPasswordText}>
-            Recuperar contraseña
-          </Text>
-        </TouchableOpacity>
+
       </View>
     </TouchableWithoutFeedback>
 

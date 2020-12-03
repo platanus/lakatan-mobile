@@ -198,6 +198,7 @@ const RiteScreen = ({
             hookOf={'Salida'}
           />
         </View>
+
         <View style={styles.buttonContainer}>
           <View style={styles.newHookContainer}>
             <TouchableOpacity
@@ -217,14 +218,25 @@ const RiteScreen = ({
 
   const [index, setIndex] = useState(0);
   const routes = [
-    { key: 'first', title: 'sortear' },
-    { key: 'second', title: 'hooks' },
+    { key: 'first', title: 'Sortear' },
+    { key: 'second', title: 'Hooks' },
   ];
 
-  const renderScene = SceneMap({
-    first: raffleRoute,
-    second: hooksRoute,
-  });
+  // const renderScene = SceneMap({
+  //   first: raffleRoute,
+  //   second: hooksRoute,
+  // });
+
+  const renderScene =
+
+  ({ route, jumpTo }) => {
+    switch (route.key) {
+    case 'first':
+      return raffleRoute();
+    case 'second':
+      return hooksRoute();
+    }
+  };
 
   const renderTabBar = (tabProps) => (
 
