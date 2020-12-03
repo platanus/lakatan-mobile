@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   areaInput: {
     width: '100%',
-    backgroundColor: color.softGray,
-    borderRadius: globalStyle.borderRadiusButton,
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
     paddingHorizontal: '3%',
     height: globalStyle.heightInput,
   },

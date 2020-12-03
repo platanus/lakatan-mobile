@@ -186,12 +186,16 @@ const RiteScreen = ({
           <Text style={styles.hookHeader}>Entrada</Text>
           <ItemList
             data={inHooks}
+            navigation={navigation}
+            hookOf={'Entrada'}
           />
         </View>
         <View style={styles.listHooksContainerOutput}>
           <Text style={styles.hookHeader}>Salida</Text>
           <ItemList
             data={outHooksName}
+            navigation={navigation}
+            hookOf={'Salida'}
           />
         </View>
         <View style={styles.buttonContainer}>

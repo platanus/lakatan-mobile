@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingTop: globalStyle.paddingTopInput,
+    paddingTop: '10%',
     color: color.darkBlue,
-    paddingBottom: globalStyle.paddingBottomButton,
+    paddingBottom: '2%',
   },
   instructionContainer: {
     marginTop: '5%',
@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: '5%',
   },
+  urlContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  textDescription: {
+    width: '90%',
+  },
+  copyIcon: {},
   header: {
     flexDirection: 'row',
     height: '50%',
@@ -33,6 +41,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,
+    textTransform: 'capitalize',
   },
 });
 

@@ -7,20 +7,25 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
 import styles from '../../styles/RiteScreen/RiteScreen';
 
-const Item = ({ item }) => {
+const Item = ({ item, navigation, hookOf }) => {
   let description = '';
-
   if (item.attributes.type === 'Webhook') {
     description = item.attributes.url;
   } else {
     description = item.attributes.slackReference;
   }
+  console.log('holAA');
+  console.log(item);
+  console.log(item.attributes.type);
 
   return (
     <TouchableOpacity
+      // onPress={() => {
+      //   Clipboard.setString(description);
+      //   Alert.alert("Link copiado");
+      // }}
       onPress={() => {
-        Clipboard.setString(description);
-        Alert.alert("Link copiado");
+        navigation.navigate('Hook', { hookOf, name: item.attributes.name, description, hookType: item.attributes.type });
       }}
       style={styles.hookButton}
       key={item.id}
@@ -40,11 +45,11 @@ const Item = ({ item }) => {
   );
 };
 
-const ItemList = ({ data }) => (
+const ItemList = ({ data, navigation, hookOf }) => (
   <View style={styles.itemsListContainer}>
     <FlatList
       data={data}
-      renderItem={({ item }) => (<Item item={item} />)}
+      renderItem={({ item }) => (<Item item={item} navigation={navigation} hookOf={hookOf} />)}
     />
   </View>
 );

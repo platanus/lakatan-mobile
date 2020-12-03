@@ -28,7 +28,7 @@ const SignInScreen = ({ navigation }) => {
   const signInButtonHandler = () => {
     if (emailHandler(email)) {
       dispatch({ type: SIGN_IN_REQUEST, payload: { email, password } });
-    } else setFormError('¡Has ingresado un email inválido!');
+    } else setFormError('Credenciales incorrectas');
   };
 
   const signUpButtonHandler = () => {

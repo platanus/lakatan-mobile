@@ -28,7 +28,7 @@ const RiteView = (props) => {
       <TouchableOpacity
         onPress={pressHandler}
       >
-        <Text style={styles.riteText}>{goal}</Text>
+        <Text style={styles.riteText}>{name}</Text>
         <Text style={styles.ritePeople}>{userMinimum} persona(s)</Text>
         <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
       </TouchableOpacity>

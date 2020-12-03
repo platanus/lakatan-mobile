@@ -31,6 +31,11 @@ import NewOrganizationScreen from './screens/NewOrganizationScreen/NewOrganizati
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import EditPhotoScreen from './screens/ProfileScreen/EditPhotoScreen';
 import EditNameScreen from './screens/ProfileScreen/EditNameScreen';
+import OrganizationLogo from './components/Logo/OrganizationLogo';
+import ProfileLogo from './components/Logo/ProfileLogo';
+import LogoutLogo from './components/Logo/LogoutLogo';
+import TeamLogo from './components/Logo/TeamLogo';
+import IntegrationLogo from './components/Logo/IntegrationLogo';
 
 runSagas();
 const AppStack = createStackNavigator();
@@ -88,7 +93,7 @@ const Teams = () => (
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
     <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
     <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
-    
+
   </TeamStack.Navigator>
 );
 
@@ -114,6 +119,7 @@ const AppNavigator = () => {
           style={styles.signoutButton}
           inactiveTintColor={colors.red}
           onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}
+          icon={() => <LogoutLogo />}
         />
       </DrawerContentScrollView>
     )}
@@ -121,10 +127,25 @@ const AppNavigator = () => {
     >
       { id ? (
         <>
-          <AppDrawer.Screen name="Organizaciones" component={Organization} />
-          <AppDrawer.Screen name="Equipos" component={Teams} />
-          <AppDrawer.Screen name="Integraciones" component={Integration} />
-          <AppDrawer.Screen name="Perfil" component={Profile}/>
+          <AppDrawer.Screen
+            name="Organizaciones"
+            component={Organization}
+            options={{ drawerIcon: () => <OrganizationLogo /> }}/>
+          <AppDrawer.Screen
+            name="Equipos"
+            component={Teams}
+            options={{ drawerIcon: () => <TeamLogo /> }}
+            />
+          <AppDrawer.Screen
+            name="Integraciones"
+            component={Integration}
+            options={{ drawerIcon: () => <IntegrationLogo /> }}
+            />
+          <AppDrawer.Screen
+            name="Editar perfil"
+            component={Profile}
+            options={{ drawerIcon: () => <ProfileLogo /> }}
+            />
         </>
       ) :
         (

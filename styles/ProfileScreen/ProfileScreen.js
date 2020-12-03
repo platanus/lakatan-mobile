@@ -3,7 +3,48 @@ import colors from '../colors';
 import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
-
+  container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.white,
+    paddingHorizontal: globalStyle.paddingContainer,
+    flex: 1,
+    paddingTop: '5%',
+  },
+  infoContainer: {
+    paddingVertical: '8%',
+    paddingTop: globalStyle.paddingContainer,
+    alignItems: 'center',
+  },
+  emailContainer: {
+    alignItems: 'center',
+    marginVertical: 30,
+  },
+  name: {
+    fontSize: 32,
+  },
+  email: {
+    fontSize: 20,
+  },
+  nameTag: {
+    color: colors.darkBlue,
+    textAlign: 'left',
+    fontSize: globalStyle.fontSizePrincipalText,
+    paddingBottom: '3%',
+  },
+  imageContainer: {
+    alignItems: 'center',
+    marginBottom: '10%',
+  },
+  image: {
+    height: 150,
+    width: 150,
+    resizeMode: 'stretch',
+    borderRadius: 75,
+  },
+  profileContainer: {
+    marginLeft: '0%',
+  },
   button: {
     backgroundColor: colors.lightBlue,
     flexDirection: 'row',
@@ -14,38 +55,50 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 20,
   },
-  image: {
-    height: 150,
-    width: 150,
-    resizeMode: 'stretch',
-    borderRadius: 75,
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    paddingTop: 20,
-    backgroundColor: colors.white,
-    flex: 1,
+  areaInput: {
+    width: '100%',
+    backgroundColor: colors.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
+    paddingLeft: globalStyle.paddingInput,
+    height: globalStyle.heightInput,
   },
   buttonText: {
     color: colors.darkBlue,
-    marginLeft: 15,
+    textDecorationLine: 'underline',
+    fontSize: globalStyle.fontSizeSecondaryText,
   },
-  email: {
-    fontSize: 20,
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: globalStyle.paddingBottomButton,
   },
-  name: {
-    fontSize: 45,
-  },
-  emailContainer: {
+  confirmButton: {
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 30,
-  },
-  areaInput: {
-    width: 180,
-    backgroundColor: colors.softGray,
     borderRadius: globalStyle.borderRadiusButton,
-    paddingHorizontal: '3%',
-    height: globalStyle.heightInput,
+    backgroundColor: colors.darkBlue,
+  },
+  applyButton: {
+    width: '100%',
+    borderRadius: globalStyle.borderRadiusButton,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+    height: globalStyle.heightButton,
+  },
+  textConfirmButton: {
+    color: colors.white,
+    fontSize: globalStyle.fontSizeButton,
+  },
+  headerScreen: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  titleScreen: {
+    fontSize: globalStyle.fontSizeHeader,
   },
 });
 

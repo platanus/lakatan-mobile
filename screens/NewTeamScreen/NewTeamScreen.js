@@ -58,13 +58,11 @@ const NewTeamScreen = (props) => {
           <Text style={styles.tag}>Nombre</Text>
           <TextInput
             style={styles.areaInput}
-            placeholder="Mobile Capstone"
             value={name} onChangeText={setName}
           />
           <Text style={styles.tag}>Propósito</Text>
           <TextInput
             style={styles.areaInput}
-            placeholder="Equipo encargado de Lakatan-Mobile"
             value={description}
             onChangeText={setDescription}
           />
@@ -79,7 +77,7 @@ const NewTeamScreen = (props) => {
             style={styles.addUserButton}
             onPress={() => props.navigation.navigate('Add Users', { name, members })}
           >
-            <Text style={styles.addUserText}>agregar usuarios</Text>
+            <Text style={styles.addUserText}>Agregar usuarios</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -90,7 +88,7 @@ const NewTeamScreen = (props) => {
             style={confirmButtonDisable()}
             onPress={() => props.navigation.navigate('Teams', { name, description, members })}
           >
-            <Text style={styles.textConfirmButton}>confirmar</Text>
+            <Text style={styles.textConfirmButton}>Confirmar</Text>
           </TouchableOpacity>
         </View>
       </View>
