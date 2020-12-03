@@ -102,13 +102,12 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: color.white,
     opacity: 0.9,
-    flex: 0.6,
-    marginTop: '50%',
+    marginVertical: '50%',
     borderRadius: 5,
   },
   modalView: {
     flex: 1,
-    padding: '10%',
+    padding: '7%',
   },
   modalMessage: {
     fontSize: 16,

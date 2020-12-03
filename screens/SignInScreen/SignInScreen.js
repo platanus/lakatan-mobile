@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert, Image,
+  View, Text, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Alert, Image, Animated,
 } from 'react-native';
 import colors from '../../styles/colors';
 import { SIGN_IN_REQUEST, CLEAR_AUTH_ERROR, CLEAR_AUTH_SUCCESS } from '../../store/types';
@@ -51,14 +51,16 @@ const SignInScreen = ({ navigation }) => {
     );
   }
 
+  
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.mainContainer}>
 
-        <View style={styles.lakatanHeader}>
+        <Animated.View style={styles.lakatanHeader}>
           <Image style={styles.icon} source={require('../../assets/Lakatan/lakatanIcon.png')} />
           <Image style={styles.text} source={require('../../assets/Lakatan/lakatanText.png')} />
-        </View>
+        </Animated.View>
 
         <View style={styles.body}>
           <View style={styles.subBody}>

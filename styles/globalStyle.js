@@ -18,5 +18,5 @@ export default {
   paddingInput: '3%',
   paddingTopInput: '7%',
   paddingBottomInput: '2%',
-  buttonMarginVertival: 10,
+  buttonMarginVertival: 15,
 };

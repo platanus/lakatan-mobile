@@ -221,10 +221,21 @@ const RiteScreen = ({
     { key: 'second', title: 'Hooks' },
   ];
 
-  const renderScene = SceneMap({
-    first: raffleRoute,
-    second: hooksRoute,
-  });
+  // const renderScene = SceneMap({
+  //   first: raffleRoute,
+  //   second: hooksRoute,
+  // });
+
+  const renderScene =
+
+  ({ route, jumpTo }) => {
+    switch (route.key) {
+    case 'first':
+      return raffleRoute();
+    case 'second':
+      return hooksRoute();
+    }
+  };
 
   const renderTabBar = (tabProps) => (
 
