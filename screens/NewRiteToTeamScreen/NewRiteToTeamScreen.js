@@ -103,7 +103,7 @@ const NewRiteToTeamScreen = (props) => {
         <View style={styles.buttonContainer}>
           <View style={createRiteButtonDisable()}>
             <TouchableOpacity
-              onPress={createHandler}
+              onPress={() => createHandler()}
               style={styles.applyButton}
               disabled={!(riteName && objective && numberOfPeople)}
             >

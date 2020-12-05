@@ -182,32 +182,43 @@ const RiteScreen = ({
   const hooksRoute = (props) => (
     <View style={styles.subScreenContainer}>
       <View style={styles.subScreen}>
-        <View style={styles.listHooksContainerInput}>
-          <Text style={styles.hookHeader}>Entrada</Text>
-          <ItemList
-            data={inHooks}
-            navigation={navigation}
-            hookOf={'Entrada'}
-          />
-        </View>
-        <View style={styles.listHooksContainerOutput}>
-          <Text style={styles.hookHeader}>Salida</Text>
-          <ItemList
-            data={outHooksName}
-            navigation={navigation}
-            hookOf={'Salida'}
-          />
+        <View style={{ flex: 1 }}>
+          <View style={styles.listHooksContainerInput}>
+            <Text style={styles.hookHeader}>Entrada</Text>
+            { inHooks.length > 0 ?
+              (<ItemList
+                data={inHooks}
+                navigation={navigation}
+                hookOf={'Entrada'}
+              />) :
+              (<View style={{ height: 60 }}>
+              </View>)
+            }
+          </View>
+          <View style={styles.listHooksContainerOutput}>
+            <Text style={styles.hookHeader}>Salida</Text>
+
+            { outHooks.length > 0 ? (<ItemList
+              data={outHooksName}
+              navigation={navigation}
+              hookOf={'Salida'}
+            />) : (
+              <View style={{ height: 60 }}>
+              </View>)}
+          </View>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <View style={styles.newHookContainer}>
-            <TouchableOpacity
-              style={styles.applyButton}
-              onPress={() => navigation.navigate('New Hook', { taskId })}>
-              <Text style={styles.textApplyButton}>
+        <View>
+          <View style={styles.buttonContainer}>
+            <View style={styles.newHookContainer}>
+              <TouchableOpacity
+                style={styles.applyButton}
+                onPress={() => navigation.navigate('New Hook', { taskId })}>
+                <Text style={styles.textApplyButton}>
                 Nuevo hook
-              </Text>
-            </TouchableOpacity>
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>

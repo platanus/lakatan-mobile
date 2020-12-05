@@ -71,8 +71,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: globalStyle.paddingBottomButton,
+    marginVertical: globalStyle.buttonMarginVertival,
   },
   confirmButton: {
     width: '100%',

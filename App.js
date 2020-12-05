@@ -135,23 +135,30 @@ const AppNavigator = () => {
             name="Equipos"
             component={Teams}
             options={{ drawerIcon: () => <TeamLogo /> }}
-            />
+          />
           <AppDrawer.Screen
             name="Integraciones"
             component={Integration}
             options={{ drawerIcon: () => <IntegrationLogo /> }}
-            />
+          />
           <AppDrawer.Screen
             name="Editar perfil"
             component={Profile}
             options={{ drawerIcon: () => <ProfileLogo /> }}
-            />
+          />
         </>
       ) :
         (
           <>
-            <AppDrawer.Screen name="Organizaciones" component={Organization} />
-            <AppDrawer.Screen name="Perfil" component={Profile}/>
+            <AppDrawer.Screen
+              name="Organizaciones"
+              component={Organization}
+              options={{ drawerIcon: () => <OrganizationLogo /> }}/>
+            <AppDrawer.Screen
+              name="Editar perfil"
+              component={Profile}
+              options={{ drawerIcon: () => <ProfileLogo /> }}
+            />
           </>
         )}
     </AppDrawer.Navigator>
