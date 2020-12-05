@@ -36,8 +36,9 @@ const styles = StyleSheet.create({
   copyIcon: {},
   header: {
     flexDirection: 'row',
-    height: '50%',
+    height: '100%',
     width: '100%',
+    alignItems: 'center',
   },
   title: {
     fontSize: globalStyle.fontSizeHeader,

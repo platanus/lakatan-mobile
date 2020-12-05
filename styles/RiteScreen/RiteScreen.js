@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
   listHooksContainerInput: {
   },
   listHooksContainerOutput: {
+    flex: 1,
   },
 });
 

@@ -15,7 +15,6 @@ const Item = ({ item, navigation, hookOf }) => {
     description = item.attributes.slackReference;
   }
 
-
   return (
     <TouchableOpacity
       // onPress={() => {
@@ -44,12 +43,11 @@ const Item = ({ item, navigation, hookOf }) => {
 };
 
 const ItemList = ({ data, navigation, hookOf }) => (
-  <View style={styles.itemsListContainer}>
-    <FlatList
-      data={data}
-      renderItem={({ item }) => (<Item item={item} navigation={navigation} hookOf={hookOf} />)}
-    />
-  </View>
+
+  <FlatList
+    data={data}
+    renderItem={({ item }) => (<Item item={item} navigation={navigation} hookOf={hookOf} />)}
+  />
 );
 
 export default ItemList;
