@@ -140,6 +140,7 @@ function *nameChangeRequest({ payload }) {
 }
 
 function *getSessionRequest({ payload }) {
+  yield put(authenticationActions.start());
   try {
     const response = yield call(api.getSesionApi, payload);
     const data = response.data;

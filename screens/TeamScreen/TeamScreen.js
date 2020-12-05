@@ -171,7 +171,7 @@ const Team = (props) => {
           indicatorStyle={{ backgroundColor: color.darkBlue }}
           style={{ backgroundColor: color.white }}
           getLabelText={({ route }) => route.title}
-          labelStyle={{ fontSize: 16, color: color.darkBlue }}
+          labelStyle={{ fontSize: 15, color: color.darkBlue }}
         />
       </View>
     </View>

@@ -14,9 +14,7 @@ const Item = ({ item, navigation, hookOf }) => {
   } else {
     description = item.attributes.slackReference;
   }
-  console.log('holAA');
-  console.log(item);
-  console.log(item.attributes.type);
+
 
   return (
     <TouchableOpacity

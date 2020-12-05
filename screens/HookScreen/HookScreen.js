@@ -9,8 +9,6 @@ import colors from '../../styles/colors';
 
 const HookScreen = (props) => {
   const { hookOf, name, description, hookType } = props.route.params;
-  console.log("hola")
-  console.log(hookOf)
   
   useLayoutEffect(() => {
     props.navigation.setOptions({

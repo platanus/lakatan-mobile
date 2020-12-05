@@ -2,7 +2,7 @@ import { call, put, take, takeLatest } from 'redux-saga/effects';
 import { camelizeKeys } from 'humps';
 import { actions as hooksActions } from './slice';
 import api from '../../api/hooks';
-import { GET_HOOKS_REQUEST, GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST } from '../types';
+import { GET_HOOKS_REQUEST, GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST, CLEAR_HOOK_SUCCESS } from '../types';
 
 // eslint-disable-next-line max-statements
 function *getHooksRequest({ payload }) {
@@ -42,14 +42,20 @@ function *setHookRequest({ payload }) {
   yield put(hooksActions.start());
   try {
     yield call(api.setHookRequest, payload);
+    yield put(hooksActions.hookSuccess());
   } catch (error) {
     console.log(error);
   }
   yield put(hooksActions.finish());
 }
 
+function *clearHookSuccess() {
+  yield put(hooksActions.clearSuccess());
+}
+
 export default function *hooksSaga() {
   yield takeLatest(GET_HOOKS_REQUEST, getHooksRequest);
   yield takeLatest(GET_SLACK_ENTITIES_REQUEST, getSlackEntitiesRequest);
   yield takeLatest(SET_HOOK_REQUEST, setHookRequest);
+  yield takeLatest(CLEAR_HOOK_SUCCESS, clearHookSuccess);
 }

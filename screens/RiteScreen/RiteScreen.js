@@ -208,7 +208,6 @@ const RiteScreen = ({
           </View>
         </View>
 
-        <View>
           <View style={styles.buttonContainer}>
             <View style={styles.newHookContainer}>
               <TouchableOpacity
@@ -220,7 +219,7 @@ const RiteScreen = ({
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+   
       </View>
     </View>
   );

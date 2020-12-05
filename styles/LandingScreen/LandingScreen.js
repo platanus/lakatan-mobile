@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   teamCard: {
+    flex: 1,
     width: '100%',
     height: 170,
     marginVertical: 10,
@@ -44,18 +45,15 @@ const styles = StyleSheet.create({
   },
   teamName: {
     textAlign: 'left',
-    fontSize: 30,
     color: color.darkBlue,
     textTransform: 'capitalize',
+    fontSize: 30,
   },
   teamPurpose: {
     color: color.darkGray,
     paddingTop: '2%',
   },
   teamPeople: {
-    position: 'absolute',
-    paddingLeft: '9%',
-    bottom: '20%',
     color: color.darkBlue,
   },
   signOutButton: {
@@ -79,9 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   backButton: {
-    width: '200%',
-    paddingLeft: '100%',
-    flexDirection: 'column',
+    marginLeft: 20,
   },
   header: {
     flexDirection: 'row',

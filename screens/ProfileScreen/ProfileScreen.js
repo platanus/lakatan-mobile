@@ -43,14 +43,14 @@ const Profile = (props) => {
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      setImage(imageProfile);
+      setImage(imageProfile)
       setSetelected(false);
     });
   }, [dispatch, props.navigation, email, token, imageProfile]);
 
-
-
   const navigate = () => {
+    setSetelected(false);
+
     // props.navigation.navigate('Profile');
     if (name !== newName) {
       dispatch({ type: CHANGE_NAME_REQUEST, payload: { token, email, name: newName } });
@@ -94,13 +94,15 @@ const Profile = (props) => {
 
   useEffect(() => {
     if (props.navigation.isFocused() && success && !loading) {
-      
       dispatch({ type: CLEAR_AUTH_SUCCESS });
 
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      setSetelected(false);
     }
   }, [dispatch, email, loading, props.navigation, success, token]);
+
+  useEffect(() => {
+    setImage(imageProfile);
+  }, [imageProfile]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

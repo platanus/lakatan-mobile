@@ -44,6 +44,8 @@ const IntegrationList = (props) => {
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>Sincronización y mensajería</Text>
+          </View>
+        <View>
           {activado ? (
             <Text style={{ ...styles.activate, color: color.blue }}>Activado</Text>
           ) : (

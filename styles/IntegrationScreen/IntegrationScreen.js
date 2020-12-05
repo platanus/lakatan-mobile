@@ -7,22 +7,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    height: '80%',
-    width: '28%',
-    marginRight: '5%',
   },
   header: {
+    alignSelf: 'flex-start',
     flexDirection: 'row',
-    height: '100%',
-    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
-    marginTop: '5%',
     fontSize: 20,
   },
   gearButton: {
-    paddingRight: '80%',
-    width: '180%',
+    marginRight: 20,
   },
   description: {
     flexDirection: 'row',

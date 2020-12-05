@@ -8,17 +8,16 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.lightBlue,
-    flexDirection: 'row',
     borderRadius: globalStyle.borderRadiusTouchable,
     width: '90%',
     marginVertical: 5,
     height: 120,
     paddingLeft: '5%',
-    paddingTop: '5%',
+    paddingVertical: '5%',
   },
   image: {
-    height: 31,
-    width: 30,
+    height: 28,
+    width: 28,
   },
   buttonContainer: {
     alignItems: 'center',
@@ -28,24 +27,21 @@ const styles = StyleSheet.create({
   },
   integrationContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   descriptionContainer: {
-    flexDirection: 'row',
+    flex: 1,
   },
   buttonText: {
     color: colors.darkBlue,
-    marginLeft: '5%',
-    paddingTop: '2%',
-    fontSize: 18,
+    marginLeft: '1%',
+    fontSize: 20,
   },
   description: {
-    position: 'absolute',
-    bottom: '40%',
+    
   },
   activate: {
-    position: 'absolute',
-    // paddingLeft: '9%',
-    bottom: '15%',
+
   },
   header: {
     flexDirection: 'row',

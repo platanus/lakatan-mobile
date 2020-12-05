@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     resizeMode: 'stretch',
-    borderRadius: 75,
+    borderRadius: 100,
   },
   profileContainer: {
     marginLeft: '0%',

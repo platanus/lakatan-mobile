@@ -10,7 +10,10 @@ const img = {
 
 const HeaderLogo = ({ name }) => (
   <View style={styles.header}>
-    <Image style={styles.logo} source={img[name]} />
+    <Image
+      style={{ height: '100%', width: 40 }}
+      resizeMode= 'contain'
+      source={img[name]} />
     <Text style={styles.title}>{name}</Text>
   </View>
 );

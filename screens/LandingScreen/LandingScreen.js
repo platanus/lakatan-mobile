@@ -19,8 +19,19 @@ const TeamView = (props) => {
   return (
     <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
       <View style={styles.teamCard}>
-        <Text style={styles.teamName}>{name}</Text>
-        <Text style={styles.teamPurpose}>{purpose}</Text>
+        <View style={{}}>
+          <Text adjustsFontSizeToFit
+          numberOfLines={1}
+          style={styles.teamName}>{name}</Text>
+        </View>
+        <View style={{ flex: 1}}>
+        <Text 
+        adjustsFontSizeToFit
+        numberOfLines={2}
+        style={styles.teamPurpose}>{purpose}</Text>
+        </View>
+
+        <View style={{}}>
         {soyMiembro ? (
           <Text style={styles.teamPeople}>{cantidadDeMiembros} miembros
           <Text style={styles.bullet}> •</Text>
@@ -29,6 +40,7 @@ const TeamView = (props) => {
         ) : (
           <Text style={styles.teamPeople}>8 miembros</Text>
         )}
+        </View>
         
       </View>
     </TouchableOpacity>

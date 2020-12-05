@@ -10,7 +10,7 @@ import BackButton from '../../components/LandingScreen/BackButton';
 import styles from '../../styles/NewHookScreen/NewHookScreen';
 import colors from '../../styles/colors';
 import url from '../../env';
-import { GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST } from '../../store/types';
+import { GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST, CLEAR_HOOK_SUCCESS } from '../../store/types';
 
 const NewHookScreen = (props) => {
   const { taskId } = props.route.params;
@@ -20,7 +20,7 @@ const NewHookScreen = (props) => {
   const [reference, setReference] = useState('');
   const [hookUrl, setHookUrl] = useState('');
   const { email, token } = useSelector(store => store.authentication);
-  const { slackEntities } = useSelector(store => store.hooks);
+  const { slackEntities, success } = useSelector(store => store.hooks);
   const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
   const dispatch = useDispatch();
 
@@ -68,6 +68,13 @@ const NewHookScreen = (props) => {
       type: SET_HOOK_REQUEST,
       payload: { email, token, hookOf, hookType, hookName, hookUrl: auxUrl, taskId, reference } });
   };
+
+  useEffect(() => {
+    if (props.navigation.isFocused() && success) {
+      dispatch({ type: CLEAR_HOOK_SUCCESS });
+      props.navigation.goBack();
+    }
+  }, [dispatch, props.navigation, success]);
   // const createHookButtonDisable = () => (
   //   { ...styles.confirmButton, backgroundColor: hookName ? colors.blue : colors.gray });
 

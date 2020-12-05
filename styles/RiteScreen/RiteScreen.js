@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.lightBlue,
     borderRadius: globalStyle.borderRadiusButton,
     paddingVertical: 10,
-    marginVertical: '2%',
+    marginVertical: 3,
     paddingLeft: '10%',
     height: 65,
   },

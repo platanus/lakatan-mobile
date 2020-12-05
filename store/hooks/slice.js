@@ -5,6 +5,7 @@ const initialState = {
   slackEntities: [],
   inHooks: [],
   outHooks: [],
+  success: false,
 };
 
 const slice = createSlice({
@@ -20,6 +21,12 @@ const slice = createSlice({
     },
     saveEntities(state, action) {
       state.slackEntities = action.payload;
+    },
+    hookSuccess(state) {
+      state.success = true;
+    },
+    clearSuccess(state) {
+      state.success = false;
     },
     finish(state) {
       state.loading = false;
