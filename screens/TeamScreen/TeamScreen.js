@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { CURRENT_TEAM_REQUEST, GET_HOOKS_REQUEST } from '../../store/types';
+import { CURRENT_TEAM_REQUEST, GET_HOOKS_REQUEST, CLEAR_TEAM } from '../../store/types';
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
@@ -75,7 +75,10 @@ const Team = (props) => {
     });
 
     return refresh;
-  }, [props.navigation]);
+  }, [dispatch, email, id, props.navigation, token]);
+
+  
+  
 
   useLayoutEffect(() => {
     props.navigation.setOptions({

@@ -7,12 +7,13 @@ import {
   ALL_TEAMS_REQUEST, 
   NEW_TEAM_REQUEST,
    SIGN_OUT_REQUEST,
+   CLEAR_TEAM
   } from '../../store/types';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
-  const { id, attributes: { name, purpose, people } } = props.team.item;
+  const { id, attributes: { name, purpose, belongs, number_of_members } } = props.team.item;
   const soyMiembro = true; // TO DO: traer de backend
   const cantidadDeMiembros = 8;
 
@@ -33,9 +34,9 @@ const TeamView = (props) => {
 
         <View style={{}}>
         {soyMiembro ? (
-          <Text style={styles.teamPeople}>{cantidadDeMiembros} miembros
-          <Text style={styles.bullet}> •</Text>
-          <Text style={styles.memberOfTeam}> eres miembro</Text>
+          <Text style={styles.teamPeople}>{number_of_members} miembros
+          {belongs && <Text style={styles.bullet}> •</Text>}
+          <Text style={styles.memberOfTeam}> {belongs ? 'eres miembro' : ''}</Text>
         </Text>
         ) : (
           <Text style={styles.teamPeople}>8 miembros</Text>
@@ -72,6 +73,15 @@ function LandingScreen(props) {
       });
     }
   }, [props.route.params?.name]);
+
+  useEffect(() => {
+    const refresh = props.navigation.addListener('focus', () => {
+      dispatch({ type: CLEAR_TEAM });
+    });
+
+    return refresh;
+  }, [dispatch, email, id, props.navigation, token]);
+
 
   useLayoutEffect(() => {
     props.navigation.setOptions({

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   addTeamButton: {
+    marginBottom: 7,
     width: '100%',
     height: globalStyle.heightButton,
     backgroundColor: color.darkBlue,
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: 170,
-    marginVertical: 10,
+    marginVertical: 7,
     // justifyContent: 'left',
     backgroundColor: color.lightBlue,
     borderRadius: globalStyle.borderRadiusTouchable,
