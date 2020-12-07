@@ -155,7 +155,6 @@ function update_image({ token, email }, link) {
 
 function setLastOrg({ token, email, lastOrg }) {
   const user = decamelizeKeys({ lastOrg });
-  console.log(user);
 
   return axios({
     method: 'put',
