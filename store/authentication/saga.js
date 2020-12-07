@@ -87,6 +87,7 @@ function *signInRequest({ payload }) {
 function *signOutRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
+    yield call(api.setLastOrg, payload);
     yield call(api.signOutApi, payload);
     yield put(authenticationActions.signOutSuccess('¡Has cerrado tu sesión!'));
   } catch (error) {
