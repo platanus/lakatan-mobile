@@ -43,19 +43,20 @@ function *userOrganizationsRequest({ payload }) {
       yield put(authActions.authError('¡Oops, hubo un error!'));
       yield put(teamsActions.reset());
       yield put(authActions.reset());
-   }
+    }
   }
   yield put(organizationsActions.finish());
 }
 
 function *changeCurrentOrganization({ payload }) {
-  const { id, name, picture } = payload;
+  const { id, name, picture, email, token } = payload;
   yield put(organizationsActions.start());
   yield put(syncActions.clearWorkspace());
   yield put(teamsActions.reset());
+  const { data: { data: { attributes: { integration } } } } = yield call(apiOrganizations.organization, { id, email, token });
   yield put(organizationsActions.loadOrganizationSuccess({
     organization: {
-      id, name, picture,
+      id, name, picture, integration
     },
   }));
   yield put(organizationsActions.finish());

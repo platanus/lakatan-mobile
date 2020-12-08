@@ -14,6 +14,7 @@ import {
   SEND_FILE_REQUEST,
 } from '../types';
 import api from '../../api/authentication';
+import orgApi from '../../api/organizations';
 
 function *signUpErrorHandler(error) {
   switch (error) {
@@ -62,14 +63,19 @@ function *signInErrorHandler(error) {
   }
 }
 
+// eslint-disable-next-line max-statements
 function *signInRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
 
-    const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData } } } = camelResponse.data;
+    const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData, lastOrg } } } = camelResponse.data;
     if (isSuccess) {
+      if (lastOrg) {
+        const { data: { data } } = yield call(orgApi.organization, { email, token: authenticationToken, id: lastOrg });
+        yield put(organizationsActions.loadOrganizationSuccess({organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration}}));
+      }
       yield put(authenticationActions.signInSuccess({
         email,
         authenticationToken,
@@ -87,6 +93,9 @@ function *signInRequest({ payload }) {
 function *signOutRequest({ payload }) {
   yield put(authenticationActions.start());
   try {
+    if (payload.lastOrg) {
+      yield call(api.setLastOrg, payload);
+    }
     yield call(api.signOutApi, payload);
     yield put(authenticationActions.signOutSuccess('¡Has cerrado tu sesión!'));
   } catch (error) {
