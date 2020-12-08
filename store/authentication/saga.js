@@ -74,7 +74,7 @@ function *signInRequest({ payload }) {
     if (isSuccess) {
       if (lastOrg) {
         const { data: { data } } = yield call(orgApi.organization, { email, token: authenticationToken, id: lastOrg });
-        yield put(organizationsActions.loadOrganizationSuccess({organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture}}));
+        yield put(organizationsActions.loadOrganizationSuccess({organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration}}));
       }
       yield put(authenticationActions.signInSuccess({
         email,

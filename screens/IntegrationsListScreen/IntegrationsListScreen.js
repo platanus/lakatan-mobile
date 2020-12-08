@@ -10,7 +10,7 @@ import color from '../../styles/colors';
 const IntegrationList = (props) => {
   const dispatch = useDispatch();
   const { token, email } = useSelector((state) => state.authentication);
-  const { id } = useSelector((state) => state.organizations.currentOrganization);
+  const { id, integration } = useSelector((state) => state.organizations.currentOrganization);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -30,8 +30,6 @@ const IntegrationList = (props) => {
     dispatch({ type: SET_WORKSPACE, payload: { token, email, id } });
   };
 
-  const activado = true; // TO DO: esto viene de backend
-
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity
@@ -44,9 +42,9 @@ const IntegrationList = (props) => {
         </View>
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>Sincronización y mensajería</Text>
-          </View>
+        </View>
         <View>
-          {activado ? (
+          {integration ? (
             <Text style={{ ...styles.activate, color: color.blue }}>Activado</Text>
           ) : (
             <Text style={{ ...styles.activate, color: color.red }}>No activado</Text>
