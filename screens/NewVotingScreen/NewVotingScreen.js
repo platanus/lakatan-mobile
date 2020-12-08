@@ -26,13 +26,6 @@ const NewVoting = (props) => {
       ...styles.confirmButton,
       backgroundColor: titleVoting && (Boolean(optionOne) + Boolean(optionTwo) + Boolean(optionThree) + Boolean(optionFour) + Boolean(optionFive) === hiddenTextInputs.reduce((a, b) => a + b, 0)) ? colors.darkBlue : colors.gray,
     });
-  console.log('hi');
-  console.log((optionOne + optionTwo + optionThree + optionFour + optionFive === hiddenTextInputs.reduce((a, b) => a + b, 0)));
-  console.log('asd');
-  console.log(Boolean(optionOne) + Boolean(optionTwo) + Boolean(optionThree) + Boolean(optionFour) + Boolean(optionFive));
-  console.log('das');
-  console.log(hiddenTextInputs.reduce((a, b) => a + b, 0));
-  console.log('chao');
   const createHandler = () => {}; // RELLENAR CON REQUEST
 
   const optionsHandler = () => {

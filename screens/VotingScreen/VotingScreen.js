@@ -10,7 +10,7 @@ import BackButton from '../../components/LandingScreen/BackButton';
 import colors from '../../styles/colors';
 import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
 
-const results = [ // esto viene de Backend
+const results2332 = [ // esto viene de Backend
   {
     option: 'Opción A',
     totalPercentage: '64%',
@@ -30,6 +30,92 @@ const results = [ // esto viene de Backend
     totalPercentage: '4%',
     total: 4,
     id: 3,
+    selected: false,
+  },
+];
+
+const results = [ // esto viene de Backend
+  {
+    option: 'Opción A',
+    totalPercentage: '10%',
+    total: 10,
+    id: 1,
+    selected: true,
+  },
+  {
+    option: 'Opción B',
+    totalPercentage: '20%',
+    total: 20,
+    id: 2,
+    selected: false,
+  },
+  {
+    option: 'Opción C',
+    totalPercentage: '30%',
+    total: 30,
+    id: 3,
+    selected: false,
+  },
+  {
+    option: 'Opción D',
+    totalPercentage: '15%',
+    total: 15,
+    id: 4,
+    selected: false,
+  },
+  {
+    option: 'Opción E',
+    totalPercentage: '25%',
+    total: 25,
+    id: 5,
+    selected: false,
+  },
+];
+
+const resultsasd3 = [ // esto viene de Backend
+  {
+    option: 'Opción A',
+    totalPercentage: '10%',
+    total: 10,
+    id: 1,
+    selected: true,
+  },
+  {
+    option: 'Opción B',
+    totalPercentage: '20%',
+    total: 20,
+    id: 2,
+    selected: false,
+  },
+  {
+    option: 'Opción C',
+    totalPercentage: '30%',
+    total: 30,
+    id: 3,
+    selected: false,
+  },
+  {
+    option: 'Opción D',
+    totalPercentage: '40%',
+    total: 40,
+    id: 4,
+    selected: false,
+  },
+];
+
+const results22 = [ // esto viene de Backend
+  {
+    option: 'Opción A',
+    totalPercentage: '45%',
+    total: 45,
+    id: 1,
+    selected: true,
+  },
+  {
+    option: 'Opción B',
+    totalPercentage: '65%',
+    total: 65,
+    id: 2,
     selected: false,
   },
 ];
@@ -60,7 +146,7 @@ const VotingScreen = ({
   const dispatch = useDispatch();
 
   const [voteResults, setVoteResults] = useState(results);
-  const vote = false; // esto viene de backend
+  const vote = true; // esto viene de backend
   const missingVotes = 2; // esto viene de backend
   const votingOptions = ['Opción A', 'Opción B', 'Opción C']; // esto viene de backend
 
@@ -128,15 +214,15 @@ const VotingScreen = ({
               <View style={{ flexDirection: 'row', marginVertical: '10%' }} >
                 <View>
                   {results.map(item => (
-                    <View style={{ marginTop: 12 }}>
+                    <View style={{ marginTop: 8 }}>
                       <Text style={{ fontSize: 16, color: colors.darkBlue }}>{item.option}</Text>
-                      <Text style={{ fontSize: 12, marginBottom: 55 }}>{item.totalPercentage} - {item.total}</Text>
+                      <Text style={{ fontSize: 12, marginBottom: (-7*results.length/2 + 58) }}>{item.totalPercentage} - {item.total}</Text>
                     </View>
                   ))}
                 </View>
                 <View>
                   <StackedBarChart
-                    style={{ marginLeft: '15%', height: 250, width: '80%' }}
+                    style={{ marginLeft: '15%', height: 73*results.length, width: '80%' }}
                     keys={keys}
                     colors={color}
                     data={results}
