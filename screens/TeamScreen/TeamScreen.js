@@ -37,10 +37,10 @@ const RiteView = (props) => {
 };
 
 const VotingView = (props) => {
-  const nombre = 'Votación uno'; // TO DO: traer de backend
+  const nameVoting = 'Votación uno'; // TO DO: traer de backend
   const vote = false;
   const votingPressHandler = () => {
-    props.navigation.goBack(); // TO DO: llevar a la vista de votación
+    props.navigation.navigate('Voting', { nameVoting }); // TO DO: llevar a la vista de votación
   };
 
   return (
@@ -48,7 +48,7 @@ const VotingView = (props) => {
       <TouchableOpacity
         onPress={votingPressHandler}
       >
-        <Text style={styles.riteText}>{nombre}</Text>
+        <Text style={styles.riteText}>{nameVoting}</Text>
         {vote ? (
           <Text style={{ ...styles.voting, color: color.cian }}>Ya votaste</Text>
         ) : (
@@ -139,7 +139,7 @@ const Team = (props) => {
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.applyContainer}>
-            <TouchableOpacity style={styles.newRiteButton} onPress={() => {}}>
+            <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Voting')}>
               <Text style={styles.newRiteText}>Nueva votación</Text>
             </TouchableOpacity>
           </View>

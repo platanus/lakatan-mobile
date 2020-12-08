@@ -31,6 +31,8 @@ import NewOrganizationScreen from './screens/NewOrganizationScreen/NewOrganizati
 import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import EditPhotoScreen from './screens/ProfileScreen/EditPhotoScreen';
 import EditNameScreen from './screens/ProfileScreen/EditNameScreen';
+import VotingScreen from './screens/VotingScreen/VotingScreen';
+import NewVotingScreen from './screens/NewVotingScreen/NewVotingScreen';
 import OrganizationLogo from './components/Logo/OrganizationLogo';
 import ProfileLogo from './components/Logo/ProfileLogo';
 import LogoutLogo from './components/Logo/LogoutLogo';
@@ -93,7 +95,8 @@ const Teams = () => (
     <TeamStack.Screen name="New Rite" component={NewRiteToTeamScreen} options={{ title: 'Nuevo Rito' }} />
     <TeamStack.Screen name="Hook" component={HookScreen} options={{ title: 'Hook' }} />
     <TeamStack.Screen name="New Hook" component={NewHookScreen} options={{ title: 'Nuevo hook' }} />
-
+    <TeamStack.Screen name="Voting" component={VotingScreen} options={{ title: 'Votación' }} />
+    <TeamStack.Screen name="New Voting" component={NewVotingScreen} options={{ title: 'Nueva votación' }} />
   </TeamStack.Navigator>
 );
 

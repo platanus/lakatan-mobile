@@ -8,7 +8,7 @@ import defaultImage from '../../assets/user.png';
 
 const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
 
-const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
+const UsersListComponent = ({ selectedMembers, itemOnPressHandler, vote }) => (
 
   <FlatList
     data={selectedMembers}
@@ -20,18 +20,28 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
         }
       >
         <View style={(item.selected || !item.hasOwnProperty('selected')) ?
-          (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
+          ({ ...styles.selectedItemContainer,
+            height: vote ? 50 : 60,
+            borderRadius: vote ? 40 : 20 }
+          ) : (
+            { ...styles.unselectedItemContainer, height: vote ? 50 : 60,
+              borderRadius: vote ? 40 : 20 }
+          )}>
 
-          <View>
+          { !vote && <View>
             <Image source={{
               uri: item.picture ? `${bucket}${item.picture.id}` :
                 Image.resolveAssetSource(defaultImage).uri }}
             style={styles.picture} />
-          </View>
+          </View> }
 
           <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
             (styles.selectedItemText) : (styles.unselectedItemText)}>
-            {item.name}
+            {vote ? (
+              item.option
+            ) : (
+              item.name
+            )}
           </Text>
 
           { itemOnPressHandler && item.selected &&
