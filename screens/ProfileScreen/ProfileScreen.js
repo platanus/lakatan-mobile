@@ -8,13 +8,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
 import {
-  REFRESH_PROFILE_REQUEST, CHANGE_NAME_REQUEST, SEND_FILE_REQUEST, CLEAR_AUTH_SUCCESS,
+  REFRESH_PROFILE_REQUEST,
+  CHANGE_NAME_REQUEST,
+  SEND_FILE_REQUEST,
+  CLEAR_AUTH_SUCCESS,
+  GET_ALL_LABELS_REQUEST,
+  GET_USER_LABELS_REQUEST,
 } from '../../store/types';
 import colors from '../../styles/colors';
 
 const Profile = (props) => {
   // const { id, name, mail } = props.route.params;
-  const { token, email, name, imageProfile, loading, success } = useSelector((state) => state.authentication);
+  const { token, email, name, imageProfile, id, loading, success } = useSelector((state) => state.authentication);
+  const { allLabels, userLabels } = useSelector((state) => state.labels);
   const [newName, setNewName] = useState(name);
   const [image, setImage] = useState(imageProfile);
   const [selected, setSetelected] = useState(false);
@@ -43,10 +49,12 @@ const Profile = (props) => {
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      setImage(imageProfile)
+      dispatch({ type: GET_ALL_LABELS_REQUEST });
+      dispatch({ type: GET_USER_LABELS_REQUEST, payload: { id } });
+      setImage(imageProfile);
       setSetelected(false);
     });
-  }, [dispatch, props.navigation, email, token, imageProfile]);
+  }, [dispatch, props.navigation, email, token, imageProfile, id]);
 
   const navigate = () => {
     setSetelected(false);
@@ -132,6 +140,20 @@ const Profile = (props) => {
             value={newName}
             onChangeText={setNewName}
           />
+        </View>
+
+        <View style={styles.profileContainer}>
+          <Text style={styles.nameTag}>
+            Etiquetas
+          </Text>
+          <Text>
+            lista de etiquetas
+          </Text>
+          {userLabels.map((label) => <Text key={label.id}>{label.attributes.name}</Text>)}
+          <Text>
+            todas las etiquetas
+          </Text>
+          {allLabels.map((label) => <Text key={label.id}>{label.attributes.name}</Text>)}
         </View>
 
         {/* <View style={{}}>

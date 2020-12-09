@@ -67,7 +67,6 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-
     const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData } } } = camelResponse.data;
     if (isSuccess) {
       yield put(authenticationActions.signInSuccess({
@@ -152,6 +151,8 @@ function *getSessionRequest({ payload }) {
 }
 
 function *uploadFileRequest({ payload, data }) {
+  yield put(authenticationActions.start());
+
   try {
     const repon = yield call(api.send_file, payload, data);
     const uploadedFileData = {
@@ -172,6 +173,8 @@ function *uploadFileRequest({ payload, data }) {
   } catch (error) {
     console.log(error);
   }
+  yield put(authenticationActions.finish());
+
 }
 
 function *getUrlTempRequest({ payload }) {

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
     textAlign: 'left',
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingBottom: '3%',
+    marginVertical: '2%',
   },
   imageContainer: {
     alignItems: 'center',
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   profileContainer: {
-    marginLeft: '0%',
   },
   button: {
     backgroundColor: colors.lightBlue,
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: globalStyle.paddingInput,
     height: globalStyle.heightInput,
+    marginBottom: '2%',
   },
   buttonText: {
     color: colors.darkBlue,

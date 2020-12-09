@@ -34,6 +34,9 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
             {item.name}
           </Text>
 
+          {item.labels && item.labels.map((label, index) =>
+            <Text key={index}>{label}</Text>)}
+
           { itemOnPressHandler && item.selected &&
             <View style={styles.check}>
               <Icon
