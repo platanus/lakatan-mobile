@@ -4,6 +4,8 @@ import {
   View, Text, TouchableOpacity, Image, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import RNPickerSelect from 'react-native-picker-select';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/ProfileScreen/ProfileScreen';
@@ -14,6 +16,8 @@ import {
   CLEAR_AUTH_SUCCESS,
   GET_ALL_LABELS_REQUEST,
   GET_USER_LABELS_REQUEST,
+  DELETE_USER_LABEL_REQUEST,
+  POST_USER_LABEL_REQUEST,
 } from '../../store/types';
 import colors from '../../styles/colors';
 
@@ -25,6 +29,7 @@ const Profile = (props) => {
   const [image, setImage] = useState(imageProfile);
   const [selected, setSetelected] = useState(false);
   const [info, setinfo] = useState(undefined);
+  const [selectedLabel, setSelectedLabel] = useState('');
   const dispatch = useDispatch();
   //   useEffect(() => {
   //     const refresh = props.navigation.addListener('focus', () => {
@@ -49,12 +54,13 @@ const Profile = (props) => {
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      dispatch({ type: GET_ALL_LABELS_REQUEST });
-      dispatch({ type: GET_USER_LABELS_REQUEST, payload: { id } });
+      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email } });
+      dispatch({ type: GET_USER_LABELS_REQUEST, payload: { user_id: id, token, email } });
       setImage(imageProfile);
       setSetelected(false);
+      setNewName(name);
     });
-  }, [dispatch, props.navigation, email, token, imageProfile, id]);
+  }, [dispatch, props.navigation, email, token, imageProfile, id, name]);
 
   const navigate = () => {
     setSetelected(false);
@@ -82,6 +88,15 @@ const Profile = (props) => {
       const information = { size: info.height * info.width, filename: fileName };
       dispatch({ type: SEND_FILE_REQUEST, payload: { token, email, data, information } });
     }
+
+    if (selectedLabel) {
+      dispatch({ type: POST_USER_LABEL_REQUEST, payload: { token, email, label_id: selectedLabel, user_id: id } });
+      setSelectedLabel('');
+    }
+  };
+
+  const deleteLabelHandler = (label_id) => {
+    dispatch({ type: DELETE_USER_LABEL_REQUEST, payload: { token, email, label_id, user_id: id } });
   };
 
   const pickImage = async () => {
@@ -111,6 +126,10 @@ const Profile = (props) => {
   useEffect(() => {
     setImage(imageProfile);
   }, [imageProfile]);
+
+  useEffect(() => {
+    setNewName(name);
+  }, [name]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -146,14 +165,50 @@ const Profile = (props) => {
           <Text style={styles.nameTag}>
             Etiquetas
           </Text>
-          <Text>
-            lista de etiquetas
-          </Text>
-          {userLabels.map((label) => <Text key={label.id}>{label.attributes.name}</Text>)}
-          <Text>
-            todas las etiquetas
-          </Text>
-          {allLabels.map((label) => <Text key={label.id}>{label.attributes.name}</Text>)}
+
+          {userLabels.length > 0 &&
+          <View style={styles.labelsContainer}>
+            {(userLabels.map((label) =>
+              <View style={styles.labelView} key={label.id}>
+                <Text style={styles.labelText}>
+                  {label.attributes.name}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => deleteLabelHandler(label.id)}>
+                  <Icon
+                    name="times"
+                    size={14}
+                    color={colors.white}
+                  />
+                </TouchableOpacity>
+              </View>,
+            ))}
+          </View>
+          }
+
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={selectedLabel}
+              onValueChange={setSelectedLabel}
+              placeholder={{ label: 'Agregar etiqueta', color: colors.black, value: null }}
+              items={allLabels.filter((label) =>
+                (!(userLabels.find(lab => lab.id === label.id)))).map((label) =>
+                ({ label: label.attributes.name, value: label.id, key: label.id }),
+              )}
+              style={ {
+                inputIOS: {
+                  color: colors.black,
+                  paddingTop: 13,
+                  paddingHorizontal: 10,
+                  paddingBottom: 12,
+                },
+                inputAndroid: {
+                  color: colors.black,
+                },
+                placeholder: { color: colors.black, fontSize: 14 },
+              } }
+            />
+          </View>
         </View>
 
         {/* <View style={{}}>
@@ -170,12 +225,12 @@ const Profile = (props) => {
         <View style={{ flex: 1 }}></View>
         <View style={styles.buttonContainer}>
           <View style={{ ...styles.confirmButton, backgroundColor:
-           (loading || (!selected && (name === newName))) ?
+           (loading || (!selected && (name === newName) && !selectedLabel)) ?
              colors.gray : colors.darkBlue }}>
             <TouchableOpacity
               onPress={navigate}
               style={styles.applyButton}
-              disabled={loading || (!selected && (name === newName))}
+              disabled={loading || (!selected && (name === newName) && !selectedLabel)}
             >
               { loading ? (<ActivityIndicator size='large' style={{ flex: 1 }}/>) :
                 (<Text style={styles.textConfirmButton}>Guardar</Text>)}

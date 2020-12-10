@@ -29,13 +29,25 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
             style={styles.picture} />
           </View>
 
-          <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
-            (styles.selectedItemText) : (styles.unselectedItemText)}>
-            {item.name}
-          </Text>
+          <View>
+            <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
+              (styles.selectedItemText) : (styles.unselectedItemText)}>
+              {item.name}
+            </Text>
 
-          {item.labels && item.labels.map((label, index) =>
-            <Text key={index}>{label}</Text>)}
+            {item.labels &&
+            <View style={styles.labelsView}>
+              {item.labels.map((label, index) => {
+                if (index === item.labels.length - 1) {
+                  return <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
+                    (styles.selectedLabelsText) : (styles.unselectedLabelsText)} key={index}>{label}</Text>;
+                }
+
+                return <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
+                  (styles.selectedLabelsText) : (styles.unselectedLabelsText)} key={index}>{label}, </Text>;
+              })}
+            </View>}
+          </View>
 
           { itemOnPressHandler && item.selected &&
             <View style={styles.check}>

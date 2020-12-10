@@ -33,6 +33,7 @@ const RiteScreen = ({
     id: member.id.toString(),
     name: member.name,
     picture: member.picture,
+    labels: member.labels,
     selected: true }));
   const [selectedMembers, setSelectedMembers] = useState(availableMembers);
   const [selectedItems, setSelectedItems] = useState(() => availableMembers.map((item) =>
@@ -141,7 +142,7 @@ const RiteScreen = ({
         </View>
 
         <View style={styles.raffleUserList}>
-          <Text style={styles.hookHeader}>Sorteo</Text>
+          <Text style={{ ...styles.hookHeader, alignSelf: 'center', marginBottom: '2%' }}>Sorteo</Text>
           <UsersListComponent
             selectedMembers={selectedMembers}
             itemOnPressHandler={itemOnPressHandler}
@@ -197,8 +198,8 @@ const RiteScreen = ({
         </View>
 
         <View style={styles.listHooksContainerOutput}>
-      
-            <Text style={styles.hookHeader}>Salida</Text>
+
+          <Text style={styles.hookHeader}>Salida</Text>
           { outHooks.length > 0 ? (<ItemList
             data={outHooksName}
             navigation={navigation}
