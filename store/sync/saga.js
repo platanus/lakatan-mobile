@@ -21,8 +21,11 @@ function *setWorkspace({ payload }) {
   yield put(syncActions.start());
   try {
     const response = yield call(api.requestWorkpaceName, payload);
-    const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
-    yield put(syncActions.setWorkspace({ slackWorkspaceName }));
+    console.log(response)
+    if (response.data !== null){
+      const { slackWorkspaceName } = camelizeKeys(response).data.data.attributes;
+      yield put(syncActions.setWorkspace({ slackWorkspaceName }));
+    }
   } catch (error) {
     console.log(error);
   }

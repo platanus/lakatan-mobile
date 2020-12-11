@@ -12,9 +12,10 @@ import {
 const OrganizationView = (props) => {
   const { id, attributes: { name, picture } } = props.organization.item;
   const dispatch = useDispatch();
+  const { token, email } = useSelector((state) => state.authentication);
 
   const pressHandler = () => {
-    dispatch({ type: CHANGE_CURRENT_ORGANIZATION, payload: { name, picture, id } });
+    dispatch({ type: CHANGE_CURRENT_ORGANIZATION, payload: { name, picture, id, token, email } });
   };
 
   return (

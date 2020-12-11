@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Image } from 'react-native';
 import defaultImage from '../../assets/user.png';
+import { BUCKETEER_BUCKET_NAME } from '../../env';
 
-const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
+const bucket = `https://${BUCKETEER_BUCKET_NAME}.s3.amazonaws.com/`;
 const initialState = {
   token: undefined,
   email: undefined,
@@ -59,6 +60,7 @@ const slice = createSlice({
       if (action.payload.data.attributes.picture !== null) {
         const picdata = action.payload.data.attributes.picture;
         const link = `${bucket}${picdata.id}`;
+        console.log(link)
         state.imageProfile = link;
       }
     },

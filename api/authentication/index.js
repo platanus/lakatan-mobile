@@ -153,6 +153,23 @@ function update_image({ token, email }, link) {
   });
 }
 
+function setLastOrg({ token, email, lastOrg }) {
+  const user = decamelizeKeys({ lastOrg });
+
+  return axios({
+    method: 'put',
+    url: `${url}api/v1/registrations`,
+    data: {
+      user,
+    },
+    headers: {
+      'X-User-Email': email,
+      'X-User-token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 const authenticactionApi = {
   signInApi,
   signUpApi,
@@ -163,6 +180,7 @@ const authenticactionApi = {
   getUrlTemp,
   send_file,
   update_image,
+  setLastOrg,
 };
 
 export default authenticactionApi;

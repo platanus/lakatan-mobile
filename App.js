@@ -121,7 +121,7 @@ const AppNavigator = () => {
           label='Cerrar Sesión'
           style={styles.signoutButton}
           inactiveTintColor={colors.red}
-          onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token } })}
+          onPress={() => dispatch({ type: SIGN_OUT_REQUEST, payload: { email, token, lastOrg: id } })}
           icon={() => <LogoutLogo />}
         />
       </DrawerContentScrollView>
