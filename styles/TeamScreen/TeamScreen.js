@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   teamScreen: {
     backgroundColor: color.white,
     paddingTop: globalStyle.paddingContainer,
-    paddingVertical: '8%',
+    paddingVertical: '6%',
   },
   riteScreen: {
     height: '100%',

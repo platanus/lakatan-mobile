@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     paddingTop: globalStyle.paddingContainer,
-    paddingVertical: '8%',
+    paddingVertical: '6%',
   },
   riteTitle: {
     fontSize: globalStyle.fontSizeTitle,

@@ -12,6 +12,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
 
   <FlatList
     data={selectedMembers}
+    persistentScrollbar={true}
     renderItem={({ item }) => (
       <TouchableOpacity
         key={item.id}
