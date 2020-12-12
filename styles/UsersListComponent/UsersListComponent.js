@@ -41,14 +41,10 @@ const styles = StyleSheet.create({
     width: 55,
     borderRadius: 80,
   },
-  check: {
-    flex: 1,
-    flexDirection: 'row-reverse',
-  },
-
   labelsView: {
     flexDirection: 'row',
-    marginHorizontal: 10,
+    flexWrap: 'wrap',
+    paddingHorizontal: 10,
   },
   selectedLabelsText: {
     color: '#4fb8e8',

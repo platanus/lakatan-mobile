@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
 import colors from '../../styles/colors';
-import { CREATE_RITE_REQUEST, GET_ALL_LABELS_REQUEST } from '../../store/types';
+import { CREATE_RITE_REQUEST, GET_ALL_LABELS_REQUEST, CLEAR_RITE_SUCCESS } from '../../store/types';
 import RNPickerSelect from 'react-native-picker-select';
 
 // eslint-disable-next-line max-statements
@@ -18,6 +18,7 @@ const NewRiteToTeamScreen = (props) => {
   const [raffleType, setRaffleType] = useState('');
   const [selectedLabel, setSelectedLabel] = useState('');
   const { token, email } = useSelector((state) => state.authentication);
+  const { success } = useSelector((state) => state.rites);
   const { allLabels } = useSelector((state) => state.labels);
   const { id } = useSelector((state) => state.teams.currentTeam);
   const dispatch = useDispatch();
@@ -36,7 +37,8 @@ const NewRiteToTeamScreen = (props) => {
   const createRiteButtonDisable = () => (
     {
       ...styles.confirmButton,
-      backgroundColor: riteName && objective && numberOfPeople ? colors.darkBlue : colors.gray,
+      backgroundColor: riteName && objective && numberOfPeople && raffleType &&
+      (selectedLabel || raffleType !== 'Labels') ? colors.darkBlue : colors.gray,
     });
 
   const numberOfPeopleHandler = (currentNumber) => {
@@ -60,10 +62,18 @@ const NewRiteToTeamScreen = (props) => {
       userMinimum: parseInt(numberOfPeople, 10),
       token,
       email,
+      raffleType,
+      selectedLabel,
     },
     });
-    props.navigation.navigate('Team');
   };
+
+  useEffect(() => {
+    if (props.navigation.isFocused() && success) {
+      dispatch({ type: CLEAR_RITE_SUCCESS });
+      props.navigation.goBack();
+    }
+  }, [dispatch, props.navigation, success]);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -168,7 +178,8 @@ const NewRiteToTeamScreen = (props) => {
             <TouchableOpacity
               onPress={() => createHandler()}
               style={styles.applyButton}
-              disabled={!(riteName && objective && numberOfPeople)}
+              disabled={!(riteName && objective && numberOfPeople && raffleType &&
+                (selectedLabel || raffleType !== 'Labels'))}
             >
               <Text style={styles.textConfirmButton}>Crear rito</Text>
             </TouchableOpacity>

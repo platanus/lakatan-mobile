@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  loading: false,
+  success: false,
 };
 
 const slice = createSlice({
@@ -12,6 +14,12 @@ const slice = createSlice({
     },
     finish(state) {
       state.loading = false;
+    },
+    setSuccess(state) {
+      state.success = true;
+    },
+    clearSuccess(state) {
+      state.success = false;
     },
     reset(state) {
       state = initialState;

@@ -52,7 +52,10 @@ const NewWorkspaceScreen = (props) => {
       ),
       headerTitle: () => (
         <View style={stylesHeader.header}>
-          <Image style={stylesHeader.logo} source={img[name]} />
+          <Image
+            style={{ height: '100%', width: 40 }}
+            resizeMode='contain'
+            source={img[name]} />
           <Text style={stylesHeader.title}>{name}</Text>
         </View>
       ),

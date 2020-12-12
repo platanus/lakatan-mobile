@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.lightBlue,
     borderRadius: 20,
     paddingLeft: '7.5%',
-    paddingVertical: 10,
-    marginVertical: globalStyle.marginVerticalPrincipal,
+    justifyContent: 'center',
+    marginVertical: 5,
     height: globalStyle.heightButton,
   },
   newRiteButton: {

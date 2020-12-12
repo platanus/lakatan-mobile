@@ -30,7 +30,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
             style={styles.picture} />
           </View>
 
-          <View>
+          <View style={{flex: 1}}>
             <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
               (styles.selectedItemText) : (styles.unselectedItemText)}>
               {item.name}
