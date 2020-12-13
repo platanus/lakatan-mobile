@@ -22,7 +22,12 @@ const Item = ({ item, navigation, hookOf }) => {
       //   Alert.alert("Link copiado");
       // }}
       onPress={() => {
-        navigation.navigate('Hook', { hookOf, name: item.attributes.name, description, hookType: item.attributes.type });
+        navigation.navigate('Hook', { hookOf,
+          name: item.attributes.name,
+          description,
+          hookType: item.attributes.type,
+          id: item.id,
+        });
       }}
       style={styles.hookButton}
       key={item.id}
