@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 import colors from '../colors';
 import globalStyle from '../globalStyle';
 
@@ -9,11 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingHorizontal: globalStyle.paddingContainer,
     flex: 1,
-    paddingTop: '5%',
+    paddingTop: '4%',
   },
   infoContainer: {
-    paddingVertical: '8%',
-    paddingTop: globalStyle.paddingContainer,
+    paddingVertical: globalStyle.paddingContainer,
     alignItems: 'center',
   },
   emailContainer: {
@@ -30,20 +30,19 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
     textAlign: 'left',
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingBottom: '3%',
+    marginVertical: '2%',
   },
   imageContainer: {
     alignItems: 'center',
-    marginBottom: '10%',
+    marginBottom: '5%',
   },
   image: {
     height: 150,
     width: 150,
     resizeMode: 'stretch',
-    borderRadius: 100,
+    borderRadius: 150,
   },
   profileContainer: {
-    marginLeft: '0%',
   },
   button: {
     backgroundColor: colors.lightBlue,
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: globalStyle.paddingInput,
     height: globalStyle.heightInput,
+    marginBottom: '2%',
   },
   buttonText: {
     color: colors.darkBlue,
@@ -98,6 +98,30 @@ const styles = StyleSheet.create({
   },
   titleScreen: {
     fontSize: globalStyle.fontSizeHeader,
+  },
+  labelsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: '2%',
+  },
+  labelView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4fb8e8',
+    borderRadius: 50,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    marginHorizontal: 2,
+    marginVertical: 3,
+  },
+  labelText: {
+    color: colors.white,
+    marginRight: 10,
+  },
+  pickerContainer: {
+    backgroundColor: colors.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
+    height: globalStyle.heightInput,
   },
 });
 

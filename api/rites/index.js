@@ -3,14 +3,14 @@ import { decamelizeKeys } from 'humps';
 import url from '../../env';
 
 function createRite({
-  name, goal, teamId, userMinimum, token, email,
+  name, goal, teamId, userMinimum, token, email, raffleType, selectedLabel,
 }) {
-  const data = decamelizeKeys({ name, goal, teamId, userMinimum });
+  const dat = decamelizeKeys({ name, goal, teamId, userMinimum });
 
   return axios({
     method: 'post',
     url: `${url}/api/v1/tasks`,
-    data,
+    data: { ...dat, raffle_type: raffleType, label_id: selectedLabel },
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,

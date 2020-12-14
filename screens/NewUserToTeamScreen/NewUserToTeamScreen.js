@@ -35,6 +35,7 @@ const NewUserToTeamScreen = (props) => {
 
     return aux;
   };
+
   const availableUsers = dataHandler(users);
 
   useLayoutEffect(() => {

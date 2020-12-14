@@ -1,28 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  allLabels: [],
+  userLabels: [],
   loading: false,
-  success: false,
 };
 
 const slice = createSlice({
-  name: 'rites',
+  name: 'labels',
   initialState,
   reducers: {
     start(state) {
       state.loading = true;
     },
+    getAllLabels(state, action) {
+      state.allLabels = action.payload;
+    },
+    getUserLabels(state, action) {
+      state.userLabels = action.payload;
+    },
     finish(state) {
       state.loading = false;
-    },
-    setSuccess(state) {
-      state.success = true;
-    },
-    clearSuccess(state) {
-      state.success = false;
-    },
-    reset(state) {
-      state = initialState;
     },
   },
 });
