@@ -27,8 +27,6 @@ const TeamView = (props) => {
         </View>
         <View style={{ flex: 1}}>
         <Text 
-        adjustsFontSizeToFit
-        numberOfLines={2}
         style={styles.teamPurpose}>{purpose}</Text>
         </View>
 

@@ -21,6 +21,7 @@ const NewRiteToTeamScreen = (props) => {
   const { success } = useSelector((state) => state.rites);
   const { allLabels } = useSelector((state) => state.labels);
   const { id } = useSelector((state) => state.teams.currentTeam);
+  const { currentOrganization } = useSelector((state) => state.organizations);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -91,9 +92,9 @@ const NewRiteToTeamScreen = (props) => {
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {
-      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email } });
+      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email, orga_id: currentOrganization.id } });
     });
-  }, [dispatch, email, props.navigation, token]);
+  }, [currentOrganization.id, dispatch, email, props.navigation, token]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import url from '../../env';
 
-function getAllLabelsApi({ email, token }) {
+function getAllLabelsApi({ orga_id, email, token }) {
   return axios({
     method: 'get',
-    url: `${url}api/v1/labels`,
+    url: `${url}api/v1/labels?id=${orga_id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,
@@ -13,10 +13,10 @@ function getAllLabelsApi({ email, token }) {
   });
 }
 
-function getUserLabelsApi({ user_id, email, token }) {
+function getUserLabelsApi({ orga_id, user_id, email, token }) {
   return axios({
     method: 'get',
-    url: `${url}api/v1/user_labels/${user_id}`,
+    url: `${url}api/v1/user_labels/${user_id}?organization_id=${orga_id}`,
     headers: {
       'X-User-Email': email,
       'X-User-Token': token,

@@ -5,38 +5,45 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../../styles/UsersListComponent/UsersListComponent';
 import color from '../../styles/colors';
 import defaultImage from '../../assets/user.png';
+import { BUCKETEER_BUCKET_NAME } from '../../env';
 
-const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
+const http = 'https://';
+const amaz = '.s3.amazonaws.com/';
 
-const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
+const UsersListComponent = ({ selectedMembers, itemOnPressHandler, search }) => (
 
   <FlatList
     data={selectedMembers}
     persistentScrollbar={true}
-    renderItem={({ item }) => (
-      <TouchableOpacity
-        key={item.id}
-        disabled={ !itemOnPressHandler}
-        onPress={() => (itemOnPressHandler(item.id))
-        }
-      >
-        <View style={(item.selected || !item.hasOwnProperty('selected')) ?
-          (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
+    renderItem={({ item }) => {
+      if (!!search && !item.name.toLowerCase().includes(search.toLowerCase())) {
+        return <></>;
+      }
 
-          <View>
-            <Image source={{
-              uri: item.picture ? `${bucket}${item.picture.id}` :
-                Image.resolveAssetSource(defaultImage).uri }}
-            style={styles.picture} />
-          </View>
+      return (
+        <TouchableOpacity
+          key={item.id}
+          disabled={ !itemOnPressHandler}
+          onPress={() => (itemOnPressHandler(item.id))
+          }
+        >
+          <View style={(item.selected || !item.hasOwnProperty('selected')) ?
+            (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
 
-          <View style={{flex: 1}}>
-            <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
-              (styles.selectedItemText) : (styles.unselectedItemText)}>
-              {item.name}
-            </Text>
+            <View>
+              <Image source={{
+                uri: item.picture ? `${http}${BUCKETEER_BUCKET_NAME}${amaz}${item.picture.id}` :
+                  Image.resolveAssetSource(defaultImage).uri }}
+              style={styles.picture} />
+            </View>
 
-            {item.labels &&
+            <View style={{ flex: 1 }}>
+              <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
+                (styles.selectedItemText) : (styles.unselectedItemText)}>
+                {item.name}
+              </Text>
+
+              {item.labels &&
             <View style={styles.labelsView}>
               {item.labels.map((label, index) => {
                 if (index === item.labels.length - 1) {
@@ -48,9 +55,9 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
                   (styles.selectedLabelsText) : (styles.unselectedLabelsText)} key={index}>{label}, </Text>;
               })}
             </View>}
-          </View>
+            </View>
 
-          { itemOnPressHandler && item.selected &&
+            { itemOnPressHandler && item.selected &&
             <View style={styles.check}>
               <Icon
                 name="check"
@@ -58,7 +65,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
                 color={color.darkBlue}
               />
             </View> }
-          { itemOnPressHandler && !item.selected &&
+            { itemOnPressHandler && !item.selected &&
             <View style={styles.check}>
               <Icon
                 name="times"
@@ -67,10 +74,11 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler }) => (
               />
             </View> }
 
-        </View>
+          </View>
 
-      </TouchableOpacity>
-    )
+        </TouchableOpacity>
+      );
+    }
     }
     keyExtractor={item => item.id.toString()}
   />)

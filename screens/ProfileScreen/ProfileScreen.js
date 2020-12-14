@@ -24,6 +24,8 @@ import colors from '../../styles/colors';
 const Profile = (props) => {
   // const { id, name, mail } = props.route.params;
   const { token, email, name, imageProfile, id, loading, success } = useSelector((state) => state.authentication);
+  const { currentOrganization } = useSelector((state) => state.organizations);
+
   const { allLabels, userLabels } = useSelector((state) => state.labels);
   const [newName, setNewName] = useState(name);
   const [image, setImage] = useState(imageProfile);
@@ -54,13 +56,16 @@ const Profile = (props) => {
   useEffect(() => {
     props.navigation.addListener('focus', () => {
       dispatch({ type: REFRESH_PROFILE_REQUEST, payload: { token, email } });
-      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email } });
-      dispatch({ type: GET_USER_LABELS_REQUEST, payload: { user_id: id, token, email } });
+      if (currentOrganization.id) {
+
+        dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email, orga_id: currentOrganization.id } });
+        dispatch({ type: GET_USER_LABELS_REQUEST, payload: { user_id: id, token, email, orga_id: currentOrganization.id } });
+      }
       setImage(imageProfile);
       setSetelected(false);
       setNewName(name);
     });
-  }, [dispatch, props.navigation, email, token, imageProfile, id, name]);
+  }, [dispatch, props.navigation, email, token, imageProfile, id, name, currentOrganization.id]);
 
   const navigate = () => {
     setSetelected(false);
@@ -90,13 +95,13 @@ const Profile = (props) => {
     }
 
     if (selectedLabel) {
-      dispatch({ type: POST_USER_LABEL_REQUEST, payload: { token, email, label_id: selectedLabel, user_id: id } });
+      dispatch({ type: POST_USER_LABEL_REQUEST, payload: { token, email, label_id: selectedLabel, user_id: id, orga_id: currentOrganization.id  } });
       setSelectedLabel('');
     }
   };
 
   const deleteLabelHandler = (label_id) => {
-    dispatch({ type: DELETE_USER_LABEL_REQUEST, payload: { token, email, label_id, user_id: id } });
+    dispatch({ type: DELETE_USER_LABEL_REQUEST, payload: { token, email, label_id, user_id: id, orga_id: currentOrganization.id  } });
   };
 
   const pickImage = async () => {
@@ -161,6 +166,7 @@ const Profile = (props) => {
           />
         </View>
 
+        { currentOrganization.id &&
         <View style={styles.profileContainer}>
           <Text style={styles.nameTag}>
             Etiquetas
@@ -210,7 +216,7 @@ const Profile = (props) => {
             />
           </View>
         </View>
-
+        }
         {/* <View style={{}}>
         <Text style={styles.nameTag}>Nombre</Text>
       </View> */}

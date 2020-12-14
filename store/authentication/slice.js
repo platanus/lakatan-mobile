@@ -60,7 +60,6 @@ const slice = createSlice({
       if (action.payload.data.attributes.picture !== null) {
         const picdata = action.payload.data.attributes.picture;
         const link = `${bucket}${picdata.id}`;
-        console.log(link)
         state.imageProfile = link;
       }
     },

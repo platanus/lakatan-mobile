@@ -8,6 +8,11 @@ import {
   USER_ORGANIZATIONS_REQUEST,
   CHANGE_CURRENT_ORGANIZATION,
 } from '../../store/types';
+import defaultImage from '../../assets/organization.png';
+import { BUCKETEER_BUCKET_NAME } from '../../env';
+
+const http = 'https://';
+const amaz = '.s3.amazonaws.com/';
 
 const OrganizationView = (props) => {
   const { id, attributes: { name, picture } } = props.organization.item;
@@ -21,7 +26,11 @@ const OrganizationView = (props) => {
   return (
     <TouchableOpacity onPress={pressHandler}>
       <View style={styles.buttonTextContainer}>
-        <Image source={require('../../assets/platanus/logoPlatanus.png')} style={styles.image} />
+        <Image source={{
+          uri: picture ? `${http}${BUCKETEER_BUCKET_NAME}${amaz}${picture.id}` :
+            Image.resolveAssetSource(defaultImage).uri }}
+        style={{ height: '100%', width: 50 }}
+        resizeMode= 'contain' />
         <Text style={styles.buttonText}>{name}</Text>
       </View>
     </TouchableOpacity>
