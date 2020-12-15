@@ -24,24 +24,43 @@ import color from '../../styles/colors';
 const RiteScreen = ({
   navigation, route: {
     params: {
-      name, userMinimum, goal, members, taskId,
+      name, userMinimum, goal, members, taskId, raffle_type, label_id,
     },
   },
 }) => {
+  const { allLabels } = useSelector((state) => state.labels);
   const availableMembers = [];
-  members.forEach((member) => availableMembers.push({
-    id: member.id.toString(),
-    name: member.name,
-    picture: member.picture,
-    selected: true }));
+  let oneLabel;
+  if (raffle_type && raffle_type === 'Labels') {
+    oneLabel = allLabels.find((lab) => lab.id === label_id.toString());
+  }
+
+  allLabels.find((lab) => lab.id === label_id);
+  members.forEach((member) => {
+    if (raffle_type && raffle_type === 'Labels') {
+      if (member.labels.find((lab) => lab === oneLabel.attributes.name)) {
+        availableMembers.push({
+          id: member.id.toString(),
+          name: member.name,
+          picture: member.picture,
+          labels: member.labels,
+          selected: true });
+      }
+    } else {
+      availableMembers.push({
+        id: member.id.toString(),
+        name: member.name,
+        picture: member.picture,
+        labels: member.labels,
+        selected: true });
+    }
+  });
   const [selectedMembers, setSelectedMembers] = useState(availableMembers);
   const [selectedItems, setSelectedItems] = useState(() => availableMembers.map((item) =>
     item.id,
   ));
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
-  // const [dataIn, setDataIn] = useState(hooksDataIn);
-  // const [dataOut, setDataOut] = useState(hooksDataOut);
   const [searchWord, setSearchWord] = useState('');
   const { email, token } = useSelector((store) => store.authentication);
   const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
@@ -121,9 +140,6 @@ const RiteScreen = ({
     setRaffleButton(userMinimum <= list.length);
   }, [selectedMembers, userMinimum]);
 
-  // const selectedHandler = () => {
-  //   setRaffleButton(userMinimum <= selected.length);
-  // };
 
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -139,12 +155,21 @@ const RiteScreen = ({
           <Text style={styles.hookHeader}>Personas</Text>
           <Text style={styles.textInfo}>Este objetivo necesita {userMinimum} persona(s)</Text>
         </View>
-
         <View style={styles.raffleUserList}>
-          <Text style={styles.hookHeader}>Sorteo</Text>
+          <Text style={{ ...styles.hookHeader, alignSelf: 'center', marginBottom: '2%' }}>Sorteo</Text>
+
+          <TextInput
+            clearButtonMode='always'
+            style={{ backgroundColor: color.lightGray, borderRadius: 50, paddingLeft: 10, marginBottom: 5, height: 30 }}
+            placeholder={'buscar'}
+            value={searchWord}
+            onChangeText={setSearchWord}
+            autoCapitalize='none'
+          />
           <UsersListComponent
             selectedMembers={selectedMembers}
             itemOnPressHandler={itemOnPressHandler}
+            search={searchWord}
           />
           {/* <RaffleUserList
               selectedMembers={selectedMembers}
@@ -197,8 +222,8 @@ const RiteScreen = ({
         </View>
 
         <View style={styles.listHooksContainerOutput}>
-      
-            <Text style={styles.hookHeader}>Salida</Text>
+
+          <Text style={styles.hookHeader}>Salida</Text>
           { outHooks.length > 0 ? (<ItemList
             data={outHooksName}
             navigation={navigation}
@@ -232,10 +257,6 @@ const RiteScreen = ({
     { key: 'second', title: 'Hooks' },
   ];
 
-  // const renderScene = SceneMap({
-  //   first: raffleRoute,
-  //   second: hooksRoute,
-  // });
 
   const renderScene =
 

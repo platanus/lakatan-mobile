@@ -4,7 +4,7 @@
     "slug": "lakatan",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Platanus/logoPlatanus.png",
+    "icon": "./assets/Lakatan/lakatanIconSq.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -21,8 +21,9 @@
       "translucent": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
-    "description": ""
+    "description": "",
+    "githubUrl": "https://github.com/platanus/lakatan-mobile"
   }
 }

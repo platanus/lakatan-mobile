@@ -77,8 +77,6 @@ const NewHookScreen = (props) => {
       props.navigation.goBack();
     }
   }, [dispatch, props.navigation, success]);
-  // const createHookButtonDisable = () => (
-  //   { ...styles.confirmButton, backgroundColor: hookName ? colors.blue : colors.gray });
 
   useEffect(() => {
     props.navigation.addListener('focus', () => {

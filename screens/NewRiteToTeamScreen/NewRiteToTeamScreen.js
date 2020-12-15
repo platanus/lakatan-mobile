@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
 } from 'react-native';
@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/NewRiteToTeamScreen/NewRiteToTeamScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
 import colors from '../../styles/colors';
-import { CREATE_RITE_REQUEST } from '../../store/types';
+import { CREATE_RITE_REQUEST, GET_ALL_LABELS_REQUEST, CLEAR_RITE_SUCCESS } from '../../store/types';
+import RNPickerSelect from 'react-native-picker-select';
 
 // eslint-disable-next-line max-statements
 const NewRiteToTeamScreen = (props) => {
@@ -14,8 +15,13 @@ const NewRiteToTeamScreen = (props) => {
   const [numberOfPeople, setNumberOfPeople] = useState('');
   const [riteName, setRiteName] = useState('');
   const [objective, setObjective] = useState('');
+  const [raffleType, setRaffleType] = useState('');
+  const [selectedLabel, setSelectedLabel] = useState('');
   const { token, email } = useSelector((state) => state.authentication);
+  const { success } = useSelector((state) => state.rites);
+  const { allLabels } = useSelector((state) => state.labels);
   const { id } = useSelector((state) => state.teams.currentTeam);
+  const { currentOrganization } = useSelector((state) => state.organizations);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -32,7 +38,8 @@ const NewRiteToTeamScreen = (props) => {
   const createRiteButtonDisable = () => (
     {
       ...styles.confirmButton,
-      backgroundColor: riteName && objective && numberOfPeople ? colors.darkBlue : colors.gray,
+      backgroundColor: riteName && objective && numberOfPeople && raffleType &&
+      (selectedLabel || raffleType !== 'Labels') ? colors.darkBlue : colors.gray,
     });
 
   const numberOfPeopleHandler = (currentNumber) => {
@@ -56,10 +63,18 @@ const NewRiteToTeamScreen = (props) => {
       userMinimum: parseInt(numberOfPeople, 10),
       token,
       email,
+      raffleType,
+      selectedLabel,
     },
     });
-    props.navigation.navigate('Team');
   };
+
+  useEffect(() => {
+    if (props.navigation.isFocused() && success) {
+      dispatch({ type: CLEAR_RITE_SUCCESS });
+      props.navigation.goBack();
+    }
+  }, [dispatch, props.navigation, success]);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -74,6 +89,12 @@ const NewRiteToTeamScreen = (props) => {
       ),
     });
   }, [name]);
+
+  useEffect(() => {
+    props.navigation.addListener('focus', () => {
+      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email, orga_id: currentOrganization.id } });
+    });
+  }, [currentOrganization.id, dispatch, email, props.navigation, token]);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -99,13 +120,67 @@ const NewRiteToTeamScreen = (props) => {
             onChangeText={numberOfPeopleHandler}
             keyboardType={'number-pad'}
           />
+          <Text style={styles.textHeader}>Tipo de sorteo</Text>
+          <View style={styles.pickerContainer}>
+            <RNPickerSelect
+              value={raffleType}
+              onValueChange={setRaffleType}
+              placeholder={{ label: 'Elegir tipo de sorteo', color: colors.darkBlue, value: null }}
+              items=
+                {[{ label: 'Labels', value: 'Labels', key: 'Labels' },
+                  { label: 'Equity', value: 'Equity', key: 'Equity' },
+                  { label: 'Random', value: 'Random', key: 'Random' },
+                  { label: 'Balanced', value: 'Balanced', key: 'Balanced' },
+                ]}
+              style={ {
+                inputIOS: {
+                  color: colors.black,
+                  paddingTop: 13,
+                  paddingHorizontal: 10,
+                  paddingBottom: 12,
+                },
+                inputAndroid: {
+                  color: colors.black,
+                },
+                placeholder: { color: colors.black, fontSize: 14 },
+              } }
+            />
+          </View>
+          {raffleType === 'Labels' &&
+          <>
+            <Text style={styles.textHeader}>Etiqueta</Text>
+            <View style={styles.pickerContainer}>
+              <RNPickerSelect
+                value={selectedLabel}
+                onValueChange={setSelectedLabel}
+                placeholder={{ label: 'Elegir etiqueta', color: colors.darkBlue, value: null }}
+                items={allLabels.map((label) =>
+                  ({ label: label.attributes.name, value: label.id, key: label.id }),
+                ) }
+                style={ {
+                  inputIOS: {
+                    color: colors.black,
+                    paddingTop: 13,
+                    paddingHorizontal: 10,
+                    paddingBottom: 12,
+                  },
+                  inputAndroid: {
+                    color: colors.black,
+                  },
+                  placeholder: { color: colors.black, fontSize: 14 },
+                } }
+              />
+            </View>
+          </>
+          }
         </View>
         <View style={styles.buttonContainer}>
           <View style={createRiteButtonDisable()}>
             <TouchableOpacity
               onPress={() => createHandler()}
               style={styles.applyButton}
-              disabled={!(riteName && objective && numberOfPeople)}
+              disabled={!(riteName && objective && numberOfPeople && raffleType &&
+                (selectedLabel || raffleType !== 'Labels'))}
             >
               <Text style={styles.textConfirmButton}>Crear rito</Text>
             </TouchableOpacity>

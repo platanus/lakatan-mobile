@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusButton,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingVertical: 10,
     height: globalStyle.heightButton,
   },
   addUserText: {

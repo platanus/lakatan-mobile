@@ -6,7 +6,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { CURRENT_TEAM_REQUEST, GET_HOOKS_REQUEST, CLEAR_TEAM } from '../../store/types';
+
+import { CURRENT_TEAM_REQUEST,
+  GET_HOOKS_REQUEST,
+  CLEAR_TEAM,
+  GET_POLLS_REQUEST,
+  GET_POLL_REQUEST, 
+  GET_ALL_LABELS_REQUEST,} from '../../store/types';
+
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
@@ -14,13 +21,14 @@ import BackButton from '../../components/LandingScreen/BackButton';
 import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
 
 const RiteView = (props) => {
-  const { name, goal, id } = props.rite.item;
+
+  const { name, goal, id, raffle_type, label_id } = props.rite.item;
   const userMinimum = props.rite.item.user_minimum;
   const { members, token, email } = props;
   const taskId = id;
-  const dispatch = useDispatch();
+
   const pressHandler = () => {
-    props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId });
+    props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId, raffle_type, label_id });
   };
 
   return (
@@ -37,10 +45,13 @@ const RiteView = (props) => {
 };
 
 const VotingView = (props) => {
-  const nombre = 'Votación uno'; // TO DO: traer de backend
-  const vote = false;
+  const { name, voted } = props.poll.item.attributes; 
+  const { id } = props.poll.item;
+  const { token, email, belongs } = props;
+  const dispatch = useDispatch();
   const votingPressHandler = () => {
-    props.navigation.goBack(); // TO DO: llevar a la vista de votación
+    dispatch({ type: GET_POLL_REQUEST, payload: { token, email, id } });
+    props.navigation.navigate('Voting', { name }); 
   };
 
   return (
@@ -48,38 +59,49 @@ const VotingView = (props) => {
       <TouchableOpacity
         onPress={votingPressHandler}
       >
-        <Text style={styles.riteText}>{nombre}</Text>
-        {vote ? (
-          <Text style={{ ...styles.voting, color: color.cian }}>Ya votaste</Text>
-        ) : (
-          <Text style={{ ...styles.voting, color: color.red }}>Falta tu voto</Text>
-        )}
-        <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
+        {belongs ? (
+          <View>
+            <Text style={styles.riteText}>{name}</Text>
+            {voted ? (
+              <Text style={{ ...styles.voting, color: color.cian }}>Ya votaste</Text>
+            ) : (
+              <Text style={{ ...styles.voting, color: color.red }}>Falta tu voto</Text>
+            )}
+            <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
+          </View>) : (
+          <View>
+            <Text style={styles.riteText}>{name}</Text>
+            <Icon name="angle-right" style={styles.icon} size={22} color={color.darkBlue} />
+          </View>)}
       </TouchableOpacity>
     </View>
   );
 };
 
 const Team = (props) => {
-  const { id } = props.route.params;
+  
+  const { id, belongs } = props.route.params;
   const {
-    name, purpose, members, rites,
+    name, purpose, members, rites
   } = useSelector((state) => state.teams.currentTeam);
+  const { polls } = useSelector((state) => state.polls);
   const { token, email } = useSelector((state) => state.authentication);
 
-  const dispatch = useDispatch();
+  const { currentOrganization } = useSelector((state) => state.organizations);
 
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const refresh = props.navigation.addListener('focus', () => {
+      dispatch({ type: GET_POLLS_REQUEST, payload: { token, email, id } });
       dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
+
+      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email, orga_id: currentOrganization.id } });
+
     });
 
     return refresh;
   }, [dispatch, email, id, props.navigation, token]);
-
-  
-  
-
   useLayoutEffect(() => {
     props.navigation.setOptions({
       // eslint-disable-next-line react/display-name
@@ -101,10 +123,9 @@ const Team = (props) => {
           <FlatList
             data={rites}
             renderItem={
-              (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} token={token} email={email}/>
-            }
-            keyExtractor={(rite) => rite.id.toString()}
-          />
+            (rite) => <RiteView navigation={props.navigation} rite={rite} members={members} token={token} 
+            email={email} />}
+            keyExtractor={(rite) => rite.id.toString()} />
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.applyContainer}>
@@ -116,6 +137,7 @@ const Team = (props) => {
       </View>
     </View>
   );
+
 
   const membersRoute = () => (
     <View style={styles.riteContainer}>
@@ -130,19 +152,20 @@ const Team = (props) => {
       <View style={styles.riteScreen}>
         <View style={styles.listRites}>
           <FlatList
-            data={rites}
+            data={polls}
             renderItem={
-              (vote) => <VotingView navigation={props.navigation} vote={vote}/>
+              (poll) => <VotingView navigation={props.navigation} poll ={poll} token={token} email={email} belongs={belongs} />
             }
-            keyExtractor={(vote) => vote.id.toString()}
+            keyExtractor={(poll) => poll.id.toString()}
           />
         </View>
         <View style={styles.buttonContainer}>
+          {belongs &&
           <View style={styles.applyContainer}>
-            <TouchableOpacity style={styles.newRiteButton} onPress={() => {}}>
+            <TouchableOpacity style={styles.newRiteButton} onPress={() => props.navigation.navigate('New Voting')}>
               <Text style={styles.newRiteText}>Nueva votación</Text>
             </TouchableOpacity>
-          </View>
+          </View>}
         </View>
       </View>
     </View>

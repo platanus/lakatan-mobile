@@ -7,6 +7,9 @@ import ritesSaga from './rites/saga';
 import rafflesSaga from './raffles/saga';
 import syncSaga from './sync/saga';
 import hooksSaga from './hooks/saga';
+import pollsSaga from './polls/saga';
+import labelsSaga from './labels/saga';
+
 
 export default function *rootSagas() {
   yield all([
@@ -18,5 +21,7 @@ export default function *rootSagas() {
     rafflesSaga(),
     syncSaga(),
     hooksSaga(),
+    pollsSaga(),
+    labelsSaga(),
   ]);
 }

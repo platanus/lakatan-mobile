@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingTop: '4%',
+    paddingTop: globalStyle.paddingTopInput,
     color: color.darkBlue,
-    paddingBottom: '1%',
+    paddingBottom: globalStyle.paddingBottomInput,
   },
-  newRiteText: {
+  newVotingText: {
     fontSize: 20,
-    paddingBottom: '3%',
-    paddingTop: '8%',
+    paddingBottom: '5%',
+    paddingTop: '10%',
   },
   areaInput: {
     width: '100%',
@@ -36,6 +36,36 @@ const styles = StyleSheet.create({
     borderRadius: globalStyle.borderRadiusTextInput,
     paddingLeft: globalStyle.paddingInput,
     height: globalStyle.heightInput,
+    marginBottom: globalStyle.marginVerticalPrincipal,
+  },
+  addOptionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    paddingVertical: globalStyle.buttonMarginVertival,
+  },
+  addOptionSubContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: globalStyle.borderRadiusButton,
+  },
+  createOptionsContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addOption: {
+    width: '100%',
+    borderRadius: globalStyle.borderRadiusTextInput,
+    height: globalStyle.heightInput,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addOptionText: {
+    fontSize: globalStyle.fontSizePrincipalText,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -69,6 +99,12 @@ const styles = StyleSheet.create({
   titleScreen: {
     fontSize: globalStyle.fontSizeHeader,
   },
+  deleteOption: {
+    position: 'absolute',
+    right: '10%',
+    bottom: '10%',
+    paddingRight: '5%',
+  },
   header: {
     flexDirection: 'row',
     height: '100%',
@@ -78,11 +114,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: globalStyle.fontSizeHeader,
     textTransform: 'capitalize',
-  },
-  pickerContainer: {
-    backgroundColor: color.lightSoftGray,
-    borderRadius: globalStyle.borderRadiusTextInput,
-    height: globalStyle.heightInput,
   },
 });
 

@@ -69,7 +69,6 @@ const EditPhoto = (props) => {
     const type = match ? `image/${match[1]}` : 'image';
 
     // Upload the image using the fetch and FormData APIs
-    // const data = new FormData();
     // Assume "photo" is the name of the form field the server expects
     const exten = type.split('/').pop();
     const name = email.split('.')[0];

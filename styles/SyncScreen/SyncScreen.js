@@ -12,17 +12,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   stepView: {
-    // backgroundColor: colors.yellow,
-    // borderRadius: 50,
-    // width: 110,
-    // alignItems: 'left',
     marginTop: '3%',
     alignSelf: 'flex-start',
   },
   stepText: {
-    // color: colors.white,
-    // fontWeight: 'bold',
-    // fontSize: 15,
     fontSize: 18,
     color: colors.darkBlue,
     marginBottom: '3%',

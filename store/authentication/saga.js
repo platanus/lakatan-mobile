@@ -50,15 +50,12 @@ function *signInErrorHandler(error) {
     yield put(authenticationActions.authError('Ha ocurrido un error'));
     break;
   case '401' :
-    // yield put(authenticationActions.authError('¡La constraseña es incorrecta!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
     break;
   case '404' :
-    // yield put(authenticationActions.authError('¡Este email no está registrado!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
     break;
   default :
-    // yield put(authenticationActions.authError('¡El email o la constraseña son incorrectas!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
   }
 }
@@ -74,7 +71,7 @@ function *signInRequest({ payload }) {
     if (isSuccess) {
       if (lastOrg) {
         const { data: { data } } = yield call(orgApi.organization, { email, token: authenticationToken, id: lastOrg });
-        yield put(organizationsActions.loadOrganizationSuccess({organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration}}));
+        yield put(organizationsActions.loadOrganizationSuccess({ organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration } }));
       }
       yield put(authenticationActions.signInSuccess({
         email,
@@ -161,6 +158,8 @@ function *getSessionRequest({ payload }) {
 }
 
 function *uploadFileRequest({ payload, data }) {
+  yield put(authenticationActions.start());
+
   try {
     const repon = yield call(api.send_file, payload, data);
     const uploadedFileData = {
@@ -181,6 +180,7 @@ function *uploadFileRequest({ payload, data }) {
   } catch (error) {
     console.log(error);
   }
+  yield put(authenticationActions.finish());
 }
 
 function *getUrlTempRequest({ payload }) {
