@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     width: 50,
   },
   buttonContainer: {
-    // alignItems: 'center',
     backgroundColor: colors.white,
     flex: 1,
   },
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'left',
     fontSize: 18,
-    // fontWeight: 'bold',
     color: colors.darkBlue,
     paddingLeft: '5%',
     textTransform: 'capitalize',

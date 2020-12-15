@@ -37,7 +37,6 @@ const slice = createSlice({
       state.success = action.payload;
     },
     signOutSuccess(state, action) {
-      //state.success = action.payload;
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;

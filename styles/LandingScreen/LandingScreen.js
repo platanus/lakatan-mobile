@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 170,
     marginVertical: 7,
-    // justifyContent: 'left',
     backgroundColor: color.lightBlue,
     borderRadius: globalStyle.borderRadiusTouchable,
     padding: '8%',
@@ -92,8 +91,6 @@ const styles = StyleSheet.create({
   },
   bullet: {
     fontSize: 14,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     color: color.gray,
     flexDirection: 'row',
     alignItems: 'center',

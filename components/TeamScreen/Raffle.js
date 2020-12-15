@@ -11,17 +11,11 @@ import styles from '../../styles/TeamScreen/TeamScreen';
 import UsersListComponent from '../../components/UsersListComponent/UsersListComponent'
 import TeamList from './TeamList';
 
-// let fewUsers = false;
 
 const Raffle = ({
   setVisible, visible,
 }) => {
   const chosenOnes = useSelector((store) => store.raffles.chosenOnes);
-  // const members = useSelector((store) => store.teams.currentTeam.members);
-  // const usersSelected = members.filter((user) => chosenOnes.includes(user.id));
-  // if (chosenOnes.length > 1) {
-  //   fewUsers = true;
-  // }
   const toggleModalOff = () => {
     setVisible(!visible);
   };

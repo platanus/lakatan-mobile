@@ -7,18 +7,25 @@ import {
   ALL_TEAMS_REQUEST, 
   NEW_TEAM_REQUEST,
    SIGN_OUT_REQUEST,
-   CLEAR_TEAM
+   CLEAR_TEAM,
+   GET_POLLS_REQUEST
   } from '../../store/types';
 import MenuButton from '../../components/LandingScreen/MenuButton';
 import styles from '../../styles/LandingScreen/LandingScreen';
 
 const TeamView = (props) => {
+  const { token, email } = useSelector((state) => state.authentication);
   const { id, attributes: { name, purpose, belongs, number_of_members } } = props.team.item;
-  const soyMiembro = true; // TO DO: traer de backend
+  const soyMiembro = true; 
   const cantidadDeMiembros = 8;
+  const dispatch = useDispatch();
+  const pressHandler = () => {
+    dispatch({ type: GET_POLLS_REQUEST, payload: { token, email, id } });
+    props.navigation.navigate('Team', { id, belongs });
+  }
 
   return (
-    <TouchableOpacity onPress={() => props.navigation.navigate('Team', { id })}>
+    <TouchableOpacity onPress={pressHandler}>
       <View style={styles.teamCard}>
         <View style={{}}>
           <Text adjustsFontSizeToFit

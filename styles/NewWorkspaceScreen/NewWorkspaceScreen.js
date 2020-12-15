@@ -15,14 +15,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   input: {
-    // width: '90%',
-    // marginHorizontal: '10%',
   },
   textInput: {
-    // width: '90%',
-    // height: 40,
-    // borderBottomWidth: 0.5,
-    // fontSize: 15,
     width: '100%',
     backgroundColor: color.lightSoftGray,
     borderRadius: globalStyle.borderRadiusTextInput,
@@ -31,12 +25,6 @@ const styles = StyleSheet.create({
     marginVertical: '5%',
   },
   button: {
-    // backgroundColor: color.blue,
-    // borderRadius: 5,
-    // height: 40,
-    // width: 110,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     width: '100%',
     backgroundColor: color.darkBlue,
     borderRadius: globalStyle.borderRadiusButton,
@@ -61,9 +49,6 @@ const styles = StyleSheet.create({
     paddingBottom: '10%',
   },
   stepContent: {
-    // margin: 20,
-    // flexDirection: 'row',
-
   },
   TitleContent: {
     marginTop: 20,
@@ -77,18 +62,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: color.darkBlue,
     marginBottom: '5%',
-    // fontWeight: '600',
-    // marginRight: 10,
   },
   row: {
-    // marginRight: 40,
   },
   readyButtonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    // position: 'absolute',
-    // bottom: globalStyle.paddingBottomButton,
   },
   createButtonContainer: {
     width: '100%',

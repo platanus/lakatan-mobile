@@ -10,7 +10,8 @@ import { BUCKETEER_BUCKET_NAME } from '../../env';
 const http = 'https://';
 const amaz = '.s3.amazonaws.com/';
 
-const UsersListComponent = ({ selectedMembers, itemOnPressHandler, search }) => (
+       
+const UsersListComponent = ({ selectedMembers, itemOnPressHandler, search, vote }) => (
 
   <FlatList
     data={selectedMembers}
@@ -28,19 +29,31 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler, search }) => 
           }
         >
           <View style={(item.selected || !item.hasOwnProperty('selected')) ?
-            (styles.selectedItemContainer) : (styles.unselectedItemContainer)}>
+          ({ ...styles.selectedItemContainer,
+            height: vote ? 50 : 60,
+            borderRadius: vote ? 40 : 20 }
+          ) : (
+            { ...styles.unselectedItemContainer, height: vote ? 50 : 60,
+              borderRadius: vote ? 40 : 20 }
+          )}>
 
+            {!vote &&  
             <View>
               <Image source={{
                 uri: item.picture ? `${http}${BUCKETEER_BUCKET_NAME}${amaz}${item.picture.id}` :
                   Image.resolveAssetSource(defaultImage).uri }}
               style={styles.picture} />
             </View>
+            }
 
             <View style={{ flex: 1 }}>
               <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
                 (styles.selectedItemText) : (styles.unselectedItemText)}>
-                {item.name}
+                {vote ? (
+              item.name
+            ) : (
+              item.name
+            )}
               </Text>
 
               {item.labels &&
@@ -50,6 +63,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler, search }) => 
                   return <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
                     (styles.selectedLabelsText) : (styles.unselectedLabelsText)} key={index}>{label}</Text>;
                 }
+
 
                 return <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
                   (styles.selectedLabelsText) : (styles.unselectedLabelsText)} key={index}>{label}, </Text>;
