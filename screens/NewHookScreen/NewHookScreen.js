@@ -15,7 +15,7 @@ import { GET_SLACK_ENTITIES_REQUEST, SET_HOOK_REQUEST, CLEAR_HOOK_SUCCESS } from
 const NewHookScreen = (props) => {
   const { taskId } = props.route.params;
   const [hookName, setHookName] = useState('');
-  const [hookOf, setHookOf] = useState('output');
+  const [hookOf, setHookOf] = useState('input');
   const [hookType, setHookType] = useState('Webhook');
   const [reference, setReference] = useState('');
   const [hookUrl, setHookUrl] = useState('');
@@ -23,6 +23,7 @@ const NewHookScreen = (props) => {
   const { slackEntities, success } = useSelector(store => store.hooks);
   const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
   const dispatch = useDispatch();
+  let disable = true;
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -43,6 +44,7 @@ const NewHookScreen = (props) => {
   };
 
   const hookTypeHandler = (item) => {
+    console.log(item)
     setHookType(item);
   };
 
@@ -82,6 +84,26 @@ const NewHookScreen = (props) => {
     });
   }, [dispatch, props.navigation, email, token]);
 
+  if (hookOf === 'output') {
+    if (hookType === 'Webhook') {
+      if (hookUrl && hookName) {
+        disable = false;
+      }
+    } else if (hookType === 'Slack') {
+      if (reference && hookName) {
+        disable = false;
+      }
+    } else {
+      if (hookName) {
+        disable = false;
+      }
+    }
+  } else {
+    if (hookName) {
+      disable = false;
+    }
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -119,8 +141,10 @@ const NewHookScreen = (props) => {
               items={hookOf === 'output' ? [
                 { label: 'Webhook', value: 'Webhook', key: 'Webhook' },
                 { label: 'Slack', value: 'SlackHook', key: 'SlackHook' },
+                { label: 'Zapier', value: 'ZapierTriggerHook', key: 'ZapierTriggerHook' },
               ] : [
                 { label: 'Webhook', value: 'Webhook', key: 'Webhook' },
+                { label: 'Zapier', value: 'ZapierActionHook', key: 'ZapierActionHook' },
               ]}
               style={ {
                 inputIOS: {
@@ -189,10 +213,10 @@ const NewHookScreen = (props) => {
           <View style={styles.createButtonContainer}>
             <TouchableOpacity
               onPress={() => createHookHandler()}
-              disabled={hookOf === 'output' ? ((!hookUrl && !reference) || !hookName) : !hookName}
+              disabled={disable}
               style={{ ...styles.applyButton,
                 backgroundColor:
-                ((hookOf === 'output' ? ((!hookUrl && !reference) || !hookName) : !hookName) ?
+                (disable ?
                   colors.gray : colors.darkBlue),
               }} >
               <Text style={styles.textConfirmButton}>Crear hook</Text>

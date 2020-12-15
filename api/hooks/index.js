@@ -45,10 +45,23 @@ function setHookRequest({ email, token, hookOf, hookType, hookName, hookUrl, tas
   });
 }
 
+function getRiteInfo({ email, token, id }) {
+  return axios({
+    method: 'get',
+    url: `${url}/api/v1/hooks/${id}`,
+    headers: {
+      'X-User-Email': email,
+      'X-User-Token': token,
+      'Content-type': 'application/json',
+    },
+  });
+}
+
 const hooksApi = {
   requestHooks,
   slackEntitiesRequest,
   setHookRequest,
+  getRiteInfo,
 };
 
 export default hooksApi;

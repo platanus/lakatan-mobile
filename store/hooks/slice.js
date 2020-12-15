@@ -6,6 +6,7 @@ const initialState = {
   inHooks: [],
   outHooks: [],
   success: false,
+  riteInfo: { attributes: { id: null } },
 };
 
 const slice = createSlice({
@@ -21,6 +22,9 @@ const slice = createSlice({
     },
     saveEntities(state, action) {
       state.slackEntities = action.payload;
+    },
+    saveRite(state, action) {
+      state.riteInfo = action.payload;
     },
     hookSuccess(state) {
       state.success = true;

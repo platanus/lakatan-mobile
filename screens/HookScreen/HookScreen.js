@@ -1,15 +1,20 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import {
-  View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Clipboard, Alert,
+  View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Clipboard, Alert, FlatList,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from '../../components/LandingScreen/BackButton';
+import ZapierDetails from '../../components/HookScreen/ZapierDetails'
+import WebhookSlack from '../../components/HookScreen/WebhookSlack';
 import styles from '../../styles/HookScreen/HookScreen';
-import colors from '../../styles/colors';
+import { GET_RITE_INFO_REQUEST } from '../../store/types';
 
 const HookScreen = (props) => {
-  const { hookOf, name, description, hookType } = props.route.params;
-  
+  const { hookOf, name, description, hookType, id } = props.route.params;
+  const { email, token } = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
+
   useLayoutEffect(() => {
     props.navigation.setOptions({
       // eslint-disable-next-line react/display-name
@@ -24,6 +29,12 @@ const HookScreen = (props) => {
     });
   }, [props.navigation]);
 
+  useEffect(() => {
+    if (hookType === 'ZapierActionHook') {
+      dispatch({ type: GET_RITE_INFO_REQUEST, payload: { id, email, token } });
+    }
+  });
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -32,24 +43,10 @@ const HookScreen = (props) => {
           <Text>{hookOf}</Text>
           <Text style={styles.textHeader}>Tipo</Text>
           <Text>{hookType}</Text>
-          {hookType === 'Webhook' ? (
-            <View>
-              <Text style={styles.textHeader}>URL</Text>
-              <TouchableOpacity onPress={() => {
-                Clipboard.setString(description);
-                Alert.alert('Link copiado');
-              }}>
-                <View style={styles.urlContainer}>
-                  <Text style={styles.textDescription}>{description}</Text>
-                  <Icon name="copy" size={25} color="grey" style={styles.copyIcon} />
-                </View>
-              </TouchableOpacity>
-            </View>
+          {hookType.includes("Zapier") ? (
+            <ZapierDetails hookType={hookType} />
           ) : (
-            <View>
-              <Text style={styles.textHeader}>Descripción</Text>
-              <Text>{description}</Text>
-            </View>
+            <WebhookSlack hookType={hookType} description={description} />
           )}
         </View>
       </View>

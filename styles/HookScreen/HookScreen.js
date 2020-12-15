@@ -44,6 +44,24 @@ const styles = StyleSheet.create({
     fontSize: globalStyle.fontSizeHeader,
     textTransform: 'capitalize',
   },
+  userContainer: {
+    flexDirection: 'row',
+    paddingTop: 8,
+  },
+  userName: {
+    width: '45%',
+  },
+  userId: {
+    width: '5%',
+  },
+  userTitleContainer: {
+    flexDirection: 'row',
+  },
+  userTitle: {
+    fontWeight: 'bold',
+    width: '45%',
+    paddingVertical: 5,
+  },
 });
 
 export default { ...styles };
