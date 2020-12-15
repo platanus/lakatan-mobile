@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     paddingTop: globalStyle.paddingContainer,
-    paddingVertical: '8%',
+    paddingVertical: '6%',
   },
   riteTitle: {
     fontSize: globalStyle.fontSizeTitle,
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     fontSize: globalStyle.fontSizePrincipalText,
   },
   textInfo: {
-    paddingBottom: globalStyle.paddingTopInput,
-    paddingVertical: '2%',
+    paddingBottom: '3%',
+    paddingTop: '2%',
   },
   hookButton: {
     width: '100%',

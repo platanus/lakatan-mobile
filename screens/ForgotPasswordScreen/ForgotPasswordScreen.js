@@ -24,6 +24,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
     });
   }, [navigation, dispatch]);
 
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.mainContainer}>

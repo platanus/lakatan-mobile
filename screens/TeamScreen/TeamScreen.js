@@ -6,11 +6,14 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { CURRENT_TEAM_REQUEST,
   GET_HOOKS_REQUEST,
   CLEAR_TEAM,
   GET_POLLS_REQUEST,
-  GET_POLL_REQUEST, } from '../../store/types';
+  GET_POLL_REQUEST, 
+  GET_ALL_LABELS_REQUEST,} from '../../store/types';
+
 import color from '../../styles/colors';
 import styles from '../../styles/TeamScreen/TeamScreen';
 import TeamList from '../../components/TeamScreen/TeamList';
@@ -18,14 +21,14 @@ import BackButton from '../../components/LandingScreen/BackButton';
 import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
 
 const RiteView = (props) => {
-  
-  const { name, goal, id } = props.rite.item;
+
+  const { name, goal, id, raffle_type, label_id } = props.rite.item;
   const userMinimum = props.rite.item.user_minimum;
   const { members, token, email } = props;
   const taskId = id;
 
   const pressHandler = () => {
-    props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId });
+    props.navigation.navigate('Rite', { name, userMinimum, goal, members, taskId, raffle_type, label_id });
   };
 
   return (
@@ -83,12 +86,18 @@ const Team = (props) => {
   } = useSelector((state) => state.teams.currentTeam);
   const { polls } = useSelector((state) => state.polls);
   const { token, email } = useSelector((state) => state.authentication);
+
+  const { currentOrganization } = useSelector((state) => state.organizations);
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     const refresh = props.navigation.addListener('focus', () => {
       dispatch({ type: GET_POLLS_REQUEST, payload: { token, email, id } });
       dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
-      
+
+      dispatch({ type: GET_ALL_LABELS_REQUEST, payload: { token, email, orga_id: currentOrganization.id } });
+
     });
 
     return refresh;
@@ -128,6 +137,7 @@ const Team = (props) => {
       </View>
     </View>
   );
+
 
   const membersRoute = () => (
     <View style={styles.riteContainer}>

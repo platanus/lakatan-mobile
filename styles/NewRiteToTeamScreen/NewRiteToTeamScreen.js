@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     fontSize: globalStyle.fontSizePrincipalText,
-    paddingTop: globalStyle.paddingTopInput,
+    paddingTop: '4%',
     color: color.darkBlue,
-    paddingBottom: globalStyle.paddingBottomInput,
+    paddingBottom: '1%',
   },
   newRiteText: {
     fontSize: 20,
-    paddingBottom: '5%',
-    paddingTop: '10%',
+    paddingBottom: '3%',
+    paddingTop: '8%',
   },
   areaInput: {
     width: '100%',
@@ -78,6 +78,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: globalStyle.fontSizeHeader,
     textTransform: 'capitalize',
+  },
+  pickerContainer: {
+    backgroundColor: color.lightSoftGray,
+    borderRadius: globalStyle.borderRadiusTextInput,
+    height: globalStyle.heightInput,
   },
 });
 

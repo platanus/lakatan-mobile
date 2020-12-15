@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
-  View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity,
+  View, Text, TouchableWithoutFeedback, Keyboard, TouchableOpacity, TextInput,
 } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import BackButton from '../../components/LandingScreen/BackButton';
@@ -13,6 +13,7 @@ import UsersListComponent from '../../components/UsersListComponent/UsersListCom
 // eslint-disable-next-line max-statements
 const NewUserToTeamScreen = (props) => {
   const { members, name } = props.route.params;
+  const [searchWord, setSearchWord] = useState('');
   const [selectedItems, setSelectedItems] = useState(members);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const { id } = useSelector((state) => state.organizations.currentOrganization);
@@ -35,6 +36,7 @@ const NewUserToTeamScreen = (props) => {
 
     return aux;
   };
+
   const availableUsers = dataHandler(users);
 
   useLayoutEffect(() => {
@@ -86,9 +88,18 @@ const NewUserToTeamScreen = (props) => {
       <View style={styles.container}>
 
         <View style={styles.usersList}>
+          <TextInput
+            clearButtonMode='always'
+            style={{ backgroundColor: color.lightGray, borderRadius: 50, paddingLeft: 10, marginBottom: 5, height: 30 }}
+            placeholder={'buscar'}
+            value={searchWord}
+            onChangeText={setSearchWord}
+            autoCapitalize='none'
+          />
           <UsersListComponent
             selectedMembers={selectedMembers}
             itemOnPressHandler={itemOnPressHandler}
+            search={searchWord}
           />
         </View>
 

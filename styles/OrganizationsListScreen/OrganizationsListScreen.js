@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonTextContainer: {
+    paddingLeft: 10,
+    paddingVertical: 8,
     width: '100%',
     height: 60,
     marginVertical: 5,

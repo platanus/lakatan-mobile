@@ -71,7 +71,7 @@ function *signInRequest({ payload }) {
     if (isSuccess) {
       if (lastOrg) {
         const { data: { data } } = yield call(orgApi.organization, { email, token: authenticationToken, id: lastOrg });
-        yield put(organizationsActions.loadOrganizationSuccess({organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration}}));
+        yield put(organizationsActions.loadOrganizationSuccess({ organization: { id: data.id, name: data.attributes.name, picture: data.attributes.picture, integration: data.attributes.integration } }));
       }
       yield put(authenticationActions.signInSuccess({
         email,
@@ -158,6 +158,8 @@ function *getSessionRequest({ payload }) {
 }
 
 function *uploadFileRequest({ payload, data }) {
+  yield put(authenticationActions.start());
+
   try {
     const repon = yield call(api.send_file, payload, data);
     const uploadedFileData = {
@@ -178,6 +180,7 @@ function *uploadFileRequest({ payload, data }) {
   } catch (error) {
     console.log(error);
   }
+  yield put(authenticationActions.finish());
 }
 
 function *getUrlTempRequest({ payload }) {
