@@ -9,7 +9,6 @@ import defaultImage from '../../assets/user.png';
 const bucket = 'https://bucketeer-60eb4403-f79d-491b-9dd5-066f00fac05c.s3.amazonaws.com/';
 
 const UsersListComponent = ({ selectedMembers, itemOnPressHandler, vote }) => (
-
   <FlatList
     data={selectedMembers}
     renderItem={({ item }) => (
@@ -38,7 +37,7 @@ const UsersListComponent = ({ selectedMembers, itemOnPressHandler, vote }) => (
           <Text style={(item.selected || !item.hasOwnProperty('selected')) ?
             (styles.selectedItemText) : (styles.unselectedItemText)}>
             {vote ? (
-              item.option
+              item.name
             ) : (
               item.name
             )}

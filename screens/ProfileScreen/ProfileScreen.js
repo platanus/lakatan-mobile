@@ -13,19 +13,12 @@ import {
 import colors from '../../styles/colors';
 
 const Profile = (props) => {
-  // const { id, name, mail } = props.route.params;
   const { token, email, name, imageProfile, loading, success } = useSelector((state) => state.authentication);
   const [newName, setNewName] = useState(name);
   const [image, setImage] = useState(imageProfile);
   const [selected, setSetelected] = useState(false);
   const [info, setinfo] = useState(undefined);
   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     const refresh = props.navigation.addListener('focus', () => {
-  //       dispatch({ type: CURRENT_TEAM_REQUEST, payload: { token, email, id } });
-  //     });
-  //     return refresh;
-  //   }, [props.navigation]);
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -51,7 +44,6 @@ const Profile = (props) => {
   const navigate = () => {
     setSetelected(false);
 
-    // props.navigation.navigate('Profile');
     if (name !== newName) {
       dispatch({ type: CHANGE_NAME_REQUEST, payload: { token, email, name: newName } });
     }
@@ -65,7 +57,6 @@ const Profile = (props) => {
       const type = match ? `image/${match[1]}` : 'image';
 
       // Upload the image using the fetch and FormData APIs
-      // const data = new FormData();
       // Assume "photo" is the name of the form field the server expects
       const exten = type.split('/').pop();
       const namePicture = email.split('.')[0];
@@ -109,7 +100,6 @@ const Profile = (props) => {
       <View style={styles.container}>
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{name}</Text>
-          {/* <Text style={styles.email} >{email}</Text> */}
         </View>
 
         <View style={styles.imageContainer}>
@@ -133,18 +123,6 @@ const Profile = (props) => {
             onChangeText={setNewName}
           />
         </View>
-
-        {/* <View style={{}}>
-        <Text style={styles.nameTag}>Nombre</Text>
-      </View> */}
-
-        {/* <View>
-        <TextInput
-          style={styles.areaInput}
-          value={newName}
-          onChangeText={setNewName}
-        />
-      </View> */}
         <View style={{ flex: 1 }}></View>
         <View style={styles.buttonContainer}>
           <View style={{ ...styles.confirmButton, backgroundColor:

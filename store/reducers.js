@@ -7,6 +7,7 @@ import rites from './rites/slice';
 import raffles from './raffles/slice';
 import sync from './sync/slice';
 import hooks from './hooks/slice';
+import polls from './polls/slice';
 
 export default combineReducers({
   authentication: authentication.reducer,
@@ -17,4 +18,6 @@ export default combineReducers({
   raffles: raffles.reducer,
   sync: sync.reducer,
   hooks: hooks.reducer,
+  polls: polls.reducer,
+
 });

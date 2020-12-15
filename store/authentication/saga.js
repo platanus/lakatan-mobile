@@ -50,15 +50,12 @@ function *signInErrorHandler(error) {
     yield put(authenticationActions.authError('Ha ocurrido un error'));
     break;
   case '401' :
-    // yield put(authenticationActions.authError('¡La constraseña es incorrecta!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
     break;
   case '404' :
-    // yield put(authenticationActions.authError('¡Este email no está registrado!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
     break;
   default :
-    // yield put(authenticationActions.authError('¡El email o la constraseña son incorrectas!'));
     yield put(authenticationActions.authError('Credenciales incorrectas'));
   }
 }
@@ -69,7 +66,6 @@ function *signInRequest({ payload }) {
   try {
     const response = yield call(api.signInApi, payload);
     const camelResponse = camelizeKeys(response);
-    console.log(response);
 
     const { isSuccess, data: { user: { authenticationToken, email, id, name, pictureData, lastOrg } } } = camelResponse.data;
     if (isSuccess) {

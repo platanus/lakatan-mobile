@@ -4,13 +4,6 @@ import globalStyle from '../globalStyle';
 
 const styles = StyleSheet.create({
   button: {
-    // backgroundColor: color.blue,
-    // borderRadius: 5,
-    // height: 40,
-    // width: 130,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-
     width: '100%',
     backgroundColor: color.darkBlue,
     borderRadius: globalStyle.borderRadiusButton,
@@ -33,8 +26,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
-    // position: 'absolute',
-    // bottom: globalStyle.paddingBottomButton,
   },
   createButtonContainer: {
     width: '100%',

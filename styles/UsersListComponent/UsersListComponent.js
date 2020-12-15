@@ -5,20 +5,16 @@ import globalStyle from '../globalStyle';
 const styles = StyleSheet.create({
   selectedItemContainer: {
     backgroundColor: color.lightBlue,
-    // borderRadius: 20,
     paddingHorizontal: 15,
     width: '100%',
-    // height: 60,
     marginVertical: 4,
     flexDirection: 'row',
     alignItems: 'center',
   },
   unselectedItemContainer: {
     backgroundColor: color.lightSoftGray,
-    // borderRadius: 20,
     paddingHorizontal: 15,
     width: '100%',
-    // height: 60,
     marginVertical: 4,
     flexDirection: 'row',
     alignItems: 'center',

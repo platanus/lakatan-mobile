@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   logo: {
-    // resizeMode: 'stretch',
+
     width: '100%',
   },
 });

@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addOptionText: {
-    // color: color.darkBlue,
     fontSize: globalStyle.fontSizePrincipalText,
     alignItems: 'center',
     justifyContent: 'center',
@@ -103,7 +102,6 @@ const styles = StyleSheet.create({
   deleteOption: {
     position: 'absolute',
     right: '10%',
-    // top: '10%',
     bottom: '10%',
     paddingRight: '5%',
   },

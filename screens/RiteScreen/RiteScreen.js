@@ -40,8 +40,6 @@ const RiteScreen = ({
   ));
   const [isModalVisible, setModalVisible] = useState(false);
   const [raffleButton, setRaffleButton] = useState(userMinimum <= availableMembers.length);
-  // const [dataIn, setDataIn] = useState(hooksDataIn);
-  // const [dataOut, setDataOut] = useState(hooksDataOut);
   const [searchWord, setSearchWord] = useState('');
   const { email, token } = useSelector((store) => store.authentication);
   const organizationId = useSelector((store) => store.organizations.currentOrganization.id);
@@ -121,9 +119,6 @@ const RiteScreen = ({
     setRaffleButton(userMinimum <= list.length);
   }, [selectedMembers, userMinimum]);
 
-  // const selectedHandler = () => {
-  //   setRaffleButton(userMinimum <= selected.length);
-  // };
 
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -232,10 +227,6 @@ const RiteScreen = ({
     { key: 'second', title: 'Hooks' },
   ];
 
-  // const renderScene = SceneMap({
-  //   first: raffleRoute,
-  //   second: hooksRoute,
-  // });
 
   const renderScene =
 

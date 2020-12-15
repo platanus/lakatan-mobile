@@ -37,7 +37,6 @@ const slice = createSlice({
       state.success = action.payload;
     },
     signOutSuccess(state, action) {
-      //state.success = action.payload;
       state.token = undefined;
       state.email = undefined;
       state.name = undefined;
@@ -60,7 +59,6 @@ const slice = createSlice({
       if (action.payload.data.attributes.picture !== null) {
         const picdata = action.payload.data.attributes.picture;
         const link = `${bucket}${picdata.id}`;
-        console.log(link)
         state.imageProfile = link;
       }
     },

@@ -13,7 +13,6 @@ import {
 } from '../../store/types';
 
 const EditName = (props) => {
-  // const { id, name, mail } = props.route.params;
   const { token, email } = useSelector((state) => state.authentication);
   const [name, setName] = useState('');
   const dispatch = useDispatch();

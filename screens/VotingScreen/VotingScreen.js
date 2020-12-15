@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import {
   View, Text, TextInput, TouchableWithoutFeedback, Keyboard, TouchableOpacity, FlatList,
 } from 'react-native';
@@ -9,112 +9,22 @@ import styles from '../../styles/VotingScreen/VotingScreen';
 import BackButton from '../../components/LandingScreen/BackButton';
 import colors from '../../styles/colors';
 import UsersListComponent from '../../components/UsersListComponent/UsersListComponent';
+import { interpolate } from 'react-native-reanimated';
+import { DELETE_POLL_REQUEST,
+  CREATE_POLL_REQUEST,
+  CREATE_VOTE_REQUEST } from '../../store/types';
 
-const results2332 = [ // esto viene de Backend
-  {
+const results = [  {
     option: 'Opción A',
-    totalPercentage: '64%',
-    total: 64,
+    percentage: '45%',
+    votes: 45,
     id: 1,
     selected: true,
   },
   {
     option: 'Opción B',
-    totalPercentage: '32%',
-    total: 32,
-    id: 2,
-    selected: false,
-  },
-  {
-    option: 'Opción C',
-    totalPercentage: '4%',
-    total: 4,
-    id: 3,
-    selected: false,
-  },
-];
-
-const results = [ // esto viene de Backend
-  {
-    option: 'Opción A',
-    totalPercentage: '10%',
-    total: 10,
-    id: 1,
-    selected: true,
-  },
-  {
-    option: 'Opción B',
-    totalPercentage: '20%',
-    total: 20,
-    id: 2,
-    selected: false,
-  },
-  {
-    option: 'Opción C',
-    totalPercentage: '30%',
-    total: 30,
-    id: 3,
-    selected: false,
-  },
-  {
-    option: 'Opción D',
-    totalPercentage: '15%',
-    total: 15,
-    id: 4,
-    selected: false,
-  },
-  {
-    option: 'Opción E',
-    totalPercentage: '25%',
-    total: 25,
-    id: 5,
-    selected: false,
-  },
-];
-
-const resultsasd3 = [ // esto viene de Backend
-  {
-    option: 'Opción A',
-    totalPercentage: '10%',
-    total: 10,
-    id: 1,
-    selected: true,
-  },
-  {
-    option: 'Opción B',
-    totalPercentage: '20%',
-    total: 20,
-    id: 2,
-    selected: false,
-  },
-  {
-    option: 'Opción C',
-    totalPercentage: '30%',
-    total: 30,
-    id: 3,
-    selected: false,
-  },
-  {
-    option: 'Opción D',
-    totalPercentage: '40%',
-    total: 40,
-    id: 4,
-    selected: false,
-  },
-];
-
-const results22 = [ // esto viene de Backend
-  {
-    option: 'Opción A',
-    totalPercentage: '45%',
-    total: 45,
-    id: 1,
-    selected: true,
-  },
-  {
-    option: 'Opción B',
-    totalPercentage: '65%',
-    total: 65,
+    percentage: '65%',
+    votes: 65,
     id: 2,
     selected: false,
   },
@@ -141,25 +51,31 @@ const VotingScreen = ({
   },
 }) => {
   const { name, purpose } = useSelector((state) => state.teams.currentTeam);
-  const { token, email } = useSelector((state) => state.authentication);
-  const { id } = useSelector((state) => state.teams.currentTeam);
+  const { token, email, id } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
-
-  const [voteResults, setVoteResults] = useState(results);
-  const vote = true; // esto viene de backend
-  const missingVotes = 2; // esto viene de backend
-  const votingOptions = ['Opción A', 'Opción B', 'Opción C']; // esto viene de backend
-
+  const currentPoll = useSelector((state) => state.polls.currentPoll);
+  const [voteResults, setVoteResults] = useState([]);
   const color = [colors.darkBlue];
-  const keys = ['total'];
+  const keys = ['votes'];
+  
+  
+  useEffect(() => {
+    if (currentPoll) {
+      setVoteResults(currentPoll.attributes.poll_options.map((item) => {
+        const element = { ...item };
+        element.selected = false;
 
-  // const voteButtonDisable = () => (
-  //   {
-  //     ...styles.confirmButton,
-  //     backgroundColor: vote ? colors.darkBlue : colors.gray,
-  //   });
+        return element;
+      }));}
+  }, [currentPoll]);
 
-  const createHandler = () => {}; // RELLENAR CON REQUEST
+
+  const createHandler = () => {
+    const poll_option = voteResults.find((item) => item.selected === true);
+    const poll_option_id = poll_option.id;
+    dispatch({ type: CREATE_VOTE_REQUEST, payload: { token, email, "poll_id": currentPoll.id, poll_option_id, 'user_id': id } });
+    navigation.goBack();
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -191,72 +107,116 @@ const VotingScreen = ({
     });
   };
 
-  return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.infoContainer}>
-          <Text style={styles.textHeader}>Propósito</Text>
-          <Text>{purpose}</Text>
-          <Text style={styles.newVotingText}>{nameVoting}</Text>
-          {missingVotes !== 0 && vote &&
-            <View style={{ flexDirection: 'row' }}>
-              <Text>Faltan {missingVotes} votos • </Text>
-              <TouchableOpacity><Text style={styles.deteleVoting}>Eliminar votación</Text></TouchableOpacity>
-            </View>
-          }
-          {missingVotes === 0 && vote &&
-            <TouchableOpacity>
-              <Text style={styles.deteleVoting}>Eliminar votación</Text>
-            </TouchableOpacity>
-          }
-          {vote ? (
-            <View>
-              <View style={{ flexDirection: 'row', marginVertical: '10%' }} >
-                <View>
-                  {results.map(item => (
-                    <View style={{ marginTop: 8 }}>
-                      <Text style={{ fontSize: 16, color: colors.darkBlue }}>{item.option}</Text>
-                      <Text style={{ fontSize: 12, marginBottom: (-7*results.length/2 + 58) }}>{item.totalPercentage} - {item.total}</Text>
-                    </View>
-                  ))}
-                </View>
-                <View>
-                  <StackedBarChart
-                    style={{ marginLeft: '15%', height: 73*results.length, width: '80%' }}
-                    keys={keys}
-                    colors={color}
-                    data={results}
-                    yAccessor={({ item }) => item}
-                    showGrid={false}
-                    // contentInset={{ top: 30, bottom: 30 }}
-                    horizontal={true}
-                    spacingInner={0.6}
-                  />
-                </View>
+  const deletePressHandler = () => {
+    dispatch({ type: DELETE_POLL_REQUEST, payload: {token, email, "id": currentPoll.id } });
+    navigation.goBack();
+  }
+  if (currentPoll && currentPoll.attributes.belongs) {
+    return (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.textHeader}>Propósito</Text>
+            <Text>{purpose}</Text>
+            <Text style={styles.newVotingText}>{nameVoting}</Text>
+            {currentPoll.attributes.votes_remaining !== 0 && currentPoll.attributes.voted &&
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Faltan {currentPoll.attributes.votes_remaining} votos • </Text>
+                <TouchableOpacity onPress={deletePressHandler}><Text style={styles.deteleVoting}>
+                  Eliminar votación</Text></TouchableOpacity>
               </View>
-            </View>
-          ) : (
-            <View >
-              <Text style={styles.optionsVote}>Opciones:</Text>
+            }
+            {currentPoll.attributes.votes_remaining === 0 && currentPoll.attributes.voted &&
+              <TouchableOpacity>
+                <Text style={styles.deteleVoting}>Eliminar votación</Text>
+              </TouchableOpacity> }
+            {currentPoll.attributes.voted ? (
               <View>
-                <UsersListComponent selectedMembers={results} vote={true} itemOnPressHandler={voteHandler}/>
-              </View>
-              <View style={styles.buttonContainer}>
-                <View style={styles.confirmButton}>
-                  <TouchableOpacity
-                    onPress={() => createHandler()}
-                    style={styles.applyButton}
-                  >
-                    <Text style={styles.textConfirmButton}>Votar</Text>
-                  </TouchableOpacity>
+                <View style={{ flexDirection: 'row', marginVertical: '10%' }} >
+                  <View>
+                    {voteResults.map(item => (
+                      <View style={{ marginTop: 8 }} key={item.name}>
+                        <Text style={{ fontSize: 16, color: colors.darkBlue }}>{item.name}</Text>
+                        <Text style={{ fontSize: 12, marginBottom: (-7 * voteResults.length / 2 + 58) }}>
+                          {item.percentage} - {item.votes}</Text>
+                      </View>
+                    ))}
+                  </View>
+                  <View>
+                    <StackedBarChart
+                      style={{ marginLeft: '15%', height: 73 * voteResults.length, width: '80%' }}
+                      keys={keys}
+                      colors={color}
+                      data={voteResults}
+                      yAccessor={({ item }) => item}
+                      showGrid={false}
+                      horizontal={true}
+                      spacingInner={0.6}
+                    />
+                  </View>
                 </View>
               </View>
+            ) : (
+              <View >
+                <Text style={styles.optionsVote}>Opciones:</Text>
+                <View>
+                  <UsersListComponent selectedMembers={voteResults} vote={true} itemOnPressHandler={voteHandler}/>
+                </View>
+                <View style={styles.buttonContainer}>
+                  <View style={styles.confirmButton}>
+                    <TouchableOpacity
+                      onPress={() => createHandler()}
+                      style={styles.applyButton}
+                    >
+                      <Text style={styles.textConfirmButton}>Votar</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            )}
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.infoContainer}>
+        <Text style={styles.textHeader}>Propósito</Text>
+        <Text>{purpose}</Text>
+        <Text style={styles.newVotingText}>{nameVoting}</Text>
+        {currentPoll && currentPoll.attributes.votes_remaining !== 0 &&
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Faltan {currentPoll && currentPoll.attributes.votes_remaining} votos • </Text>
+          </View>
+        }
+        <View>
+          <View style={{ flexDirection: 'row', marginVertical: '10%' }} >
+            <View>
+              {voteResults.map(item => (
+                <View style={{ marginTop: 8 }}>
+                  <Text style={{ fontSize: 16, color: colors.darkBlue }}>{item.option}</Text>
+                  <Text style={{ fontSize: 12, marginBottom: (-7 * voteResults.length / 2 + 58) }}>{item.percentage} - {item.total}</Text>
+                </View>
+              ))}
             </View>
-          )}
+            <View>
+              <StackedBarChart
+                style={{ marginLeft: '15%', height: 73 * voteResults.length, width: '80%' }}
+                keys={keys}
+                colors={color}
+                data={voteResults}
+                yAccessor={({ item }) => item}
+                showGrid={false}
+                horizontal={true}
+                spacingInner={0.6}
+              />
+            </View>
+          </View>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   );
 };
-
 export default VotingScreen;
