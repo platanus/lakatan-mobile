@@ -195,7 +195,7 @@ const VotingScreen = ({
           <View style={{ flexDirection: 'row', marginVertical: '10%' }} >
             <View>
               {voteResults.map(item => (
-                <View style={{ marginTop: 8 }}>
+                <View style={{ marginTop: 8 }} key={item.name}>
                   <Text style={{ fontSize: 16, color: colors.darkBlue }}>{item.option}</Text>
                   <Text style={{ fontSize: 12, marginBottom: (-7 * voteResults.length / 2 + 58) }}>{item.percentage} - {item.total}</Text>
                 </View>
