@@ -28,7 +28,7 @@ const TeamView = (props) => {
     <TouchableOpacity onPress={pressHandler}>
       <View style={styles.teamCard}>
         <View style={{}}>
-          <Text adjustsFontSizeToFit
+          <Text
           numberOfLines={1}
           style={styles.teamName}>{name}</Text>
         </View>
