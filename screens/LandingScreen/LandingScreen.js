@@ -34,6 +34,7 @@ const TeamView = (props) => {
         </View>
         <View style={{ flex: 1}}>
         <Text 
+        numberOfLines={3}
         style={styles.teamPurpose}>{purpose}</Text>
         </View>
 
